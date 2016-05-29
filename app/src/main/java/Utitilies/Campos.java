@@ -13,6 +13,7 @@ public class Campos {
         this.id = id;
         this.nombre = nombre;
         //prueba de Git
+        //prueba 2 git
     }
     @Override
     public String toString() {
