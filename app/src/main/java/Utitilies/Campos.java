@@ -12,6 +12,7 @@ public class Campos {
         super();
         this.id = id;
         this.nombre = nombre;
+        //prueba de Git
     }
     @Override
     public String toString() {
