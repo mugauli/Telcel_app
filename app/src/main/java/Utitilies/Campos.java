@@ -14,7 +14,7 @@ public class Campos {
         this.nombre = nombre;
         //prueba de Git
         //prueba 2 git
-        //prueba 3
+        //prueba 3 merge
     }
     @Override
     public String toString() {
