@@ -38,8 +38,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="100dp"
-                android:paddingEnd="100dp">
+                android:paddingStart="90dp"
+                android:paddingEnd="90dp">
 
                 <LinearLayout
                     android:orientation="vertical"

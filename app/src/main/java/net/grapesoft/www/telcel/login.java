@@ -3,6 +3,7 @@ package net.grapesoft.www.telcel;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.method.DialerKeyListener;
@@ -14,13 +15,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import Utitilies.Campos;
+import Utitilies.Comunication;
 
 public class login extends ActionBarActivity {
-
+    public String tokenCTE = "67d6b32e8d96b8542feda3df334c04f5";
     final Context context = this;
 
     @Override
@@ -67,39 +73,60 @@ public class login extends ActionBarActivity {
             @Override
         public void onClick(View arg0) {
 
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                Spinner spinner_campos = (Spinner) findViewById(R.id.spnCampos);
 
-            // set title
-            alertDialogBuilder.setTitle("Your Title");
+                String dato="",campo = spinner_campos.getSelectedItem().toString();
+                if(campo=="C") {
+                    final EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
+                    dato=txtEmail.getText().toString();
+                }
+                else if (campo == "T") {
+                    final EditText txtPhone = (EditText) findViewById(R.id.txtPhone);
+                    dato=txtPhone.getText().toString();
+                }else {
+                    final EditText txtEmpleado = (EditText) findViewById(R.id.txtNoEmpleado);
+                    dato=txtEmpleado.getText().toString();
+                }
 
-            // set dialog message
-            alertDialogBuilder
-                    .setMessage("Click yes to exit!")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
-                            // if this button is clicked, close
-                            // current activity
-                            login.this.finish();
-                        }
-                    })
-                    .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
-                            // if this button is clicked, just close
-                            // the dialog box and do nothing
-                            dialog.cancel();
-                        }
-                    });
+                final EditText txtPass = (EditText) findViewById(R.id.txtPassword);
 
-            // create alert dialog
-            AlertDialog alertDialog = alertDialogBuilder.create();
 
-            // show it
-            alertDialog.show();
+          String response = new Comunication().Post(dato,obtenerPassMD5(txtPass.getText().toString()),tokenCTE,campo);
+                Log.i("Response", "Login: " + response);
         }
     });
         Log.i("LunchList", "Array Adapter Size: " + spinner_adapter.getCount());
+
+
+
+        ImageView btnAyuda = (ImageView) findViewById(R.id.imageView2);
+        btnAyuda.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(login.this,ayuda.class);
+                startActivity(intent);
+            }
+        });
+
 }
+    public String obtenerPassMD5(String pass) {
+
+        String password = null;
+        MessageDigest mdEnc;
+        try {
+            mdEnc = MessageDigest.getInstance("MD5");
+            mdEnc.update(pass.getBytes(), 0, pass.length());
+            pass = new BigInteger(1, mdEnc.digest()).toString(16);
+            while (pass.length() < 32) {
+                pass = "0" + pass;
+            }
+            password = pass;
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
+        }
+        return password;
+    }
 
     public boolean ocultaCampos (char campo)
     {
