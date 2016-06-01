@@ -48,10 +48,9 @@
         android:ems="10"
         android:id="@+id/txtEmail"
         android:text="mugauli2@hotmail.com"
-        android:layout_below="@+id/spnCampos"
+        android:layout_alignTop="@+id/txtNoEmpleado"
         android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone"
-        android:layout_marginTop="35dp" />
+        android:layout_alignStart="@+id/txtPhone" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -61,7 +60,7 @@
         android:id="@+id/txtNoEmpleado"
         android:text="345"
         android:visibility="invisible"
-        android:layout_alignTop="@+id/txtEmail"
+        android:layout_below="@+id/spnCampos"
         android:layout_alignLeft="@+id/txtPhone"
         android:layout_alignStart="@+id/txtPhone" />
 
@@ -69,11 +68,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spnCampos"
-        android:layout_marginTop="72dp"
         android:spinnerMode="dropdown"
-        android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone" />
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/btnIngresar"
+        android:layout_alignStart="@+id/btnIngresar" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -118,8 +116,8 @@
         android:textColor="#0b4da2"
         android:layout_marginTop="29dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/spnCampos"
-        android:layout_alignStart="@+id/spnCampos" />
+        android:layout_alignLeft="@+id/txtPhone"
+        android:layout_alignStart="@+id/txtPhone" />
 
     <TextView
         android:layout_width="wrap_content"
