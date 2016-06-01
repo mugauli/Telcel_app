@@ -69,10 +69,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spnCampos"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:spinnerMode="dropdown" />
+        android:layout_marginTop="72dp"
+        android:spinnerMode="dropdown"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/txtPhone"
+        android:layout_alignStart="@+id/txtPhone" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -114,10 +115,11 @@
         android:layout_height="wrap_content"
         android:text="Ingresar con:"
         android:id="@+id/textView3"
-        android:layout_below="@+id/spnCampos"
-        android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone"
-        android:textColor="#0b4da2" />
+        android:textColor="#0b4da2"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/spnCampos"
+        android:layout_alignStart="@+id/spnCampos" />
 
     <TextView
         android:layout_width="wrap_content"
