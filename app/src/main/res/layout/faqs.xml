@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Qué es una APP COMUNICACIÓN INTERNA?"
+                    android:id="@+id/textView15"
+                    android:textStyle="bold"
+                    android:textColor="#2F2FB4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Es la aplicación que te ayudará a estar informado de todas las novedades de Telcel y Grupo Carso."
+                    android:id="@+id/textView16" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Qué debo hacer para utilizar APP COMUNICACIÓN INTERNA?"
+                    android:id="@+id/textView17"
+                    android:textStyle="bold"
+                    android:textColor="#2F2FB4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Debes registrarte proporcionando tu nombre completo, número de empleado, celular, correo electrónico corporativo y se te hará llegar un vínculo con la descarga de la aplicación así como una contraseña con la que podrás ingresar a la aplicación."
+                    android:id="@+id/textView18" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="La navegación dentro de la aplicación tiene algún costo"
+                    android:id="@+id/textView19"
+                    android:textStyle="bold"
+                    android:textColor="#2F2FB4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No la navegación dentro de la APP COMUNICACIÓN INTERNA es gratuita, pero sólo puedes acceder a ella siendo empleado de Telcel"
+                    android:id="@+id/textView20" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Cada cuando se actualiza el contenido?"
+                    android:id="@+id/textView21"
+                    android:textStyle="bold"
+                    android:textColor="#2F2FB4" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="El contenido se actualiza automáticamente al abrirlo."
+                    android:id="@+id/textView22" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
