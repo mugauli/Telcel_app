@@ -25,44 +25,27 @@
         android:ems="10"
         android:id="@+id/txtPassword"
         android:layout_marginTop="52dp"
-        android:text="00000000"
-        android:layout_below="@+id/txtPhone"
-        android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone" />
+        android:text="ANDROID"
+        android:layout_below="@+id/txtDato"
+        android:layout_alignLeft="@+id/txtDato"
+        android:layout_alignStart="@+id/txtDato"
+        android:layout_alignRight="@+id/btnIngresar"
+        android:layout_alignEnd="@+id/btnIngresar" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
+        android:inputType="text"
         android:ems="10"
-        android:id="@+id/txtPhone"
-        android:text="5548326608"
-        android:visibility="invisible"
-        android:layout_alignTop="@+id/txtEmail"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/txtEmail"
-        android:text="mugauli2@hotmail.com"
-        android:layout_alignTop="@+id/txtNoEmpleado"
-        android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/txtNoEmpleado"
-        android:text="345"
+        android:id="@+id/txtDato"
+        android:text="ANDROID"
         android:visibility="invisible"
         android:layout_below="@+id/spnCampos"
-        android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone" />
+        android:layout_alignLeft="@+id/btnIngresar"
+        android:layout_alignStart="@+id/btnIngresar"
+        android:background="@drawable/backwithborder"/>
+
+
 
     <Spinner
         android:layout_width="wrap_content"
@@ -70,8 +53,10 @@
         android:id="@+id/spnCampos"
         android:spinnerMode="dropdown"
         android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/btnIngresar"
-        android:layout_alignStart="@+id/btnIngresar" />
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -129,5 +114,21 @@
         android:layout_alignStart="@+id/txtPassword"
         android:layout_marginTop="22dp"
         android:textColor="#0b4da2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtValidationPass"
+        android:layout_below="@+id/txtPassword"
+        android:layout_alignLeft="@+id/txtPassword"
+        android:layout_alignStart="@+id/txtPassword" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtValidationCampo"
+        android:layout_below="@+id/txtDato"
+        android:layout_alignLeft="@+id/txtDato"
+        android:layout_alignStart="@+id/txtDato" />
 
 </RelativeLayout>

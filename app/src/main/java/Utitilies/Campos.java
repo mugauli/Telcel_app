@@ -5,10 +5,10 @@ package Utitilies;
  */
 public class Campos {
 
-    char id;
+    String id;
     String nombre;
     //Constructor
-    public Campos(char id, String nombre) {
+    public Campos(String id, String nombre) {
         super();
         this.id = id;
         this.nombre = nombre;
@@ -21,7 +21,7 @@ public class Campos {
     public String toString() {
         return nombre;
     }
-    public char getId() {
+    public String getId() {
         return id;
     }
 }
