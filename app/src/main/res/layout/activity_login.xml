@@ -88,10 +88,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
-        android:layout_marginTop="23dp"
         android:src="@drawable/ayudac"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
+        android:clickable="true"
+        android:onClick="setContentView(ayuda)"
+        android:layout_alignTop="@+id/spnCampos"
+        android:layout_toRightOf="@+id/txtPhone"
+        android:layout_toEndOf="@+id/txtPhone" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -99,10 +101,10 @@
         android:text="Ingresar con:"
         android:id="@+id/textView3"
         android:textColor="#0b4da2"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="31dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone" />
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignEnd="@+id/textView4" />
 
     <TextView
         android:layout_width="wrap_content"

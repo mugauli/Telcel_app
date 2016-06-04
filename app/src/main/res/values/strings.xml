@@ -35,5 +35,37 @@
     <string name="cuatrodesc">El contenido se actualiza automáticamente al abrirlo</string>
     <!-- -->
 
+    <!--Strings ACERCA DE -->
+
+    <string name="descapp">Descripción de la APP</string>
+    <string name="versionapp">Versión APP</string>
+    <string name="mailapp">mail@app.com</string>
+
+    <!-- -->
+
+    <!--Strings REPORTAR FALLA -->
+    <string name="rfdescuno">Reporta tu falla para brindarte un mejor servicio</string>
+    <string name="rfdescdos">Elige la categoría más adecuada.</string>
+    <string name="rfuno">La aplicación no siempre me permite ingresar</string>
+    <string name="rfdos">La aplicación no actualiza correctamente</string>
+    <string name="rftres">La aplicación no funciona en el teléfono</string>
+    <string name="rfcuatro">La aplicación se cierra inesperadamente</string>
+    <string name="rfcinco">La aplicación se traba</string>
+    <string name="rfseis">Detalla tu comentario</string>
+    <!-- -->
+
+    <!--SUGERENCIAS -->
+    <string name="sugdesc">Tu opinión es valiosa para nosotros, envianos un mensaje</string>
+    <string name="mail">Correo electrónico</string>
+    <string name="detalle">Detalla tu comentario</string>
+    <!-- -->
+
+    <!--Strings MENSAJE ENVIADO -->
+    <string name="gracias">GRACIAS</string>
+    <string name="detallegracias">Tu mensaje ha sido enviado.</string>
+    <!-- -->
+
+
+
 
 </resources>
