@@ -68,6 +68,7 @@ public class ayuda  extends ActionBarActivity {
                     startActivity(i);
                 }else
                 {
+
                     Toast toast = Toast.makeText(ayuda.this, texto, Toast.LENGTH_LONG);
                     toast.show();
                 }
