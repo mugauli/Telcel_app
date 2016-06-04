@@ -15,27 +15,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Mugauli on 01/06/2016.
- */
-public class ayuda  extends ActionBarActivity {
-
+public class faq extends ActionBarActivity {
     final Context context = this;
     private ListView lista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ayuda);
+        setContentView(R.layout.activity_faq);
 
         ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
 
-        datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.preguntas), getString(R.string.preguntasdesc)));
-        datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.fallas),getString(R.string.fallasdesc)));
-        datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.sugerencias), getString(R.string.sugerenciasdesc)));
-        datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.acercade),""));
+        datos.add(new Lista_entrada(getString(R.string.uno), getString(R.string.unodesc)));
+        datos.add(new Lista_entrada(getString(R.string.dos),getString(R.string.dosdesc)));
+        datos.add(new Lista_entrada(getString(R.string.tres), getString(R.string.tresdesc)));
+        datos.add(new Lista_entrada(getString(R.string.cuatro),getString(R.string.cuatrodesc)));
 
 
-        lista = (ListView) findViewById(R.id.ayuda);
+        lista = (ListView) findViewById(R.id.faq);
         lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_lista, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
@@ -48,27 +44,14 @@ public class ayuda  extends ActionBarActivity {
                     if (texto_inferior_entrada != null)
                         texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo());
 
-                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
-                    if (imagen_entrada != null)
-                        imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+
                 }
             }
         });
 
-        lista.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-                Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion);
 
-                CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
-                Toast toast = Toast.makeText(ayuda.this, texto, Toast.LENGTH_LONG);
-                toast.show();
-            }
-        });
 
     }
-
-
 
 
 
