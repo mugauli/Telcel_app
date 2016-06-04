@@ -1,6 +1,7 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import java.util.ArrayList;
@@ -63,6 +64,11 @@ public class ayuda  extends ActionBarActivity {
                 CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
                 Toast toast = Toast.makeText(ayuda.this, texto, Toast.LENGTH_LONG);
                 toast.show();
+                if(elegido.get_textoEncima() != getString(R.string.preguntas) ) {
+                    Intent i = new Intent(ayuda.this, faq.class);
+                    startActivity(i);
+                }
+
             }
         });
 
