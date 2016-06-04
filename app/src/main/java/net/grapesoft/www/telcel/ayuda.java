@@ -62,11 +62,14 @@ public class ayuda  extends ActionBarActivity {
                 Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion);
 
                 CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
-                Toast toast = Toast.makeText(ayuda.this, texto, Toast.LENGTH_LONG);
-                toast.show();
-                if(elegido.get_textoEncima() != getString(R.string.preguntas) ) {
+
+                if(elegido.get_textoEncima() == getString(R.string.preguntas) ) {
                     Intent i = new Intent(ayuda.this, faq.class);
                     startActivity(i);
+                }else
+                {
+                    Toast toast = Toast.makeText(ayuda.this, texto, Toast.LENGTH_LONG);
+                    toast.show();
                 }
 
             }
