@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 
+import net.grapesoft.www.telcel.R;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -29,47 +31,18 @@ import java.util.List;
  */
 public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> {
 
-    public String Post(String dato, String pass, String token, String campo) {
-
-        HttpClient httpClient = new DefaultHttpClient();
-        //Create an object of HttpPost
-
-        HttpPost httpPost = new HttpPost("http://internetencaja.com.mx/telcel/WServices/GetLogin.php");
-        //Add POST parameters
-
-        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-        nameValuePair.add(new BasicNameValuePair("dato", "ANDROID"));
-        nameValuePair.add(new BasicNameValuePair("password", "09721ab88e0a552087391be1ef0c6826"));
-        nameValuePair.add(new BasicNameValuePair("token", "67d6b32e8d96b8542feda3df334c04f5"));
-        nameValuePair.add(new BasicNameValuePair("campo", "E"));
-        //Encode POST data
-
-        //We need to encode our data into valid URL format before making HTTP request.
-
-        //Encoding POST data
-        try {
-            HttpResponse response = httpClient.execute(httpPost);
-            // write response to log
-            Log.e("Http Post Response:", response.toString());
-        } catch (ClientProtocolException e) {
-            // Log exception
-            e.printStackTrace();
-        } catch (IOException e) {
-            // Log exception
-            e.printStackTrace();
-        }
-
-        return "a";
-    }
 
 
     ProgressDialog progressDialog;
-
+    public String IP = "",tokenCTE = "";
     public static JSONArray arreglo;
+
 
 
     public Comunication (Context cxt){
         progressDialog = new ProgressDialog(cxt);
+        IP = cxt.getString(R.string.URL);
+        tokenCTE = cxt.getString(R.string.tokenXM);
     }
 
     @Override
@@ -85,44 +58,13 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
     public JSONArray doInBackground(ArrayList<String>... params) {
 
         try {
+
             HttpClient httpclient = new DefaultHttpClient();
-            ArrayList<String> paramsPassed = params[0];
 
-            String IP = "http://internetencaja.com.mx/telcel/WServices/GetLogin.php";
-            String dato = paramsPassed.get(0);
-            String password = paramsPassed.get(1);
-            String tokenCTE = paramsPassed.get(2);
-            String campo = paramsPassed.get(3);
+            Log.e("IP",IP + params[0].get(1));
+            HttpPost httppost = new HttpPost(IP + params[0].get(1));
 
-            //Log.e("Datos",dato);
-            //Log.e("tokenCTE",tokenCTE);
-            //Log.e("Campo",campo);
-            //Log.e("PASS",password);
-            //Log.e("PASS","09721ab88e0a552087391be1ef0c6826");
-
-            //HttpGet request = new HttpGet(IP +"?token="+tokenCTE+"&campo="+campo+"&dato="+dato+"&password=" + password);
-            // replace with your url
-            //Log.e("Response of GET request","Inicia");
-            //HttpResponse responseGET;
-            //responseGET = httpclient.execute(request);
-
-            HttpPost httppost = new HttpPost(IP);
-
-            //Add POST parameters
-
-            List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-
-            nameValuePair.add(new BasicNameValuePair("dato", dato));
-            nameValuePair.add(new BasicNameValuePair("password", password));
-            nameValuePair.add(new BasicNameValuePair("token", tokenCTE));
-            nameValuePair.add(new BasicNameValuePair("campo", campo));
-
-            //nameValuePair.add(new BasicNameValuePair("dato", "ANDROID"));
-            //nameValuePair.add(new BasicNameValuePair("password", "09721ab88e0a552087391be1ef0c6826"));
-            //nameValuePair.add(new BasicNameValuePair("token", "67d6b32e8d96b8542feda3df334c04f5"));
-            //nameValuePair.add(new BasicNameValuePair("campo", "E"));
-
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+            httppost.setEntity(new UrlEncodedFormEntity(createPost(params[0])));
 
             // Execute HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
@@ -171,6 +113,33 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             // error occured
         }
     }
+
+    public List<NameValuePair> createPost(ArrayList<String> paramsPassed)
+    {
+        List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+
+        if(paramsPassed.get(0)=="1")
+        {
+            nameValuePair.add(new BasicNameValuePair("dato", paramsPassed.get(2)));
+            nameValuePair.add(new BasicNameValuePair("password", paramsPassed.get(3)));
+            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(4)));
+            nameValuePair.add(new BasicNameValuePair("campo", paramsPassed.get(5)));
+
+        }else if(paramsPassed.get(0)=="2")
+        {
+            nameValuePair.add(new BasicNameValuePair("dato", paramsPassed.get(2)));
+            nameValuePair.add(new BasicNameValuePair("password", paramsPassed.get(3)));
+            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(4)));
+            nameValuePair.add(new BasicNameValuePair("campo", paramsPassed.get(5)));
+
+        }
+
+
+        return nameValuePair;
+
+    }
+
+
 
 
 

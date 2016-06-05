@@ -5,6 +5,34 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!--Configuracion WS-->
+
+    <string name="URL">http://internetencaja.com.mx/telcel/WServices/</string>
+    <string name="tokenXM">67d6b32e8d96b8542feda3df334c04f5</string>
+
+    <!--Actualiza Trabajador-->
+    <string name="asignado">Female</string>
+    <string name="personal">Display</string>
+
+    <string-array name="region">
+        <item>Región 1</item>
+        <item>Región 2</item>
+        <item>Región 3</item>
+        <item>Región 4</item>
+        <item>Región 5</item>
+        <item>Región 6</item>
+        <item>Región 7</item>
+        <item>Región 8</item>
+        <item>Región 9</item>
+        <item>Región 10</item>
+        <item>Coorporativo</item>
+        <item>AMX</item>
+    </string-array>
+
+    <string-array name="direccion">
+        <item>Marketing</item>
+    </string-array>
+
     <!--Strings List View Ayuda -->
 
     <string name="preguntas">PREGUNTAS FRECUENTES</string>

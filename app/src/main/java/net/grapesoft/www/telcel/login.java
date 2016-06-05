@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,10 +40,15 @@ import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
 public class login extends Activity {
-    public String tokenCTE = "67d6b32e8d96b8542feda3df334c04f5";
+    public String tokenCTE = "";
     final Context context = this;
     AlertDialogManager alert = new AlertDialogManager();
     SessionManagement session;
+
+    public login (Context cxt){
+
+        tokenCTE = cxt.getString(R.string.tokenXM);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +221,8 @@ public class login extends Activity {
                             ArrayList<String> params = new ArrayList<String>();
 
                             //-- PARAMETROS PETICION LOGIN-----//
+                            params.add("1");
+                            params.add("GetLogin.php");
                             params.add(dato);
                             params.add(password);
                             params.add(tokenCTE);
@@ -290,6 +298,7 @@ public class login extends Activity {
         });
 
 }
+
     public String obtenerPassMD5(String pass) {
 
         String password = null;
@@ -307,8 +316,6 @@ public class login extends Activity {
         }
         return password;
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
