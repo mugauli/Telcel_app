@@ -81,7 +81,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".acercade" />
-        <activity android:name=".enviado"></activity>
+        <activity android:name=".enviado" />
+        <activity android:name=".recuperar"></activity>
     </application>
 
 </manifest>

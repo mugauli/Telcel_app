@@ -65,5 +65,10 @@
     <string name="detallegracias">Tu mensaje ha sido enviado.</string>
     <!-- -->
 
+    <!--Strings RECUPERAR CONTRASEÑA -->
+    <string name="contra">Ingresa tu número de empleado y recibirás un correo electrónico con la nueva contraseña. </string>
+    <string name="contradesc">Número de empleado</string>
+    <!-- -->
+
 
 </resources>
