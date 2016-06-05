@@ -27,10 +27,10 @@
         android:layout_marginTop="52dp"
         android:text="ANDROID"
         android:layout_below="@+id/txtDato"
-        android:layout_alignLeft="@+id/txtDato"
-        android:layout_alignStart="@+id/txtDato"
-        android:layout_alignRight="@+id/btnIngresar"
-        android:layout_alignEnd="@+id/btnIngresar" />
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_alignRight="@+id/spnCampos"
+        android:layout_alignEnd="@+id/spnCampos" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -41,9 +41,10 @@
         android:text="ANDROID"
         android:visibility="invisible"
         android:layout_below="@+id/spnCampos"
-        android:layout_alignLeft="@+id/btnIngresar"
-        android:layout_alignStart="@+id/btnIngresar"
-        android:background="@drawable/backwithborder"/>
+        android:background="@drawable/backwithborder"
+        android:layout_toRightOf="@+id/txtValidationPass"
+        android:layout_alignRight="@+id/spnCampos"
+        android:layout_alignEnd="@+id/spnCampos" />
 
 
 
@@ -101,21 +102,20 @@
         android:text="Ingresar con:"
         android:id="@+id/textView3"
         android:textColor="#0b4da2"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="27dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/txtPhone"
-        android:layout_alignStart="@+id/txtPhone" />
+        android:layout_alignLeft="@+id/spnCampos"
+        android:layout_alignStart="@+id/spnCampos" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contraseña:"
         android:id="@+id/textView4"
-        android:layout_below="@+id/txtPhone"
-        android:layout_alignLeft="@+id/txtPassword"
-        android:layout_alignStart="@+id/txtPassword"
-        android:layout_marginTop="22dp"
-        android:textColor="#0b4da2" />
+        android:textColor="#0b4da2"
+        android:layout_below="@+id/txtValidationCampo"
+        android:layout_alignLeft="@+id/spnCampos"
+        android:layout_alignStart="@+id/spnCampos" />
 
     <TextView
         android:layout_width="wrap_content"
