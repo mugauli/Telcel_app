@@ -66,9 +66,21 @@ public class ayuda  extends ActionBarActivity {
                 if(elegido.get_textoEncima() == getString(R.string.preguntas) ) {
                     Intent i = new Intent(ayuda.this, faq.class);
                     startActivity(i);
+                }else if(elegido.get_textoEncima() == getString(R.string.fallas))
+                {
+                    Intent i = new Intent(ayuda.this, falla.class);
+                    startActivity(i);
+
+                }else if(elegido.get_textoEncima() == getString(R.string.sugerencias))
+                {
+                    Intent i = new Intent(ayuda.this, sugerencias.class);
+                    startActivity(i);
+                }else if(elegido.get_textoEncima() == getString(R.string.acercade))
+                {
+                    Intent i = new Intent(ayuda.this,acercade.class );
+                    startActivity(i);
                 }else
                 {
-
                     Toast toast = Toast.makeText(ayuda.this, texto, Toast.LENGTH_LONG);
                     toast.show();
                 }

@@ -15,30 +15,29 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class faq extends ActionBarActivity {
+
+public class falla extends ActionBarActivity {
     final Context context = this;
     private ListView lista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_faq);
+        setContentView(R.layout.activity_falla);
 
         ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
 
-        datos.add(new Lista_entrada(getString(R.string.uno), getString(R.string.unodesc)));
-        datos.add(new Lista_entrada(getString(R.string.dos),getString(R.string.dosdesc)));
-        datos.add(new Lista_entrada(getString(R.string.tres), getString(R.string.tresdesc)));
-        datos.add(new Lista_entrada(getString(R.string.cuatro),getString(R.string.cuatrodesc)));
+        datos.add(new Lista_entrada(R.id.rdfalla, getString(R.string.rfuno)));
+        datos.add(new Lista_entrada(R.id.rdfalla,getString(R.string.rfdos)));
+        datos.add(new Lista_entrada(R.id.rdfalla, getString(R.string.rftres)));
+        datos.add(new Lista_entrada(R.id.rdfalla,getString(R.string.rfcuatro)));
 
 
-        lista = (ListView) findViewById(R.id.faq);
-        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_faq, datos){
+        lista = (ListView) findViewById(R.id.falla);
+        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_falla, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {
-                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
-                    if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima());
+
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
                     if (texto_inferior_entrada != null)
@@ -47,12 +46,9 @@ public class faq extends ActionBarActivity {
 
                 }
             }
+
+
         });
 
-
-
     }
-
-
-
 }
