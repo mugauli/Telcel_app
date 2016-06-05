@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".login">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:id="@+id/textView_desc1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rfdescuno"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+
+
+            />
+        <TextView
+            android:id="@+id/textView_desc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rfdescdos"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/ColorPrimary"
+            android:textStyle="bold"
+            android:layout_below="@+id/textView_desc1"
+            />
+
+        <ListView
+            android:id="@+id/falla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:divider="#983333"
+            >
+        </ListView>
+
+        <TextView
+            android:id="@+id/textView_comentario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detalla tu comentario"
+            android:textColor="@color/ColorPrimary"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="40"
+            android:id="@+id/txtComentario"
+
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ENVIAR"
+            android:id="@+id/button"
+            android:background="#0b4da2"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:width="250dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

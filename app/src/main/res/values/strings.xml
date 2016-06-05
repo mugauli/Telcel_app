@@ -61,11 +61,9 @@
     <!-- -->
 
     <!--Strings MENSAJE ENVIADO -->
-    <string name="gracias">GRACIAS</string>
+    <string name="gracias">Gracias, </string>
     <string name="detallegracias">Tu mensaje ha sido enviado.</string>
     <!-- -->
-
-
 
 
 </resources>
