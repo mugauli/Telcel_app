@@ -1,8 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".ActualizarActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="collapseActionView" />
+<!-- "Mark Favorite", should appear as action button if possible -->
+<item
+    android:id="@+id/action_favorite"
+    android:icon="@drawable/nav"
+    android:title="@string/action_settings"
+    app:showAsAction="ifRoom"/>
+
 
 </menu>
+

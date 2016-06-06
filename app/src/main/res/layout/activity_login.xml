@@ -41,7 +41,6 @@
         android:text="ANDROID"
         android:visibility="invisible"
         android:layout_below="@+id/spnCampos"
-        android:background="@drawable/backwithborder"
         android:layout_toRightOf="@+id/txtValidationPass"
         android:layout_alignRight="@+id/spnCampos"
         android:layout_alignEnd="@+id/spnCampos" />
