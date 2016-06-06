@@ -33,6 +33,9 @@
         <item>Marketing</item>
     </string-array>
 
+    <string name="mensajeActualizado">Tus datos han sido actualizados</string>
+    <string name="tituloActualizado">MODIFICAR O ACTUALIZAR DATOS</string>
+
     <!--Strings List View Ayuda -->
 
     <string name="preguntas">PREGUNTAS FRECUENTES</string>

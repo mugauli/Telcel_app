@@ -18,6 +18,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -81,27 +82,41 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             Log.e("Response: ", result11);
 
             //Checar Parametros
-            //BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
-            //StringBuilder sb1 = new StringBuilder();
-            //sb1.append(reader1.readLine() + "\n");
-            //String line1 = "0";
-            //while ((line1 = reader1.readLine()) != null) {
-            //    sb1.append(line1 + "\n");
-            //}
-            //reader1.close();
-            //String result111 = sb1.toString();
-            //Log.e("Parametros: ", result111);
+            BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
+            StringBuilder sb1 = new StringBuilder();
+            sb1.append(reader1.readLine() + "\n");
+            String line1 = "0";
+            while ((line1 = reader1.readLine()) != null) {
+                sb1.append(line1 + "\n");
+            }
+            reader1.close();
+            String result111 = sb1.toString();
+            Log.e("Parametros: ", result111);
             //Fin Checar Parametros
 
+            Log.e("Response: ", result11);
+            if(result11 == "true" || result11 == "false") {
+                arreglo = new JSONArray("[{'resp':'" + result11 + "'}]");
+            }
+            else
+            {
+                arreglo = new JSONArray("[" + result11 + "]");
+            }
 
-            arreglo = new JSONArray("[" + result11 + "]");
+
             // parsing data
-            return arreglo;
+
 
         } catch (Exception e) {
+            try {
+                arreglo = new JSONArray("[{'error':'true'}]");
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
             return null;
         }
+        return arreglo;
     }
 
     @Override
@@ -127,10 +142,15 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
         }else if(paramsPassed.get(0)=="2")
         {
-            nameValuePair.add(new BasicNameValuePair("dato", paramsPassed.get(2)));
-            nameValuePair.add(new BasicNameValuePair("password", paramsPassed.get(3)));
-            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(4)));
-            nameValuePair.add(new BasicNameValuePair("campo", paramsPassed.get(5)));
+            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(2)));
+            nameValuePair.add(new BasicNameValuePair("idUsuario", paramsPassed.get(3)));
+            nameValuePair.add(new BasicNameValuePair("num_celular", paramsPassed.get(4)));
+            nameValuePair.add(new BasicNameValuePair("tipo_celular", paramsPassed.get(5)));
+            nameValuePair.add(new BasicNameValuePair("region", paramsPassed.get(6)));
+            nameValuePair.add(new BasicNameValuePair("nombre", paramsPassed.get(7)));
+            nameValuePair.add(new BasicNameValuePair("paterno", paramsPassed.get(8)));
+            nameValuePair.add(new BasicNameValuePair("materno", paramsPassed.get(9)));
+            nameValuePair.add(new BasicNameValuePair("email", paramsPassed.get(10)));
 
         }
 

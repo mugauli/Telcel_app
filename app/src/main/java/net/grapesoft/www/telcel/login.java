@@ -40,21 +40,21 @@ import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
 public class login extends Activity {
+
     public String tokenCTE = "";
     final Context context = this;
     AlertDialogManager alert = new AlertDialogManager();
     SessionManagement session;
 
-    public login (Context cxt){
-
-        tokenCTE = cxt.getString(R.string.tokenXM);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         session = new SessionManagement(getApplicationContext());
+
+        tokenCTE = getText(R.string.tokenXM).toString();
         //Creamos la lista
         LinkedList SpnCampos = new LinkedList();
 
@@ -244,7 +244,7 @@ public class login extends Activity {
 
                                 session.createLoginSession(tokenCTE, dato, campo, password, id, num_empleado, num_celular,
                                         region, nombre, paterno, materno, interes_1, interes_2);
-                                Intent i = new Intent(login.this, home.class);
+                                Intent i = new Intent(login.this, ActualizarActivity.class);
                                 startActivity(i);
                                 finish();
 
@@ -261,7 +261,8 @@ public class login extends Activity {
 
                         }
                        else{
-                            alert.showAlertDialog(login.this, "Aviso", "No hay conexión a internet.", false);
+                            Toast toast = Toast.makeText(login.this,  "No hay conexión a internet.", Toast.LENGTH_LONG);
+                            toast.show();
                         }
 
                     } catch (InterruptedException e) {
