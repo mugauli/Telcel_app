@@ -87,7 +87,9 @@ public class ActualizarActivity extends ActionBarActivity {
 
                         Spinner spinner_Region = (Spinner) findViewById(R.id.spnRegion);
                         Spinner spinner_Direccion = (Spinner) findViewById(R.id.spnDireccion);
+
                         EditText txtCelular = (EditText) findViewById(R.id.txtCelular);
+
                         EditText txtNombre = (EditText) findViewById(R.id.txtNombre);
                         EditText txtPaterno = (EditText) findViewById(R.id.txtPaterno);
                         EditText txtMaterno = (EditText) findViewById(R.id.txtMaterno);
@@ -97,7 +99,12 @@ public class ActualizarActivity extends ActionBarActivity {
 
                         String idUsuario = user.get(SessionManagement.KEY_ID);
                         String num_Celular = txtCelular.getText().toString();
-
+                        Log.e("Request", "Celular: " + num_Celular);
+                        if(num_Celular.length() == 0 || num_Celular.length() > 10 || num_Celular.length() < 10) {
+                            Toast toast = Toast.makeText(ActualizarActivity.this, "Número de teléfono invalido.", Toast.LENGTH_LONG);
+                            toast.show();
+                            return;
+                        }
                         tipo_celular = Radio;
                         //String region = region;
 
@@ -113,9 +120,29 @@ public class ActualizarActivity extends ActionBarActivity {
                         Log.e("Request", "Region: " + region);
 
                         String nombre = txtNombre.getText().toString();
+                        if(nombre.length() == 0) {
+                            Toast toast = Toast.makeText(ActualizarActivity.this, "Nombre(s) invalido.", Toast.LENGTH_LONG);
+                            toast.show();
+                            return;
+                        }
                         String paterno = txtPaterno.getText().toString();
+                        if(paterno.length() == 0) {
+                            Toast toast = Toast.makeText(ActualizarActivity.this, "Apellido paterno invalido.", Toast.LENGTH_LONG);
+                            toast.show();
+                            return;
+                        }
                         String materno = txtMaterno.getText().toString();
+                        if(materno.length() == 0) {
+                            Toast toast = Toast.makeText(ActualizarActivity.this, "Apellido materno invalido.", Toast.LENGTH_LONG);
+                            toast.show();
+                            return;
+                        }
                         String email = txtCorreo.getText().toString();
+                        if(email.length() == 0|| !email.matches("[a-zA-Z0-9._-]+@[A-Za-z]+.+[a-z]+")) {
+                            Toast toast = Toast.makeText(ActualizarActivity.this, "Correo invalido.", Toast.LENGTH_LONG);
+                            toast.show();
+                            return;
+                        }
 
                         //-- PARAMETROS PETICION Actualizar trabajador-----//
                         params.add("2");
@@ -133,25 +160,37 @@ public class ActualizarActivity extends ActionBarActivity {
 
                         JSONArray response = new Comunication(ActualizarActivity.this).execute(params).get();
 
-
+                        Log.e("Response", "Actualizar: " + response);
                         if(response.getJSONObject(0).has("error")) {
-
-                            Toast toast = Toast.makeText(ActualizarActivity.this, "Contraseña incorrecta", Toast.LENGTH_LONG);
+                            Log.e("Response Actualizar: ", "ERROR");
+                            Toast toast = Toast.makeText(ActualizarActivity.this, "Error al actualiar los datos", Toast.LENGTH_LONG);
                             toast.show();
 
                         }
                         else if(response.getJSONObject(0).has("resp"))
                         {
-                            Intent i = new Intent(ActualizarActivity.this, ActualizarActivity.class);
-                            startActivity(i);
-                            finish();
+
+                            String resp = response.getJSONObject(0).get("resp").toString();
+                            Log.e("Response Actualizar: ", resp);
+
+                            if(resp.equals("true")) {
+                                Intent i = new Intent(ActualizarActivity.this, ActualizadosActivity.class);
+                                startActivity(i);
+                                finish();
+                            }else
+                            {
+                                Toast toast = Toast.makeText(ActualizarActivity.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
+                                toast.show();
+                            }
 
                         }
                         else
                         {
-
+                            Log.e("Response Actualizar: ", "ERROR NO DEFINIDO");
+                            Toast toast = Toast.makeText(ActualizarActivity.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
+                            toast.show();
                         }
-                         Log.i("Response", "Login: " + response);
+
 
 
                     } else {

@@ -79,27 +79,31 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             }
             reader.close();
             String result11 = sb.toString();
-            Log.e("Response: ", result11);
+            //Log.e("Response: ", result11);
 
             //Checar Parametros
-            BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
-            StringBuilder sb1 = new StringBuilder();
-            sb1.append(reader1.readLine() + "\n");
-            String line1 = "0";
-            while ((line1 = reader1.readLine()) != null) {
-                sb1.append(line1 + "\n");
-            }
-            reader1.close();
-            String result111 = sb1.toString();
-            Log.e("Parametros: ", result111);
+           //BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
+           //StringBuilder sb1 = new StringBuilder();
+           //sb1.append(reader1.readLine() + "\n");
+           //String line1 = "0";
+           //while ((line1 = reader1.readLine()) != null) {
+           //    sb1.append(line1 + "\n");
+           //}
+           //reader1.close();
+           //String result111 = sb1.toString();
+           //Log.e("Parametros: ", result111);
             //Fin Checar Parametros
 
-            Log.e("Response: ", result11);
-            if(result11 == "true" || result11 == "false") {
-                arreglo = new JSONArray("[{'resp':'" + result11 + "'}]");
-            }
-            else
+
+            if(result11.equals("true"+"\n")) {
+               // Log.e("Response: ", "true Int");
+                arreglo = new JSONArray("[{'resp':'true'}]");
+            }else if(result11.equals("false"+"\n")) {
+                //Log.e("Response: ", "false int");
+                arreglo = new JSONArray("[{'resp':'false'}]");
+            } else
             {
+                //Log.e("Response: ", "JSON");
                 arreglo = new JSONArray("[" + result11 + "]");
             }
 
