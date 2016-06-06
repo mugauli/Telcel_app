@@ -70,6 +70,7 @@ public class login extends Activity {
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner_campos = (Spinner) findViewById(R.id.spnCampos);
         spinner_campos.setAdapter(spinner_adapter);
+        spinner_campos.setPrompt("Elige un dato e ingreso ...");
         spinner_campos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -90,18 +91,22 @@ public class login extends Activity {
                 {
                     case "C":
                         txtDato.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                        txtDato.setHint("Ingrese su correo");
                         break;
                     case "T":
                         txtDato.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        txtDato.setHint("Ingrese su número de teléfono");
                         break;
                     case "E":
                         txtDato.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        txtDato.setHint("Ingrese su número de empleado");
                         break;
 
                 }
                 txtDato.setText("");
                 text.setText("");
-                txtDato.setFocusable(true);
+
+
             }
 
             @Override
