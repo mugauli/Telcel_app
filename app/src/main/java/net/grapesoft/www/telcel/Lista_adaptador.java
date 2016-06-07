@@ -2,10 +2,14 @@ package net.grapesoft.www.telcel;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * Created by memoHack on 01/06/2016.
@@ -16,6 +20,7 @@ public abstract class Lista_adaptador extends BaseAdapter {
     private ArrayList<?> entradas;
     private int R_layout_IdView;
     private Context contexto;
+    TextView tv;
 
     public Lista_adaptador(Context contexto, int R_layout_IdView, ArrayList<?> entradas) {
         super();
@@ -31,6 +36,9 @@ public abstract class Lista_adaptador extends BaseAdapter {
             view = vi.inflate(R_layout_IdView, null);
         }
         onEntrada (entradas.get(posicion), view);
+
+
+
         return view;
     }
 

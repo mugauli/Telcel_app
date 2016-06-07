@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -52,6 +54,25 @@ public class login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        TextView txtGhost = (TextView) findViewById(R.id.textView3);
+        TextView txtGhost2 = (TextView) findViewById(R.id.textView4);
+        TextView txtGhost3 = (TextView) findViewById(R.id.tvRecuperar);
+        TextView txtGhost4 = (TextView) findViewById(R.id.tvRegistrarme);
+        TextView spinner_text=(TextView)findViewById(R.id.txtDato);
+        TextView txtpass=(TextView)findViewById(R.id.txtPassword);
+        Button btn=(Button) findViewById(R.id.btnIngresar);
+        // Loading Font Face
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
+        Typeface tfl = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
+        // Applying font
+        txtGhost.setTypeface(tf);
+        txtGhost2.setTypeface(tf);
+        txtGhost3.setTypeface(tf);
+        txtGhost4.setTypeface(tf);
+        spinner_text.setTypeface(tfl);
+        txtpass.setTypeface(tfl);
+        btn.setTypeface(tf);
+
 
         session = new SessionManagement(getApplicationContext());
 
@@ -319,6 +340,26 @@ public class login extends Activity {
             }
         });
 
+        TextView txt = (TextView) findViewById(R.id.tvRecuperar);
+        txt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(login.this,recuperar.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView txt2 = (TextView) findViewById(R.id.tvRegistrarme);
+        txt2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://internetencaja.com.mx/telcel-registro/"));
+                startActivity(intent);
+            }
+        });
+
 }
 
     public String obtenerPassMD5(String pass) {
@@ -338,6 +379,7 @@ public class login extends Activity {
         }
         return password;
     }
+
 
 
 }

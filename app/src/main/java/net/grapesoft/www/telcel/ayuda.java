@@ -1,13 +1,18 @@
 package net.grapesoft.www.telcel;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import java.util.ArrayList;
 
 import android.app.Activity;
 
+
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,6 +33,12 @@ public class ayuda  extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ayuda);
 
+
+
+
+
+
+
         ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
 
         datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.preguntas), getString(R.string.preguntasdesc)));
@@ -41,11 +52,16 @@ public class ayuda  extends ActionBarActivity {
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {
+                    // Applying font
                     TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
+                    Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/obscura.otf");
+                    texto_superior_entrada.setTypeface(tf);
                     if (texto_superior_entrada != null)
                         texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima());
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
+                    Typeface tfi = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
+                    texto_inferior_entrada.setTypeface(tfi);
                     if (texto_inferior_entrada != null)
                         texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo());
 
@@ -90,7 +106,32 @@ public class ayuda  extends ActionBarActivity {
 
     }
 
+//Seteando el icono
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_login, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_favorite) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+
+
+
+
+    }
 
 
 
