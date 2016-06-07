@@ -3,4 +3,8 @@
     <color name="ColorPrimary">#0b4da2</color>
     <color name="ColorPrimaryDark">#0b4da2</color>
     <color name="ColorFondo">#f4eadc</color>
+
+    <color name="colorMenu">#878787</color>
 </resources>
+
+
