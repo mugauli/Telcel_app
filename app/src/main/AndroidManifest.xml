@@ -85,7 +85,7 @@
         </activity>
         <activity
             android:name=".enviado"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
@@ -95,7 +95,7 @@
         </activity>
         <activity
             android:name=".recuperar"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
