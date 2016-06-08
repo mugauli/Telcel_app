@@ -1,11 +1,18 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemet" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/ColorPrimary</item>
         <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
         <item name="android:colorBackground">@color/ColorFondo</item>
         <item name="android:icon">@drawable/telcelnosune</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/bordes</item>
+        <item name="colorControlActivated">@color/bordes</item>
+        <item name="colorControlHighlight">@color/bordes</item>
+        <item name="colorAccent">@color/bordes</item>
+
         <!-- Customize your theme here. -->
     </style>
     <style name="AppTheme.NoActionBar">
@@ -16,4 +23,14 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MyEditTextTheme">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="colorControlNormal">@color/bordes</item>
+        <item name="colorControlActivated">@color/bordes</item>
+        <item name="colorControlHighlight">@color/bordes</item>
+        <item name="colorAccent">@color/bordes</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
+
+
 </resources>

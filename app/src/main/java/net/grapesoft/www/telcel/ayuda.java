@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 
 
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,7 @@ import android.widget.Toast;
 /**
  * Created by Mugauli on 01/06/2016.
  */
-public class ayuda  extends ActionBarActivity {
+public class ayuda  extends AppCompatActivity {
 
     final Context context = this;
     private ListView lista;

@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
+    android:divider="?android:dividerHorizontal"
     android:gravity="bottom">
 
     <ImageView
@@ -25,5 +26,6 @@
         android:layout_height="wrap_content"
         android:text="Mi Perfil"
         android:id="@+id/textView" />
+
 
 </LinearLayout>

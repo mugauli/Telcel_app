@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this,ayuda.class);
+                startActivity(intent);
             }
         });
 
@@ -85,11 +85,16 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             Intent i = new Intent(MainActivity.this, ActualizarActivity.class);
             startActivity(i);
-            finish();
+
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            Intent i = new Intent(MainActivity.this, pin.class);
+            startActivity(i);
+
 
         } else if (id == R.id.nav_slideshow) {
+            Intent i = new Intent(MainActivity.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
 

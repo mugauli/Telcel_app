@@ -38,6 +38,7 @@
         android:inputType="textEmailAddress"
         android:ems="20"
         android:id="@+id/editText"
+        android:theme="@style/MyEditTextTheme"
         android:layout_below="@+id/textView6"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -61,6 +62,7 @@
         android:ems="20"
         android:id="@+id/editText2"
         android:layout_below="@+id/textView7"
+        android:theme="@style/MyEditTextTheme"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -68,9 +70,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ENVIAR"
-
+        android:background="@drawable/btnshape"
         android:id="@+id/button2"
-        android:background="#0b4da2"
+
         android:textColor="@android:color/white"
         android:width="250dp"
         android:layout_marginTop="43dp"

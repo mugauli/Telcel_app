@@ -8,8 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -42,7 +44,7 @@ import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
-public class login extends Activity {
+public class login extends Activity  {
 
     public String tokenCTE = "";
     final Context context = this;

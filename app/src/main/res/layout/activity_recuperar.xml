@@ -48,7 +48,7 @@
             android:inputType="textEmailAddress"
             android:ems="18"
             android:id="@+id/editText3"
-
+            android:theme="@style/MyEditTextTheme"
             android:focusable="true"
             android:layout_marginTop="20dp" />
 

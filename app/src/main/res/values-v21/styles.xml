@@ -6,4 +6,12 @@
             <item name="android:statusBarColor">@android:color/transparent</item>
 
         </style>
+    <style name="MyEditTextTheme">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="colorControlNormal">@color/bordes</item>
+        <item name="colorControlActivated">@color/bordes</item>
+        <item name="colorControlHighlight">@color/bordes</item>
+        <item name="colorAccent">@color/bordes</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
 </resources>

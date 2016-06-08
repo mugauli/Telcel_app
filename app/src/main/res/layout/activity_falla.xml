@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:ems="40"
+            android:theme="@style/MyEditTextTheme"
             android:id="@+id/txtComentario"
 
             />

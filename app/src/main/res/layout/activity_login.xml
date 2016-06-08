@@ -4,6 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".login"
+
     android:background="@color/ColorFondo">
 
 
@@ -15,45 +16,50 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:src="@drawable/logo"
+            android:src="@drawable/logologin"
             android:layout_gravity="center_horizontal"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ingresar con:"
             android:id="@+id/textView3"
             android:textColor="#0b4da2"
             android:layout_marginTop="27dp"
             android:layout_marginLeft="25dp"
+
             android:textSize="18dp" />
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spnCampos"
             android:spinnerMode="dropdown"
-
-
+            android:theme="@style/MyEditTextTheme"
+            style="@style/SpinnerAppTheme"
             android:layout_marginLeft="17dp"
-            android:backgroundTint="@color/ColorPrimary"
+
             android:paddingLeft="0dp"
             android:paddingTop="10dp"
             android:layout_gravity="left" />
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:ems="13"
             android:id="@+id/txtDato"
-            android:text="ANDROID"
+
+            android:hint="Ingrese su contraseña"
+            android:theme="@style/MyEditTextTheme"
             android:visibility="invisible"
-            android:layout_marginLeft="25dp" />
+            android:layout_marginLeft="25dp"
+            android:layout_marginBottom="10dp" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Contraseña:"
             android:id="@+id/textView4"
@@ -62,35 +68,35 @@
             android:textSize="18dp"
             android:layout_marginBottom="0dp" />
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="13"
             android:id="@+id/txtPassword"
             android:layout_marginTop="30dp"
             android:hint="Ingrese su contraseña"
-            android:text=""
+            android:theme="@style/MyEditTextTheme"
             android:layout_marginLeft="25dp" />
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="INGRESAR"
             android:id="@+id/btnIngresar"
             android:background="#3068B2"
             android:textColor="@android:color/white"
-            android:width="280dp"
+
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtValidationPass"
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtValidationCampo"
             />
@@ -125,6 +131,7 @@
             android:layout_marginTop="23dp"
             android:src="@drawable/ayudac"
             android:layout_below="@+id/tvRegistrarme"
+
             android:layout_gravity="center_horizontal"
             />
 

@@ -5,6 +5,8 @@
     <color name="ColorFondo">#f4eadc</color>
     <color name="colorMenu">#878787</color>
     <color name="white">#FFFFFF</color>
+    <color name="accent">#FF4081</color>
+    <color name="bordes">#4DB1D1</color>
 </resources>
 
 
