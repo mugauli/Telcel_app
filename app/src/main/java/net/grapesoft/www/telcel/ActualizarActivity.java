@@ -3,8 +3,14 @@ package net.grapesoft.www.telcel;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -30,7 +37,8 @@ import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
-public class ActualizarActivity extends ActionBarActivity {
+public class ActualizarActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
     public String tokenCTE = "";
@@ -40,6 +48,8 @@ public class ActualizarActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        session = new SessionManagement(getApplicationContext());
+
         setContentView(R.layout.activity_actualizar);
 
         //Fuentes
@@ -251,7 +261,74 @@ public class ActualizarActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+
+//Toolbar Menu
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.telcelnosune);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
+        ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //ToolBar Menu
     }
+
+    @Override
+    public void onBackPressed() {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+
+        if (id == R.id.nav_camera) {
+            Intent i = new Intent(ActualizarActivity.this, ActualizarActivity.class);
+
+            startActivity(i);
+
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+            Intent i = new Intent(ActualizarActivity.this, pin.class);
+            startActivity(i);
+
+
+        } else if (id == R.id.nav_slideshow) {
+            Intent i = new Intent(ActualizarActivity.this, preferencias.class);
+            startActivity(i);
+
+        } else if (id == R.id.nav_send) {
+            session.logoutUser();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?

@@ -35,7 +35,7 @@
         </activity>
         <activity
             android:name=".ayuda"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
@@ -55,7 +55,7 @@
         </activity>
         <activity
             android:name=".faq"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
@@ -65,7 +65,7 @@
         </activity>
         <activity
             android:name=".acercade"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
@@ -105,7 +105,7 @@
         </activity>
         <activity
             android:name=".ActualizarActivity"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
@@ -125,7 +125,7 @@
         </activity>
         <activity
             android:name=".ActualizadosActivity"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />

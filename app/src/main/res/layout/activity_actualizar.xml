@@ -1,257 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/ColorFondo"
-    tools:context="net.grapesoft.www.telcel.ActualizarActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <TextView
+    <include
+        layout="@layout/app_bar_actualizar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No. celular"
-        android:id="@+id/tvCelular"
-        android:textColor="#0b4da2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
+        android:background="@color/colorMenu"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/txtCelular"
-        android:theme="@style/MyEditTextTheme"
-        android:layout_below="@+id/tvCelular"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/txtCelular"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/radioGroup"
-        >
-
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:weightSum="10">
-
-            <RadioButton android:id="@+id/rbAsignado"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:text="Asignado"
-                android:checked="false"
-                android:textColor="#0b4da2"
-                android:drawableRight="@android:drawable/btn_radio"
-                android:button="@null"
-                android:onClick="onRadioButtonClicked" />
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="4"></android.support.v7.widget.LinearLayoutCompat>
-
-            <RadioButton android:id="@+id/rbPersonal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:text="Personal"
-                android:checked="true"
-                android:textColor="#0b4da2"
-                android:drawableRight="@android:drawable/btn_radio"
-                android:button="@null"
-                android:onClick="onRadioButtonClicked" />
-
-        </android.support.v7.widget.LinearLayoutCompat>
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecciona tu región"
-        android:id="@+id/tvRegion"
-        android:layout_below="@+id/radioGroup"
-        android:layout_alignParentLeft="true"
-        android:textColor="#0b4da2"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spnRegion"
-        android:layout_below="@+id/tvRegion"
-        android:theme="@style/MyEditTextTheme"
-        style="@style/SpinnerAppTheme"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selecciona tu dirección"
-        android:id="@+id/tvDireccion"
-        android:layout_below="@+id/spnRegion"
-        android:textColor="#0b4da2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spnDireccion"
-        android:layout_below="@+id/tvDireccion"
-        android:theme="@style/MyEditTextTheme"
-        style="@style/SpinnerAppTheme"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre(s)"
-        android:id="@+id/tvNombres"
-        android:textColor="#0b4da2"
-        android:layout_below="@+id/spnDireccion"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/txtNombre"
-        android:layout_below="@+id/tvNombres"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:theme="@style/MyEditTextTheme"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Apellido Paterno"
-        android:id="@+id/tvPaterno"
-        android:textColor="#0b4da2"
-        android:layout_below="@+id/txtNombre"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/txtPaterno"
-        android:layout_below="@+id/tvPaterno"
-        android:theme="@style/MyEditTextTheme"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Apellido Materno"
-        android:id="@+id/tvMaterno"
-        android:textColor="#0b4da2"
-        android:layout_below="@+id/txtPaterno"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/txtMaterno"
-        android:layout_below="@+id/tvMaterno"
-        android:theme="@style/MyEditTextTheme"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Correo electrónico corporativo"
-        android:id="@+id/tvCorreo"
-        android:layout_below="@+id/txtMaterno"
-        android:textColor="#0b4da2"
-        android:layout_alignLeft="@+id/txtMaterno"
-        android:layout_alignStart="@+id/txtMaterno" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/txtCorreo"
-        android:layout_below="@+id/tvCorreo"
-        android:layout_alignParentLeft="true"
-        android:theme="@style/MyEditTextTheme"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:weightSum="20"
-        android:layout_gravity="bottom"
-        android:layout_below="@+id/txtCorreo"
-        android:layout_centerHorizontal="true">
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="7"/>
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="ENVIAR"
-            android:id="@+id/btnEnviar"
-            android:background="@drawable/btnshape"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="50dp" />
-        <android.support.v7.widget.LinearLayoutCompat
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="7">
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="7"/>
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:id="@+id/imgAyuda"
-                android:src="@drawable/ayuda"
-                android:layout_gravity="right" />
-        </android.support.v7.widget.LinearLayoutCompat>
-
-
-    </LinearLayout>
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>
