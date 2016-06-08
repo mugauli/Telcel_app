@@ -23,11 +23,11 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".15"
+            android:layout_weight=".12"
             android:id="@+id/imageView"
             android:src="@drawable/logologin"
             android:layout_gravity="center_horizontal"
-            />
+            android:minHeight="70dp" />
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -38,7 +38,6 @@
             android:text="Ingresar con:"
             android:id="@+id/textView3"
             android:textColor="#0b4da2"
-            android:layout_marginTop="27dp"
             android:layout_marginLeft="25dp"
             android:textSize="18dp" />
         <Spinner
@@ -51,7 +50,8 @@
             style="@style/SpinnerAppTheme"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="5dp"
+            android:minHeight="60dp" />
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -64,18 +64,19 @@
             android:visibility="invisible"
             android:layout_marginLeft="17dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="17dp"
             android:layout_weight=".10"
-            android:maxHeight="30dp" />
+            android:maxHeight="120dp"
+            android:minHeight="50dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtErrorDatos"
-            android:layout_weight=".13"
             android:layout_marginLeft="26dp"
-            android:textColor="@color/error"/>
+            android:textColor="@color/error"
+            android:text="preuba" />
 
         <TextView
             android:layout_width="match_parent"
@@ -83,30 +84,27 @@
             android:text="Contraseña:"
             android:id="@+id/textView4"
             android:textColor="#0b4da2"
-            android:layout_marginLeft="26dp"
-            android:textSize="18dp"
-            android:layout_marginBottom="0dp" />
+            android:layout_marginLeft="25dp"
+            android:textSize="18dp" />
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="13"
             android:id="@+id/txtPassword"
-            android:layout_marginTop="15dp"
             android:hint="Ingrese su contraseña"
 
             style="@style/EditTextAppTheme"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
-            android:layout_marginBottom="10dp"
             android:layout_weight=".10"
-            android:maxHeight="30dp" />
+            android:maxHeight="120dp"
+            android:minHeight="50dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtErrorContrasena"
-            android:layout_weight=".13"
             android:layout_marginLeft="26dp"
             android:textColor="@color/error"/>
 
@@ -119,10 +117,10 @@
 
             android:textColor="@android:color/white"
             android:background="@drawable/btnshape"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="17dp"
-            android:layout_marginRight="17dp" />
+            android:layout_marginRight="17dp"
+            android:layout_weight=".10" />
 
         <TextView
             android:layout_width="match_parent"
@@ -150,7 +148,10 @@
             android:textSize="15dp"
             android:textColorLink="@color/abc_input_method_navigation_guard"
             android:textColorHint="@color/abc_input_method_navigation_guard" />
-
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".20"></LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -158,20 +159,24 @@
             android:text="Registrarme"
             android:id="@+id/tvRegistrarme"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="29dp"
             android:textSize="15dp"
-            android:onClick="@string/URL" />
+            android:onClick="@string/URL"
+            android:layout_marginTop="5dp" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".13"></LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView2"
-            android:layout_marginTop="23dp"
+
             android:src="@drawable/ayudac"
             android:layout_below="@+id/tvRegistrarme"
 
             android:layout_gravity="center_horizontal"
-            />
+            android:layout_marginTop="5dp" />
 
     </LinearLayout>
 </RelativeLayout>
