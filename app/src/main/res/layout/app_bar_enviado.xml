@@ -33,7 +33,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_enviado"/>
+    <include layout="@layout/enviado"/>
 
 
 </android.support.design.widget.CoordinatorLayout>
