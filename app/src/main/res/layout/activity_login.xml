@@ -10,20 +10,28 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".13"></LinearLayout>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight=".15"
             android:id="@+id/imageView"
             android:src="@drawable/logologin"
             android:layout_gravity="center_horizontal"
             />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".12"></LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,32 +40,42 @@
             android:textColor="#0b4da2"
             android:layout_marginTop="27dp"
             android:layout_marginLeft="25dp"
-
             android:textSize="18dp" />
         <Spinner
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight=".10"
             android:id="@+id/spnCampos"
             android:spinnerMode="dropdown"
             android:theme="@style/MyEditTextTheme"
             style="@style/SpinnerAppTheme"
             android:layout_marginLeft="17dp"
-
-            android:paddingLeft="0dp"
-            android:paddingTop="10dp"
-            android:layout_gravity="left" />
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="15dp" />
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:ems="13"
             android:id="@+id/txtDato"
-
             android:hint="Ingrese su contraseña"
             android:theme="@style/MyEditTextTheme"
             android:visibility="invisible"
-            android:layout_marginLeft="25dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginLeft="17dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="17dp"
+            android:layout_weight=".10"
+            android:maxHeight="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtErrorDatos"
+            android:layout_weight=".13"
+            android:layout_marginLeft="26dp"
+            android:textColor="@color/error"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,18 +86,31 @@
             android:textSize="18dp"
             android:layout_marginBottom="0dp" />
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="13"
             android:id="@+id/txtPassword"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:hint="Ingrese su contraseña"
             android:theme="@style/MyEditTextTheme"
-            android:layout_marginLeft="25dp" />
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight=".10"
+            android:maxHeight="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtErrorContrasena"
+            android:layout_weight=".13"
+            android:layout_marginLeft="26dp"
+            android:textColor="@color/error"/>
+
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="INGRESAR"
             android:id="@+id/btnIngresar"
@@ -87,7 +118,9 @@
             android:textColor="@android:color/white"
 
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -96,10 +129,12 @@
             />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtValidationCampo"
-            />
+            android:id="@+id/txtErrorInternet"
+            android:layout_weight=".13"
+            android:layout_marginLeft="26dp"
+            android:textColor="@color/error"/>
 
         <TextView
             android:layout_width="wrap_content"

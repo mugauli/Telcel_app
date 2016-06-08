@@ -88,7 +88,7 @@ public class login extends Activity  {
         SpnCampos.add(new Campos("E", "No. de Empleado"));
 
         ArrayAdapter spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, SpnCampos);
-        final TextView text = (TextView)findViewById(R.id.txtValidationCampo);
+        final TextView text = (TextView)findViewById(R.id.txtErrorDatos);
         //Se agrega el layout para el tipo de logeo y se asigna al spinner
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner_campos = (Spinner) findViewById(R.id.spnCampos);
@@ -222,6 +222,10 @@ public class login extends Activity  {
                 Spinner spinner_campos = (Spinner) findViewById(R.id.spnCampos);
                 final EditText txtDato = (EditText) findViewById(R.id.txtDato);
                 final EditText txtPass = (EditText) findViewById(R.id.txtPassword);
+                final TextView txtErrorDato = (TextView) findViewById(R.id.txtErrorDatos);
+                final TextView txtErrorPass = (TextView) findViewById(R.id.txtErrorContrasena);
+                final TextView txtErrorInternet = (TextView) findViewById(R.id.txtErrorInternet);
+
 
                 Campos item = (Campos)spinner_campos.getSelectedItem();
                 campo = item.getId();
@@ -232,20 +236,24 @@ public class login extends Activity  {
                //Log.e("tokenCTE",tokenCTE);
                //Log.e("Campo",campo);
                //Log.e("PASS",password);
-
+                txtErrorDato.setText("");
+                txtErrorPass.setText("");
                 //-------//
                 // Check if username, password is filled
                 if(campo == "0")
                 {
-                    alert.showAlertDialog(login.this, "Aviso", "Elige un dato de ingreso.", false);
+                    txtErrorDato.setText("Elige un dato de ingreso.");
+                    //alert.showAlertDialog(login.this, "Aviso", "Elige un dato de ingreso.", false);
                 }
                 else if (dato.trim().length() == 0)
                 {
-                    alert.showAlertDialog(login.this, "Aviso", "Ingresa tu " + item.toString()+ ".", false);
+                    txtErrorDato.setText("Ingresa tu " + item.toString()+ ".");
+                    //alert.showAlertDialog(login.this, "Aviso", "Ingresa tu " + item.toString()+ ".", false);
                 }
                 else if(password.trim().length() == 0)
                 {
-                    alert.showAlertDialog(login.this, "Aviso", "Ingresa una contraseña.", false);
+                    txtErrorPass.setText("Ingresa una contraseña..");
+                    //alert.showAlertDialog(login.this, "Aviso", "Ingresa una contraseña.", false);
 
                 }else{
 
@@ -256,6 +264,7 @@ public class login extends Activity  {
 
                         if(isInternetPresent)
                         {
+                            txtErrorInternet.setText("");
                             password = obtenerPassMD5(password);
 
 
@@ -295,8 +304,10 @@ public class login extends Activity  {
                             }
                             else
                             {
-                                Toast toast = Toast.makeText(login.this, "Contraseña incorrecta", Toast.LENGTH_LONG);
-                                toast.show();
+                                txtErrorPass.setText("La contraseña no es correcta.");
+
+                               // Toast toast = Toast.makeText(login.this, "Contraseña incorrecta", Toast.LENGTH_LONG);
+                               // toast.show();
 
                             }
 
@@ -305,8 +316,10 @@ public class login extends Activity  {
 
                         }
                        else{
-                            Toast toast = Toast.makeText(login.this,  "No hay conexión a internet.", Toast.LENGTH_LONG);
-                            toast.show();
+
+                            txtErrorInternet.setText("No hay conexión a internet.");
+                            //Toast toast = Toast.makeText(login.this,  "No hay conexión a internet.", Toast.LENGTH_LONG);
+                            //toast.show();
                         }
 
                     } catch (InterruptedException e) {
