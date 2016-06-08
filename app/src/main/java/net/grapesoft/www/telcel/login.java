@@ -256,11 +256,13 @@ public class login extends Activity  {
                 else if (dato.trim().length() == 0)
                 {
                     txtErrorDato.setText("Ingresa tu " + item.toString()+ ".");
+                    txtDato.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
                     //alert.showAlertDialog(login.this, "Aviso", "Ingresa tu " + item.toString()+ ".", false);
                 }
                 else if(password.trim().length() == 0)
                 {
                     txtErrorPass.setText("Ingresa una contraseña..");
+                    txtpass.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
                     //alert.showAlertDialog(login.this, "Aviso", "Ingresa una contraseña.", false);
 
                 }else{
