@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
@@ -74,8 +75,8 @@ public class login extends Activity  {
         spinner_text.setTypeface(tfl);
         txtpass.setTypeface(tfl);
         btn.setTypeface(tf);
-
-
+        txtGhost3.setPaintFlags(txtGhost3.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        txtGhost4.setPaintFlags(txtGhost4.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         session = new SessionManagement(getApplicationContext());
 
         tokenCTE = getText(R.string.tokenXM).toString();

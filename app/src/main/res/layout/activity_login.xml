@@ -59,7 +59,8 @@
             android:ems="13"
             android:id="@+id/txtDato"
             android:hint="Ingrese su contraseña"
-            android:theme="@style/MyEditTextTheme"
+
+            style="@style/EditTextAppTheme"
             android:visibility="invisible"
             android:layout_marginLeft="17dp"
             android:layout_marginBottom="10dp"
@@ -93,7 +94,8 @@
             android:id="@+id/txtPassword"
             android:layout_marginTop="15dp"
             android:hint="Ingrese su contraseña"
-            android:theme="@style/MyEditTextTheme"
+
+            style="@style/EditTextAppTheme"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
             android:layout_marginBottom="10dp"
@@ -114,9 +116,9 @@
             android:layout_height="wrap_content"
             android:text="INGRESAR"
             android:id="@+id/btnIngresar"
-            android:background="#3068B2"
-            android:textColor="@android:color/white"
 
+            android:textColor="@android:color/white"
+            android:background="@drawable/btnshape"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="17dp"
@@ -148,6 +150,7 @@
             android:textSize="15dp"
             android:textColorLink="@color/abc_input_method_navigation_guard"
             android:textColorHint="@color/abc_input_method_navigation_guard" />
+
 
         <TextView
             android:layout_width="wrap_content"

@@ -34,12 +34,6 @@ public class ayuda  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ayuda);
 
-
-
-
-
-
-
         ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
 
         datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.preguntas), getString(R.string.preguntasdesc)));
