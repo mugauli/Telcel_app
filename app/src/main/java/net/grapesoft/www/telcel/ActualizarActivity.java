@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -39,6 +41,41 @@ public class ActualizarActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actualizar);
+
+        //Fuentes
+        TextView txtGhost = (TextView) findViewById(R.id.tvCelular);
+        TextView txtGhost2 = (TextView) findViewById(R.id.tvRegion);
+        TextView txtGhost3 = (TextView) findViewById(R.id.tvDireccion);
+        RadioButton rb= (RadioButton) findViewById(R.id.rbAsignado);
+        RadioButton rbp= (RadioButton) findViewById(R.id.rbPersonal);
+        TextView txtGhost5 = (TextView) findViewById(R.id.tvNombres);
+        TextView txtGhost6 = (TextView) findViewById(R.id.tvPaterno);
+        TextView txtGhost7 = (TextView) findViewById(R.id.tvMaterno);
+        TextView txtGhost8 = (TextView) findViewById(R.id.tvCorreo);
+        TextView txt1 = (TextView) findViewById(R.id.txtCelular);
+        TextView txt2 = (TextView) findViewById(R.id.txtNombre);
+        TextView txt3 = (TextView) findViewById(R.id.txtPaterno);
+        TextView txt4 = (TextView) findViewById(R.id.txtMaterno);
+        TextView txt5 = (TextView) findViewById(R.id.txtCorreo);
+        // Loading Font Face
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
+        Typeface tfm = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
+        // Applying font
+        txtGhost.setTypeface(tfm);
+        txtGhost2.setTypeface(tfm);
+        txtGhost3.setTypeface(tfm);
+        txtGhost5.setTypeface(tfm);
+        txtGhost6.setTypeface(tfm);
+        txtGhost7.setTypeface(tfm);
+        txtGhost8.setTypeface(tfm);
+        txt1.setTypeface(tf);
+        txt2.setTypeface(tf);
+        txt3.setTypeface(tf);
+        txt4.setTypeface(tf);
+        txt5.setTypeface(tf);
+        rb.setTypeface(tfm);
+        rbp.setTypeface(tfm);
+
 
         tokenCTE = getText(R.string.tokenXM).toString();
         Spinner spinner_Region = (Spinner) findViewById(R.id.spnRegion);
