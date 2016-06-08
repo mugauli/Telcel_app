@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 
         //boton ayuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
