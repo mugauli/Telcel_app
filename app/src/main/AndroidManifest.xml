@@ -75,7 +75,7 @@
         </activity>
         <activity
             android:name=".falla"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
@@ -135,7 +135,7 @@
         </activity>
         <activity
             android:name=".sugerencias"
-            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
