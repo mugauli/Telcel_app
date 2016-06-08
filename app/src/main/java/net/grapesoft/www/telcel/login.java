@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
@@ -62,7 +64,7 @@ public class login extends Activity  {
         TextView txtGhost3 = (TextView) findViewById(R.id.tvRecuperar);
         TextView txtGhost4 = (TextView) findViewById(R.id.tvRegistrarme);
         TextView spinner_text=(TextView)findViewById(R.id.txtDato);
-        TextView txtpass=(TextView)findViewById(R.id.txtPassword);
+        final TextView txtpass=(TextView)findViewById(R.id.txtPassword);
         Button btn=(Button) findViewById(R.id.btnIngresar);
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
@@ -109,6 +111,7 @@ public class login extends Activity  {
                 else
                 {
                     txtDato.setVisibility(View.VISIBLE);
+                    txtDato.getBackground().setColorFilter(Color.rgb(77,177,209), PorterDuff.Mode.SRC_IN);
                 }
 
                 switch (item.getId())
@@ -150,6 +153,7 @@ public class login extends Activity  {
                 if(!hasFocus) {
                     Spinner spinner_campos = (Spinner) findViewById(R.id.spnCampos);
                     Campos item = (Campos)spinner_campos.getSelectedItem();
+
                     if (txtDato.getText().toString().trim().length() > 0)
                     if(item.getId() == "C") {
 
@@ -160,6 +164,8 @@ public class login extends Activity  {
                             //Telcel.com
                             //americamovil.com
                             text.setText("Correo invalido.");
+                            txtDato.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
                             Log.e("Email", "validacion de email: " + txtDato.getText().toString());
                             //message error
 
@@ -186,7 +192,7 @@ public class login extends Activity  {
                             text.setText("Teléfono invalido.");
                             Log.e("Telefono", "validacion de telefono: " + txtDato.getText().toString());
                             //message error
-
+                            txtDato.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
                         } else {
                             text.setText("");
                         }
@@ -199,9 +205,10 @@ public class login extends Activity  {
                             text.setText("Número de empleado invalido.");
                             Log.e("Telefono", "validacion de telefono: " + txtDato.getText().toString());
                             //message error
-
+                            txtDato.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
                         } else {
                             text.setText("");
+
                         }
 
                     }
@@ -306,6 +313,8 @@ public class login extends Activity  {
                             else
                             {
                                 txtErrorPass.setText("La contraseña no es correcta.");
+                                txtpass.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
 
                                // Toast toast = Toast.makeText(login.this, "Contraseña incorrecta", Toast.LENGTH_LONG);
                                // toast.show();
