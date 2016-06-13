@@ -114,6 +114,9 @@
     <string name="acceso1">Al generar un nuevo pin o contraseña este te llegará a tu correo corporativo. </string>
     <string name="acceso2">Se cerrará la sesión de la aplicación y deberás volver a ingresar con la nueva contraseña</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <!-- -->
 
 

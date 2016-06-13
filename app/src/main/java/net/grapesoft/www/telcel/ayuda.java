@@ -43,6 +43,7 @@ public class ayuda  extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayuda);
+
         session = new SessionManagement(getApplicationContext());
         ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
 
