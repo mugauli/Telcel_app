@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         //ToolBar Menu
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabs.addTab(tabs.newTab().setText("PODCAST"));
+        tabs.addTab(tabs.newTab().setText("@string/tab1"));
         tabs.addTab(tabs.newTab().setText("VIDEO"));
         tabs.addTab(tabs.newTab().setText("REVISTA"));
         tabs.addTab(tabs.newTab().setText("NOTICIAS"));
