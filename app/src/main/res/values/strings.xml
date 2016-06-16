@@ -125,4 +125,11 @@
     <string name="tab4">BOLSA</string>
     <string name="tab5">SITIOS</string>
 
+    <!--Strings TABS COMUNICACIÓN INTERNA   -->
+    <string name="tabs1">PODCAST </string>
+    <string name="tabs2">VIDEOS</string>
+    <string name="tabs3">REVISTA EN LINEA </string>
+    <string name="tabs4">NOTICIAS</string>
+
+
 </resources>
