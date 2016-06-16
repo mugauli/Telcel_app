@@ -2,6 +2,8 @@ package net.grapesoft.www.telcel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,24 +11,41 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import Utitilies.Campos;
+import Utitilies.Comunication;
+import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
 
@@ -34,21 +53,24 @@ public class falla extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
+    public String tokenCTE = "";
 
-    final Context context = this;
+    Context context;
     private ListView lista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_falla);
+
         session = new SessionManagement(getApplicationContext());
+
         TextView txtGhost = (TextView) findViewById(R.id.textView_desc1);
         TextView txtGhost2 = (TextView) findViewById(R.id.textView_desc2);
         TextView txtGhost3 = (TextView) findViewById(R.id.textView_comentario);
-        Button btn=(Button) findViewById(R.id.button);
+        Button btn=(Button) findViewById(R.id.btnEnviarFalla);
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
-
+        tokenCTE = getText(R.string.tokenXM).toString();
         // Applying font
         txtGhost.setTypeface(tf);
         txtGhost2.setTypeface(tf);
@@ -64,7 +86,7 @@ public class falla extends AppCompatActivity
 
 
         lista = (ListView) findViewById(R.id.falla);
-        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_falla, datos){
+        Lista_adaptador adaptador = new Lista_adaptador(this, R.layout.entrada_falla, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {
@@ -79,22 +101,152 @@ public class falla extends AppCompatActivity
 
                     if (texto_inferior_entrada != null)
                         texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo());
-
-
                 }
             }
 
+        };
+        lista.setAdapter(adaptador);
 
-        });
+        Button btnEnviarFalla;
+        btnEnviarFalla = (Button) findViewById(R.id.btnEnviarFalla);
 
-//Toolbar Menu
+        // add button listener
+        if (btnEnviarFalla != null) {
+            btnEnviarFalla.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+
+                    JSONArray response;
+
+
+                    final TextView txtErrorFalla = (TextView) findViewById(R.id.txtErrorFalla);
+                    final EditText txtComentario = (EditText) findViewById(R.id.txtComentario);
+                    final TextView txtErrorComentarioFalla = (TextView) findViewById(R.id.txtErrorComentarioFalla);
+
+                    String comentario = txtComentario.getText().toString();
+                    ListView _listView = (ListView) findViewById(R.id.falla);
+                    View itemSelected = (View)_listView.findViewById(R.id.rdfalla);
+
+                    Log.e("Response", "Falla Lista: " + _listView);
+
+
+                    //   for (int i = 0; i < _listView.getAdapter().getCount(); i++) {
+                     //       if (checked.get(i)) {
+                     //           // Do something
+                     //       }
+                     //   }
+                    //Log.e("Datos",dato);
+                    //Log.e("tokenCTE",tokenCTE);
+                    //Log.e("Campo",campo);
+                    //Log.e("PASS",password);
+                    txtErrorFalla.setText("");
+
+                    //-------//
+                    if(itemSelected == null)
+                    {
+                        Log.e("Response", "Falla: " + itemSelected);
+                        txtErrorFalla.setText("Seleccione un tipo de falla");
+
+
+                    }else if (comentario.trim().length() == 0)
+                    {
+                        txtErrorComentarioFalla.setText("Ingresa un comentario.");
+                        txtComentario.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                        //alert.showAlertDialog(login.this, "Aviso", "Ingresa tu " + item.toString()+ ".", false);
+                    }
+                    else {
+
+                        ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
+                        Boolean isInternetPresent = cd.isConnectingToInternet();
+
+                        try {
+
+                            if(isInternetPresent)
+                            {
+                                txtErrorFalla.setText("");
+                                txtErrorComentarioFalla.setText("");
+                                //-- PARAMETROS PETICION LOGIN-----//
+                                Log.e("Response", "Falla: Entro a envio de falla");
+
+                                ArrayList<String> params = new ArrayList<String>();
+                                final HashMap<String, String> user = session.getUserDetails();
+                                String idUsuario = user.get(SessionManagement.KEY_ID);
+                                Log.e("Response", "Falla: " + itemSelected);
+                                RadioButton rdFalla = (RadioButton)itemSelected.findViewById(R.id.rdfalla);
+                                String opcion = rdFalla.getTag().toString();
+
+
+                                //Fallas y sugerencias
+                                //token: siempre será 67d6b32e8d96b8542feda3df334c04f5
+                                //idUsuario: es el id que les envio en el login
+                                //correo: en caso de no contar con el id de usuario, es para las sugerencias
+                                //tipo: puede tomar 2 valores [R] cuando es un reporte, [S] cuando es una sugerencia--
+                                //opcion: cuando es un reporte de falla [R] se le envia el numero de la falla ---
+                                //comentario: Comentario que pongan en la app ----
+
+                                //-- PARAMETROS PETICION LOGIN-----//
+                                params.add("3");
+                                params.add("GetComment.php");
+                                params.add(tokenCTE);
+                                params.add(idUsuario);
+                                params.add("R");
+                                params.add(opcion);
+                                params.add(comentario);
+
+                                response = new Comunication(falla.this).execute(params).get();
+
+                                Log.e("Response", "Falla: " + response);
+                                if(response.getJSONObject(0).has("error")) {
+                                    Log.e("Response Falla: ", "ERROR");
+                                    txtErrorFalla.setText("Error al enviar reporte.");
+
+                                }
+                                else if(response.getJSONObject(0).has("resp"))
+                                {
+                                    String resp = response.getJSONObject(0).get("resp").toString();
+                                    Log.e("Response Falla: ", resp);
+
+                                    if(resp.equals("true")) {
+                                        Intent i = new Intent(falla.this, ActualizadosActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    }else
+                                    {
+                                        txtErrorFalla.setText("Error al enviar reporte.");
+                                        //Toast toast = Toast.makeText(falla.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
+                                        //toast.show();
+                                    }
+                                }
+                            }
+                            else{
+                                txtErrorFalla.setText("No hay conexión a internet.");
+                                //Toast toast = Toast.makeText(login.this,  "No hay conexión a internet.", Toast.LENGTH_LONG);
+                                //toast.show();
+                            }
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //String response = new Comunication().Post(dato,obtenerPassMD5(txtPass.getText().toString()),tokenCTE,campo);
+                    // String response = new Comunication().makePostRequest();
+                    // Log.i("Response", "Login: " + response);
+                }
+            });
+        }
+
+        //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
@@ -118,6 +270,13 @@ public class falla extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
+    }
+
+    private String isCheckedOrNot(RadioButton checkbox) {
+        if(checkbox.isChecked())
+            return "is checked";
+        else
+            return "is not checked";
     }
     @Override
     public void onBackPressed() {
@@ -185,4 +344,6 @@ public class falla extends AppCompatActivity
 
 
     }
+
+
 }

@@ -140,6 +140,13 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
         if(paramsPassed.get(0)=="1")
         {
+            //login
+
+            //token: Siempre será igual a 67d6b32e8d96b8542feda3df334c04f5
+            //campo: describe el campo con el cual el usuario quiere accesar y puede tomar 3 valores [C=correo, T=telefono, E=No. de empleado]
+            //dato: El valor del campo de usuario [correo,telefono o numero de empleado]
+            //password: Valor encriptado en MD5
+
             nameValuePair.add(new BasicNameValuePair("dato", paramsPassed.get(2)));
             nameValuePair.add(new BasicNameValuePair("password", paramsPassed.get(3)));
             nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(4)));
@@ -147,6 +154,18 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
         }else if(paramsPassed.get(0)=="2")
         {
+            //Actualiza trabajador
+
+            //token: siempre será 67d6b32e8d96b8542feda3df334c04f5
+            //idUsuario: es el id que les envio en el login
+            //num_celular
+            //tipo_celular: Puede tomar 2 valores [A] celular asignado [P] Personal
+            //region: Toma varios valores 1-9, C, A
+            //nombre
+            //paterno
+            //materno
+            //email
+
             nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(2)));
             nameValuePair.add(new BasicNameValuePair("idUsuario", paramsPassed.get(3)));
             nameValuePair.add(new BasicNameValuePair("num_celular", paramsPassed.get(4)));
@@ -157,9 +176,23 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             nameValuePair.add(new BasicNameValuePair("materno", paramsPassed.get(9)));
             nameValuePair.add(new BasicNameValuePair("email", paramsPassed.get(10)));
 
+        }else if(paramsPassed.get(0)=="3")
+        {
+           //Fallas y sugerencias
+           //token: siempre será 67d6b32e8d96b8542feda3df334c04f5
+           //idUsuario: es el id que les envio en el login
+           //correo: en caso de no contar con el id de usuario, es para las sugerencias
+           //tipo: puede tomar 2 valores [R] cuando es un reporte, [S] cuando es una sugerencia--
+           //opcion: cuando es un reporte de falla [R] se le envia el numero de la falla ---
+           //comentario: Comentario que pongan en la app ----
+
+            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(2)));
+            nameValuePair.add(new BasicNameValuePair("idUsuario", paramsPassed.get(3)));
+            nameValuePair.add(new BasicNameValuePair("tipo", paramsPassed.get(4)));
+            nameValuePair.add(new BasicNameValuePair("opcion", paramsPassed.get(5)));
+            nameValuePair.add(new BasicNameValuePair("comentario", paramsPassed.get(6)));
+            nameValuePair.add(new BasicNameValuePair("correo", paramsPassed.get(7)));
         }
-
-
         return nameValuePair;
 
     }

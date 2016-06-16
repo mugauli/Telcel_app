@@ -83,8 +83,9 @@
     <!-- -->
 
     <!--Strings REPORTAR FALLA -->
-    <string name="rfdescuno">Reporta tu falla para brindarte un mejor servicio</string>
+    <string name="rfdescuno">Reporta tu falla para brindarte un mejor servicion </string>
     <string name="rfdescdos">Elige la categoría más adecuada.</string>
+
     <string name="rfuno">La aplicación no siempre me permite ingresar</string>
     <string name="rfdos">La aplicación no actualiza correctamente</string>
     <string name="rftres">La aplicación no funciona en el teléfono</string>
@@ -124,5 +125,12 @@
     <string name="tab3">PRESTACIONES </string>
     <string name="tab4">BOLSA</string>
     <string name="tab5">SITIOS</string>
+
+    <string-array name="tabs_Principal">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+    </string-array>
 
 </resources>

@@ -1,6 +1,8 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,33 +12,47 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
+import Utitilies.Comunication;
+import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
 public class sugerencias extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
+    public String tokenCTE = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sugerencias);
-
+        tokenCTE = getText(R.string.tokenXM).toString();
         session = new SessionManagement(getApplicationContext());
 
-        TextView txtGhost = (TextView) findViewById(R.id.textView5);
-        TextView txtGhost2 = (TextView) findViewById(R.id.textView6);
+        TextView txtGhost = (TextView) findViewById(R.id.txtCorreoSugerencia);
+        TextView txtGhost2 = (TextView) findViewById(R.id.txtSugerencia);
         TextView txtGhost3 = (TextView) findViewById(R.id.textView7);
-        Button btn=(Button) findViewById(R.id.button2);
+        Button btn=(Button) findViewById(R.id.btnEnviarSugerencia);
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
         Typeface tfl = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
@@ -59,26 +75,160 @@ public class sugerencias extends AppCompatActivity
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
-        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer;
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else {
-                    drawer.openDrawer(GravityCompat.START);
+        if (imgButton != null) {
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
                 }
-            }
-        });
-
+            });
+        }
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
+
+
+        Button btnEnviarSugerencia;
+        btnEnviarSugerencia = (Button) findViewById(R.id.btnEnviarSugerencia);
+
+        // add button listener
+        if (btnEnviarSugerencia != null) {
+            btnEnviarSugerencia.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+
+                    JSONArray response;
+
+                    final EditText txtSugerencia = (EditText) findViewById(R.id.txtSugerencia);
+                    final TextView tvErrorComentarioSugerencia = (TextView) findViewById(R.id.tvErrorComentarioSugerencia);
+                    final EditText txtCorreoSugerencia = (EditText) findViewById(R.id.txtCorreoSugerencia);
+                    final TextView tvErrorCorreoSugerencia = (TextView) findViewById(R.id.tvErrorCorreoSugerencia);
+                    final TextView tvErrorSugerencia = (TextView) findViewById(R.id.tvErrorSugerencia);
+
+                    String sugerencia = txtSugerencia.getText().toString();
+                    String correo = txtCorreoSugerencia.getText().toString();
+
+
+
+                    //   for (int i = 0; i < _listView.getAdapter().getCount(); i++) {
+                    //       if (checked.get(i)) {
+                    //           // Do something
+                    //       }
+                    //   }
+                    //Log.e("Datos",dato);
+                    //Log.e("tokenCTE",tokenCTE);
+                    //Log.e("Campo",campo);
+                    //Log.e("PASS",password);
+                    tvErrorComentarioSugerencia.setText("");
+                    tvErrorCorreoSugerencia.setText("");
+                    tvErrorSugerencia.setText("");
+
+                    //-------//
+                    if(correo.trim().length() == 0)
+                    {
+                        Log.e("Response", "Sin correo ");
+                        txtCorreoSugerencia.setText("Ingrese su correo electrónico.");
+                        txtCorreoSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                    }else if (sugerencia.trim().length() == 0)
+                    {
+                        tvErrorComentarioSugerencia.setText("Ingrese una sugerencia.");
+                        txtSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                        //alert.showAlertDialog(login.this, "Aviso", "Ingresa tu " + item.toString()+ ".", false);
+                    }
+                    else {
+
+                        ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
+                        Boolean isInternetPresent = cd.isConnectingToInternet();
+
+                        try {
+
+                            if(isInternetPresent)
+                            {
+                                //-- PARAMETROS PETICION LOGIN-----//
+                                Log.e("Response", "Falla: Entro a envio de falla");
+
+                                ArrayList<String> params = new ArrayList<String>();
+                                final HashMap<String, String> user = session.getUserDetails();
+                                String idUsuario = user.get(SessionManagement.KEY_ID);
+
+
+
+
+                                //Fallas y sugerencias
+                                //token: siempre será 67d6b32e8d96b8542feda3df334c04f5
+                                //idUsuario: es el id que les envio en el login
+                                //correo: en caso de no contar con el id de usuario, es para las sugerencias
+                                //tipo: puede tomar 2 valores [R] cuando es un reporte, [S] cuando es una sugerencia--
+                                //opcion: cuando es un reporte de falla [R] se le envia el numero de la falla ---
+                                //comentario: Comentario que pongan en la app ----
+
+                                params.add("3");
+                                params.add("GetComment.php");
+                                params.add(tokenCTE);
+                                params.add(idUsuario);
+                                params.add("");
+                                params.add("S");
+                                params.add("");
+                                params.add(sugerencia);
+
+                                response = new Comunication(sugerencias.this).execute(params).get();
+
+                                Log.e("Response", "Falla: " + response);
+                                if(response.getJSONObject(0).has("error")) {
+                                    Log.e("Response Falla: ", "ERROR");
+                                    tvErrorSugerencia.setText("Error al enviar sugerencia.");
+
+                                }
+                                else if(response.getJSONObject(0).has("resp"))
+                                {
+                                    String resp = response.getJSONObject(0).get("resp").toString();
+                                    Log.e("Response Falla: ", resp);
+
+                                    if(resp.equals("true")) {
+                                        Intent i = new Intent(sugerencias.this, ActualizadosActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    }else
+                                    {
+                                        tvErrorSugerencia.setText("Error al enviar sugerencia.");
+                                        //Toast toast = Toast.makeText(falla.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
+                                        //toast.show();
+                                    }
+                                }
+                            }
+                            else{
+                                tvErrorSugerencia.setText("No hay conexión a internet.");
+                                //Toast toast = Toast.makeText(login.this,  "No hay conexión a internet.", Toast.LENGTH_LONG);
+                                //toast.show();
+                            }
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //String response = new Comunication().Post(dato,obtenerPassMD5(txtPass.getText().toString()),tokenCTE,campo);
+                    // String response = new Comunication().makePostRequest();
+                    // Log.i("Response", "Login: " + response);
+                }
+            });
+        }
     }
 
     @Override

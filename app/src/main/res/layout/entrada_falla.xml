@@ -3,35 +3,32 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@color/ColorFondo"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:weightSum="10">
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="70dp"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
         android:paddingTop="20dp"
         android:paddingBottom="30dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_weight="1">
 
         <TextView
-            android:id="@+id/textView_inferior"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Small Text"
-
-
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:text="New Text"
+            android:id="@+id/textView_inferior" />
 
 
     </LinearLayout>
 
     <RadioButton
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
         android:paddingBottom="25dp"
         android:text=""
-        android:id="@+id/rdfalla" />
+        android:id="@+id/rdfalla"
+        android:layout_weight="9" />
 </LinearLayout>

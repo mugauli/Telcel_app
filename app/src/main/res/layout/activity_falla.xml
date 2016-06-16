@@ -31,7 +31,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="40dp">
                 <TextView
@@ -57,7 +57,7 @@
 
                 <ListView
                     android:id="@+id/falla"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:divider="#983333"
                     >
@@ -83,19 +83,31 @@
                     android:id="@+id/txtComentario"
 
                     />
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtErrorComentarioFalla"
+                    android:layout_weight=".13"
+                    android:layout_marginLeft="26dp"
+                    android:textColor="@color/error"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ENVIAR"
-                    android:id="@+id/button"
+                    android:id="@+id/btnEnviarFalla"
 
                     android:background="@drawable/btnshape"
                     android:textColor="@android:color/white"
                     android:layout_gravity="center_horizontal"
                     android:width="250dp"
                     android:layout_marginTop="10dp" />
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtErrorFalla"
+                    android:layout_weight=".13"
+                    android:layout_marginLeft="26dp"
+                    android:textColor="@color/error"/>
 
 
             </LinearLayout>

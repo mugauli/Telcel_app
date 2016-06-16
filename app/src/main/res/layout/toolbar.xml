@@ -26,6 +26,20 @@
             android:background="@null"/>
 
     </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbarName"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorToolBar"
+    app:popupTheme="@style/AppTheme.PopupOverlay" >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="ghjmjhbmn"/>
+
+
+
+</android.support.v7.widget.Toolbar>
 
 
 

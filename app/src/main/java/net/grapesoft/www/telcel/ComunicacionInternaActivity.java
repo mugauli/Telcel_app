@@ -1,17 +1,14 @@
 package net.grapesoft.www.telcel;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +17,7 @@ import android.widget.ImageButton;
 
 import Utitilies.SessionManagement;
 
-public class MainActivity extends AppCompatActivity
+public class ComunicacionInternaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
@@ -28,7 +25,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_comunicacion_interna);
         session = new SessionManagement(getApplicationContext());
 
         //boton ayuda
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ayuda.class);
+                Intent intent = new Intent(ComunicacionInternaActivity.this,ayuda.class);
                 startActivity(intent);
             }
         });
@@ -74,13 +71,11 @@ public class MainActivity extends AppCompatActivity
         //ToolBar Menu
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-
-
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab1).toString()));
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab2).toString()));
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab3).toString()));
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab4).toString()));
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab5).toString()));
+        tabs.addTab(tabs.newTab().setText("PODCAST"));
+        tabs.addTab(tabs.newTab().setText("VIDEO"));
+        tabs.addTab(tabs.newTab().setText("REVISTA"));
+        tabs.addTab(tabs.newTab().setText("NOTICIAS"));
+        tabs.addTab(tabs.newTab().setText("COMUNICADOS"));
         //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -92,7 +87,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                    viewPager.setCurrentItem(tab.getPosition());
+                viewPager.setCurrentItem(tab.getPosition());
 
 
             }
@@ -135,9 +130,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-       //if (id == R.id.action_settings) {
-       //    return true;
-       //}
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }
@@ -150,17 +145,17 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(MainActivity.this, ActualizarActivity.class);
+            Intent i = new Intent(ComunicacionInternaActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(MainActivity.this, pin.class);
+            Intent i = new Intent(ComunicacionInternaActivity.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(MainActivity.this, preferencias.class);
+            Intent i = new Intent(ComunicacionInternaActivity.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {

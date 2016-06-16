@@ -3,13 +3,16 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * Created by memoHack on 01/06/2016.
@@ -28,7 +31,7 @@ public abstract class Lista_adaptador extends BaseAdapter {
         this.entradas = entradas;
         this.R_layout_IdView = R_layout_IdView;
     }
-
+    int selectedPosition = 0;
     @Override
     public View getView(int posicion, View view, ViewGroup pariente) {
         if (view == null) {
@@ -37,8 +40,22 @@ public abstract class Lista_adaptador extends BaseAdapter {
         }
         onEntrada (entradas.get(posicion), view);
 
+        RadioButton r = (RadioButton)view.findViewById(R.id.rdfalla);
+        if(r != null) {
 
-
+            r.setChecked(posicion == selectedPosition);
+            r.setTag(posicion);
+          //  Log.e("RadioButton", "SetTag: "+ posicion);
+            r.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    RadioButton r = (RadioButton)view.findViewById(R.id.rdfalla);
+                    selectedPosition = (Integer) r.getTag();
+                    notifyDataSetChanged();
+                    Log.e("Click", "RadioButton: "+ selectedPosition);
+                }
+            });
+        }
         return view;
     }
 
@@ -50,6 +67,11 @@ public abstract class Lista_adaptador extends BaseAdapter {
     @Override
     public Object getItem(int posicion) {
         return entradas.get(posicion);
+    }
+
+
+    public int getRadioChecked() {
+        return this.selectedPosition;
     }
 
     @Override
