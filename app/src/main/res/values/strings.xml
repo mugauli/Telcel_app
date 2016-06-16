@@ -118,6 +118,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- -->
-
+    <!--Strings TABS -->
+    <string name="tab1">COMUNICACIÓN INTERNA </string>
+    <string name="tab2">PRODUCTOS Y SERVICIOS</string>
+    <string name="tab3">PRESTACIONES </string>
+    <string name="tab4">BOLSA</string>
+    <string name="tab5">SITIOS</string>
 
 </resources>
