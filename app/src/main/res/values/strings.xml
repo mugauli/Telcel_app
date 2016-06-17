@@ -131,5 +131,17 @@
     <string name="tabs3">REVISTA EN LINEA </string>
     <string name="tabs4">NOTICIAS</string>
 
+    <string-array name="Planets">
+        <item>Sun</item>
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
 
 </resources>
