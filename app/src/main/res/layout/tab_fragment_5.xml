@@ -4,19 +4,121 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Tab 2ertrtsdgs"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView4"
-        android:src="@drawable/logotipo" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+
+        android:weightSum="100">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="48"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:weightSum="100">
+
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="48">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="25"
+                android:orientation="vertical"
+                android:weightSum="100"
+                android:background="@drawable/border">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="25"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="50"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imagenUC"
+                        android:src="@drawable/videoretro" />
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="50"
+                        android:layout_margin="15px"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="40"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="NADA"
+
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:id="@+id/fechaUC"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Puntualidad"
+                            android:textColor="@color/ColorPrimary"
+                            android:textStyle="bold"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:layout_weight="30"
+                            android:layout_height="match_parent"
+                            android:id="@+id/titUC"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="30"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Es una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuado"
+                            android:layout_height="match_parent"
+                            android:id="@+id/descUC"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="27">
+
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/listcomunicados" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="48"></LinearLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>
