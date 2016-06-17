@@ -198,7 +198,7 @@ public class sugerencias extends AppCompatActivity
                                     Log.e("Response Falla: ", resp);
 
                                     if(resp.equals("true")) {
-                                        Intent i = new Intent(sugerencias.this, ActualizadosActivity.class);
+                                        Intent i = new Intent(sugerencias.this, enviado.class);
                                         startActivity(i);
                                         finish();
                                     }else

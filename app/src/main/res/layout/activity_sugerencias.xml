@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text=""
                 android:id="@+id/tvErrorSugerencia"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/btnEnviarSugerencia"
@@ -115,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text=""
                 android:id="@+id/tvErrorCorreoSugerencia"
                 android:layout_below="@+id/txtCorreoSugerencia"
                 android:layout_toLeftOf="@+id/btnEnviarSugerencia"
@@ -125,7 +125,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text=""
                 android:id="@+id/tvErrorComentarioSugerencia"
                 android:layout_below="@+id/txtSugerencia"
                 android:layout_alignParentLeft="true"

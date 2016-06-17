@@ -9,19 +9,31 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
+import Utitilies.Comunication;
+import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
 public class pin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
         SessionManagement session;
+    public String tokenCTE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +41,7 @@ public class pin extends AppCompatActivity
         setContentView(R.layout.activity_pin);
 
         session = new SessionManagement(getApplicationContext());
+        tokenCTE = getText(R.string.tokenXM).toString();
 
         TextView texto_superior_entrada = (TextView) findViewById(R.id.tit1);
         TextView texto_superior = (TextView) findViewById(R.id.tit2);
@@ -83,6 +96,83 @@ public class pin extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
+
+
+        Button btnEnviarFalla;
+        btnEnviarFalla = (Button) findViewById(R.id.btnEnviarFalla);
+
+        // add button listener
+        if (btnEnviarFalla != null) {
+            btnEnviarFalla.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+
+                    JSONArray response;
+
+                    TextView tvErrorPin = (TextView) findViewById(R.id.tvErrorPin);
+
+                    tvErrorPin.setText("");
+
+                    //-------//
+                    ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
+                    Boolean isInternetPresent = cd.isConnectingToInternet();
+
+                    try {
+                        if (isInternetPresent) {
+                            tvErrorPin.setText("");
+
+                            ArrayList<String> params = new ArrayList<String>();
+                            final HashMap<String, String> user = session.getUserDetails();
+                            String idUsuario = user.get(SessionManagement.KEY_ID);
+
+
+                            params.add("5");
+                            params.add("RecoveryPassword.php");
+                            params.add(tokenCTE);
+                            params.add(idUsuario);
+
+                            response = new Comunication(pin.this).execute(params).get();
+
+                            Log.e("Response", "Falla: " + response);
+                            if (response.getJSONObject(0).has("error")) {
+                                Log.e("Response Falla: ", "ERROR");
+                                tvErrorPin.setText("Error al enviar reporte.");
+
+                            } else if (response.getJSONObject(0).has("resp")) {
+                                String resp = response.getJSONObject(0).get("resp").toString();
+                                Log.e("Response Falla: ", resp);
+
+                                if (resp.equals("true")) {
+                                    Intent i = new Intent(pin.this, ActualizadosActivity.class);
+                                    startActivity(i);
+                                    finish();
+                                } else {
+                                    tvErrorPin.setText("Error al enviar reporte.");
+                                    //Toast toast = Toast.makeText(falla.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
+                                    //toast.show();
+                                }
+                            }
+                        } else {
+                            tvErrorPin.setText("No hay conexión a internet.");
+                            //Toast toast = Toast.makeText(login.this,  "No hay conexión a internet.", Toast.LENGTH_LONG);
+                            //toast.show();
+                        }
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //String response = new Comunication().Post(dato,obtenerPassMD5(txtPass.getText().toString()),tokenCTE,campo);
+                    // String response = new Comunication().makePostRequest();
+                    // Log.i("Response", "Login: " + response);
+                }
+            });
+        }
     }
     @Override
     public void onBackPressed() {

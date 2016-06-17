@@ -67,6 +67,9 @@ public class falla extends AppCompatActivity
         TextView txtGhost = (TextView) findViewById(R.id.textView_desc1);
         TextView txtGhost2 = (TextView) findViewById(R.id.textView_desc2);
         TextView txtGhost3 = (TextView) findViewById(R.id.textView_comentario);
+        TextView TitleSeccion = (TextView) findViewById(R.id.TitleSeccion);
+
+        TitleSeccion.setText("SUGERENCIAS");
         Button btn=(Button) findViewById(R.id.btnEnviarFalla);
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");

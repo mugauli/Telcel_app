@@ -52,6 +52,17 @@
                     android:id="@+id/tit2"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="40dp" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/tvErrorPin"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/error_color"
+                    />
+
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,7 +80,6 @@
                     android:id="@+id/ayudaint"
                     android:layout_marginTop="60dp"
                     android:src="@drawable/ayudac"
-
                     android:layout_marginLeft="280dp"
                     />
             </LinearLayout>
