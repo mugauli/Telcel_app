@@ -5,46 +5,120 @@ android:layout_height="match_parent"
 android:orientation="vertical">
 
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#ce2727">
+        android:weightSum="100">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="48"></LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:weightSum="100">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView8"
-                android:src="@drawable/preguntas" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView16" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView17" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="48">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="25"
+                android:orientation="vertical"
+                android:weightSum="100"
+                android:background="@drawable/border">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="25"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="50"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imagenUN"
+                        android:src="@drawable/videoretro" />
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="50"
+                        android:layout_margin="15px"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="40"
+                            android:layout_height="match_parent"
+                            android:gravity="right"
+                            android:text="NADA"
+
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:id="@+id/fechaUN"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Puntualidad"
+                            android:textColor="@color/ColorPrimary"
+                            android:textStyle="bold"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:layout_weight="30"
+                            android:layout_height="match_parent"
+                            android:id="@+id/titUN"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="30"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Es una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuado"
+                            android:layout_height="match_parent"
+                            android:id="@+id/descUN"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="27">
+
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/listnoticias" />
+            </LinearLayout>
+
         </LinearLayout>
-    </FrameLayout>
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView" />
 
-</LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="48"></LinearLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>
