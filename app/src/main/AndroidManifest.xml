@@ -163,7 +163,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ComunicacionInternaActivity"></activity>
+        <activity android:name=".ComunicacionInternaActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

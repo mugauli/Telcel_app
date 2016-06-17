@@ -192,7 +192,28 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             nameValuePair.add(new BasicNameValuePair("opcion", paramsPassed.get(5)));
             nameValuePair.add(new BasicNameValuePair("comentario", paramsPassed.get(6)));
             nameValuePair.add(new BasicNameValuePair("correo", paramsPassed.get(7)));
+        }else if(paramsPassed.get(0)=="4")
+        {
+            //Cambiar Contraseña
+           //token: siempre será 67d6b32e8d96b8542feda3df334c04f5
+           //idUsuario: es el id que les envio en el login
+           //password: encriptado con md5
+
+            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(2)));
+            nameValuePair.add(new BasicNameValuePair("idUsuario", paramsPassed.get(3)));
+            nameValuePair.add(new BasicNameValuePair("password", paramsPassed.get(4)));
+
+        }else if(paramsPassed.get(0)=="5")
+        {
+            //Recuperar Contraseña
+            //token: siempre será 67d6b32e8d96b8542feda3df334c04f5
+            //idUsuario: es el id que les envio en el login
+
+            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(2)));
+            nameValuePair.add(new BasicNameValuePair("idUsuario", paramsPassed.get(3)));
+
         }
+
         return nameValuePair;
 
     }

@@ -1,6 +1,8 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,24 +12,40 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
+import Utitilies.Comunication;
+import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
 public class recuperar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     SessionManagement session;
+    public String tokenCTE = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recuperar);
 
+        tokenCTE = getText(R.string.tokenXM).toString();
         session = new SessionManagement(getApplicationContext());
 
         TextView texto_superior_entrada = (TextView) findViewById(R.id.textView13);
@@ -83,6 +101,86 @@ public class recuperar extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
+
+        Button btnEnviarFalla;
+        btnEnviarFalla = (Button) findViewById(R.id.btnEnviarFalla);
+
+        // add button listener
+        if (btnEnviarFalla != null) {
+            btnEnviarFalla.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+
+                    JSONArray response;
+
+                    TextView tvErrorRecuperar = (TextView) findViewById(R.id.tvErrorRecuperar);
+                    EditText txtUsuario = (EditText) findViewById(R.id.txtUsuario);
+
+                    tvErrorRecuperar.setText("");
+
+                    //-------//
+                    ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
+                    Boolean isInternetPresent = cd.isConnectingToInternet();
+
+                    try {
+                        if(txtUsuario.length()==0)
+                        {
+                            tvErrorRecuperar.setText("Ingrese el número de Usuario");
+                        }else if (isInternetPresent) {
+                            tvErrorRecuperar.setText("");
+
+                                    ArrayList<String> params = new ArrayList<String>();
+                            final HashMap<String, String> user = session.getUserDetails();
+                            String idUsuario = user.get(SessionManagement.KEY_ID);
+
+
+                            params.add("5");
+                            params.add("RecoveryPassword.php");
+                            params.add(tokenCTE);
+                            params.add(idUsuario);
+
+                            response = new Comunication(recuperar.this).execute(params).get();
+
+                            Log.e("Response", "Falla: " + response);
+                            if (response.getJSONObject(0).has("error")) {
+                                Log.e("Response Falla: ", "ERROR");
+                                tvErrorRecuperar.setText("Error al enviar reporte.");
+
+                            } else if (response.getJSONObject(0).has("resp")) {
+                                String resp = response.getJSONObject(0).get("resp").toString();
+                                Log.e("Response Falla: ", resp);
+
+                                if (resp.equals("true")) {
+                                    Intent i = new Intent(recuperar.this, ActualizadosActivity.class);
+                                    startActivity(i);
+                                    finish();
+                                } else {
+                                    tvErrorRecuperar.setText("Error al enviar reporte.");
+                                    //Toast toast = Toast.makeText(falla.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
+                                    //toast.show();
+                                }
+                            }
+                        } else {
+                            tvErrorRecuperar.setText("No hay conexión a internet.");
+                            //Toast toast = Toast.makeText(login.this,  "No hay conexión a internet.", Toast.LENGTH_LONG);
+                            //toast.show();
+                        }
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //String response = new Comunication().Post(dato,obtenerPassMD5(txtPass.getText().toString()),tokenCTE,campo);
+                    // String response = new Comunication().makePostRequest();
+                    // Log.i("Response", "Login: " + response);
+                }
+            });
+        }
     }
 
     @Override

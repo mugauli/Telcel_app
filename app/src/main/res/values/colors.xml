@@ -10,6 +10,9 @@
     <color name="bordes">#4DB1D1</color>
     <color name="error">#ff0000</color>
     <color name="colorToolBar">#3068B2</color>
+    <color name="tituloRevista">#C077B1</color>
+    <color name="fondoRevista">#FFFFFF</color>
+    <color name="bordeRevista">#EFE0DE</color>
 
 </resources>
 

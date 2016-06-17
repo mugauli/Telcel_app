@@ -53,6 +53,19 @@ public class TabFragment1 extends Fragment {
 
         View rootview = inflater.inflate(R.layout.tab_fragment_1, container, false);
 
+        //JSON DE LECTURA
+        tokenCTE = getText(R.string.tokenXM).toString();
+        ArrayList<String> params = new ArrayList<String>();
+        JSONArray response;
+
+        //-- PARAMETROS PETICION LOGIN-----//
+
+        params.add("1");
+        params.add("GetPodcast.php");
+        params.add(tokenCTE);
+
+
+
 
         //
         ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();

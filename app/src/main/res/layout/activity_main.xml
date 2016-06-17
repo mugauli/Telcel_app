@@ -28,11 +28,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@color/ColorFondo">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                />
+
             <TextView
                 android:text=""
                 android:layout_width="wrap_content"

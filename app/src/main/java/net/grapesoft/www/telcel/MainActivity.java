@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -81,20 +81,11 @@ public class MainActivity extends AppCompatActivity
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab3).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab4).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab5).toString()));
-        //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
-                    viewPager.setCurrentItem(tab.getPosition());
-
-
+                Log.e("TAB",tab.getText().toString());
             }
 
             @Override
@@ -107,6 +98,33 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
+
+      // final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+      // final PagerAdapter adapter = new PagerAdapter
+      //         (getSupportFragmentManager(), tabs.getTabCount());
+      // viewPager.setAdapter(adapter);
+      // viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+      // tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+       //     @Override
+       //     public void onTabSelected(TabLayout.Tab tab) {
+
+       //             viewPager.setCurrentItem(tab.getPosition());
+
+
+       //     }
+
+       //     @Override
+       //     public void onTabUnselected(TabLayout.Tab tab) {
+
+       //     }
+
+       //     @Override
+       //     public void onTabReselected(TabLayout.Tab tab) {
+
+       //     }
+       // });
     }
 
     @Override
