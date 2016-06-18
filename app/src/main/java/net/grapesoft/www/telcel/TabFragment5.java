@@ -5,8 +5,11 @@ package net.grapesoft.www.telcel;
  */
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 
 public class TabFragment5 extends Fragment {
     private ListView lista;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.tab_fragment_5, container, false);
@@ -55,7 +59,8 @@ public class TabFragment5 extends Fragment {
                         @Override
                         public void onClick(View arg0) {
 
-
+                            Intent myIntent = new Intent(getActivity(), acercade.class);
+                            getActivity().startActivity(myIntent);
                         }
                     });
                 }
@@ -65,4 +70,5 @@ public class TabFragment5 extends Fragment {
         return rootview;
 
     }
+
 }
