@@ -19,8 +19,8 @@
         android:layout_weight="60">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:id="@+id/imagenoticias" />
     </LinearLayout>
 
@@ -40,7 +40,7 @@
             android:gravity="right"
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_weight="5"
+            android:layout_weight="6"
              />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_weight="5"/>
+            android:layout_weight="4"/>
 
 
     </LinearLayout>
