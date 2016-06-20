@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
@@ -45,12 +46,12 @@ public class ayuda  extends AppCompatActivity
         setContentView(R.layout.activity_ayuda);
 
         session = new SessionManagement(getApplicationContext());
-        ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
+        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
 
-        datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.preguntas), getString(R.string.preguntasdesc)));
-        datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.fallas),getString(R.string.fallasdesc)));
-        datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.sugerencias), getString(R.string.sugerenciasdesc)));
-        datos.add(new Lista_entrada(R.drawable.arrow, getString(R.string.acercade),""));
+        datos.add(new Lista_Entrada(R.drawable.arrow, getString(R.string.preguntas), getString(R.string.preguntasdesc)));
+        datos.add(new Lista_Entrada(R.drawable.arrow, getString(R.string.fallas),getString(R.string.fallasdesc)));
+        datos.add(new Lista_Entrada(R.drawable.arrow, getString(R.string.sugerencias), getString(R.string.sugerenciasdesc)));
+        datos.add(new Lista_Entrada(R.drawable.arrow, getString(R.string.acercade),""));
 
 
         lista = (ListView) findViewById(R.id.ayuda);
@@ -63,17 +64,17 @@ public class ayuda  extends AppCompatActivity
                     Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/obscura.otf");
                     texto_superior_entrada.setTypeface(tf);
                     if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima());
+                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
                     Typeface tfi = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
                     texto_inferior_entrada.setTypeface(tfi);
                     if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo());
+                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
 
                     ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen);
                     if (imagen_entrada != null)
-                        imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+                        imagen_entrada.setImageResource(((Lista_Entrada) entrada).get_idImagen());
                 }
             }
         });
@@ -81,7 +82,7 @@ public class ayuda  extends AppCompatActivity
         lista.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-                Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion);
+                Lista_Entrada elegido = (Lista_Entrada) pariente.getItemAtPosition(posicion);
 
                 CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
 

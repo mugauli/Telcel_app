@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 public class faq extends ActionBarActivity
@@ -43,12 +44,12 @@ public class faq extends ActionBarActivity
 
 
 
-        ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
+        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
 
-        datos.add(new Lista_entrada(getString(R.string.uno), getString(R.string.unodesc)));
-        datos.add(new Lista_entrada(getString(R.string.dos),getString(R.string.dosdesc)));
-        datos.add(new Lista_entrada(getString(R.string.tres), getString(R.string.tresdesc)));
-        datos.add(new Lista_entrada(getString(R.string.cuatro),getString(R.string.cuatrodesc)));
+        datos.add(new Lista_Entrada(getString(R.string.uno), getString(R.string.unodesc)));
+        datos.add(new Lista_Entrada(getString(R.string.dos),getString(R.string.dosdesc)));
+        datos.add(new Lista_Entrada(getString(R.string.tres), getString(R.string.tresdesc)));
+        datos.add(new Lista_Entrada(getString(R.string.cuatro),getString(R.string.cuatrodesc)));
 
 
         lista = (ListView) findViewById(R.id.faq);
@@ -61,13 +62,13 @@ public class faq extends ActionBarActivity
                     texto_superior_entrada.setTypeface(tf);
 
                     if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima());
+                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
                     Typeface tfl = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
                     texto_inferior_entrada.setTypeface(tfl);
                     if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo());
+                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
 
 
                 }

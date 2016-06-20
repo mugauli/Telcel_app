@@ -41,13 +41,14 @@ import java.util.concurrent.ExecutionException;
 
 import Utitilies.Comunication;
 import Utitilies.GetNetImage;
+import Utitilies.Lista_Entrada;
 
 import static net.grapesoft.www.telcel.R.drawable.border_shadow;
 
 /**
  * Created by Mugauli on 19/06/2016.
  */
-public class TabFragment1Async  extends AsyncTask<ArrayList<String>, Integer, Lista_adaptador> {
+public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, Lista_adaptador> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -58,7 +59,7 @@ public class TabFragment1Async  extends AsyncTask<ArrayList<String>, Integer, Li
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
     public boolean primer = true,primer2 = true;
-    public TabFragment1Async(Activity activity) {
+    public FragmentPodCastAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
         this.activity = activity;
@@ -70,7 +71,7 @@ public class TabFragment1Async  extends AsyncTask<ArrayList<String>, Integer, Li
     @Override
     protected Lista_adaptador doInBackground(ArrayList<String>... params){
 
-        ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
+        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
 
         try {
@@ -138,15 +139,12 @@ public class TabFragment1Async  extends AsyncTask<ArrayList<String>, Integer, Li
 
                     if(primer2) {
                         primer2 = false;
-                        datos.add(new Lista_entrada(loadedImage, titulo, duracion, R.drawable.downloadcircle));
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion, R.drawable.downloadcircle));
                     }
                     else
                     {
-                        datos.add(new Lista_entrada(loadedImage, titulo, duracion, R.drawable.descarga));
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion, R.drawable.descarga));
                     }
-                  // datos.add(new Lista_entrada(loadedImage, "Podcast 0001", "Duracion - Fecha",R.drawable.downloadcircle));
-                  // datos.add(new Lista_entrada(loadedImage, "Prueba 03-06-16 Mariana y Marcos","Duracion - Fecha",R.drawable.downloadcircle));
-                  // datos.add(new Lista_entrada(loadedImage, "Mejora tus ventas (audio de prueba)","Duracion - Fecha",R.drawable.downloadcircle));
 
                 }
             }
@@ -164,39 +162,45 @@ public class TabFragment1Async  extends AsyncTask<ArrayList<String>, Integer, Li
         }
 
         Lista_adaptador adaptadorLts = new Lista_adaptador(activity, R.layout.entrada_podcast, datos){
-            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onEntrada(Object entrada, View view) {
 
 
                 if (entrada != null) {
                     // Applying font
-                    if(primer){
+                    if(primer) {
                         primer = false;
                         //view.setBackgroundResource(R.drawable.border_shadow);
                         view.setBackgroundColor(Color.WHITE);
 
-
                     }
-
                     TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
 
                     if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima());
+                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
 
                     if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo());
+                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_duracion());
+
+                    TextView idPodcast = (TextView) view.findViewById(R.id.idPodcast);
+                    if (idPodcast != null)
+                        idPodcast.setText(((Lista_Entrada) entrada).get_id());
+
+                    TextView url_Podcast = (TextView) view.findViewById(R.id.url_Podcast);
+
+                    if (url_Podcast != null)
+                        url_Podcast.setText(((Lista_Entrada) entrada).get_url());
 
                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView5);
                     if (imagen_entrada != null) {
 
-                        imagen_entrada.setImageBitmap(((Lista_entrada) entrada).get_urlImagen());
+                        imagen_entrada.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                     }
                     ImageView imagen_entrada2 = (ImageView) view.findViewById(R.id.imageView6);
                     if (imagen_entrada2 != null)
-                        imagen_entrada2.setImageResource(((Lista_entrada) entrada).get_idImagen2());
+                        imagen_entrada2.setImageResource(((Lista_Entrada) entrada).get_idImagen2());
 
 
                     assert imagen_entrada2 != null;
@@ -225,21 +229,7 @@ public class TabFragment1Async  extends AsyncTask<ArrayList<String>, Integer, Li
         lista = (ListView) activity.findViewById(R.id.podcast);
         lista.setAdapter(result);
 
-        int n = lista.getCount();
-        Log.e("Count Lista", " "+n);
-            View childAt = lista.getChildAt(1);
-
-            if(childAt != null)
-            {
-                Log.e("Lista", "Entro");
-                LinearLayout LL1 = (LinearLayout)childAt.findViewById(R.id.LL2);
-                LL1.setBackgroundColor(R.color.white);
-            }
-
-
-
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanel);
-
 
         pBar.setVisibility(View.INVISIBLE);
 

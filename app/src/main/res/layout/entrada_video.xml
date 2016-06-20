@@ -14,13 +14,25 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_weight="60">
+        android:layout_weight="55">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="fill_parent"
+            android:layout_height="90dp"
 
             android:id="@+id/imagevideo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idVideo"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/url_Video"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -29,7 +41,7 @@
 
 
         android:orientation="vertical"
-        android:layout_weight="40"
+        android:layout_weight="45"
         android:weightSum="10"
         android:padding="10dp">
 

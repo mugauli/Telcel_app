@@ -7,9 +7,6 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import net.grapesoft.www.telcel.Lista_entrada;
-import net.grapesoft.www.telcel.R;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 

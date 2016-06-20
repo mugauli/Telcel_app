@@ -46,6 +46,7 @@ import org.json.JSONException;
 import Utitilies.Campos;
 import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 
@@ -80,12 +81,12 @@ public class falla extends AppCompatActivity
         txtGhost3.setTypeface(tf);
         btn.setTypeface(tf);
 
-        ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
+        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
 
-        datos.add(new Lista_entrada(R.id.rdfalla, getString(R.string.rfuno)));
-        datos.add(new Lista_entrada(R.id.rdfalla,getString(R.string.rfdos)));
-        datos.add(new Lista_entrada(R.id.rdfalla, getString(R.string.rftres)));
-        datos.add(new Lista_entrada(R.id.rdfalla,getString(R.string.rfcuatro)));
+        datos.add(new Lista_Entrada(R.id.rdfalla, getString(R.string.rfuno)));
+        datos.add(new Lista_Entrada(R.id.rdfalla,getString(R.string.rfdos)));
+        datos.add(new Lista_Entrada(R.id.rdfalla, getString(R.string.rftres)));
+        datos.add(new Lista_Entrada(R.id.rdfalla,getString(R.string.rfcuatro)));
 
 
         lista = (ListView) findViewById(R.id.falla);
@@ -103,7 +104,7 @@ public class falla extends AppCompatActivity
 
 
                     if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo());
+                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
                 }
             }
 

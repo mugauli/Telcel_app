@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import Utitilies.Lista_Entrada;
+
 public class TabFragment5 extends Fragment {
     private ListView lista;
 
@@ -27,10 +29,10 @@ public class TabFragment5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.tab_fragment_5, container, false);
 
-        ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
-        datos.add(new Lista_entrada(R.drawable.revista0001, "Podcast 0001", "Duracion - Fecha"));
-        datos.add(new Lista_entrada(R.drawable.pod2, "Prueba 03-06-16 Mariana y Marcos","Duracion - Fecha"));
-        datos.add(new Lista_entrada(R.drawable.pod6, "Mejora tus ventas (audio de prueba)","Duracion - Fecha"));
+        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
+        datos.add(new Lista_Entrada(R.drawable.revista0001, "Podcast 0001", "Duracion - Fecha"));
+        datos.add(new Lista_Entrada(R.drawable.pod2, "Prueba 03-06-16 Mariana y Marcos","Duracion - Fecha"));
+        datos.add(new Lista_Entrada(R.drawable.pod6, "Mejora tus ventas (audio de prueba)","Duracion - Fecha"));
         lista = (ListView) rootview.findViewById(R.id.listcomunicados);
         lista.setAdapter(new Lista_adaptador(getActivity(), R.layout.entrada_comunicados, datos){
             @Override
@@ -40,16 +42,16 @@ public class TabFragment5 extends Fragment {
                     TextView texto_superior_entrada = (TextView) view.findViewById(R.id.comunicadofecha);
 
                     if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima());
+                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.comunicadotitulo);
 
                     if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo());
+                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
 
                     ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagencomunicados);
                     if (imagen_entrada != null)
-                        imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+                        imagen_entrada.setImageResource(((Lista_Entrada) entrada).get_idImagen());
 
 
 
