@@ -30,10 +30,12 @@ public class TabFragment5 extends Fragment {
         final View rootview = inflater.inflate(R.layout.tab_fragment_5, container, false);
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
-        datos.add(new Lista_Entrada(R.drawable.revista0001, "Podcast 0001", "Duracion - Fecha"));
-        datos.add(new Lista_Entrada(R.drawable.pod2, "Prueba 03-06-16 Mariana y Marcos","Duracion - Fecha"));
-        datos.add(new Lista_Entrada(R.drawable.pod6, "Mejora tus ventas (audio de prueba)","Duracion - Fecha"));
+        datos.add(new Lista_Entrada(R.drawable.mas, "18-12-2015", "Desarrollando nuestro potencial, Proceso de realimentacion al desempeño."));
+        datos.add(new Lista_Entrada(R.drawable.mas, "10-12-2015", "Comunicado especial. Proxima evaluacion al desempeño 2016, Preparate."));
+        datos.add(new Lista_Entrada(R.drawable.mas, "18-12-2015", "Desarrollando nuestro potencial, Proceso de realimentacion al desempeño."));
+
         lista = (ListView) rootview.findViewById(R.id.listcomunicados);
+
         lista.setAdapter(new Lista_adaptador(getActivity(), R.layout.entrada_comunicados, datos){
             @Override
             public void onEntrada(Object entrada, View view) {

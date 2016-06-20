@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,7 @@ public class FragmentVideo extends Fragment {
             public void onClick(View arg0) {
 
                 download(rootview,arg0.getTag().toString());
-                view(rootview);
+                view(rootview,arg0.getTag().toString());
 
 
             }
@@ -86,9 +87,7 @@ public class FragmentVideo extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-
                 download(rootview,arg0.getTag().toString());
-
             }
 
         });
@@ -96,16 +95,15 @@ public class FragmentVideo extends Fragment {
         return rootview;
     }
 
-    public void download(View v,String URL)
+    public void download(View v , String URL)
     {
+
         new DownloadFile().execute(URL);
     }
 
-    public void view(View v)
+    public void view(View v,String URL)
     {
-
-
-        File pdfFile = new File(Environment.getExternalStorageDirectory() + "/testthreevid/" + "Bridge-Slide-Video.mp4");  // -> filename = maven.pdf
+        File pdfFile = new File(Environment.getExternalStorageDirectory() + URL);  // -> filename = maven.pdf
         Uri path = Uri.fromFile(pdfFile);
         Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
         pdfIntent.setDataAndType(path, "video/*");

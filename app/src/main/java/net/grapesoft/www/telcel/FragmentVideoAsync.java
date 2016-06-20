@@ -190,7 +190,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     if (idVideo != null)
                         idVideo.setText(((Lista_Entrada) entrada).get_id());
 
-                    TextView url_Video = (TextView) view.findViewById(R.id.url_Video);
+                    final TextView url_Video = (TextView) view.findViewById(R.id.url_Video);
 
                     if (url_Video != null)
                         url_Video.setText(((Lista_Entrada) entrada).get_url());
@@ -207,15 +207,17 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                         public void onClick(View arg0) {
 
                             arg0.setBackgroundColor(Color.WHITE);
+
                             ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
                             ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
                             ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
 
-                            ImageView imagenView = (ImageView) activity.findViewById(R.id.video);
-                            ImageView urlVideo = (ImageView) activity.findViewById(R.id.play);
+                            ImageView imagenView = (ImageView) arg0.findViewById(R.id.imagevideo);
+                            TextView urlVideo = (TextView) arg0.findViewById(R.id.url_Video);
 
                             imagenVideo.setImageBitmap((Bitmap) imagenView.getTag());
-
+                            imagenPlay.setTag(urlVideo.getText().toString());
+                            imagenDescarga.setTag(urlVideo.getText().toString());
 
                         }
                     });
@@ -237,9 +239,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
         lista = (ListView) activity.findViewById(R.id.listvideo);
         lista.setAdapter(result);
 
-
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelVideo);
-
 
         pBar.setVisibility(View.INVISIBLE);
 
