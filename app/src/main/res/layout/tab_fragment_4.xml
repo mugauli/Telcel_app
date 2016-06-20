@@ -45,24 +45,26 @@ android:orientation="vertical">
                 android:layout_weight="25"
                 android:orientation="vertical"
                 android:weightSum="100"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:padding="0dp">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="25"
                     android:orientation="vertical"
-                    android:weightSum="100">
+                    android:weightSum="100"
+                    android:padding="1dp">
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_weight="50"
-                        android:layout_height="wrap_content"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="30"
+                        android:layout_height="fill_parent"
                         android:id="@+id/imagenUN"
                         android:src="@drawable/videoretro" />
                     <LinearLayout
-                        android:layout_width="fill_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:layout_weight="50"
+                        android:layout_weight="70"
                         android:layout_margin="15px"
                         android:orientation="vertical"
                         android:weightSum="100">
@@ -105,8 +107,8 @@ android:orientation="vertical">
 
 
                 <ListView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
 
                     android:id="@+id/listnoticias" />
             </LinearLayout>

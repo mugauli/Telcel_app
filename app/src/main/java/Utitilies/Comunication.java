@@ -42,7 +42,7 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
 
     public Comunication (Context cxt){
-        progressDialog = new ProgressDialog(cxt);
+//        progressDialog = new ProgressDialog(cxt);
         IP = cxt.getString(R.string.URL);
         tokenCTE = cxt.getString(R.string.tokenXM);
     }
@@ -50,9 +50,9 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
     @Override
     public void onPreExecute(){
         super.onPreExecute();
-        progressDialog.setTitle("Cargando");
-        progressDialog.setMessage("Espere Por Favor . . . ");
-        progressDialog.show();
+      //  progressDialog.setTitle("Cargando");
+      //  progressDialog.setMessage("Espere Por Favor . . . ");
+      //  progressDialog.show();
 
     }
 
@@ -83,16 +83,16 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             //Log.e("Response: ", result11);
 
             //Checar Parametros
-           //BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
-           //StringBuilder sb1 = new StringBuilder();
-           //sb1.append(reader1.readLine() + "\n");
-           //String line1 = "0";
-           //while ((line1 = reader1.readLine()) != null) {
-           //    sb1.append(line1 + "\n");
-           //}
-           //reader1.close();
-           //String result111 = sb1.toString();
-           //Log.e("Parametros: ", result111);
+           BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
+           StringBuilder sb1 = new StringBuilder();
+           sb1.append(reader1.readLine() + "\n");
+           String line1 = "0";
+           while ((line1 = reader1.readLine()) != null) {
+               sb1.append(line1 + "\n");
+           }
+           reader1.close();
+           String result111 = sb1.toString();
+           Log.e("Parametros: ", result111);
             //Fin Checar Parametros
 
 
@@ -105,7 +105,10 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             } else
             {
                 //Log.e("Response: ", "JSON");
-                arreglo = new JSONArray("[" + result11 + "]");
+                if(result11.contains("["))
+                    arreglo = new JSONArray(result11);
+                else
+                    arreglo = new JSONArray("[" + result11 + "]");
             }
 
 
@@ -126,7 +129,7 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
     @Override
     public void onPostExecute(JSONArray result) {
-        progressDialog.dismiss();
+       // progressDialog.dismiss();
         if (result != null) {
 
         } else {
@@ -212,7 +215,17 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(2)));
             nameValuePair.add(new BasicNameValuePair("idUsuario", paramsPassed.get(3)));
 
+        }else if(paramsPassed.get(0)=="6")
+        {
+            //Recuperar Contraseña
+            //token: siempre será 67d6b32e8d96b8542feda3df334c04f5
+            //idUsuario: es el id que les envio en el login
+
+            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(2)));
+            nameValuePair.add(new BasicNameValuePair("reg", paramsPassed.get(3)));
+
         }
+
 
         return nameValuePair;
 

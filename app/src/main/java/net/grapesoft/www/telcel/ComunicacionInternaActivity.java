@@ -82,12 +82,16 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);
+
+
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 viewPager.setCurrentItem(tab.getPosition());
+
 
 
             }

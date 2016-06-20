@@ -13,6 +13,7 @@
     <color name="tituloRevista">#C077B1</color>
     <color name="fondoRevista">#FFFFFF</color>
     <color name="bordeRevista">#EFE0DE</color>
+    <color name="bordePodCast">#F0E0C9</color>
 
 </resources>
 

@@ -132,5 +132,8 @@
     <string name="tabs3">REVISTA EN LINEA </string>
     <string name="tabs4">NOTICIAS</string>
 
+    <!--PODCAST -->
+    <string name="URL_media">http://internetencaja.com.mx/telcel/</string>
+
 
 </resources>
