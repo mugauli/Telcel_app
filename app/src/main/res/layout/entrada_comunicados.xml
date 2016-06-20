@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="match_parent">
+<LinearLayout
     android:layout_width="fill_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/border"
-        android:orientation="horizontal"
-        android:weightSum="100"
-        android:layout_marginTop="10dp"
-        >
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="60">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:id="@+id/imagencomunicados" />
-    </LinearLayout>
+    android:layout_height="fill_parent"
+    android:background="@drawable/border"
+    android:orientation="horizontal"
+    android:weightSum="100"
+    android:layout_marginTop="10dp">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="40"
+        android:layout_weight="15"
         android:weightSum="10"
         android:padding="15dp">
 
@@ -39,7 +26,7 @@
             android:gravity="right"
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_weight="5"
+            android:layout_weight="4"
             />
 
         <TextView
@@ -53,9 +40,21 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_weight="5"/>
+            android:layout_weight="6"/>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="85">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/imagencomunicados" />
     </LinearLayout>
 
 </LinearLayout>
