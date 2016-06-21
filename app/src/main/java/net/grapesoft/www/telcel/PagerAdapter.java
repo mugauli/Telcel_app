@@ -25,7 +25,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 FragmentVideo tab2 = new FragmentVideo();
                 return tab2;
             case 2:
-                TabFragment3 tab3 = new TabFragment3();
+                FragmentRevista tab3 = new FragmentRevista();
                 return tab3;
             case 3:
                 TabFragment4 tab4 = new TabFragment4();

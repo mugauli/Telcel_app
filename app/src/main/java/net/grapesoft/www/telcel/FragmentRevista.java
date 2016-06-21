@@ -4,10 +4,9 @@ package net.grapesoft.www.telcel;
  * Created by memoHack on 14/06/2016.
  */
 
-import android.app.DownloadManager;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,36 +18,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import Utitilies.SessionManagement;
 
 
-public class TabFragment3 extends Fragment {
+public class FragmentRevista extends Fragment {
     private static String fileName = "revista-demo.pdf";
     private static final String file_url= "http://internetencaja.com.mx/telcel/revistas/revista-demo.pdf";
-    // Progress Dialog
+
+    public String tokenCTE = "";
+    private ListView lista;
+    private ImageView imageView;
+    private Bitmap loadedImage;
+    private String imageHttpAddress = "";
+    SessionManagement session;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-        final View rootview = inflater.inflate(R.layout.tab_fragment_3, container, false);
+        final View rootview = inflater.inflate(R.layout.tab_fragment_revista, container, false);
 
-        ImageView imagen_entrada2 = (ImageView) rootview.findViewById(R.id.revista);
-        download(rootview);
-        imagen_entrada2.setOnClickListener(new View.OnClickListener() {
+        tokenCTE = getText(R.string.tokenXM).toString();
+        ArrayList<String> params = new ArrayList<String>();
 
-            @Override
-            public void onClick(View arg0) {
-            view(rootview);
+        imageHttpAddress = getText(R.string.URL_media).toString();
+        session = new SessionManagement(getActivity());
 
+        final HashMap<String, String> user = session.getUserDetails();
+        String region = user.get(SessionManagement.KEY_REGION);
 
-            }
+        params.add("6");
+        params.add("GetMagazine.php");
+        params.add(tokenCTE);
+        params.add(region);
 
-        });
+        new FragmentRevistaAsync(getActivity()).execute(params);
+
 
         return rootview;
+
     }
     public void download(View v)
     {

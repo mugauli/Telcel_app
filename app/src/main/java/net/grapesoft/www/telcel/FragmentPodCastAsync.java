@@ -59,14 +59,13 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
     public boolean primer = true,primer2 = true;
+
+
     public FragmentPodCastAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
         this.activity = activity;
-
     }
-
-
 
     @Override
     protected Lista_adaptador doInBackground(ArrayList<String>... params){

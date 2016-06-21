@@ -11,14 +11,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import Utitilies.SessionManagement;
 
 public class FragmentPodCast extends Fragment {
+
     public String tokenCTE = "";
     private ListView lista;
     private ImageView imageView;
@@ -29,10 +28,7 @@ public class FragmentPodCast extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootview = inflater.inflate(R.layout.tab_fragment_1, container, false);
-
-
-        //JSON DE LECTURA
+        View rootview = inflater.inflate(R.layout.tab_fragment_podcast, container, false);
 
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();

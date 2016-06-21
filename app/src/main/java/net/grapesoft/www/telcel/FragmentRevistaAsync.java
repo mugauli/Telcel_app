@@ -38,7 +38,7 @@ import Utitilies.Lista_Entrada;
 /**
  * Created by Mugauli on 20/06/2016.
  */
-public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Lista_adaptador> {
+public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, Lista_adaptador> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -51,15 +51,12 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     public boolean primer = true,primer2 = true;
 
 
-
-    public FragmentVideoAsync(Activity activity) {
+    public FragmentRevistaAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
         this.activity = activity;
 
     }
-
-
 
     @Override
     protected Lista_adaptador doInBackground(ArrayList<String>... params){
@@ -68,7 +65,6 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
 
         try {
-
             List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
             HttpClient httpclient = new DefaultHttpClient();
 
@@ -105,11 +101,6 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     responseArray = new JSONArray("[" + result11 + "]");
             }
 
-
-
-            //response = new Comunication(activity).execute(params).get();
-            Log.e("Async","4");
-
             if(responseArray.getJSONObject(0).has("resp")) {
                 Log.e("Item Podcast" ,  "Error");
             }
@@ -121,8 +112,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
                     String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                    String url_podcast = responseArray.getJSONObject(i).get("url_video").toString();
-                    String duracion = responseArray.getJSONObject(i).get("duracion").toString();
+                    String url_podcast = responseArray.getJSONObject(i).get("url_pdf").toString();
 
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
@@ -130,15 +120,9 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     conn.connect();
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, "", R.drawable.descarga));
 
-                    if(primer2) {
-                        primer2 = false;
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion));
-                    }
-                    else
-                    {
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion));
-                    }
+
                 }
             }
 
@@ -154,80 +138,36 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             e.printStackTrace();
         }
 
-        Lista_adaptador adaptadorLts = new Lista_adaptador(activity, R.layout.entrada_video, datos){
-
+        Lista_adaptador adaptadorLts = new Lista_adaptador(activity, R.layout.entrada_revista, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
 
-                if(primer){
-                    primer = false;
-                    //view.setBackgroundResource(R.drawable.border_shadow);
-                    view.setBackgroundColor(Color.WHITE);
-
-                    ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
-                    ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
-                    ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
-                    TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
-
-                    imagenVideo.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                    imagenPlay.setTag(((Lista_Entrada) entrada).get_url());
-                    imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
-                    txtTiempo.setText(((Lista_Entrada) entrada).get_duracion());
-                }
-
                 if (entrada != null) {
+                    Log.e("Titulo",((Lista_Entrada) entrada).get_titulo());
+                    TextView titulo = (TextView) view.findViewById(R.id.textView2);
 
-                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.videotitulo);
+                    if (titulo != null)
+                        titulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                    if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
-
-                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.videoduracion);
-
-                    if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_duracion());
-
-                    TextView idVideo = (TextView) view.findViewById(R.id.idVideo);
-
-                    if (idVideo != null)
-                        idVideo.setText(((Lista_Entrada) entrada).get_id());
-
-                    final TextView url_Video = (TextView) view.findViewById(R.id.url_Video);
-
-                    if (url_Video != null)
-                        url_Video.setText(((Lista_Entrada) entrada).get_url());
-
-                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagevideo);
+                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.revista);
                     if (imagen_entrada != null) {
-                        imagen_entrada.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                        imagen_entrada.setTag(((Lista_Entrada) entrada).get_img_previa());
-                    }
 
-                    view.setOnClickListener(new View.OnClickListener() {
+                        imagen_entrada.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                    }
+                    ImageView imagen_descarga = (ImageView) view.findViewById(R.id.imgDescarga);
+                    if (imagen_descarga != null) {
+                        imagen_descarga.setImageResource(((Lista_Entrada) entrada).get_idImagen2());
+                        imagen_descarga.setTag(((Lista_Entrada) entrada).get_url());
+                    }
+                    assert imagen_descarga != null;
+                    imagen_descarga.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View arg0) {
 
-                            arg0.setBackgroundColor(Color.WHITE);
-
-                            ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
-                            ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
-                            ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
-                            TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
-
-
-                            ImageView imagenView = (ImageView) arg0.findViewById(R.id.imagevideo);
-                            TextView urlVideo = (TextView) arg0.findViewById(R.id.url_Video);
-                            TextView tiempoView = (TextView) arg0.findViewById(R.id.videoduracion);
-
-                            imagenVideo.setImageBitmap((Bitmap) imagenView.getTag());
-                            imagenPlay.setTag(urlVideo.getText().toString());
-                            imagenDescarga.setTag(urlVideo.getText().toString());
-                            txtTiempo.setText(tiempoView.getText());
 
                         }
                     });
-
                 }
             }
 
@@ -242,11 +182,10 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     protected void onPostExecute(Lista_adaptador result) {
 
         super.onPostExecute(result);
-        lista = (ListView) activity.findViewById(R.id.listvideo);
-        if(result != null)
+        lista = (ListView) activity.findViewById(R.id.lvRevista);
         lista.setAdapter(result);
 
-        ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelVideo);
+        ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelRevista);
 
         pBar.setVisibility(View.INVISIBLE);
 

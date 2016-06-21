@@ -5,21 +5,29 @@ package net.grapesoft.www.telcel;
  */
 
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.MediaController;
+import android.widget.RelativeLayout;
+import android.widget.VideoView;
 
 import org.json.JSONArray;
 
@@ -33,6 +41,13 @@ import Utitilies.SessionManagement;
 
 public class FragmentVideo extends Fragment {
 
+    // Declare variables
+    ProgressDialog pDialog;
+    VideoView videoview;
+
+    // Insert your Video URL
+    String VideoURL = "http://internetencaja.com.mx/telcel/videos/Grafica%20Informativa.mp4";
+
     public String tokenCTE = "";
     private ListView lista;
     private ImageView imageView;
@@ -41,11 +56,9 @@ public class FragmentVideo extends Fragment {
     SessionManagement session;
 
 
-    @Override
+   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootview = inflater.inflate(R.layout.tab_fragment_2, container, false);
-
-        //JSON DE LECTURA
+        final View rootview = inflater.inflate(R.layout.tab_fragment_video, container, false);
 
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
@@ -69,15 +82,62 @@ public class FragmentVideo extends Fragment {
         ImageView imagen_entrada2 = (ImageView) rootview.findViewById(R.id.play);
 
 
+
         imagen_entrada2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                download(rootview,arg0.getTag().toString());
-                view(rootview,arg0.getTag().toString());
+              //  download(rootview,arg0.getTag().toString());
+              //Int  view(rootview,arg0.getTag().toString());
 
+               //Video
 
+                RelativeLayout RLvideo = (RelativeLayout) rootview.findViewById(R.id.visorVideo);
+                RLvideo.setVisibility(View.VISIBLE);
+
+                Log.e("URL Video",imageHttpAddress+arg0.getTag().toString());
+                VideoURL = imageHttpAddress + arg0.getTag().toString();
+                // Find your VideoView in your video_main.xml layout
+                videoview = (VideoView) rootview.findViewById(R.id.VideoView);
+
+                // Execute StreamVideo AsyncTask
+
+                // Create a progressbar
+                pDialog = new ProgressDialog(getActivity());
+                // Set progressbar title
+                // Set progressbar message
+                pDialog.setMessage("Cargando...");
+                pDialog.setIndeterminate(false);
+                pDialog.setCancelable(false);
+                // Show progressbar
+                pDialog.show();
+
+                try {
+                    // Start the MediaController
+                    MediaController mediacontroller = new MediaController(getActivity());
+                    mediacontroller.setAnchorView(videoview);
+                    // Get the URL from String VideoURL
+                    Uri video = Uri.parse(VideoURL);
+
+                    videoview.setMediaController(mediacontroller);
+                    videoview.setVideoURI(video);
+
+                } catch (Exception e) {
+                    Log.e("Error", e.getMessage());
+                    e.printStackTrace();
+                }
+
+                videoview.requestFocus();
+                videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    // Close the progress bar and play the video
+                    public void onPrepared(MediaPlayer mp) {
+                        pDialog.dismiss();
+                        videoview.start();
+                    }
+                });
+
+                //End Video
             }
 
         });
@@ -92,6 +152,7 @@ public class FragmentVideo extends Fragment {
 
         });
 
+
         return rootview;
     }
 
@@ -103,7 +164,8 @@ public class FragmentVideo extends Fragment {
 
     public void view(View v,String URL)
     {
-        File pdfFile = new File(Environment.getExternalStorageDirectory() + URL);  // -> filename = maven.pdf
+        Log.e("URL Abrir", URL);
+        File pdfFile = new File(Environment.getExternalStorageDirectory() + "/testthreevid/" + URL);
         Uri path = Uri.fromFile(pdfFile);
         Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
         pdfIntent.setDataAndType(path, "video/*");
@@ -116,10 +178,13 @@ public class FragmentVideo extends Fragment {
         }
     }
 
+
     private class DownloadFile extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(String... strings) {
+
+
             String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
             String fileName = strings[1];  // -> maven.pdf
             String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
@@ -133,6 +198,8 @@ public class FragmentVideo extends Fragment {
             }catch (IOException e){
                 e.printStackTrace();
             }
+            Log.e("URL Guardado",fileUrl);
+            Log.e("URL Guardado",pdfFile.toString());
             FileDownloader.DownloadFile(fileUrl, pdfFile);
             return null;
         }

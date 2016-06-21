@@ -1,45 +1,84 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
+import android.net.Uri;
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import Utitilies.SessionManagement;
 
-public class ComunicacionInternaActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class VideoViewActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
+    // Declare variables
+    ProgressDialog pDialog;
+    VideoView videoview;
     SessionManagement session;
+
+    // Insert your Video URL
+    String VideoURL = "http://internetencaja.com.mx/telcel/videos/Grafica%20Informativa.mp4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comunicacion_interna);
-        session = new SessionManagement(getApplicationContext());
 
-        //boton ayuda
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ComunicacionInternaActivity.this,ayuda.class);
-                startActivity(intent);
+        // Get the layout from video_main.xml
+        setContentView(R.layout.activity_video_view);
+        session = new SessionManagement(getApplicationContext());
+        // Find your VideoView in your video_main.xml layout
+        videoview = (VideoView) findViewById(R.id.VideoView);
+        // Execute StreamVideo AsyncTask
+
+        // Create a progressbar
+        pDialog = new ProgressDialog(VideoViewActivity.this);
+        // Set progressbar title
+        pDialog.setTitle("Android Video Streaming Tutorial");
+        // Set progressbar message
+        pDialog.setMessage("Buffering...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        // Show progressbar
+        pDialog.show();
+
+        try {
+            // Start the MediaController
+            MediaController mediacontroller = new MediaController(
+                    VideoViewActivity.this);
+            mediacontroller.setAnchorView(videoview);
+            // Get the URL from String VideoURL
+            Uri video = Uri.parse(VideoURL);
+            videoview.setMediaController(mediacontroller);
+            videoview.setVideoURI(video);
+
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+
+        videoview.requestFocus();
+        videoview.setOnPreparedListener(new OnPreparedListener() {
+            // Close the progress bar and play the video
+            public void onPrepared(MediaPlayer mp) {
+                pDialog.dismiss();
+                videoview.start();
             }
         });
-        //boton ayuda
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,43 +109,7 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
-        final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-        tabs.addTab(tabs.newTab().setText("PODCAST"));
-        tabs.addTab(tabs.newTab().setText("VIDEO"));
-        tabs.addTab(tabs.newTab().setText("REVISTA"));
-        tabs.addTab(tabs.newTab().setText("NOTICIAS"));
-        tabs.addTab(tabs.newTab().setText("COMUNICADOS"));
-        //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
-
-
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                viewPager.setCurrentItem(tab.getPosition());
-
-
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
     @Override
@@ -150,17 +153,17 @@ public class ComunicacionInternaActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(ComunicacionInternaActivity.this, ActualizarActivity.class);
+            Intent i = new Intent(VideoViewActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(ComunicacionInternaActivity.this, pin.class);
+            Intent i = new Intent(VideoViewActivity.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(ComunicacionInternaActivity.this, preferencias.class);
+            Intent i = new Intent(VideoViewActivity.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {
@@ -171,4 +174,5 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
