@@ -2,15 +2,20 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -31,8 +36,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import Utitilies.DownloadTask;
 import Utitilies.Lista_Entrada;
 
 /**
@@ -54,6 +62,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
     public FragmentRevistaAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
+        imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
 
     }
@@ -62,7 +71,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
     protected Lista_adaptador doInBackground(ArrayList<String>... params){
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
-        imageHttpAddress = activity.getText(R.string.URL_media).toString();
+
 
         try {
             List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
@@ -143,7 +152,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
             public void onEntrada(Object entrada, View view) {
 
                 if (entrada != null) {
-                    Log.e("Titulo",((Lista_Entrada) entrada).get_titulo());
+
                     TextView titulo = (TextView) view.findViewById(R.id.textView2);
 
                     if (titulo != null)
@@ -154,17 +163,39 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                         imagen_entrada.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                     }
+
                     ImageView imagen_descarga = (ImageView) view.findViewById(R.id.imgDescarga);
                     if (imagen_descarga != null) {
                         imagen_descarga.setImageResource(((Lista_Entrada) entrada).get_idImagen2());
                         imagen_descarga.setTag(((Lista_Entrada) entrada).get_url());
                     }
+
+                    WindowManager wm = (WindowManager) activity.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+                    Display display = wm.getDefaultDisplay();
+
+                    LinearLayout RelRevista = (LinearLayout)view.findViewById(R.id.RelRevista);
+                    int height = (int)(display.getHeight()*(0.82));
+                    RelRevista.setMinimumHeight(height);
+
                     assert imagen_descarga != null;
                     imagen_descarga.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View arg0) {
 
+                            ArrayList<String> Url = new ArrayList<String>();
+                            Url.add(imageHttpAddress + arg0.getTag().toString());
+                            String[] nombre = arg0.getTag().toString().split("/");
+                            Url.add(nombre[nombre.length - 1]);
+                            try {
+                                String response = new DownloadTask(activity).execute(Url).get();
+                                if(response != null)
+                                 Log.e("Response Revista",response);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            }
 
                         }
                     });

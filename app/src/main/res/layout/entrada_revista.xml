@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:fillViewport="true">
 
 
     <LinearLayout
@@ -12,8 +13,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-
-        android:weightSum="100">
+        android:weightSum="100"
+        android:minHeight="500dp"
+        android:id="@+id/RelRevista">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -72,12 +74,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Descargar"
-                        android:id="@+id/textView15" />
+                        android:id="@+id/textView15"
+                        android:textColor="#4DB1D1"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/imgDescarga" />
+                        android:id="@+id/imgDescarga"
+                        android:src="@drawable/descarga" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -99,4 +103,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
