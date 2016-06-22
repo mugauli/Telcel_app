@@ -174,7 +174,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                     Display display = wm.getDefaultDisplay();
 
                     LinearLayout RelRevista = (LinearLayout)view.findViewById(R.id.RelRevista);
-                    int height = (int)(display.getHeight()*(0.82));
+                    int height = (int)(display.getHeight()*(0.79));
                     RelRevista.setMinimumHeight(height);
 
                     assert imagen_descarga != null;

@@ -78,10 +78,11 @@
                         android:textColor="#4DB1D1"/>
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:id="@+id/imgDescarga"
-                        android:src="@drawable/descarga" />
+                        android:src="@drawable/descarga"
+                        android:layout_marginLeft="20dp" />
 
                 </LinearLayout>
             </LinearLayout>
