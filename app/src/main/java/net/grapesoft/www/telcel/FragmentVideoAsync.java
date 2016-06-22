@@ -208,7 +208,6 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                         @Override
                         public void onClick(View arg0) {
 
-                            arg0.setBackgroundColor(Color.WHITE);
 
                             ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
                             ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
