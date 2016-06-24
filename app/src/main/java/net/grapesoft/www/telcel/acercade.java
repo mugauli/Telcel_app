@@ -34,23 +34,27 @@ public class acercade extends AppCompatActivity
         TextView txtGhost = (TextView) findViewById(R.id.textView8);
         TextView txtGhost2 = (TextView) findViewById(R.id.textView9);
         TextView txtGhost3 = (TextView) findViewById(R.id.textView10);
-
+        TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
+        Typeface tfm = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
 
         // Applying font
         txtGhost.setTypeface(tf);
         txtGhost2.setTypeface(tf);
         txtGhost3.setTypeface(tf);
-
+       txtGhost4.setTypeface(tfm);
+        txtGhost4.setText("ACERCA DE");
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);

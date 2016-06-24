@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
@@ -30,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -202,13 +204,13 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                         imagen_entrada2.setImageResource(((Lista_Entrada) entrada).get_idImagen2());
 
 
-                    assert imagen_entrada2 != null;
+                    //assert imagen_entrada2 != null;
                     imagen_entrada2.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View arg0) {
 
-
+                            audioPlayer("http://internetencaja.com.mx/telcel/podcast","prueba001.mp3");
                         }
                     });
                 }
@@ -236,7 +238,18 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
     }
 
 
+    public void audioPlayer(String path, String fileName){
+        //set up MediaPlayer
+        MediaPlayer mp = new MediaPlayer();
 
+        try {
+            mp.setDataSource(path + File.separator + fileName);
+            mp.prepare();
+            mp.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

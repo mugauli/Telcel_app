@@ -51,9 +51,4 @@ public class FragmentPodCast extends Fragment {
     }
 
 
-
-
-
-
-
 }

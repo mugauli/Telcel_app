@@ -63,7 +63,7 @@ public class TabFragment5 extends Fragment {
                         @Override
                         public void onClick(View arg0) {
 
-                            Intent myIntent = new Intent(getActivity(), acercade.class);
+                            Intent myIntent = new Intent(getActivity(), Detalle_noticia.class);
                             getActivity().startActivity(myIntent);
                         }
                     });

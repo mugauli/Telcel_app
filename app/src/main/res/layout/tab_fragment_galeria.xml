@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+
+        android:weightSum="100">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="48"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:weightSum="100">
+
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="48">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="25"
+                android:orientation="vertical"
+                android:weightSum="100"
+                android:background="@drawable/border"
+                android:padding="0dp">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="25"
+                    android:orientation="vertical"
+                    android:weightSum="100"
+                    android:padding="1dp">
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_weight="30"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/imagenGaleria"
+                        android:src="@drawable/videoretro" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="70"
+                        android:layout_margin="15px"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Puntualidad"
+                            android:textColor="@color/ColorPrimary"
+                            android:textStyle="bold"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:layout_weight="40"
+                            android:layout_height="match_parent"
+                            android:id="@+id/titGaleria"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="60"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="Es una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuado"
+                            android:layout_height="match_parent"
+                            android:id="@+id/descGaleria"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="27">
+
+
+                <ListView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+
+                    android:id="@+id/listGaleria" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="48"></LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

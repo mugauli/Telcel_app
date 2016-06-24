@@ -77,6 +77,9 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         tabs.addTab(tabs.newTab().setText("REVISTA"));
         tabs.addTab(tabs.newTab().setText("NOTICIAS"));
         tabs.addTab(tabs.newTab().setText("COMUNICADOS"));
+        tabs.addTab(tabs.newTab().setText("GRUPO CARSO"));
+        tabs.addTab(tabs.newTab().setText("CAMPAÑAS INTERNAS"));
+        tabs.addTab(tabs.newTab().setText("GALERIAS"));
         //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
