@@ -1,6 +1,5 @@
 package net.grapesoft.www.telcel;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -8,15 +7,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -39,18 +34,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import Utitilies.Comunication;
-import Utitilies.GetNetImage;
 import Utitilies.Lista_Entrada;
-
-import static net.grapesoft.www.telcel.R.drawable.border_shadow;
 
 /**
  * Created by Mugauli on 19/06/2016.
  */
-public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, Lista_adaptador> {
+public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -70,7 +60,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
     }
 
     @Override
-    protected Lista_adaptador doInBackground(ArrayList<String>... params){
+    protected List_adapted doInBackground(ArrayList<String>... params){
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
@@ -138,14 +128,14 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
 
-                    if(primer2) {
-                        primer2 = false;
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion, R.drawable.downloadcircle));
-                    }
-                    else
-                    {
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion, R.drawable.descarga));
-                    }
+                  //  if(primer2) {
+                  //      primer2 = false;
+                  //      datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion, R.drawable.play));
+                  //  }
+                  //  else
+                  //  {
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion, R.drawable.play));
+                  //  }
 
                 }
             }
@@ -162,7 +152,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
             e.printStackTrace();
         }
 
-        Lista_adaptador adaptadorLts = new Lista_adaptador(activity, R.layout.entrada_podcast, datos){
+        List_adapted adaptadorLts = new List_adapted(activity, R.layout.entrada_podcast, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
 
@@ -172,7 +162,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                     if(primer) {
                         primer = false;
                         //view.setBackgroundResource(R.drawable.border_shadow);
-                        view.setBackgroundColor(Color.WHITE);
+                   //     view.setBackgroundColor(Color.WHITE);
 
                     }
                     TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior);
@@ -224,7 +214,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
     }
 
     @Override
-    protected void onPostExecute(Lista_adaptador result) {
+    protected void onPostExecute(List_adapted result) {
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.podcast);

@@ -307,7 +307,7 @@ public class login extends Activity  {
 
                                 session.createLoginSession(tokenCTE, dato, campo, password, id, num_empleado, num_celular,
                                         region, nombre, paterno, materno, interes_1, interes_2);
-                                Intent i = new Intent(login.this, ComunicacionInternaActivity.class);
+                                Intent i = new Intent(login.this, MainActivity.class);
                                 startActivity(i);
                                 finish();
 

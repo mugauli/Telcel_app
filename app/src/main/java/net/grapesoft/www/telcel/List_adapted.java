@@ -1,4 +1,6 @@
 package net.grapesoft.www.telcel;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -18,14 +20,14 @@ import android.widget.Toast;
  * Created by memoHack on 01/06/2016.
  */
 
-public abstract class Lista_adaptador extends BaseAdapter {
+public abstract class List_adapted extends BaseAdapter {
 
     private ArrayList<?> entradas;
     private int R_layout_IdView;
     private Context contexto;
     TextView tv;
 
-    public Lista_adaptador(Context contexto, int R_layout_IdView, ArrayList<?> entradas) {
+    public List_adapted(Context contexto, int R_layout_IdView, ArrayList<?> entradas) {
         super();
         this.contexto = contexto;
         this.entradas = entradas;
@@ -38,7 +40,14 @@ public abstract class Lista_adaptador extends BaseAdapter {
             LayoutInflater vi = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R_layout_IdView, null);
         }
-        onEntrada (entradas.get(posicion), view);
+
+        try {
+            onEntrada (entradas.get(posicion), view);
+        } catch (IOException e) {
+            Log.e("Error", "Adaptador");
+            e.printStackTrace();
+        }
+
 
         RadioButton r = (RadioButton)view.findViewById(R.id.rdfalla);
         if(r != null) {
@@ -80,6 +89,6 @@ public abstract class Lista_adaptador extends BaseAdapter {
     }
 
 
-    public abstract void onEntrada (Object entrada, View view);
+    public abstract void onEntrada (Object entrada, View view) throws IOException;
 
 }

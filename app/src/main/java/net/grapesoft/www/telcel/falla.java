@@ -9,41 +9,27 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.concurrent.ExecutionException;
 
-import android.app.Activity;
-
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import Utitilies.Campos;
 import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
 import Utitilies.Lista_Entrada;
@@ -91,7 +77,7 @@ public class falla extends AppCompatActivity
 
 
         lista = (ListView) findViewById(R.id.falla);
-        Lista_adaptador adaptador = new Lista_adaptador(this, R.layout.entrada_falla, datos){
+        List_adapted adaptador = new List_adapted(this, R.layout.entrada_falla, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {

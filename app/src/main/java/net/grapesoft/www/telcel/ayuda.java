@@ -1,6 +1,5 @@
 package net.grapesoft.www.telcel;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,13 +7,10 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+
 import java.util.ArrayList;
 
-import android.app.Activity;
 
-
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -55,7 +51,7 @@ public class ayuda  extends AppCompatActivity
 
 
         lista = (ListView) findViewById(R.id.ayuda);
-        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_lista, datos){
+        lista.setAdapter(new List_adapted(this, R.layout.entrada_lista, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {

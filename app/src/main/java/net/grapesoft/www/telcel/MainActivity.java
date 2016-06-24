@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
         //boton ayuda
+
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,6 +87,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Log.e("TAB",tab.getText().toString());
+
+                if(tab.getText().toString().equals(getString(R.string.tab1).toString())) {
+
+                    Intent i = new Intent(MainActivity.this, ComunicacionInternaActivity.class);
+                    startActivity(i);
+                }
+
             }
 
             @Override

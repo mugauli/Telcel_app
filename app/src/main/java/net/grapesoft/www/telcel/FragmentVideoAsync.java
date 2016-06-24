@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +37,7 @@ import Utitilies.Lista_Entrada;
 /**
  * Created by Mugauli on 20/06/2016.
  */
-public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Lista_adaptador> {
+public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -62,7 +61,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
 
     @Override
-    protected Lista_adaptador doInBackground(ArrayList<String>... params){
+    protected List_adapted doInBackground(ArrayList<String>... params){
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
@@ -105,11 +104,6 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     responseArray = new JSONArray("[" + result11 + "]");
             }
 
-
-
-            //response = new Comunication(activity).execute(params).get();
-            Log.e("Async","4");
-
             if(responseArray.getJSONObject(0).has("resp")) {
                 Log.e("Item Podcast" ,  "Error");
             }
@@ -133,11 +127,11 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
                     if(primer2) {
                         primer2 = false;
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion));
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion,responseArray));
                     }
                     else
                     {
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion));
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion,responseArray));
                     }
                 }
             }
@@ -154,15 +148,13 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             e.printStackTrace();
         }
 
-        Lista_adaptador adaptadorLts = new Lista_adaptador(activity, R.layout.entrada_video, datos){
+        List_adapted adaptadorLts = new List_adapted(activity, R.layout.entrada_video, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
 
                 if(primer){
                     primer = false;
-                    //view.setBackgroundResource(R.drawable.border_shadow);
-                    view.setBackgroundColor(Color.WHITE);
 
                     ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
                     ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
@@ -170,7 +162,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
 
                     imagenVideo.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                    imagenPlay.setTag(((Lista_Entrada) entrada).get_url());
+                    imagenPlay.setTag((entrada));
                     imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
                     txtTiempo.setText(((Lista_Entrada) entrada).get_duracion());
                 }
@@ -208,12 +200,10 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                         @Override
                         public void onClick(View arg0) {
 
-
                             ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
                             ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
                             ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
                             TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
-
 
                             ImageView imagenView = (ImageView) arg0.findViewById(R.id.imagevideo);
                             TextView urlVideo = (TextView) arg0.findViewById(R.id.url_Video);
@@ -238,7 +228,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     }
 
     @Override
-    protected void onPostExecute(Lista_adaptador result) {
+    protected void onPostExecute(List_adapted result) {
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.listvideo);

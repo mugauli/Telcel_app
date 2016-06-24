@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import net.grapesoft.www.telcel.Detalle_noticia;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -22,6 +24,8 @@ public class GetNetImage extends AsyncTask<String,Void,Bitmap> {
     Activity activity;
 
     ImageView img;
+
+
 
 
     @Override

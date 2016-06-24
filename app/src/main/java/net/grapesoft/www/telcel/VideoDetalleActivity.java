@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,9 +19,12 @@ import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
+import java.util.ArrayList;
+
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
-public class VideoViewActivity extends AppCompatActivity
+public class VideoDetalleActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     // Declare variables
@@ -32,11 +33,18 @@ public class VideoViewActivity extends AppCompatActivity
     SessionManagement session;
 
     // Insert your Video URL
-    String VideoURL = "http://internetencaja.com.mx/telcel/videos/Grafica%20Informativa.mp4";
+    String VideoURL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        String[] ltEntrada = getIntent().getStringArrayExtra("video_selected");
+
+        VideoURL = ltEntrada[2].toString();
+
+
+        Log.e ("URL Activity", VideoURL);
 
         // Get the layout from video_main.xml
         setContentView(R.layout.activity_video_view);
@@ -46,31 +54,32 @@ public class VideoViewActivity extends AppCompatActivity
         // Execute StreamVideo AsyncTask
 
         // Create a progressbar
-        pDialog = new ProgressDialog(VideoViewActivity.this);
+        pDialog = new ProgressDialog(VideoDetalleActivity.this);
         // Set progressbar title
-        pDialog.setTitle("Android Video Streaming Tutorial");
+
         // Set progressbar message
-        pDialog.setMessage("Buffering...");
+        pDialog.setMessage("Cargando...");
         pDialog.setIndeterminate(false);
         pDialog.setCancelable(false);
         // Show progressbar
         pDialog.show();
 
         try {
+            Log.e ("URL Activity", "0");
             // Start the MediaController
             MediaController mediacontroller = new MediaController(
-                    VideoViewActivity.this);
+                    VideoDetalleActivity.this);
             mediacontroller.setAnchorView(videoview);
             // Get the URL from String VideoURL
             Uri video = Uri.parse(VideoURL);
             videoview.setMediaController(mediacontroller);
             videoview.setVideoURI(video);
-
+            Log.e ("URL Activity", "1");
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
             e.printStackTrace();
         }
-
+        Log.e ("URL Activity", "2");
         videoview.requestFocus();
         videoview.setOnPreparedListener(new OnPreparedListener() {
             // Close the progress bar and play the video
@@ -79,6 +88,8 @@ public class VideoViewActivity extends AppCompatActivity
                 videoview.start();
             }
         });
+
+
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -153,17 +164,17 @@ public class VideoViewActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(VideoViewActivity.this, ActualizarActivity.class);
+            Intent i = new Intent(VideoDetalleActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(VideoViewActivity.this, pin.class);
+            Intent i = new Intent(VideoDetalleActivity.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(VideoViewActivity.this, preferencias.class);
+            Intent i = new Intent(VideoDetalleActivity.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {

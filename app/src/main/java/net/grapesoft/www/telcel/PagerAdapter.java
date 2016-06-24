@@ -28,10 +28,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                 FragmentRevista tab3 = new FragmentRevista();
                 return tab3;
             case 3:
-                TabFragment4 tab4 = new TabFragment4();
+                FragmentNoticias tab4 = new FragmentNoticias();
                 return tab4;
             case 4:
-                TabFragment5 tab5 = new TabFragment5();
+                FragmentComunicados tab5 = new FragmentComunicados();
                 return tab5;
             case 5:
                 FragmentCampana tab6 = new FragmentCampana();

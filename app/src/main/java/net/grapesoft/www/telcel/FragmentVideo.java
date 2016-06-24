@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import org.json.JSONArray;
@@ -70,8 +71,6 @@ public class FragmentVideo extends Fragment {
         final HashMap<String, String> user = session.getUserDetails();
         String region = user.get(SessionManagement.KEY_REGION);
 
-        //-- PARAMETROS PETICION LOGIN-----//
-
         params.add("6");
         params.add("GetVideo.php");
         params.add(tokenCTE);
@@ -90,52 +89,69 @@ public class FragmentVideo extends Fragment {
 
               //  download(rootview,arg0.getTag().toString());
               //Int  view(rootview,arg0.getTag().toString());
+                Intent i = new Intent(getActivity(), VideoDetalleActivity.class);
+                Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
+
+                ArrayList<String> datos = new ArrayList<String>();
+                datos.add(ltEntrada.get_id());
+                datos.add(ltEntrada.get_titulo());
+                datos.add(ltEntrada.get_url());
+
+                datos.add("id");
+                datos.add("id");
+                datos.add("id");
+
+                i.putExtra("video_selected",datos);
+
+
+                startActivity(i);
+
 
                //Video
 
-                RelativeLayout RLvideo = (RelativeLayout) rootview.findViewById(R.id.visorVideo);
-                RLvideo.setVisibility(View.VISIBLE);
-
-                Log.e("URL Video",imageHttpAddress+arg0.getTag().toString());
-                VideoURL = imageHttpAddress + arg0.getTag().toString();
-                // Find your VideoView in your video_main.xml layout
-                videoview = (VideoView) rootview.findViewById(R.id.VideoView);
-
-                // Execute StreamVideo AsyncTask
-
-                // Create a progressbar
-                pDialog = new ProgressDialog(getActivity());
-                // Set progressbar title
-                // Set progressbar message
-                pDialog.setMessage("Cargando...");
-                pDialog.setIndeterminate(false);
-                pDialog.setCancelable(false);
-                // Show progressbar
-                pDialog.show();
-
-                try {
-                    // Start the MediaController
-                    MediaController mediacontroller = new MediaController(getActivity());
-                    mediacontroller.setAnchorView(videoview);
-                    // Get the URL from String VideoURL
-                    Uri video = Uri.parse(VideoURL);
-
-                    videoview.setMediaController(mediacontroller);
-                    videoview.setVideoURI(video);
-
-                } catch (Exception e) {
-                    Log.e("Error", e.getMessage());
-                    e.printStackTrace();
-                }
-
-                videoview.requestFocus();
-                videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    // Close the progress bar and play the video
-                    public void onPrepared(MediaPlayer mp) {
-                        pDialog.dismiss();
-                        videoview.start();
-                    }
-                });
+            //    RelativeLayout RLvideo = (RelativeLayout) rootview.findViewById(R.id.visorVideo);
+            //    RLvideo.setVisibility(View.VISIBLE);
+//
+            //    Log.e("URL Video",imageHttpAddress+arg0.getTag().toString());
+            //    VideoURL = imageHttpAddress + arg0.getTag().toString();
+            //    // Find your VideoView in your video_main.xml layout
+            //    videoview = (VideoView) rootview.findViewById(R.id.VideoView);
+//
+            //    // Execute StreamVideo AsyncTask
+//
+            //    // Create a progressbar
+            //    pDialog = new ProgressDialog(getActivity());
+            //    // Set progressbar title
+            //    // Set progressbar message
+            //    pDialog.setMessage("Cargando...");
+            //    pDialog.setIndeterminate(false);
+            //    pDialog.setCancelable(false);
+            //    // Show progressbar
+            //    pDialog.show();
+//
+            //    try {
+            //        // Start the MediaController
+            //        MediaController mediacontroller = new MediaController(getActivity());
+            //        mediacontroller.setAnchorView(videoview);
+            //        // Get the URL from String VideoURL
+            //        Uri video = Uri.parse(VideoURL);
+//
+            //        videoview.setMediaController(mediacontroller);
+            //        videoview.setVideoURI(video);
+//
+            //    } catch (Exception e) {
+            //        Log.e("Error", e.getMessage());
+            //        e.printStackTrace();
+            //    }
+//
+            //    videoview.requestFocus();
+            //    videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            //        // Close the progress bar and play the video
+            //        public void onPrepared(MediaPlayer mp) {
+            //            pDialog.dismiss();
+            //            videoview.start();
+            //        }
+             //   });
 
                 //End Video
             }

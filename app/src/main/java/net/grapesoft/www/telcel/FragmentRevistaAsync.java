@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -41,7 +40,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -51,7 +49,7 @@ import Utitilies.Lista_Entrada;
 /**
  * Created by Mugauli on 20/06/2016.
  */
-public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, Lista_adaptador> {
+public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -63,17 +61,15 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
     public String IP = "",tokenCTE = "";
     public boolean primer = true,primer2 = true;
 
-
     public FragmentRevistaAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
-
     }
 
     @Override
-    protected Lista_adaptador doInBackground(ArrayList<String>... params){
+    protected List_adapted doInBackground(ArrayList<String>... params){
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
 
@@ -114,14 +110,11 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                 else
                     responseArray = new JSONArray("[" + result11 + "]");
             }
-
             if(responseArray.getJSONObject(0).has("resp")) {
                 Log.e("Item Podcast" ,  "Error");
             }
             else {
-
                 for (int i = 0; i < responseArray.length(); i++) {
-
 
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
@@ -135,12 +128,8 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
                     datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, "", R.drawable.descarga));
-
-
                 }
             }
-
-
         } catch (JSONException e) {
             Log.e("Async", e.getMessage());
             e.printStackTrace();
@@ -152,7 +141,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
             e.printStackTrace();
         }
 
-        Lista_adaptador adaptadorLts = new Lista_adaptador(activity, R.layout.entrada_revista, datos){
+        List_adapted adaptadorLts = new List_adapted(activity, R.layout.entrada_revista, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
 
@@ -165,7 +154,6 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                     ImageView imagen_entrada = (ImageView) view.findViewById(R.id.revista);
                     if (imagen_entrada != null) {
-
                         imagen_entrada.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                     }
 
@@ -201,35 +189,23 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                             } catch (ExecutionException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     });
                 }
             }
-
-
-
         };
-
         return adaptadorLts;
     }
 
     @Override
-    protected void onPostExecute(Lista_adaptador result) {
+    protected void onPostExecute(List_adapted result) {
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.lvRevista);
+        if(result != null)
         lista.setAdapter(result);
-
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelRevista);
-
         pBar.setVisibility(View.INVISIBLE);
 
-
     }
-
-
-
-
-
 }

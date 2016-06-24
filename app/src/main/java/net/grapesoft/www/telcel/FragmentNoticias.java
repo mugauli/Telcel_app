@@ -1,24 +1,39 @@
 package net.grapesoft.www.telcel;
 
+/**
+ * Created by memoHack on 14/06/2016.
+ */
+
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
-public class FragmentPodCast extends Fragment {
+public class FragmentNoticias extends Fragment {
 
+    String styledText = "This is <font color='red'>simple</font>.";
     public String tokenCTE = "";
 
     SessionManagement session;
 
+
+
+    private ListView lista;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View rootview = inflater.inflate(R.layout.tab_fragment_podcast, container, false);
+        final View rootview = inflater.inflate(R.layout.tab_fragment_noticias, container, false);
 
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
@@ -30,15 +45,15 @@ public class FragmentPodCast extends Fragment {
         String region = user.get(SessionManagement.KEY_REGION);
 
         params.add("6");
-        params.add("GetPodcast.php");
+        params.add("GetNews.php");
         params.add(tokenCTE);
         params.add(region);
 
-        new FragmentPodCastAsync(getActivity()).execute(params);
+        new FragmentNoticiasAsync(getActivity()).execute(params);
+
+
 
 
         return rootview;
     }
-
-
 }

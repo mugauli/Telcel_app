@@ -10,20 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import java.util.ArrayList;
 
-import android.app.Activity;
-
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
@@ -53,7 +46,7 @@ public class faq extends ActionBarActivity
 
 
         lista = (ListView) findViewById(R.id.faq);
-        lista.setAdapter(new Lista_adaptador(this, R.layout.entrada_faq, datos){
+        lista.setAdapter(new List_adapted(this, R.layout.entrada_faq, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {
