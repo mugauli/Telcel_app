@@ -12,7 +12,6 @@ import Utitilies.SessionManagement;
 public class FragmentPodCast extends Fragment {
 
     public String tokenCTE = "";
-
     SessionManagement session;
 
     @Override

@@ -32,6 +32,7 @@ import org.json.JSONException;
 
 import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
+import Utitilies.List_adapted;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 

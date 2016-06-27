@@ -26,6 +26,7 @@ public class ComunicacionInternaActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_comunicacion_interna);
         session = new SessionManagement(getApplicationContext());
 
@@ -54,6 +55,7 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
+        if(imgButton != null)
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +72,12 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
+
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+
+
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
+
         tabs.addTab(tabs.newTab().setText("PODCAST"));
         tabs.addTab(tabs.newTab().setText("VIDEO"));
         tabs.addTab(tabs.newTab().setText("REVISTA"));
@@ -80,6 +86,7 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         tabs.addTab(tabs.newTab().setText("GRUPO CARSO"));
         tabs.addTab(tabs.newTab().setText("CAMPAÑAS INTERNAS"));
         tabs.addTab(tabs.newTab().setText("GALERIAS"));
+
         //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -93,11 +100,7 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
                 viewPager.setCurrentItem(tab.getPosition());
-
-
-
             }
 
             @Override

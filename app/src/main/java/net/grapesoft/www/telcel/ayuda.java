@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Utitilies.List_adapted;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 

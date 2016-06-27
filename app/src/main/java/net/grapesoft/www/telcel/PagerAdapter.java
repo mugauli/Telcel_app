@@ -19,7 +19,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 FragmentPodCast tab1 = new FragmentPodCast();
-
                 return tab1;
             case 1:
                 FragmentVideo tab2 = new FragmentVideo();

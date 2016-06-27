@@ -32,12 +32,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utitilies.List_adapted;
+import Utitilies.List_adapted_Video;
 import Utitilies.Lista_Entrada;
+import Utitilies.SessionManagement;
 
 /**
  * Created by Mugauli on 20/06/2016.
  */
-public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted> {
+public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Video> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -48,6 +51,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
     public boolean primer = true,primer2 = true;
+    SessionManagement session;
 
 
 
@@ -61,33 +65,49 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
 
     @Override
-    protected List_adapted doInBackground(ArrayList<String>... params){
+    protected List_adapted_Video doInBackground(ArrayList<String>... params){
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
 
+        session = new SessionManagement(activity.getApplicationContext());
+        String result11 = "";
         try {
 
-            List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-            HttpClient httpclient = new DefaultHttpClient();
+            String video = session.getVideoDetails();
 
-            HttpPost httppost = new HttpPost(IP + params[0].get(1));
-            nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
-            nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+            if(video == null || video == "") {
 
-            // Execute HTTP Post Request
-            HttpResponse response = httpclient.execute(httppost);
+                Log.e("Se obtiene VIDEO","Procesando...");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
-            StringBuilder sb = new StringBuilder();
-            sb.append(reader.readLine() + "\n");
-            String line = "0";
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+                HttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = new HttpPost(IP + params[0].get(1));
+                nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
+                nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+                StringBuilder sb = new StringBuilder();
+                sb.append(reader.readLine() + "\n");
+                String line = "0";
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                reader.close();
+                result11 = sb.toString();
+
+                session.createVideoSession(result11);
             }
-            reader.close();
-            String result11 = sb.toString();
+            else
+            {
+                Log.e("Con session VIDEO",video);
+                result11 = video;
+            }
 
             if(result11.equals("true"+"\n")) {
                 // Log.e("Response: ", "true Int");
@@ -138,20 +158,24 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
 
         } catch (JSONException e) {
-            Log.e("Async", e.getMessage());
+            Log.e("Error Async 0 Video", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
+            Log.e("Error Async 1 Video", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
+            Log.e("Error Async 2 Video", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
+            Log.e("Error Async 3 Video", e.getMessage());
             e.printStackTrace();
         }
 
-        List_adapted adaptadorLts = new List_adapted(activity, R.layout.entrada_video, datos){
+        List_adapted_Video adaptadorLts = new List_adapted_Video(activity, R.layout.entrada_video, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
+                Log.e ("Entrada Video", ((Lista_Entrada) entrada).get_titulo());
 
                 if(primer){
                     primer = false;
@@ -165,6 +189,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     imagenPlay.setTag((entrada));
                     imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
                     txtTiempo.setText(((Lista_Entrada) entrada).get_duracion());
+
                 }
 
                 if (entrada != null) {
@@ -195,6 +220,8 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                         imagen_entrada.setTag(((Lista_Entrada) entrada).get_img_previa());
                     }
 
+                    view.setTag(entrada);
+
                     view.setOnClickListener(new View.OnClickListener() {
 
                         @Override
@@ -210,7 +237,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             TextView tiempoView = (TextView) arg0.findViewById(R.id.videoduracion);
 
                             imagenVideo.setImageBitmap((Bitmap) imagenView.getTag());
-                            imagenPlay.setTag(urlVideo.getText().toString());
+                            imagenPlay.setTag(arg0.getTag());
                             imagenDescarga.setTag(urlVideo.getText().toString());
                             txtTiempo.setText(tiempoView.getText());
 
@@ -228,7 +255,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     }
 
     @Override
-    protected void onPostExecute(List_adapted result) {
+    protected void onPostExecute(List_adapted_Video result) {
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.listvideo);

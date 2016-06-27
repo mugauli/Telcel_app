@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -35,7 +34,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utitilies.List_adapted;
 import Utitilies.Lista_Entrada;
+import Utitilies.SessionManagement;
 
 /**
  * Created by Mugauli on 19/06/2016.
@@ -51,7 +52,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
     public boolean primer = true,primer2 = true;
-
+    SessionManagement session;
 
     public FragmentPodCastAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
@@ -65,7 +66,15 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
 
+        session = new SessionManagement(activity.getApplicationContext());
+        String result11 = "";
         try {
+
+            String podcast = session.getPodcastDetails();
+
+            if(podcast == null || podcast == "") {
+
+
             List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient = new DefaultHttpClient();
 
@@ -85,7 +94,16 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                     sb.append(line + "\n");
                 }
                 reader.close();
-                String result11 = sb.toString();
+                result11 = sb.toString();
+
+
+                session.createPodcastSession(result11);
+            }
+            else
+            {
+                Log.e("Con session PODCAST",podcast);
+                result11 = podcast;
+            }
 
                 if(result11.equals("true"+"\n")) {
                     // Log.e("Response: ", "true Int");
@@ -102,10 +120,6 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                         responseArray = new JSONArray("[" + result11 + "]");
                 }
 
-
-
-            //response = new Comunication(activity).execute(params).get();
-            Log.e("Async","4");
 
             if(responseArray.getJSONObject(0).has("resp")) {
                 Log.e("Item Podcast" ,  "Error");
@@ -218,6 +232,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.podcast);
+        if(result != null)
         lista.setAdapter(result);
 
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanel);

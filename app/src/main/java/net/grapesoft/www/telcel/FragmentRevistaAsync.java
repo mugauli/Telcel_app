@@ -2,15 +2,10 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -33,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -44,12 +38,15 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.DownloadTask;
+import Utitilies.List_adapted;
+import Utitilies.List_adapted_Revista;
 import Utitilies.Lista_Entrada;
+import Utitilies.SessionManagement;
 
 /**
  * Created by Mugauli on 20/06/2016.
  */
-public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted> {
+public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Revista> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -60,6 +57,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
     public boolean primer = true,primer2 = true;
+    SessionManagement session;
 
     public FragmentRevistaAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
@@ -69,32 +67,47 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
     }
 
     @Override
-    protected List_adapted doInBackground(ArrayList<String>... params){
+    protected List_adapted_Revista doInBackground(ArrayList<String>... params){
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
 
 
+        session = new SessionManagement(activity.getApplicationContext());
+        String result11 = "";
         try {
-            List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-            HttpClient httpclient = new DefaultHttpClient();
 
-            HttpPost httppost = new HttpPost(IP + params[0].get(1));
-            nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
-            nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+            String revista = session.getRevistaDetails();
 
-            // Execute HTTP Post Request
-            HttpResponse response = httpclient.execute(httppost);
+            if(revista == null || revista == "") {
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
-            StringBuilder sb = new StringBuilder();
-            sb.append(reader.readLine() + "\n");
-            String line = "0";
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+                HttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = new HttpPost(IP + params[0].get(1));
+                nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
+                nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+                StringBuilder sb = new StringBuilder();
+                sb.append(reader.readLine() + "\n");
+                String line = "0";
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                reader.close();
+                result11 = sb.toString();
+
+                session.createRevistaSession(result11);
             }
-            reader.close();
-            String result11 = sb.toString();
+            else
+            {
+                Log.e("Con session REVISTA",revista);
+                result11 = revista;
+            }
 
             if(result11.equals("true"+"\n")) {
                 // Log.e("Response: ", "true Int");
@@ -111,7 +124,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                     responseArray = new JSONArray("[" + result11 + "]");
             }
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Podcast" ,  "Error");
+                Log.e("Item Revista" ,  "Error");
             }
             else {
                 for (int i = 0; i < responseArray.length(); i++) {
@@ -141,10 +154,10 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
             e.printStackTrace();
         }
 
-        List_adapted adaptadorLts = new List_adapted(activity, R.layout.entrada_revista, datos){
+        List_adapted_Revista adaptadorLts = new List_adapted_Revista(activity, R.layout.entrada_revista, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
-
+                Log.e("Item Revista" ,  "NO");
                 if (entrada != null) {
 
                     TextView titulo = (TextView) view.findViewById(R.id.textView2);
@@ -198,7 +211,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
     }
 
     @Override
-    protected void onPostExecute(List_adapted result) {
+    protected void onPostExecute(List_adapted_Revista result) {
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.lvRevista);

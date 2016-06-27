@@ -56,8 +56,8 @@ public class ActualizarActivity extends AppCompatActivity
         TextView txtGhost = (TextView) findViewById(R.id.tvCelular);
         TextView txtGhost2 = (TextView) findViewById(R.id.tvRegion);
         TextView txtGhost3 = (TextView) findViewById(R.id.tvDireccion);
-        RadioButton rb= (RadioButton) findViewById(R.id.rbAsignado);
-        RadioButton rbp= (RadioButton) findViewById(R.id.rbPersonal);
+        RadioButton rb = (RadioButton) findViewById(R.id.rbAsignado);
+        RadioButton rbp = (RadioButton) findViewById(R.id.rbPersonal);
         TextView txtGhost5 = (TextView) findViewById(R.id.tvNombres);
         TextView txtGhost6 = (TextView) findViewById(R.id.tvPaterno);
         TextView txtGhost7 = (TextView) findViewById(R.id.tvMaterno);
@@ -99,10 +99,6 @@ public class ActualizarActivity extends AppCompatActivity
         ArrayAdapter spinner_adapterD = ArrayAdapter.createFromResource( this, R.array.direccion , android.R.layout.simple_spinner_item);
         spinner_adapterD.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_Direccion.setAdapter(spinner_adapterD);
-
-
-
-
 
         Button btnEnviar = (Button) findViewById(R.id.btnEnviar);
 

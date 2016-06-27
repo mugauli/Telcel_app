@@ -25,12 +25,8 @@ public class FragmentNoticias extends Fragment {
 
     String styledText = "This is <font color='red'>simple</font>.";
     public String tokenCTE = "";
-
     SessionManagement session;
 
-
-
-    private ListView lista;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.tab_fragment_noticias, container, false);
@@ -50,9 +46,6 @@ public class FragmentNoticias extends Fragment {
         params.add(region);
 
         new FragmentNoticiasAsync(getActivity()).execute(params);
-
-
-
 
         return rootview;
     }

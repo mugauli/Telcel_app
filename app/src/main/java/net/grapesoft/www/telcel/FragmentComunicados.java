@@ -16,59 +16,44 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Utitilies.Lista_Entrada;
+import Utitilies.SessionManagement;
 
 public class FragmentComunicados extends Fragment {
     private ListView lista;
+    public String tokenCTE = "";
+    SessionManagement session;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.tab_fragment_comunicados, container, false);
 
-        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
-        datos.add(new Lista_Entrada(R.drawable.mas, "18-12-2015", "Desarrollando nuestro potencial, Proceso de realimentacion al desempeño."));
-        datos.add(new Lista_Entrada(R.drawable.mas, "10-12-2015", "Comunicado especial. Proxima evaluacion al desempeño 2016, Preparate."));
-        datos.add(new Lista_Entrada(R.drawable.mas, "18-12-2015", "Desarrollando nuestro potencial, Proceso de realimentacion al desempeño."));
+        tokenCTE = getText(R.string.tokenXM).toString();
+        ArrayList<String> params = new ArrayList<String>();
 
-        lista = (ListView) rootview.findViewById(R.id.listcomunicados);
+        String imageHttpAddress = getText(R.string.URL_media).toString();
+        session = new SessionManagement(getActivity());
 
-        lista.setAdapter(new List_adapted(getActivity(), R.layout.entrada_comunicados, datos){
-            @Override
-            public void onEntrada(Object entrada, View view) {
-                if (entrada != null) {
-                    // Applying font
-                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.comunicadofecha);
+        final HashMap<String, String> user = session.getUserDetails();
+        String region = user.get(SessionManagement.KEY_REGION);
 
-                    if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
+        params.add("6");
+        params.add("GetPodcast.php");
+        params.add(tokenCTE);
+        params.add(region);
 
-                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.comunicadotitulo);
+        new FragmentComunicadosAsync(getActivity()).execute(params);
 
-                    if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
-
-                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagencomunicados);
-                    if (imagen_entrada != null)
-                        imagen_entrada.setImageResource(((Lista_Entrada) entrada).get_idImagen());
-
-
-
-
-                    imagen_entrada.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View arg0) {
-
-                            Intent myIntent = new Intent(getActivity(), Detalle_noticia.class);
-                            getActivity().startActivity(myIntent);
-                        }
-                    });
-                }
-            }
-        });
 
         return rootview;
+
+
+
+
+
+
 
     }
 

@@ -63,9 +63,6 @@ public class FragmentVideo extends Fragment {
 
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
-        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
-        JSONArray response;
-        imageHttpAddress = getText(R.string.URL_media).toString();
         session = new SessionManagement(getActivity());
 
         final HashMap<String, String> user = session.getUserDetails();
@@ -80,16 +77,13 @@ public class FragmentVideo extends Fragment {
 
         ImageView imagen_entrada2 = (ImageView) rootview.findViewById(R.id.play);
 
-
-
         imagen_entrada2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-              //  download(rootview,arg0.getTag().toString());
-              //Int  view(rootview,arg0.getTag().toString());
                 Intent i = new Intent(getActivity(), VideoDetalleActivity.class);
+
                 Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
 
                 ArrayList<String> datos = new ArrayList<String>();
@@ -105,55 +99,6 @@ public class FragmentVideo extends Fragment {
 
 
                 startActivity(i);
-
-
-               //Video
-
-            //    RelativeLayout RLvideo = (RelativeLayout) rootview.findViewById(R.id.visorVideo);
-            //    RLvideo.setVisibility(View.VISIBLE);
-//
-            //    Log.e("URL Video",imageHttpAddress+arg0.getTag().toString());
-            //    VideoURL = imageHttpAddress + arg0.getTag().toString();
-            //    // Find your VideoView in your video_main.xml layout
-            //    videoview = (VideoView) rootview.findViewById(R.id.VideoView);
-//
-            //    // Execute StreamVideo AsyncTask
-//
-            //    // Create a progressbar
-            //    pDialog = new ProgressDialog(getActivity());
-            //    // Set progressbar title
-            //    // Set progressbar message
-            //    pDialog.setMessage("Cargando...");
-            //    pDialog.setIndeterminate(false);
-            //    pDialog.setCancelable(false);
-            //    // Show progressbar
-            //    pDialog.show();
-//
-            //    try {
-            //        // Start the MediaController
-            //        MediaController mediacontroller = new MediaController(getActivity());
-            //        mediacontroller.setAnchorView(videoview);
-            //        // Get the URL from String VideoURL
-            //        Uri video = Uri.parse(VideoURL);
-//
-            //        videoview.setMediaController(mediacontroller);
-            //        videoview.setVideoURI(video);
-//
-            //    } catch (Exception e) {
-            //        Log.e("Error", e.getMessage());
-            //        e.printStackTrace();
-            //    }
-//
-            //    videoview.requestFocus();
-            //    videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            //        // Close the progress bar and play the video
-            //        public void onPrepared(MediaPlayer mp) {
-            //            pDialog.dismiss();
-            //            videoview.start();
-            //        }
-             //   });
-
-                //End Video
             }
 
         });
@@ -220,4 +165,6 @@ public class FragmentVideo extends Fragment {
             return null;
         }
     }
+
+
 }

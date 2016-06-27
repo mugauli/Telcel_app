@@ -56,6 +56,15 @@ public class SessionManagement {
     public static final String KEY_INTERES_1 = "interes_1";
     public static final String KEY_INTERES_2 = "interes_2";
 
+    public static final String KEY_COMUNICACION_INTERNA_PODCAST = "comunicacion_interna_podcast";
+    public static final String KEY_COMUNICACION_INTERNA_VIDEO = "comunicacion_interna_video";
+    public static final String KEY_COMUNICACION_INTERNA_REVISTA = "comunicacion_interna_revista";
+    public static final String KEY_COMUNICACION_INTERNA_NOTICIAS = "comunicacion_interna_noticias";
+    public static final String KEY_COMUNICACION_INTERNA_COMUNICADOS = "comunicacion_interna_comunicados";
+    public static final String KEY_COMUNICACION_INTERNA_GRUPO_CARSO = "comunicacion_interna_grupo_carso";
+    public static final String KEY_COMUNICACION_INTERNA_CAMPANAS_INTERNAS = "comunicacion_interna_campanas_internas";
+    public static final String KEY_COMUNICACION_INTERNA_GALERIA = "comunicacion_interna_galeria";
+
     // Constructor
     public SessionManagement(Context context){
         this._context = context;
@@ -68,7 +77,7 @@ public class SessionManagement {
      * */
     public void createLoginSession(String token, String dato, String campo, String pass, String id, String num_empelado, String num_celular,
                                    String region, String nombre, String paterno, String materno, String interes_1, String interes_2) {
-
+        editor.clear();
         //SHARED
         editor.putBoolean(IS_LOGIN, true);
 
@@ -88,11 +97,28 @@ public class SessionManagement {
         editor.putString(KEY_MATERNO,materno);
         editor.putString(KEY_INTERES_1,interes_1);
         editor.putString(KEY_INTERES_2,interes_2);
+        editor.putString(KEY_INTERES_2,interes_2);
 
 
         // commit changes
         editor.commit();
     }
+
+    public void createPodcastSession(String podcast){ editor.putString(KEY_COMUNICACION_INTERNA_PODCAST,podcast);editor.commit();}
+
+    public void createVideoSession(String value){ editor.putString(KEY_COMUNICACION_INTERNA_VIDEO,value); editor.commit();  }
+
+    public void createRevistaSession(String value) { editor.putString(KEY_COMUNICACION_INTERNA_REVISTA,value); editor.commit();  }
+
+    public void createNoticiasSession(String value){ editor.putString(KEY_COMUNICACION_INTERNA_NOTICIAS,value); editor.commit(); }
+
+    public void createComunicadosSession(String value){ editor.putString(KEY_COMUNICACION_INTERNA_COMUNICADOS,value); editor.commit(); }
+
+    public void createGrupoCarsoSession(String value){ editor.putString(KEY_COMUNICACION_INTERNA_GRUPO_CARSO,value); editor.commit(); }
+
+    public void createCampanasInternasSession(String value){ editor.putString(KEY_COMUNICACION_INTERNA_CAMPANAS_INTERNAS,value);  editor.commit(); }
+
+    public void createGaleriaSession(String value){ editor.putString(KEY_COMUNICACION_INTERNA_GALERIA,value); editor.commit(); }
 
     /**
      * Check login method wil check user login status
@@ -139,9 +165,30 @@ public class SessionManagement {
         return user;
     }
 
+    public String getPodcastDetails(){return pref.getString(KEY_COMUNICACION_INTERNA_PODCAST,null);}
+
+    public String getVideoDetails(){
+        return pref.getString(KEY_COMUNICACION_INTERNA_VIDEO,null);
+    }
+
+    public String getRevistaDetails() { return pref.getString(KEY_COMUNICACION_INTERNA_REVISTA, null); }
+
+    public String getNoticiasDetails(){ return pref.getString(KEY_COMUNICACION_INTERNA_NOTICIAS,null); }
+
+    public String getComunicadosDetails(){ return pref.getString(KEY_COMUNICACION_INTERNA_COMUNICADOS,null); }
+
+    public String getGrupoCarsoDetails() { return pref.getString(KEY_COMUNICACION_INTERNA_GRUPO_CARSO, null); }
+
+    public String getCampanasInternasDetails() { return pref.getString(KEY_COMUNICACION_INTERNA_CAMPANAS_INTERNAS, null); }
+
+    public String getGaleriaDetails() {  return pref.getString(KEY_COMUNICACION_INTERNA_GALERIA, null); }
+
     /**
      * Clear session details
      * */
+
+
+
     public void logoutUser(){
         // Clearing all data from Shared Preferences
         editor.clear();

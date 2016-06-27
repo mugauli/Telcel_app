@@ -1,7 +1,202 @@
 package net.grapesoft.www.telcel;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.view.Display;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import Utitilies.List_adapted;
+import Utitilies.List_adapted_Comunicados;
+import Utitilies.List_adapted_Revista;
+import Utitilies.Lista_Entrada;
+import Utitilies.SessionManagement;
+
 /**
  * Created by Mugauli on 24/06/2016.
  */
-public class FragmentComunicadosAsync {
+
+public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Comunicados> {
+
+    ProgressDialog dialog;
+    Activity activity;
+    ImageView img;
+    private ListView lista;
+    JSONArray responseArray;
+    private String imageHttpAddress = "";
+    private Bitmap loadedImage;
+    public String IP = "",tokenCTE = "";
+    public boolean primer = true,primer2 = true;
+    SessionManagement session;
+
+    public FragmentComunicadosAsync(Activity activity) {
+        IP = activity.getString(R.string.URL);
+        tokenCTE = activity.getString(R.string.tokenXM);
+        imageHttpAddress = activity.getText(R.string.URL_media).toString();
+        this.activity = activity;
+    }
+
+    @Override
+    protected List_adapted_Comunicados doInBackground(ArrayList<String>... params){
+
+        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
+
+
+        session = new SessionManagement(activity.getApplicationContext());
+        String result11 = "";
+        try {
+
+            String comunicadosDetails = session.getComunicadosDetails();
+
+            if(comunicadosDetails == null || comunicadosDetails == "") {
+
+                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+                HttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = new HttpPost(IP + params[0].get(1));
+                nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
+                nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+                StringBuilder sb = new StringBuilder();
+                sb.append(reader.readLine() + "\n");
+                String line = "0";
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                reader.close();
+                result11 = sb.toString();
+
+                session.createComunicadosSession(result11);
+            }
+            else
+            {
+                Log.e("Con session COMUNICACOS",comunicadosDetails);
+                result11 = comunicadosDetails;
+            }
+
+            if(result11.equals("true"+"\n")) {
+                // Log.e("Response: ", "true Int");
+                responseArray = new JSONArray("[{'resp':'true'}]");
+            }else if(result11.equals("false"+"\n")) {
+                //Log.e("Response: ", "false int");
+                responseArray = new JSONArray("[{'resp':'false'}]");
+            } else
+            {
+                //Log.e("Response: ", "JSON");
+                if(result11.contains("["))
+                    responseArray = new JSONArray(result11);
+                else
+                    responseArray = new JSONArray("[" + result11 + "]");
+            }
+            if(responseArray.getJSONObject(0).has("resp")) {
+                Log.e("Item Comunicados" ,  "Error");
+            }
+            else {
+                for (int i = 0; i < responseArray.length(); i++) {
+
+                       String id = responseArray.getJSONObject(i).get("id").toString();
+                       String titulo = responseArray.getJSONObject(i).get("titulo").toString();
+                       String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
+                       String imagen_detalle = responseArray.getJSONObject(i).get("imagen_detalle").toString();
+                       String texto = responseArray.getJSONObject(i).get("texto").toString();
+                       String fecha = responseArray.getJSONObject(i).get("fecha").toString();
+
+                       URL imageUrl = null;
+                       imageUrl = new URL(imageHttpAddress + img_previa);
+                       HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                       conn.connect();
+                       loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                       conn.disconnect();
+
+                       datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+                   datos.add(new Lista_Entrada(R.drawable.mas, fecha,texto));
+
+                }
+            }
+        } catch (JSONException e) {
+            Log.e("Error async Comunicados", e.getMessage());
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            Log.e("Error async 1 Comunicados", e.getMessage());
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            Log.e("Error async 2 Comunicados", e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            Log.e("Error async 3 Comunicados", e.getMessage());
+            e.printStackTrace();
+        }
+
+        List_adapted_Comunicados adaptadorLts = new List_adapted_Comunicados(activity, R.layout.entrada_comunicados, datos){
+            @Override
+            public void onEntrada(Object entrada, View view) {
+                Log.e("Item Cominicados" ,  "NO");
+                if (entrada != null) {
+
+                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.comunicadofecha);
+
+                    if (texto_superior_entrada != null)
+                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
+
+                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.comunicadotitulo);
+
+                    if (texto_inferior_entrada != null)
+                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
+
+                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagencomunicados);
+                    if (imagen_entrada != null)
+                        imagen_entrada.setImageResource(((Lista_Entrada) entrada).get_idImagen());
+
+                }
+            }
+        };
+        return adaptadorLts;
+    }
+
+    @Override
+    protected void onPostExecute(List_adapted_Comunicados result) {
+
+        super.onPostExecute(result);
+        lista = (ListView) activity.findViewById(R.id.listcomunicados);
+        if(result != null)
+            lista.setAdapter(result);
+        ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelCominicados);
+        pBar.setVisibility(View.INVISIBLE);
+
+    }
 }

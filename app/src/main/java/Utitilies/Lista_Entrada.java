@@ -80,6 +80,8 @@ public class Lista_Entrada {
         this.fecha = fecha;
     }
 
+
+
     public Bitmap get_img_previa() {
         return img_previa;
     }

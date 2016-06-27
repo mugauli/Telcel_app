@@ -1,4 +1,5 @@
-package net.grapesoft.www.telcel;
+package Utitilies;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -16,18 +17,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import net.grapesoft.www.telcel.R;
 /**
- * Created by memoHack on 01/06/2016.
+ * Created by Mugauli on 26/06/2016.
  */
-
-public abstract class List_adapted extends BaseAdapter {
+public abstract class List_adapted_Video extends BaseAdapter {
 
     private ArrayList<?> entradas;
     private int R_layout_IdView;
     private Context contexto;
     TextView tv;
 
-    public List_adapted(Context contexto, int R_layout_IdView, ArrayList<?> entradas) {
+    public List_adapted_Video(Context contexto, int R_layout_IdView, ArrayList<?> entradas) {
         super();
         this.contexto = contexto;
         this.entradas = entradas;
@@ -40,13 +41,7 @@ public abstract class List_adapted extends BaseAdapter {
             LayoutInflater vi = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R_layout_IdView, null);
         }
-
-        try {
-            onEntrada (entradas.get(posicion), view);
-        } catch (IOException e) {
-            Log.e("Error", "Adaptador");
-            e.printStackTrace();
-        }
+        onEntrada (entradas.get(posicion), view);
 
 
         RadioButton r = (RadioButton)view.findViewById(R.id.rdfalla);
@@ -54,7 +49,7 @@ public abstract class List_adapted extends BaseAdapter {
 
             r.setChecked(posicion == selectedPosition);
             r.setTag(posicion);
-          //  Log.e("RadioButton", "SetTag: "+ posicion);
+            //  Log.e("RadioButton", "SetTag: "+ posicion);
             r.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -89,6 +84,6 @@ public abstract class List_adapted extends BaseAdapter {
     }
 
 
-    public abstract void onEntrada (Object entrada, View view) throws IOException;
+    public abstract void onEntrada (Object entrada, View view);
 
 }
