@@ -133,7 +133,7 @@
     <string name="tabs4">NOTICIAS</string>
 
     <!--PODCAST -->
-    <string name="URL_media">http://internetencaja.com.mx/telcel/</string>
+    <string name="URL_media"></string>
 
 
 </resources>

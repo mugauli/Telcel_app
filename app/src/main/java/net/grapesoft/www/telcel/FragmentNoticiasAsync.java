@@ -170,7 +170,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
         }
 
 
-        Log.e("Datos Noticias",""+datos.get(2).get_titulo());
+      //  Log.e("Datos Noticias",""+datos.get(2).get_titulo());
 
         List_adapted_Noticias ltsNoticias = new List_adapted_Noticias(activity, R.layout.entrada_noticias, datos){
 
