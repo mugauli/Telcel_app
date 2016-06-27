@@ -139,7 +139,6 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                     String imagen_detalle = responseArray.getJSONObject(i).get("imagen_detalle").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
                     String fecha = responseArray.getJSONObject(i).get("fecha").toString();
-t
                     if(fecha == null || fecha == "")
                     {
                         fecha = "01-01-2016";
