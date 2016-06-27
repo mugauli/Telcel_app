@@ -4,6 +4,7 @@ package net.grapesoft.www.telcel;
  * Created by memoHack on 14/06/2016.
  */
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,12 +61,18 @@ public class FragmentRevista extends Fragment {
         params.add(tokenCTE);
         params.add(region);
 
+
         new FragmentRevistaAsync(getActivity()).execute(params);
+
 
 
         return rootview;
 
     }
+
+
+
+
     public void download(View v)
     {
         new DownloadFile().execute("http://internetencaja.com.mx/telcel/revistas/revista-demo.pdf", "revista-demo.pdf");

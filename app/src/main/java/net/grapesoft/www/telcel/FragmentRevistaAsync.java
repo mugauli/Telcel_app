@@ -65,6 +65,12 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
     }
+    private Context mCtx;
+
+    public  FragmentRevistaAsync (Context ctx){
+        mCtx = ctx;
+    }
+
 
     @Override
     protected List_adapted_Revista doInBackground(ArrayList<String>... params){
