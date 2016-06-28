@@ -59,8 +59,7 @@
                         android:layout_width="fill_parent"
                         android:layout_weight="30"
                         android:layout_height="fill_parent"
-                        android:id="@+id/imagenGrupo"
-                        android:src="@drawable/videoretro" />
+                        android:id="@+id/imagenGrupo" />
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
@@ -73,13 +72,13 @@
                             android:layout_weight="40"
                             android:layout_height="match_parent"
                             android:gravity="right"
-                            android:text="NADA"
+                            android:text=""
 
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:id="@+id/fechaGrupo"/>
                         <TextView
                             android:layout_width="match_parent"
-                            android:text="Puntualidad"
+                            android:text=""
                             android:textColor="@color/ColorPrimary"
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -90,7 +89,7 @@
                             android:layout_width="match_parent"
                             android:layout_weight="30"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="Es una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuado"
+                            android:text=""
                             android:layout_height="match_parent"
                             android:id="@+id/descGrupo"/>
                     </LinearLayout>
@@ -104,7 +103,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="27">
+                <RelativeLayout
+                    android:id="@+id/loadingPanelGrupo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="visible">
+                    <ProgressBar
 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true" />
+                </RelativeLayout>
 
                 <ListView
                     android:layout_width="fill_parent"

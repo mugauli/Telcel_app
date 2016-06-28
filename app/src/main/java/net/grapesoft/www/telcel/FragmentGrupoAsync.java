@@ -2,20 +2,16 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,49 +35,47 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utitilies.List_adapted;
-import Utitilies.List_adapted_Comunicados;
-import Utitilies.List_adapted_Revista;
+import Utitilies.List_adapted_Grupo;
+import Utitilies.List_adapted_Noticias;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
- * Created by Mugauli on 24/06/2016.
+ * Created by Mugauli on 28/06/2016.
  */
-
-public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Comunicados> {
+public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Grupo> {
 
     ProgressDialog dialog;
     Activity activity;
-    ImageView img;
     private ListView lista;
     JSONArray responseArray;
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
-    public boolean primer = true,primer2 = true;
+    public boolean primer = true;
     SessionManagement session;
 
-    public FragmentComunicadosAsync(Activity activity) {
+    public FragmentGrupoAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
-        imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
     }
 
     @Override
-    protected List_adapted_Comunicados doInBackground(ArrayList<String>... params){
+    protected List_adapted_Grupo doInBackground(ArrayList<String>... params) {
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
-
+        imageHttpAddress = activity.getText(R.string.URL_media).toString();
 
         session = new SessionManagement(activity.getApplicationContext());
         String result11 = "";
         try {
 
-            String comunicadosDetails = session.getComunicadosDetails();
+            String noticias = session.getNoticiasDetails();
 
-            if(comunicadosDetails == null || comunicadosDetails == "") {
+            if(noticias == null || noticias == "") {
+
+                Log.e("Se obtiene GRUPO","Procesando...");
 
                 List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient = new DefaultHttpClient();
@@ -90,7 +84,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                 nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
                 nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-
+                Log.e("IP", IP + params[0].get(1));
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
 
@@ -104,12 +98,13 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                 reader.close();
                 result11 = sb.toString();
 
-                session.createComunicadosSession(result11);
+
+                session.createNoticiasSession(result11);
             }
             else
             {
-                Log.e("Con session COMUNICACOS",comunicadosDetails);
-                result11 = comunicadosDetails;
+                Log.e("Con session GRUPO",noticias);
+                result11 = noticias;
             }
 
             if(result11.equals("true"+"\n")) {
@@ -120,115 +115,148 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                 responseArray = new JSONArray("[{'resp':'false'}]");
             } else
             {
-                //Log.e("Response: ", "JSON");
                 if(result11.contains("["))
                     responseArray = new JSONArray(result11);
                 else
                     responseArray = new JSONArray("[" + result11 + "]");
             }
+
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Comunicados" ,  "Error");
+                Log.e("Item GRUPO" ,  "Error");
             }
             else {
+
                 for (int i = 0; i < responseArray.length(); i++) {
+                    Log.e("Response Item: ", responseArray.getJSONObject(i).toString());
 
-                       String id = responseArray.getJSONObject(i).get("id").toString();
-                       String titulo = responseArray.getJSONObject(i).get("titulo").toString();
-                       String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                       String imagen_detalle = responseArray.getJSONObject(i).get("imagen_detalle").toString();
-                       String texto = responseArray.getJSONObject(i).get("texto").toString();
-                       String fecha = responseArray.getJSONObject(i).get("fecha").toString();
+                    String id = responseArray.getJSONObject(i).get("id").toString();
+                    String titulo = responseArray.getJSONObject(i).get("titulo").toString();
+                    String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
+                    String imagen_detalle = responseArray.getJSONObject(i).get("imagen_detalle").toString();
+                    String texto = responseArray.getJSONObject(i).get("texto").toString();
+                    String fecha = responseArray.getJSONObject(i).get("fecha").toString();
 
-                       URL imageUrl = null;
-                       imageUrl = new URL(imageHttpAddress + img_previa);
-                       HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                       conn.connect();
-                       loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                       conn.disconnect();
+                    URL imageUrl = null;
+                    imageUrl = new URL(imageHttpAddress + img_previa);
+                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                    conn.connect();
+                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                    conn.disconnect();
 
-                       datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
-               //    datos.add(new Lista_Entrada(R.drawable.mas, fecha,texto));
-
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
                 }
             }
+
+
         } catch (JSONException e) {
-            Log.e("Error async Comunicados", e.getMessage());
+            Log.e("Error JSONException Noticia", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            Log.e("Error async 1 Comunicados", e.getMessage());
+            Log.e("Error UnsupportedEncodingException Noticia", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error async 2 Comunicados", e.getMessage());
+            Log.e("Error ClientProtocolException Noticia", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("Error async 3 Comunicados", e.getMessage());
+            Log.e("Error IOException Noticia", e.getMessage());
             e.printStackTrace();
         }
 
-        List_adapted_Comunicados adaptadorLts = new List_adapted_Comunicados(activity, R.layout.entrada_comunicados, datos){
+        List_adapted_Grupo ltsGrupo = new List_adapted_Grupo(activity, R.layout.entrada_grupo, datos){
+
             @Override
             public void onEntrada(Object entrada, View view) {
 
-
+                Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
 
                 if (entrada != null) {
 
                     if (primer) {
                         primer = false;
 
-                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUC);
+                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenGrupo);
                         if (imagen_noticias != null) {
                             Log.e("imagen","pricipal");
                             imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
 
-                        TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUC);
+                        TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaGrupo);
                         if (noticiafecha != null)
                             noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.titUC);
+                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.titGrupo);
 
                         if (noticiatitulo != null)
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUC);
+                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descGrupo);
 
                         if (noticiaDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                             // desc = desc.substring(0,200);
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
+
                     }
 
-                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.comunicadofecha);
+                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenGrupoL);
+                    if (imagen_noticias != null)
+                        imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                    if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
+                    TextView noticiafecha = (TextView) view.findViewById(R.id.grupofechal);
+                    if (noticiafecha != null)
+                        noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.comunicadotitulo);
+                    TextView noticiatitulo = (TextView) view.findViewById(R.id.grupotitulol);
 
-                    if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
+                    if (noticiatitulo != null)
+                        noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                 //  ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagencomunicados);
-                 //  if (imagen_entrada != null)
-                 //      imagen_entrada.setImageResource(((Lista_Entrada) entrada).get_idImagen());
+                    view.setTag(entrada);
+
+
+                    //assert imagen_entrada2 != null;
+                    view.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View arg0) {
+
+                            Intent i = new Intent(activity, Detalle_noticia.class);
+                            Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
+
+                            ArrayList<String> datos1 = new ArrayList<String>();
+                            datos1.add(ltEntrada.get_id());
+                            datos1.add(ltEntrada.get_titulo());
+                            datos1.add(ltEntrada.get_fecha());
+                            datos1.add(ltEntrada.get_textoDebajo());
+                            datos1.add(ltEntrada.get_img_detalle());
+
+                            i.putExtra("noticia_selected", datos1);
+
+                            activity.startActivity(i);
+
+                        }
+                    });
 
                 }
             }
         };
-        return adaptadorLts;
+
+        return ltsGrupo;
     }
 
     @Override
-    protected void onPostExecute(List_adapted_Comunicados result) {
+    protected void onPostExecute(List_adapted_Grupo result) {
 
         super.onPostExecute(result);
-        lista = (ListView) activity.findViewById(R.id.listcomunicados);
-        if(result != null)
+        lista = (ListView) activity.findViewById(R.id.listGrupo);
+        if(result != null) {
             lista.setAdapter(result);
-        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelCominicados);
-        pBar.setVisibility(View.GONE);
+            Log.e("Llego", ""+result.getCount());
+        }
+        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelGrupo);
 
+        pBar.setVisibility(View.GONE);
     }
+
 }

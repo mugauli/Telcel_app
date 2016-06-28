@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -181,33 +182,36 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
 
                 if (entrada != null) {
 
-                    if(primer)
-                    {
+                    if (primer) {
                         primer = false;
-
-
 
                         ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUN);
                         if (imagen_noticias != null) {
-                            String UrlComplete = imageHttpAddress + ((Lista_Entrada) entrada).get_img_detalle().toString();
-                            Log.e ("Entrada Url Imagen", UrlComplete);
-//
-                          //  URL imageUrl = null;
-                          //  try {
-                          //      imageUrl = new URL(UrlComplete);
-//
-                          //      HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                          //      conn.connect();
-                          //      loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                          //      conn.disconnect();
-                          //      imagen_noticias.setImageBitmap(loadedImage);
-//
-                          //  } catch (MalformedURLException e) {
-                          //      e.printStackTrace();
-                          //  } catch (IOException e) {
-                          //      e.printStackTrace();
-                          //  }
+                            Log.e("imagen","pricipal");
+                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
+//
+                     //   ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUN);
+                     //   if (imagen_noticias != null) {
+                     //       String UrlComplete = imageHttpAddress + ((Lista_Entrada) entrada).get_img_detalle().toString();
+                     //       Log.e("Entrada Url Imagen", UrlComplete);
+//
+                            //  URL imageUrl = null;
+                            //  try {
+                            //      imageUrl = new URL(UrlComplete);
+//
+                            //      HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                            //      conn.connect();
+                            //      loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                            //      conn.disconnect();
+                            //      imagen_noticias.setImageBitmap(loadedImage);
+//
+                            //  } catch (MalformedURLException e) {
+                            //      e.printStackTrace();
+                            //  } catch (IOException e) {
+                            //      e.printStackTrace();
+                            //  }
+                      //  }
                         TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUN);
                         if (noticiafecha != null)
                             noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
@@ -217,12 +221,12 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                         if (noticiatitulo != null)
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        TextView noticiaDescripcion= (TextView) activity.findViewById(R.id.descUN);
+                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUN);
 
                         if (noticiaDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
-                                    desc = desc.substring(0,200);
-                            noticiaDescripcion.setText(Html.fromHtml("<h2>Title</h2><br><p>Description here</p>"));
+                            // desc = desc.substring(0,200);
+                            noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
 
                         LinearLayout noticiaPrincipal = (LinearLayout) activity.findViewById(R.id.noticiaPrincipal);
@@ -234,68 +238,68 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                             @Override
                             public void onClick(View arg0) {
 
-                            //  Intent i = new Intent(activity, Detalle_noticia.class);
-                            //  Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
+                                //  Intent i = new Intent(activity, Detalle_noticia.class);
+                                //  Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
 //
-                            //  ArrayList<String> datos1 = new ArrayList<String>();
-                            //  datos1.add(ltEntrada.get_id());
-                            //  datos1.add(ltEntrada.get_titulo());
-                            //  datos1.add(ltEntrada.get_fecha());
-                            //  datos1.add(ltEntrada.get_textoDebajo());
-                            //  datos1.add(ltEntrada.get_img_detalle());
+                                //  ArrayList<String> datos1 = new ArrayList<String>();
+                                //  datos1.add(ltEntrada.get_id());
+                                //  datos1.add(ltEntrada.get_titulo());
+                                //  datos1.add(ltEntrada.get_fecha());
+                                //  datos1.add(ltEntrada.get_textoDebajo());
+                                //  datos1.add(ltEntrada.get_img_detalle());
 //
-                            //  i.putExtra("noticia_selected", datos1);
+                                //  i.putExtra("noticia_selected", datos1);
 //
-                            //  activity.startActivity(i);
+                                //  activity.startActivity(i);
 
                             }
                         });
 
 
                     }
-                    else {
-
-                        Log.e ("Entrada Else", ((Lista_Entrada) entrada).get_titulo());
-
-                        ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenoticias);
-                        if (imagen_noticias != null)
-                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-
-                        TextView noticiafecha = (TextView) view.findViewById(R.id.noticiafecha);
-                        if (noticiafecha != null)
-                            noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
-
-                        TextView noticiatitulo = (TextView) view.findViewById(R.id.noticiatitulo);
-
-                        if (noticiatitulo != null)
-                            noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
-
-                        view.setTag(entrada);
 
 
-                        //assert imagen_entrada2 != null;
-                        view.setOnClickListener(new View.OnClickListener() {
 
-                            @Override
-                            public void onClick(View arg0) {
 
-                                Intent i = new Intent(activity, Detalle_noticia.class);
-                                Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
+                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenoticias);
+                    if (imagen_noticias != null)
+                        imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                                ArrayList<String> datos1 = new ArrayList<String>();
-                                datos1.add(ltEntrada.get_id());
-                                datos1.add(ltEntrada.get_titulo());
-                                datos1.add(ltEntrada.get_fecha());
-                                datos1.add(ltEntrada.get_textoDebajo());
-                                datos1.add(ltEntrada.get_img_detalle());
+                    TextView noticiafecha = (TextView) view.findViewById(R.id.noticiafecha);
+                    if (noticiafecha != null)
+                        noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                                i.putExtra("noticia_selected", datos1);
+                    TextView noticiatitulo = (TextView) view.findViewById(R.id.noticiatitulo);
 
-                                activity.startActivity(i);
+                    if (noticiatitulo != null)
+                        noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                            }
-                        });
-                    }
+                    view.setTag(entrada);
+
+
+                    //assert imagen_entrada2 != null;
+                    view.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View arg0) {
+
+                            Intent i = new Intent(activity, Detalle_noticia.class);
+                            Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
+
+                            ArrayList<String> datos1 = new ArrayList<String>();
+                            datos1.add(ltEntrada.get_id());
+                            datos1.add(ltEntrada.get_titulo());
+                            datos1.add(ltEntrada.get_fecha());
+                            datos1.add(ltEntrada.get_textoDebajo());
+                            datos1.add(ltEntrada.get_img_detalle());
+
+                            i.putExtra("noticia_selected", datos1);
+
+                            activity.startActivity(i);
+
+                        }
+                    });
+
                 }
             }
         };
@@ -312,9 +316,9 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
             lista.setAdapter(result);
             Log.e("Llego", ""+result.getCount());
         }
-        ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelNoticias);
+        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelNoticias);
 
-        pBar.setVisibility(View.INVISIBLE);
+        pBar.setVisibility(View.GONE);
     }
 
 }
