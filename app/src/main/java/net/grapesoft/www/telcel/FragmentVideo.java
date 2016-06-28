@@ -88,8 +88,7 @@ public class FragmentVideo extends Fragment {
 
                 ArrayList<String> datos = new ArrayList<String>();
                 datos.add(ltEntrada.get_id());
-                datos.add(ltEntrada.get_titulo());
-                datos.add(ltEntrada.get_url());
+
 
                 datos.add("id");
                 datos.add("id");
