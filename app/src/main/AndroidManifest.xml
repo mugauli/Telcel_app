@@ -165,7 +165,8 @@
         <activity
             android:name=".ComunicacionInternaActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".VideoDetalleActivity"
+        <activity
+            android:name=".VideoDetalleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -174,6 +175,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity_detalle_comunicado" />
+        <activity android:name=".activity_detalle_grupo"></activity>
     </application>
 
 </manifest>

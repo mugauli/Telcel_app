@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:weightSum="100">
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="4"
+            android:weightSum="100">
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="100"
+                android:orientation="vertical"
+                android:weightSum="100"
+                android:background="@drawable/border"
+                >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Revista prueba 03-06-16 Mariana y Marcos"
+                    android:id="@+id/breadcrumComunicado"
+                    android:layout_weight="94"
+                    android:background="@drawable/border_top_revista"
+                    android:textColor="@android:color/white"
+                    />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="100"
+
+                    android:background="@drawable/border_bottom_revista_"
+                    android:layout_weight="6">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="50"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imagenUC"
+                        android:src="@drawable/videoretro" />
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="50"
+                        android:layout_margin="15px"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Puntualidad"
+                            android:textColor="@color/ColorPrimary"
+                            android:textStyle="bold"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:layout_weight="88"
+                            android:layout_height="match_parent"
+                            android:id="@+id/titUC"/>
+                        <ScrollView
+                            android:id="@+id/SCROLLER_ID"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="vertical"
+                            android:fillViewport="true">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_weight="1.0"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:text="Es una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuado Es una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuadoEs una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuado"
+                                android:layout_height="match_parent"
+                                android:id="@+id/descUC"/>
+                        </ScrollView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -2,10 +2,14 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -28,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -65,10 +70,9 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
     }
-    private Context mCtx;
-
-    public  FragmentRevistaAsync (Context ctx){
-        mCtx = ctx;
+    Context context;
+    private FragmentRevistaAsync(Context context) {
+        this.context = context.getApplicationContext();
     }
 
 
@@ -162,7 +166,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
 
         List_adapted_Revista adaptadorLts = new List_adapted_Revista(activity, R.layout.entrada_revista, datos){
             @Override
-            public void onEntrada(Object entrada, View view) {
+            public void onEntrada(Object entrada, final View view) {
                 Log.e("Item Revista" ,  "NO");
                 if (entrada != null) {
 
@@ -203,11 +207,13 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                                 String response = new DownloadTask(activity).execute(Url).get();
                                 if(response != null)
                                  Log.e("Response Revista",response);
+
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             } catch (ExecutionException e) {
                                 e.printStackTrace();
                             }
+
                         }
                     });
                 }
@@ -223,8 +229,52 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
         lista = (ListView) activity.findViewById(R.id.lvRevista);
         if(result != null)
         lista.setAdapter(result);
+
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelRevista);
         pBar.setVisibility(View.INVISIBLE);
+    }
 
+    public void download(View v)
+    {
+        new DownloadFile().execute("http://internetencaja.com.mx/telcel/revistas/revista-demo.pdf", "revista-demo.pdf");
+    }
+
+    public void ver(View v)
+    {
+
+
+        File pdfFile = new File(Environment.getExternalStorageDirectory() + "/testthreepdf/" + "revista-demo.pdf");  // -> filename = maven.pdf
+        Uri path = Uri.fromFile(pdfFile);
+        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+        pdfIntent.setDataAndType(path, "application/pdf");
+        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        try{
+            context.startActivity(pdfIntent);
+        }catch(ActivityNotFoundException e){
+
+        }
+    }
+
+    private class DownloadFile extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
+            String fileName = strings[1];  // -> maven.pdf
+            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+            File folder = new File(extStorageDirectory, "testthreepdf");
+            folder.mkdir();
+
+            File pdfFile = new File(folder, fileName);
+
+            try{
+                pdfFile.createNewFile();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+            FileDownloader.DownloadFile(fileUrl, pdfFile);
+            return null;
+        }
     }
 }

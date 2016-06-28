@@ -64,22 +64,14 @@
                         android:layout_margin="15px"
                         android:orientation="vertical"
                         android:weightSum="100">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_weight="44"
-                            android:layout_height="match_parent"
-                            android:gravity="right"
-                            android:text="NADA"
 
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:id="@+id/fechaUN"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:text="Puntualidad"
                             android:textColor="@color/ColorPrimary"
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="44"
+                            android:layout_weight="88"
                             android:layout_height="match_parent"
                             android:id="@+id/titUN"/>
                         <ScrollView
