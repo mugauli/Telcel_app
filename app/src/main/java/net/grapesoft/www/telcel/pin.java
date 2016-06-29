@@ -46,6 +46,8 @@ public class pin extends AppCompatActivity
         TextView texto_superior_entrada = (TextView) findViewById(R.id.tit1);
         TextView texto_superior = (TextView) findViewById(R.id.tit2);
         Button btn=(Button) findViewById(R.id.generar);
+        TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
+
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/obscura.otf");
         Typeface tfl = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
@@ -53,7 +55,8 @@ public class pin extends AppCompatActivity
         texto_superior_entrada.setTypeface(tfl);
         texto_superior.setTypeface(tfl);
         btn.setTypeface(tfm);
-
+        txtGhost4.setTypeface(tfm);
+        txtGhost4.setText("CAMBIAR PIN");
         ImageView btnAyuda = (ImageView) findViewById(R.id.ayudaint);
         btnAyuda.setOnClickListener(new View.OnClickListener() {
 

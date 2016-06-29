@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab2).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab1).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab3).toString()));
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab4).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab5).toString()));
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

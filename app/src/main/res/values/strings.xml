@@ -65,13 +65,13 @@
     <string name="unodesc">Es la aplicación que te ayudará a estar informado de todas las novedades de Telcel y Grupo Carso.</string>
 
     <string name="dos">¿Qué debo hacer para utilizar APP COMUNICACIÓN INTERNA?</string>
-    <string name="dosdesc">Debes registrarte proporcionando tu nombre completo, número de empleado, celular, correo electrónico corporativo y se te hará llegar un vínculo con la descarga de la aplicación así como una contraseña con la que podrás ingresar a la aplicación</string>
+    <string name="dosdesc">Debes registrarte proporcionando tu nombre completo, número de empleado, celular, correo electrónico corporativo y se te hará llegar un vínculo con la descarga de la aplicación así como una contraseña con la que podrás ingresar a la aplicación.</string>
 
     <string name="tres">¿La navegación dentro de la aplicación tiene algún costo?</string>
     <string name="tresdesc">No la navegación dentro de la APP COMUNICACIÓN INTERNA es gratuita, pero sólo puedes acceder a ella siendo empleado de Telcel.</string>
 
     <string name="cuatro">¿Cada cuando se actualiza el contenido?</string>
-    <string name="cuatrodesc">El contenido se actualiza automáticamente al abrirlo</string>
+    <string name="cuatrodesc">El contenido se actualiza automáticamente al abrirlo.</string>
     <!-- -->
 
     <!--Strings ACERCA DE -->
@@ -124,7 +124,7 @@
     <string name="tab2">PRODUCTOS Y SERVICIOS</string>
     <string name="tab3">PRESTACIONES </string>
     <string name="tab4">BOLSA</string>
-    <string name="tab5">SITIOS</string>
+    <string name="tab5">SITIOS DE INTERÉS</string>
 
     <!--Strings TABS COMUNICACIÓN INTERNA   -->
     <string name="tabs1">PODCAST </string>
