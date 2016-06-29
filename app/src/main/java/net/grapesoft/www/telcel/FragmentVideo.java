@@ -83,6 +83,20 @@ public class FragmentVideo extends Fragment {
             public void onClick(View arg0) {
 
                 Intent i = new Intent(getActivity(), VideoDetalleActivity.class);
+
+                Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
+
+                ArrayList<String> datos = new ArrayList<String>();
+                datos.add(ltEntrada.get_id());
+
+
+                datos.add("id");
+                datos.add("id");
+                datos.add("id");
+
+                i.putExtra("video_selected",datos);
+
+
                 startActivity(i);
             }
 

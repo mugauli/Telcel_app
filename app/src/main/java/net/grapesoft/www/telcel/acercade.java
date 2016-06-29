@@ -44,7 +44,7 @@ public class acercade extends AppCompatActivity
         txtGhost2.setTypeface(tf);
         txtGhost3.setTypeface(tf);
        txtGhost4.setTypeface(tfm);
-        txtGhost4.setText("ACERCA DE");
+        txtGhost4.setText("ACERCA DE #NOSUNE");
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

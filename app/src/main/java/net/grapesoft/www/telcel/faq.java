@@ -33,9 +33,10 @@ public class faq extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
         session = new SessionManagement(getApplicationContext());
-
-
-
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
+        TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
+        txtGhost4.setTypeface(tf);
+        txtGhost4.setText("PREGUNTAS FRECUENTES");
 
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();

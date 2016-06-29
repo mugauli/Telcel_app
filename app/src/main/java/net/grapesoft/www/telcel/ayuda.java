@@ -3,6 +3,7 @@ package net.grapesoft.www.telcel;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -49,6 +50,15 @@ public class ayuda  extends AppCompatActivity
         datos.add(new Lista_Entrada(R.drawable.arrow, getString(R.string.fallas),getString(R.string.fallasdesc)));
         datos.add(new Lista_Entrada(R.drawable.arrow, getString(R.string.sugerencias), getString(R.string.sugerenciasdesc)));
         datos.add(new Lista_Entrada(R.drawable.arrow, getString(R.string.acercade),""));
+        TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
+        Typeface tfi = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
+        txtGhost4.setTypeface(tfi);
+        txtGhost4.setText("AYUDA");
+
+        Drawable img = this.getResources().getDrawable( R.drawable.ayudat);
+        img.setBounds( 0, 0, 50, 50 );
+        txtGhost4.setCompoundDrawables( img, null, null, null );
+
 
 
         lista = (ListView) findViewById(R.id.ayuda);

@@ -55,7 +55,7 @@ public class falla extends AppCompatActivity
         TextView txtGhost = (TextView) findViewById(R.id.textView_desc1);
         TextView txtGhost2 = (TextView) findViewById(R.id.textView_desc2);
         TextView txtGhost3 = (TextView) findViewById(R.id.textView_comentario);
-        //TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
+        TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
 
 
         Button btn=(Button) findViewById(R.id.btnEnviarFalla);
@@ -67,7 +67,7 @@ public class falla extends AppCompatActivity
         txtGhost2.setTypeface(tf);
         txtGhost3.setTypeface(tf);
         btn.setTypeface(tf);
-       // txtGhost4.setText("Acerca de");
+        txtGhost4.setText("REPORTAR FALLA");
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
 

@@ -53,6 +53,7 @@ public class sugerencias extends AppCompatActivity
         TextView txtGhost2 = (TextView) findViewById(R.id.txtSugerencia);
         TextView txtGhost3 = (TextView) findViewById(R.id.textView7);
         Button btn=(Button) findViewById(R.id.btnEnviarSugerencia);
+        TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
         Typeface tfl = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
@@ -62,7 +63,8 @@ public class sugerencias extends AppCompatActivity
         txtGhost2.setTypeface(tf);
         txtGhost3.setTypeface(tf);
         btn.setTypeface(tf);
-
+        txtGhost4.setTypeface(tf);
+        txtGhost4.setText("SUGERENCIAS");
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
