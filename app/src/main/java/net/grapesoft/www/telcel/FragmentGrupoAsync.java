@@ -10,6 +10,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -226,21 +227,21 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                         @Override
                         public void onClick(View arg0) {
 
-                            Intent i = new Intent(activity, Detalle_noticia.class);
-                            Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
+                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenGrupo);
+                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaGrupo);
+                            TextView titGrupo = (TextView) activity.findViewById(R.id.titGrupo);
+                            TextView descGrupo = (TextView) activity.findViewById(R.id.descGrupo);
+                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipal);
 
-                            ArrayList<String> datos1 = new ArrayList<String>();
-                            datos1.add(ltEntrada.get_id());
-                            datos1.add(ltEntrada.get_titulo());
-                            datos1.add(ltEntrada.get_fecha());
-                            datos1.add(ltEntrada.get_textoDebajo());
-                            datos1.add(ltEntrada.get_img_detalle());
+                            Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
-                            i.putExtra("noticia_selected", datos1);
+                            imagenGrupo.setImageBitmap(Entrada.get_img_previa());
+                            fechaGrupo.setText(Entrada.get_fecha());
+                            titGrupo.setText(Entrada.get_titulo());
+                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                            principal.setTag(Entrada);
 
-                            activity.startActivity(i);
-
-                        }
+                       }
                     });
 
                 }

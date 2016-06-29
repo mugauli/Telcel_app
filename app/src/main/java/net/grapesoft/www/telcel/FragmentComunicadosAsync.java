@@ -228,6 +228,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
         if(result != null && lista != null)
             lista.setAdapter(result);
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelCominicados);
+        if(pBar != null)
         pBar.setVisibility(View.GONE);
 
     }

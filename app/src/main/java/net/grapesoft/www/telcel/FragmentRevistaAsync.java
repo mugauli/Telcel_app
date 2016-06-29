@@ -167,7 +167,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
         List_adapted_Revista adaptadorLts = new List_adapted_Revista(activity, R.layout.entrada_revista, datos){
             @Override
             public void onEntrada(Object entrada, final View view) {
-                Log.e("Item Revista" ,  "NO");
+                Log.e("Item Revista", "NO");
                 if (entrada != null) {
 
                     TextView titulo = (TextView) view.findViewById(R.id.textView2);
@@ -189,8 +189,8 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                     WindowManager wm = (WindowManager) activity.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
                     Display display = wm.getDefaultDisplay();
 
-                    LinearLayout RelRevista = (LinearLayout)view.findViewById(R.id.RelRevista);
-                    int height = (int)(display.getHeight()*(0.79));
+                    LinearLayout RelRevista = (LinearLayout) view.findViewById(R.id.RelRevista);
+                    int height = (int) (display.getHeight() * (0.79));
                     RelRevista.setMinimumHeight(height);
 
                     assert imagen_descarga != null;
@@ -198,21 +198,23 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                         @Override
                         public void onClick(View arg0) {
+                            Log.e("URL PDF", arg0.getTag().toString());
+                            abrirPDF(arg0.getTag().toString());
 
-                            ArrayList<String> Url = new ArrayList<String>();
-                            Url.add(imageHttpAddress + arg0.getTag().toString());
-                            String[] nombre = arg0.getTag().toString().split("/");
-                            Url.add(nombre[nombre.length - 1]);
-                            try {
-                                String response = new DownloadTask(activity).execute(Url).get();
-                                if(response != null)
-                                 Log.e("Response Revista",response);
-
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } catch (ExecutionException e) {
-                                e.printStackTrace();
-                            }
+                            //   ArrayList<String> Url = new ArrayList<String>();
+                            //   Url.add(imageHttpAddress + arg0.getTag().toString());
+                            //   String[] nombre = arg0.getTag().toString().split("/");
+                            //   Url.add(nombre[nombre.length - 1]);
+                            //   try {
+                            //       String response = new DownloadTask(activity).execute(Url).get();
+                            //       if(response != null)
+                            //        Log.e("Response Revista",response);
+//
+                            //   } catch (InterruptedException e) {
+                            //       e.printStackTrace();
+                            //   } catch (ExecutionException e) {
+                            //       e.printStackTrace();
+                            //   }
 
                         }
                     });
@@ -231,7 +233,18 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
         lista.setAdapter(result);
 
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelRevista);
-        pBar.setVisibility(View.INVISIBLE);
+        if(pBar != null)
+        pBar.setVisibility(View.GONE);
+    }
+
+    public void abrirPDF(String URL){
+
+
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+        Uri data = Uri.parse(URL);
+        intent.setDataAndType(data, "application/pdf");
+        activity.startActivity(intent);
+
     }
 
     public void download(View v)

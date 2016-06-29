@@ -34,7 +34,6 @@
                 android:id="@+id/grupofechal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="Small Text"
                 android:gravity="right"
                 android:layout_centerHorizontal="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"

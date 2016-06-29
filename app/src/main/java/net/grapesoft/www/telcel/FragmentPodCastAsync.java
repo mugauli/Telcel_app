@@ -240,7 +240,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
         lista.setAdapter(result);
 
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanel);
-
+        if(pBar != null)
         pBar.setVisibility(View.INVISIBLE);
 
 

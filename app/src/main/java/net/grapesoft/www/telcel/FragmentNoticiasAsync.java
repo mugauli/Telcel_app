@@ -318,7 +318,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
             Log.e("Llego", ""+result.getCount());
         }
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelNoticias);
-
+        if(pBar != null)
         pBar.setVisibility(View.GONE);
     }
 

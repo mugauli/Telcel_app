@@ -46,7 +46,8 @@
                 android:orientation="vertical"
                 android:weightSum="100"
                 android:background="@drawable/border"
-                android:padding="0dp">
+                android:padding="0dp"
+                android:id="@+id/linearPrincipal">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -66,14 +67,13 @@
                         android:layout_weight="70"
                         android:layout_margin="15px"
                         android:orientation="vertical"
-                        android:weightSum="100">
+                        android:weightSum="100"
+                        >
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_weight="40"
                             android:layout_height="match_parent"
                             android:gravity="right"
-                            android:text=""
-
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:id="@+id/fechaGrupo"/>
                         <TextView

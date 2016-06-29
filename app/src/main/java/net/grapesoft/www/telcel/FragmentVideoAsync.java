@@ -263,7 +263,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             lista.setAdapter(result);
 
         ProgressBar pBar = (ProgressBar) activity.findViewById(R.id.loadingPanelVideo);
-
+        if(pBar != null)
         pBar.setVisibility(View.INVISIBLE);
     }
 }
