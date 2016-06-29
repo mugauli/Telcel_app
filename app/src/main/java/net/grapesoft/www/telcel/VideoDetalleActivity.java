@@ -33,21 +33,17 @@ public class VideoDetalleActivity extends AppCompatActivity
     SessionManagement session;
 
     // Insert your Video URL
-    String VideoURL = "";
+    String VideoURL = "http://internetencaja.com.mx/telcel/videos/Retroalimentacion.mp4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String[] ltEntrada = getIntent().getStringArrayExtra("video_selected");
-
-        VideoURL = ltEntrada[2].toString();
-
-
         Log.e ("URL Activity", VideoURL);
 
         // Get the layout from video_main.xml
         setContentView(R.layout.activity_video_view);
+
         session = new SessionManagement(getApplicationContext());
         // Find your VideoView in your video_main.xml layout
         videoview = (VideoView) findViewById(R.id.VideoView);
