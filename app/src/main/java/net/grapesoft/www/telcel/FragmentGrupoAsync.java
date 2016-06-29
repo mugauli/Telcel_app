@@ -10,11 +10,9 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -36,12 +34,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Utitilies.List_adapted_Grupo;
-import Utitilies.List_adapted_Noticias;
+
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
+<<<<<<< Updated upstream
  * Created by Mugauli on 28/06/2016.
+=======
+ * Created by umunoz on 27/06/2016.
+>>>>>>> Stashed changes
  */
 public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Grupo> {
 
@@ -71,9 +73,9 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
         String result11 = "";
         try {
 
-            String noticias = session.getNoticiasDetails();
+            String grupo_carso= session.getGrupoCarsoDetails();
 
-            if(noticias == null || noticias == "") {
+            if(grupo_carso == null || grupo_carso == "") {
 
                 Log.e("Se obtiene GRUPO","Procesando...");
 
@@ -99,13 +101,15 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                 result11 = sb.toString();
 
 
-                session.createNoticiasSession(result11);
+                session.createGrupoCarsoSession(result11);
             }
             else
             {
-                Log.e("Con session GRUPO",noticias);
-                result11 = noticias;
+                Log.e("Con session GRUPO",grupo_carso);
+                result11 = grupo_carso;
             }
+
+            //Log.e("Response: ", result11);
 
             if(result11.equals("true"+"\n")) {
                 // Log.e("Response: ", "true Int");
@@ -115,6 +119,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                 responseArray = new JSONArray("[{'resp':'false'}]");
             } else
             {
+                //Log.e("Response: ", "JSON");
                 if(result11.contains("["))
                     responseArray = new JSONArray(result11);
                 else
@@ -249,8 +254,10 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     protected void onPostExecute(List_adapted_Grupo result) {
 
         super.onPostExecute(result);
+
         lista = (ListView) activity.findViewById(R.id.listGrupo);
-        if(result != null) {
+
+        if(result != null && lista != null) {
             lista.setAdapter(result);
             Log.e("Llego", ""+result.getCount());
         }

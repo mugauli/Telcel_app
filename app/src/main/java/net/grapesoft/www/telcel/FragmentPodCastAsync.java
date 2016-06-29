@@ -2,9 +2,11 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -204,8 +206,10 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                         imagen_entrada.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                     }
                     ImageView imagen_entrada2 = (ImageView) view.findViewById(R.id.imageView6);
-                    if (imagen_entrada2 != null)
+                    if (imagen_entrada2 != null) {
                         imagen_entrada2.setImageResource(((Lista_Entrada) entrada).get_idImagen2());
+                        imagen_entrada2.setTag(((Lista_Entrada)entrada).get_url());
+                    }
 
 
                     //assert imagen_entrada2 != null;
@@ -213,8 +217,8 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                         @Override
                         public void onClick(View arg0) {
-
-                            audioPlayer("http://internetencaja.com.mx/telcel/podcast","prueba001.mp3");
+                            String URL = arg0.getTag().toString();
+                            audioPlayer(URL);
                         }
                     });
                 }
@@ -232,7 +236,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.podcast);
-        if(result != null)
+        if(result != null && lista != null)
         lista.setAdapter(result);
 
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanel);
@@ -243,14 +247,21 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
     }
 
 
-    public void audioPlayer(String path, String fileName){
+    public void audioPlayer(String path){
         //set up MediaPlayer
         MediaPlayer mp = new MediaPlayer();
 
         try {
-            mp.setDataSource(path + File.separator + fileName);
-            mp.prepare();
-            mp.start();
+          // mp.setDataSource(path + File.separator + fileName);
+          // mp.prepare();
+          // mp.start();
+
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+
+            Log.e("URL audio", path);
+            Uri data = Uri.parse(path);
+            intent.setDataAndType(data, "audio/mp3");
+            activity.startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
         }

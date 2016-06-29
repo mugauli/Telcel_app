@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import Utitilies.SessionManagement;
 public class FragmentGrupo extends Fragment {
 
     String styledText = "This is <font color='red'>simple</font>.";
+
+    private ListView lista;
     public String tokenCTE = "";
     SessionManagement session;
     @Override

@@ -227,7 +227,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.lvRevista);
-        if(result != null)
+        if(result != null && lista != null)
         lista.setAdapter(result);
 
         ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.loadingPanelRevista);

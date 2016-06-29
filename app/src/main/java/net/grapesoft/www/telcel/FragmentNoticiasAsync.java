@@ -54,7 +54,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
-    public boolean primer = true;
+    public boolean primer3 = true;
     SessionManagement session;
 
     public FragmentNoticiasAsync(Activity activity) {
@@ -182,8 +182,9 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
 
                 if (entrada != null) {
 
-                    if (primer) {
-                        primer = false;
+                    if(primer3)
+                    {
+                        primer3 = false;
 
                         ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUN);
                         if (imagen_noticias != null) {
@@ -312,7 +313,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
 
         super.onPostExecute(result);
         lista = (ListView) activity.findViewById(R.id.listnoticias);
-        if(result != null) {
+        if(result != null && lista != null) {
             lista.setAdapter(result);
             Log.e("Llego", ""+result.getCount());
         }
