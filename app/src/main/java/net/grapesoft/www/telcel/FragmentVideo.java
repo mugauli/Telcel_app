@@ -50,10 +50,6 @@ public class FragmentVideo extends Fragment {
     String VideoURL = "http://internetencaja.com.mx/telcel/videos/Grafica%20Informativa.mp4";
 
     public String tokenCTE = "";
-    private ListView lista;
-    private ImageView imageView;
-    private Bitmap loadedImage;
-    private String imageHttpAddress = "";
     SessionManagement session;
 
 
@@ -75,35 +71,24 @@ public class FragmentVideo extends Fragment {
 
         new FragmentVideoAsync(getActivity()).execute(params);
 
-        ImageView imagen_entrada2 = (ImageView) rootview.findViewById(R.id.play);
+        ImageView imagen_play = (ImageView) rootview.findViewById(R.id.play);
 
-        imagen_entrada2.setOnClickListener(new View.OnClickListener() {
+       imagen_play.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                Intent i = new Intent(getActivity(), VideoDetalleActivity.class);
-
-                Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
-
-                ArrayList<String> datos = new ArrayList<String>();
-                datos.add(ltEntrada.get_id());
-
-
-                datos.add("id");
-                datos.add("id");
-                datos.add("id");
-
-                i.putExtra("video_selected",datos);
-
-
-                startActivity(i);
+                //TextView idVideo = (TextView) rootview.findViewById(R.id.idVideo);
+               String id_video = arg0.getTag().toString();
+               Intent i = new Intent(getActivity(), VideoDetalleActivity.class);
+               i.putExtra("video_id",id_video);
+               startActivity(i);
+               //Log.e("ID Video", "ID: "+ id_video);
             }
 
         });
-        ImageView imagen_entrada3 = (ImageView) rootview.findViewById(R.id.descarga);
-
-        imagen_entrada3.setOnClickListener(new View.OnClickListener() {
+       ImageView imagen_descarga = (ImageView) rootview.findViewById(R.id.descarga);
+       imagen_descarga.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -137,7 +122,6 @@ public class FragmentVideo extends Fragment {
 
         }
     }
-
 
     private class DownloadFile extends AsyncTask<String, Void, Void> {
 

@@ -1,6 +1,8 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,11 +18,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.VideoView;
 
-import java.util.ArrayList;
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
+import org.json.JSONException;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
+import Utitilies.Comunication;
+import Utitilies.GetNetImage;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
@@ -31,20 +48,123 @@ public class VideoDetalleActivity extends AppCompatActivity
     ProgressDialog pDialog;
     VideoView videoview;
     SessionManagement session;
+    JSONArray responseArray;
+    private Bitmap loadedImage;
+    Boolean siguiente = false;
+    String tokenCTE = "";
 
     // Insert your Video URL
-    String VideoURL = "http://internetencaja.com.mx/telcel/videos/Retroalimentacion.mp4";
+    String VideoURL = "http://internetencaja.com.mx/telcel/videos/Grafica%20Informativa.mp4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        session = new SessionManagement(getApplicationContext());
+        tokenCTE = getText(R.string.tokenXM).toString();
+        ArrayList<String> params = new ArrayList<String>();
+
+        final HashMap<String, String> user = session.getUserDetails();
+        String region = user.get(SessionManagement.KEY_REGION);
+
+        String video_id = getIntent().getStringExtra("video_id");
+
+        Log.e("id_video",video_id);
+
+        String result11 = "";
+       try{
+            String video = session.getVideoDetails();
+
+            if(video == null || video == "") {
+
+                ProgressBar pBar = (ProgressBar)findViewById(R.id.loadingPanelVideoDetalle);
+                if(pBar != null) pBar.setVisibility(View.VISIBLE);
+
+                params.add("6");
+                params.add("GetVideo.php");
+                params.add(tokenCTE);
+                params.add(region);
+
+                responseArray = new Comunication(VideoDetalleActivity.this).execute(params).get();
+
+                if(pBar != null) pBar.setVisibility(View.GONE);
+
+            } else
+            {
+                Log.e("Con session VIDEO",video);
+                result11 = video;
+                if(result11.equals("true"+"\n")) {
+                    responseArray = new JSONArray("[{'resp':'true'}]");
+                }else if(result11.equals("false"+"\n")) {
+                    responseArray = new JSONArray("[{'resp':'false'}]");
+                } else
+                {
+                    if(result11.contains("["))
+                        responseArray = new JSONArray(result11);
+                    else
+                        responseArray = new JSONArray("[" + result11 + "]");
+                }
+            }
+
+
+
+        if(responseArray.getJSONObject(0).has("resp")) {
+            Log.e("Item Video Detalle" ,  "Error");
+        }
+        else {
+
+            for (int i = 0; i < responseArray.length(); i++) {
+
+                String id = responseArray.getJSONObject(i).get("id").toString();
+                String titulo = responseArray.getJSONObject(i).get("titulo").toString();
+                String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
+                String url_video = responseArray.getJSONObject(i).get("url_video").toString();
+                String duracion = responseArray.getJSONObject(i).get("duracion").toString();
+
+                if(siguiente)
+                {
+                    siguiente = false;
+                    Log.e("Siguiente","Entro");
+                    TextView tvTituloSiguiente = (TextView) findViewById(R.id.tvTituloSiguiente);
+                    if(tvTituloSiguiente!=null)
+                        tvTituloSiguiente.setText(titulo);
+                    TextView tvTiempoSiguiente = (TextView) findViewById(R.id.tvTiempoSiguiente);
+                    if(tvTiempoSiguiente!=null)
+                        tvTiempoSiguiente.setText(duracion);
+                    ImageView imgPreviaSiguiente = (ImageView) findViewById(R.id.imgPreviaSiguiente);
+                    if(imgPreviaSiguiente!=null) {
+                        Bitmap imagen = new GetNetImage().execute(img_previa).get();
+                        imgPreviaSiguiente.setImageBitmap(imagen);
+                    }
+                }
+                if(id.equals(video_id))
+                {
+                    siguiente = true;
+                    TextView txtTituloVideo = (TextView) findViewById(R.id.tvTituloVideo);
+                    Log.e("titulo",titulo);
+                    if(txtTituloVideo != null)
+                    txtTituloVideo.setText(titulo);
+                   VideoURL = url_video;
+                }
+            }
+        }
+
+
+    } catch (JSONException e) {
+        Log.e("Error Async 0 Video", e.getMessage());
+        e.printStackTrace();
+    } catch (InterruptedException e) {
+           e.printStackTrace();
+       } catch (ExecutionException e) {
+           e.printStackTrace();
+       }
+
 
         Log.e ("URL Activity", VideoURL);
-
+        VideoURL = VideoURL.replace(" ","%20");
         // Get the layout from video_main.xml
         setContentView(R.layout.activity_video_view);
 
-        session = new SessionManagement(getApplicationContext());
+
         // Find your VideoView in your video_main.xml layout
         videoview = (VideoView) findViewById(R.id.VideoView);
         // Execute StreamVideo AsyncTask
@@ -61,7 +181,6 @@ public class VideoDetalleActivity extends AppCompatActivity
         pDialog.show();
 
         try {
-            Log.e ("URL Activity", "0");
             // Start the MediaController
             MediaController mediacontroller = new MediaController(
                     VideoDetalleActivity.this);
@@ -99,7 +218,7 @@ public class VideoDetalleActivity extends AppCompatActivity
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-
+        if(imgButton != null)
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

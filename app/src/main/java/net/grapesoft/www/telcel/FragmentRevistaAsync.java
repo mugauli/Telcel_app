@@ -200,22 +200,6 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                         public void onClick(View arg0) {
                             Log.e("URL PDF", arg0.getTag().toString());
                             abrirPDF(arg0.getTag().toString());
-
-                            //   ArrayList<String> Url = new ArrayList<String>();
-                            //   Url.add(imageHttpAddress + arg0.getTag().toString());
-                            //   String[] nombre = arg0.getTag().toString().split("/");
-                            //   Url.add(nombre[nombre.length - 1]);
-                            //   try {
-                            //       String response = new DownloadTask(activity).execute(Url).get();
-                            //       if(response != null)
-                            //        Log.e("Response Revista",response);
-//
-                            //   } catch (InterruptedException e) {
-                            //       e.printStackTrace();
-                            //   } catch (ExecutionException e) {
-                            //       e.printStackTrace();
-                            //   }
-
                         }
                     });
                 }
