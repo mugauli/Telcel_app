@@ -18,7 +18,7 @@ tools:openDrawer="start">
     android:fitsSystemWindows="true"
     tools:context="net.grapesoft.menu.MainActivity">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar_tab_sub"/>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -48,61 +48,52 @@ tools:openDrawer="start">
             android:layout_alignParentEnd="true"
             android:weightSum="100"
             android:layout_weight="60">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="48"></LinearLayout>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="4"
-                android:weightSum="100">
+                android:layout_weight="100"
+                android:weightSum="100"
+                android:layout_gravity="center_horizontal">
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="45">
+                    android:layout_weight="41">
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="15"
+                    android:layout_weight="27"
                     android:orientation="vertical"
                     android:weightSum="100"
-                    android:background="@drawable/border"
+                    android:background="@color/abc_search_url_text_pressed"
                     >
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:id="@+id/tvTituloVideo"
-                        android:layout_weight="40"
-                        android:background="@drawable/border_top_revista"
+                        android:layout_weight="50"
+                        android:background="@color/tituloRevista"
                         android:textColor="@android:color/white"
                         />
-                    <LinearLayout
-                        android:orientation="horizontal"
+
+                    <VideoView
+                        android:id="@+id/VideoView"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:weightSum="100"
-                        android:background="@drawable/border_bottom_revista_"
-                        android:layout_weight="20"
-                        android:padding="0dp">
-                        <VideoView
-                            android:id="@+id/VideoView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:layout_weight="80" />
-                    </LinearLayout>
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="2"
+                        android:layout_gravity="center_horizontal" />
+
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:id="@+id/textView5"
-                        android:layout_weight="20"
-                        android:background="@drawable/border_top_revista"
+                        android:layout_weight="48"
+                        android:background="@color/tituloRevista"
                         android:textColor="@android:color/white" />
                 </LinearLayout>
 
@@ -114,7 +105,13 @@ tools:openDrawer="start">
                     android:weightSum="100"
                     android:layout_marginTop="10dp"
                     android:padding="0dp"
-                    android:layout_weight="40" >
+                    android:layout_weight="32" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="New Text"
+                        android:id="@+id/textView6" />
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -140,49 +137,8 @@ tools:openDrawer="start">
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="45"
-                        android:weightSum="10"
-                        android:padding="10dp" >
-
-                        <TextView
-                            android:id="@+id/textView17"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:text="Small Text"
-                            android:textColor="@color/ColorPrimary"
-                            android:textStyle="bold"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="4" />
-
-                        <TextView
-                            android:id="@+id/textView18"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:text="Small Text"
-                            android:layout_centerHorizontal="true"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="6" />
-
-                        <TextView
-                            android:id="@+id/textView19"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:text=""
-                            android:visibility="gone" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="48"></LinearLayout>
         </LinearLayout>
 
     </RelativeLayout>
