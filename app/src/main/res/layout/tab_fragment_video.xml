@@ -62,8 +62,7 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:text="Revista prueba 03-06-16 Mariana y Marcos"
-                    android:id="@+id/textView2"
+                    android:id="@+id/txtTitulo"
                     android:layout_weight="80"
                     android:background="@drawable/border_top_revista"
                     android:textColor="@android:color/white"

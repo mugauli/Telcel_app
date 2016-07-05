@@ -43,7 +43,8 @@
                 android:layout_weight="25"
                 android:orientation="vertical"
                 android:weightSum="100"
-                android:background="@drawable/border">
+                android:background="@drawable/border"
+                android:id="@+id/linearPrincipalUC">
 
                 <LinearLayout
                     android:layout_width="fill_parent"

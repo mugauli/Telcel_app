@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,12 +31,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utitilies.List_adapted;
 import Utitilies.List_adapted_Noticias;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
@@ -186,33 +183,12 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                     {
                         primer3 = false;
 
-                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUN);
+                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
                         if (imagen_noticias != null) {
                             Log.e("imagen","pricipal");
                             imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
-//
-                     //   ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUN);
-                     //   if (imagen_noticias != null) {
-                     //       String UrlComplete = imageHttpAddress + ((Lista_Entrada) entrada).get_img_detalle().toString();
-                     //       Log.e("Entrada Url Imagen", UrlComplete);
-//
-                            //  URL imageUrl = null;
-                            //  try {
-                            //      imageUrl = new URL(UrlComplete);
-//
-                            //      HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            //      conn.connect();
-                            //      loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                            //      conn.disconnect();
-                            //      imagen_noticias.setImageBitmap(loadedImage);
-//
-                            //  } catch (MalformedURLException e) {
-                            //      e.printStackTrace();
-                            //  } catch (IOException e) {
-                            //      e.printStackTrace();
-                            //  }
-                      //  }
+
                         TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUN);
                         if (noticiafecha != null)
                             noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
@@ -230,28 +206,28 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
 
-                        LinearLayout noticiaPrincipal = (LinearLayout) activity.findViewById(R.id.noticiaPrincipal);
+                        view.setTag(entrada);
 
-                        noticiaPrincipal.setTag(entrada);
 
-                        noticiaPrincipal.setOnClickListener(new View.OnClickListener() {
+                        //assert imagen_entrada2 != null;
+                        view.setOnClickListener(new View.OnClickListener() {
 
                             @Override
                             public void onClick(View arg0) {
 
-                                //  Intent i = new Intent(activity, Detalle_noticia.class);
-                                //  Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
-//
-                                //  ArrayList<String> datos1 = new ArrayList<String>();
-                                //  datos1.add(ltEntrada.get_id());
-                                //  datos1.add(ltEntrada.get_titulo());
-                                //  datos1.add(ltEntrada.get_fecha());
-                                //  datos1.add(ltEntrada.get_textoDebajo());
-                                //  datos1.add(ltEntrada.get_img_detalle());
-//
-                                //  i.putExtra("noticia_selected", datos1);
-//
-                                //  activity.startActivity(i);
+                                ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
+                                TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
+                                TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
+                                TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
+                                LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+
+                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+
+                                imagenGrupo.setImageBitmap(Entrada.get_img_previa());
+                                fechaGrupo.setText(Entrada.get_fecha());
+                                titGrupo.setText(Entrada.get_titulo());
+                                descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                                principal.setTag(Entrada);
 
                             }
                         });
@@ -278,25 +254,24 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                     view.setTag(entrada);
 
 
-                    //assert imagen_entrada2 != null;
                     view.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View arg0) {
 
-                            Intent i = new Intent(activity, Detalle_noticia.class);
-                            Lista_Entrada ltEntrada = (Lista_Entrada) arg0.getTag();
+                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
+                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
+                            TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
+                            TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
+                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
-                            ArrayList<String> datos1 = new ArrayList<String>();
-                            datos1.add(ltEntrada.get_id());
-                            datos1.add(ltEntrada.get_titulo());
-                            datos1.add(ltEntrada.get_fecha());
-                            datos1.add(ltEntrada.get_textoDebajo());
-                            datos1.add(ltEntrada.get_img_detalle());
+                            Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
-                            i.putExtra("noticia_selected", datos1);
-
-                            activity.startActivity(i);
+                            imagenGrupo.setImageBitmap(Entrada.get_img_previa());
+                            fechaGrupo.setText(Entrada.get_fecha());
+                            titGrupo.setText(Entrada.get_titulo());
+                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                            principal.setTag(Entrada);
 
                         }
                     });

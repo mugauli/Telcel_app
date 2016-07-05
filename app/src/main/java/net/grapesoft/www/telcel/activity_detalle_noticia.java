@@ -15,26 +15,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.GetNetImage;
-import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
-public class activity_detalle_comunicado extends AppCompatActivity
+public class activity_detalle_noticia extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-        SessionManagement session;
+    SessionManagement session;
 
 
 
-@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_comunicado);
+        setContentView(R.layout.activity_detalle_noticia);
 
         session = new SessionManagement(getApplicationContext());
 
@@ -42,9 +40,9 @@ public class activity_detalle_comunicado extends AppCompatActivity
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
 
-        ImageView imagenUG = (ImageView) findViewById(R.id.imagenDUC);
-        TextView titUG = (TextView) findViewById(R.id.titDUC);
-        TextView descUG = (TextView) findViewById(R.id.descDUC);
+        ImageView imagenUG = (ImageView) findViewById(R.id.imagenDNT);
+        TextView titUG = (TextView) findViewById(R.id.titDNT);
+        TextView descUG = (TextView) findViewById(R.id.descDNT);
 
         try {
             Bitmap img = new GetNetImage().execute(imagen).get();
@@ -59,6 +57,7 @@ public class activity_detalle_comunicado extends AppCompatActivity
 
 
         titUG.setText(titulo);
+        if(descripcion != null)
         descUG.setText(Html.fromHtml(descripcion));
 
 
@@ -137,17 +136,17 @@ public class activity_detalle_comunicado extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(activity_detalle_comunicado.this, ActualizarActivity.class);
+            Intent i = new Intent(activity_detalle_noticia.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_detalle_comunicado.this, pin.class);
+            Intent i = new Intent(activity_detalle_noticia.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(activity_detalle_comunicado.this, preferencias.class);
+            Intent i = new Intent(activity_detalle_noticia.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {

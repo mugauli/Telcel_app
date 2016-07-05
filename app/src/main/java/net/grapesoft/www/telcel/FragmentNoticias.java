@@ -5,6 +5,7 @@ package net.grapesoft.www.telcel;
  */
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,6 +49,27 @@ public class FragmentNoticias extends Fragment {
 
         new FragmentNoticiasAsync(getActivity()).execute(params);
 
+        LinearLayout principal = (LinearLayout)rootview.findViewById(R.id.linearPrincipalNT);
+
+        principal.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent i = new Intent(getActivity(), activity_detalle_noticia.class);
+
+                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+
+                i.putExtra("imagen",Entrada.get_img_detalle());
+                i.putExtra("titulo",Entrada.get_titulo());
+                i.putExtra("fecha",Entrada.get_fecha());
+                i.putExtra("descripcion",Entrada.get_textoDebajo());
+
+                startActivity(i);
+
+
+            }
+        });
         return rootview;
     }
 }

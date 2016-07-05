@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import net.grapesoft.www.telcel.Detalle_noticia;
+import net.grapesoft.www.telcel.activity_detalle_noticia;
 
 import java.net.HttpURLConnection;
 import java.net.URL;

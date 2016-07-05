@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -181,12 +182,12 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                         ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
                         ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
                         TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
-
+                        TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
                         imagenVideo.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         imagenPlay.setTag(((Lista_Entrada) entrada).get_id());
                         imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
                         txtTiempo.setText(((Lista_Entrada) entrada).get_duracion());
-
+                        txtTitulo.setText(((Lista_Entrada) entrada).get_titulo());
                     }
 
                     TextView texto_superior_entrada = (TextView) view.findViewById(R.id.videotitulo);
@@ -226,19 +227,18 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
                             ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
                             TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
+                            TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
 
 
-
-                            ImageView imagenView = (ImageView) arg0.findViewById(R.id.imagevideo);
-                            TextView urlVideo = (TextView) arg0.findViewById(R.id.url_Video);
-                            TextView tiempoView = (TextView) arg0.findViewById(R.id.videoduracion);
+                            Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
                             String id_video = ((TextView)arg0.findViewById(R.id.idVideo)).getText().toString();
-                            //Log.e("ID Video", "ID 1: "+ id_video);
-                            imagenVideo.setImageBitmap((Bitmap) imagenView.getTag());
-                            imagenPlay.setTag(id_video);
-                            imagenDescarga.setTag(urlVideo.getText().toString());
-                            txtTiempo.setText(tiempoView.getText());
+
+                            imagenVideo.setImageBitmap(Entrada.get_img_previa());
+                            imagenPlay.setTag(Entrada.get_id());
+                            imagenDescarga.setTag(Entrada.get_url());
+                            txtTiempo.setText(Entrada.get_duracion());
+                            txtTitulo.setText(Entrada.get_titulo());
 
                         }
                     });

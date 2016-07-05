@@ -40,11 +40,9 @@ import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
-<<<<<<< Updated upstream
- * Created by Mugauli on 28/06/2016.
-=======
+
  * Created by umunoz on 27/06/2016.
->>>>>>> Stashed changes
+
  */
 public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Grupo> {
 
@@ -61,6 +59,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     public FragmentGrupoAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
+        imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
     }
 
@@ -173,7 +172,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             @Override
             public void onEntrada(Object entrada, View view) {
 
-                Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
+               // Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
 
                 if (entrada != null) {
 

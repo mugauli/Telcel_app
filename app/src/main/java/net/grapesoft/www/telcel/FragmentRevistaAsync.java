@@ -137,7 +137,16 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                 Log.e("Item Revista" ,  "Error");
             }
             else {
-                for (int i = 0; i < responseArray.length(); i++) {
+                int i = 0,ids= 0;
+
+                for (int ii = 0; ii < responseArray.length(); ii++) {
+                        if (Integer.parseInt(responseArray.getJSONObject(i).get("id").toString()) > ids)
+                        {
+                            ids = Integer.parseInt(responseArray.getJSONObject(i).get("id").toString());
+                            i = ii;
+                        }
+                }
+
 
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
@@ -151,7 +160,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
                     datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, "", R.drawable.descarga));
-                }
+
             }
         } catch (JSONException e) {
             Log.e("Async", e.getMessage());

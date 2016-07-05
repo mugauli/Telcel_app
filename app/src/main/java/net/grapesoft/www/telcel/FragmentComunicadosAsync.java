@@ -210,10 +210,31 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                     if (texto_inferior_entrada != null)
                         texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
 
-                 //  ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagencomunicados);
-                 //  if (imagen_entrada != null)
-                 //      imagen_entrada.setImageResource(((Lista_Entrada) entrada).get_idImagen());
+                    view.setTag(entrada);
 
+
+                    //assert imagen_entrada2 != null;
+                    view.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View arg0) {
+
+                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUC);
+                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUC);
+                            TextView titGrupo = (TextView) activity.findViewById(R.id.titUC);
+                            TextView descGrupo = (TextView) activity.findViewById(R.id.descUC);
+                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalUC);
+
+                            Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+
+                            imagenGrupo.setImageBitmap(Entrada.get_img_previa());
+                            fechaGrupo.setText(Entrada.get_fecha());
+                            titGrupo.setText(Entrada.get_titulo());
+                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                            principal.setTag(Entrada);
+
+                        }
+                    });
                 }
             }
         };
