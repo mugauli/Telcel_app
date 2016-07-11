@@ -243,6 +243,8 @@ public class VideoDetalleActivity extends AppCompatActivity
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
             e.printStackTrace();
+
+
         }
         videoview.requestFocus();
         videoview.setOnPreparedListener(new OnPreparedListener() {
