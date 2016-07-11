@@ -50,11 +50,11 @@ public class VideoDetalleActivity extends AppCompatActivity
     SessionManagement session;
     JSONArray responseArray;
     private Bitmap loadedImage;
-    Boolean siguiente = false;
+    Boolean siguiente = false,primero = true;
     String tokenCTE = "";
 
     // Insert your Video URL
-    String VideoURL = "http://internetencaja.com.mx/telcel/videos/Grafica%20Informativa.mp4";
+    String VideoURL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +90,8 @@ public class VideoDetalleActivity extends AppCompatActivity
 
                 if(pBar != null) pBar.setVisibility(View.GONE);
 
-            } else
+            }
+            else
             {
                 Log.e("Con session VIDEO",video);
                 result11 = video;
@@ -122,9 +123,28 @@ public class VideoDetalleActivity extends AppCompatActivity
                 String url_video = responseArray.getJSONObject(i).get("url_video").toString();
                 String duracion = responseArray.getJSONObject(i).get("duracion").toString();
 
+
+
+
                 if(siguiente)
                 {
                     siguiente = false;
+                    Log.e("Siguiente","Entro");
+                    TextView tvTituloSiguiente = (TextView) findViewById(R.id.tvTituloSiguiente);
+                    if(tvTituloSiguiente!=null)
+                        tvTituloSiguiente.setText(titulo);
+                    TextView tvTiempoSiguiente = (TextView) findViewById(R.id.tvTiempoSiguiente);
+                    if(tvTiempoSiguiente!=null)
+                        tvTiempoSiguiente.setText(duracion);
+                    ImageView imgPreviaSiguiente = (ImageView) findViewById(R.id.imgPreviaSiguiente);
+                    if(imgPreviaSiguiente!=null) {
+                        Bitmap imagen = new GetNetImage().execute(img_previa).get();
+                        imgPreviaSiguiente.setImageBitmap(imagen);
+                    }
+                }
+                if(primero)
+                {
+                    primero = false;
                     Log.e("Siguiente","Entro");
                     TextView tvTituloSiguiente = (TextView) findViewById(R.id.tvTituloSiguiente);
                     if(tvTituloSiguiente!=null)
