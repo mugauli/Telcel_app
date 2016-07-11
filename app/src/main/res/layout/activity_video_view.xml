@@ -101,13 +101,15 @@ tools:openDrawer="start">
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/btnPause"
-                            android:src="@android:drawable/ic_media_pause" />
+                            android:src="@android:drawable/ic_media_pause"
+                            android:visibility="gone" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/btnPlay"
-                            android:src="@android:drawable/ic_media_play" />
+                            android:src="@android:drawable/ic_media_play"
+                            android:visibility="gone" />
                     </LinearLayout>
 
                 </LinearLayout>

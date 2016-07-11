@@ -231,11 +231,11 @@ public class VideoDetalleActivity extends AppCompatActivity
 
         try {
             // Start the MediaController
-        //  MediaController mediacontroller = new MediaController(
-        //          VideoDetalleActivity.this);
-        //  mediacontroller.setAnchorView(videoview);
-        //  // Get the URL from String VideoURL
-        //  videoview.setMediaController(mediacontroller);
+         MediaController mediacontroller = new MediaController(
+                 VideoDetalleActivity.this);
+         mediacontroller.setAnchorView(videoview);
+         // Get the URL from String VideoURL
+         videoview.setMediaController(mediacontroller);
 
             Uri video = Uri.parse(VideoURL);
             videoview.setVideoURI(video);
@@ -265,24 +265,24 @@ public class VideoDetalleActivity extends AppCompatActivity
                 }
             });
         }
-        if (btnPause != null) {
-            btnPause.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-
-                }
-            });
-        }
-        if (btnPlay != null) {
-            btnPlay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    videoview.resume();
-
-                }
-            });
-        }
+    //    if (btnPause != null) {
+    //        btnPause.setOnClickListener(new View.OnClickListener() {
+    //            @Override
+    //            public void onClick(View v) {
+//
+//
+    //            }
+    //        });
+    //    }
+    //    if (btnPlay != null) {
+    //        btnPlay.setOnClickListener(new View.OnClickListener() {
+    //            @Override
+    //            public void onClick(View v) {
+    //                videoview.resume();
+//
+    //            }
+    //        });
+    //    }
 
 
        //Toolbar Menu
