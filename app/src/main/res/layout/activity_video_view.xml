@@ -77,7 +77,9 @@ tools:openDrawer="start">
                         android:layout_weight="50"
                         android:background="@color/tituloRevista"
                         android:textColor="@android:color/white"
-                        />
+                        android:text="kjvfgkjhbvlhjbv"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="8dp" />
 
                     <VideoView
                         android:id="@+id/VideoView"
@@ -88,19 +90,31 @@ tools:openDrawer="start">
                         android:layout_weight="2"
                         android:layout_gravity="center_horizontal" />
 
-                    <TextView
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:id="@+id/textView5"
                         android:layout_weight="48"
-                        android:background="@color/tituloRevista"
-                        android:textColor="@android:color/white" />
+                        android:background="@color/tituloRevista">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/btnPause"
+                            android:src="@android:drawable/ic_media_pause" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/btnPlay"
+                            android:src="@android:drawable/ic_media_play" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:background="@drawable/border"
                     android:orientation="horizontal"
                     android:weightSum="100"
                     android:layout_marginTop="10dp"
@@ -111,29 +125,36 @@ tools:openDrawer="start">
                         android:orientation="vertical"
                         android:layout_width="fill_parent"
                         android:layout_height="match_parent"
-                        android:weightSum="100"
 
                         android:layout_weight="100" >
                         <TextView
                             android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_height="35dp"
                             android:text="Siguiente Video"
-                            android:layout_weight="75"
                             android:background="@drawable/border_siguiente_video"
-                            android:id="@+id/textView6" />
+                            android:id="@+id/textView6"
+                            android:layout_margin="5dp"
+                            android:textColor="@color/ColorPrimaryDark"
+                            android:textStyle="bold"
+                            android:paddingTop="5dp"
+                            android:paddingLeft="5dp" />
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:weightSum="100"
                             android:background="@drawable/border"
-                            android:layout_weight="25" >
+                            android:id="@+id/btnSiguiente"
+                            android:layout_marginTop="10dp"
+                            android:layout_margin="5dp">
 
                             <LinearLayout
                                 android:orientation="horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:layout_weight="55">
+                                android:layout_weight="55"
+                                android:paddingTop="3dp"
+                                android:paddingBottom="3dp">
                                 <ImageView
                                     android:layout_width="fill_parent"
                                     android:layout_height="fill_parent"
@@ -163,11 +184,7 @@ tools:openDrawer="start">
                                     android:text="Siguiente Video"
                                     android:padding="10dp"
                                     />
-
-
                             </LinearLayout>
-
-
                     </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

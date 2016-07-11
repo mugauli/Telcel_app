@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -55,6 +56,12 @@ public class VideoDetalleActivity extends AppCompatActivity
 
     // Insert your Video URL
     String VideoURL = "";
+    String s_id = "";
+    String s_titulo = "";
+    String s_img_previa = "";
+    String s_url_video = "";
+    String s_duracion = "";
+    String result11 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,128 +75,121 @@ public class VideoDetalleActivity extends AppCompatActivity
         final HashMap<String, String> user = session.getUserDetails();
         String region = user.get(SessionManagement.KEY_REGION);
 
+        TextView tvTituloSiguiente = (TextView) findViewById(R.id.tvTituloSiguiente);
+        TextView tvTiempoSiguiente = (TextView) findViewById(R.id.tvTiempoSiguiente);
+        ImageView imgPreviaSiguiente = (ImageView) findViewById(R.id.imgPreviaSiguiente);
+        TextView txtTituloVideo = (TextView) findViewById(R.id.tvTituloVideo);
+        LinearLayout btnSiguiente = (LinearLayout) findViewById(R.id.btnSiguiente);
+        ImageView btnPause = (ImageView) findViewById(R.id.btnPause);
+        ImageView btnPlay = (ImageView) findViewById(R.id.btnPlay);
+
+
+        String id = "";
+        String titulo = "";
+        String img_previa = "";
+        String url_video = "";
+        String duracion = "";
+
+
         String video_id = getIntent().getStringExtra("video_id");
 
-        Log.e("id_video",video_id);
+        Log.e("id_video_DETALLE",video_id);
 
-        String result11 = "";
-       try{
-            String video = session.getVideoDetails();
+       try {
+           String video = session.getVideoDetails();
 
-            if(video == null || video == "") {
+           if (video == null || video == "") {
 
-                ProgressBar pBar = (ProgressBar)findViewById(R.id.loadingPanelVideoDetalle);
-                if(pBar != null) pBar.setVisibility(View.VISIBLE);
+               ProgressBar pBar = (ProgressBar) findViewById(R.id.loadingPanelVideoDetalle);
+               if (pBar != null) pBar.setVisibility(View.VISIBLE);
 
-                params.add("6");
-                params.add("GetVideo.php");
-                params.add(tokenCTE);
-                params.add(region);
+               params.add("6");
+               params.add("GetVideo.php");
+               params.add(tokenCTE);
+               params.add(region);
 
-                responseArray = new Comunication(VideoDetalleActivity.this).execute(params).get();
+               responseArray = new Comunication(VideoDetalleActivity.this).execute(params).get();
+               if (pBar != null) pBar.setVisibility(View.GONE);
 
-                if(pBar != null) pBar.setVisibility(View.GONE);
-
-            }
-            else
-            {
-                Log.e("Con session VIDEO",video);
-                result11 = video;
-                if(result11.equals("true"+"\n")) {
-                    responseArray = new JSONArray("[{'resp':'true'}]");
-                }else if(result11.equals("false"+"\n")) {
-                    responseArray = new JSONArray("[{'resp':'false'}]");
-                } else
-                {
-                    if(result11.contains("["))
-                        responseArray = new JSONArray(result11);
-                    else
-                        responseArray = new JSONArray("[" + result11 + "]");
-                }
-            }
+           } else {
+               Log.e("Con session VIDEO", video);
+               result11 = video;
+               if (result11.equals("true" + "\n")) {
+                   responseArray = new JSONArray("[{'resp':'true'}]");
+               } else if (result11.equals("false" + "\n")) {
+                   responseArray = new JSONArray("[{'resp':'false'}]");
+               } else {
+                   if (result11.contains("["))
+                       responseArray = new JSONArray(result11);
+                   else
+                       responseArray = new JSONArray("[" + result11 + "]");
+               }
+           }
 
 
+           if (responseArray.getJSONObject(0).has("resp")) {
+               Log.e("Item Video Detalle", "Error");
+           } else {
 
-        if(responseArray.getJSONObject(0).has("resp")) {
-            Log.e("Item Video Detalle" ,  "Error");
-        }
-        else {
+               for (int i = 0; i < responseArray.length(); i++) {
 
-            for (int i = 0; i < responseArray.length(); i++) {
+                   id = responseArray.getJSONObject(i).get("id").toString();
+                   titulo = responseArray.getJSONObject(i).get("titulo").toString();
+                   img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
+                   url_video = responseArray.getJSONObject(i).get("url_video").toString();
+                   duracion = responseArray.getJSONObject(i).get("duracion").toString();
 
-                String id = responseArray.getJSONObject(i).get("id").toString();
-                String titulo = responseArray.getJSONObject(i).get("titulo").toString();
-                String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                String url_video = responseArray.getJSONObject(i).get("url_video").toString();
-                String duracion = responseArray.getJSONObject(i).get("duracion").toString();
+                   Log.e(i + "_a_id", id);
+                   Log.e(i + "_a_titulo", titulo);
+                   Log.e(i + "_a_img_previa", img_previa);
+                   Log.e(i + "_a_url_video", url_video);
+                   Log.e(i + "_a_duracion", duracion);
 
+                   if (siguiente) {
+                       siguiente = false;
+                       Log.e("Siguiente", "Entro");
+                       s_id = id;
+                       s_titulo = titulo;
+                       s_img_previa = img_previa;
+                       s_url_video = url_video;
+                       s_duracion = duracion;
 
+                   } else if (primero) {
+                       primero = false;
+                       Log.e("Primero", "Entro");
+                       s_id = id;
+                       s_titulo = titulo;
+                       s_img_previa = img_previa;
+                       s_url_video = url_video;
+                       s_duracion = duracion;
+                   }
 
+                   if (id.equals(video_id)) {
+                       Log.e("Elegido", titulo);
+                       siguiente = true;
 
-                if(siguiente)
-                {
-                    siguiente = false;
-                    Log.e("Siguiente","Entro");
-                    TextView tvTituloSiguiente = (TextView) findViewById(R.id.tvTituloSiguiente);
-                    if(tvTituloSiguiente!=null)
-                        tvTituloSiguiente.setText(titulo);
-                    TextView tvTiempoSiguiente = (TextView) findViewById(R.id.tvTiempoSiguiente);
-                    if(tvTiempoSiguiente!=null)
-                        tvTiempoSiguiente.setText(duracion);
-                    ImageView imgPreviaSiguiente = (ImageView) findViewById(R.id.imgPreviaSiguiente);
-                    if(imgPreviaSiguiente!=null) {
-                        Bitmap imagen = new GetNetImage().execute(img_previa).get();
-                        imgPreviaSiguiente.setImageBitmap(imagen);
-                    }
-                }
-                if(primero)
-                {
-                    primero = false;
-                    Log.e("Siguiente","Entro");
-                    TextView tvTituloSiguiente = (TextView) findViewById(R.id.tvTituloSiguiente);
-                    if(tvTituloSiguiente!=null)
-                        tvTituloSiguiente.setText(titulo);
-                    TextView tvTiempoSiguiente = (TextView) findViewById(R.id.tvTiempoSiguiente);
-                    if(tvTiempoSiguiente!=null)
-                        tvTiempoSiguiente.setText(duracion);
-                    ImageView imgPreviaSiguiente = (ImageView) findViewById(R.id.imgPreviaSiguiente);
-                    if(imgPreviaSiguiente!=null) {
-                        Bitmap imagen = new GetNetImage().execute(img_previa).get();
-                        imgPreviaSiguiente.setImageBitmap(imagen);
-                    }
-                }
-                if(id.equals(video_id))
-                {
-                    siguiente = true;
-                    TextView txtTituloVideo = (TextView) findViewById(R.id.tvTituloVideo);
-                    Log.e("titulo",titulo);
-                    if(txtTituloVideo != null)
-                    txtTituloVideo.setText(titulo);
-                   VideoURL = url_video;
-                }
-            }
-        }
+                       if (txtTituloVideo != null)
+                           txtTituloVideo.setText(titulo);
+                       VideoURL = url_video;
+                   }
+               }
+           }
 
 
-    } catch (JSONException e) {
-        Log.e("Error Async 0 Video", e.getMessage());
-        e.printStackTrace();
-    } catch (InterruptedException e) {
+       } catch (JSONException e) {
+           Log.e("Error Async 0 Video", e.getMessage());
+           e.printStackTrace();
+       } catch (InterruptedException e) {
+           Log.e("Error Async 1 Video", e.getMessage());
            e.printStackTrace();
        } catch (ExecutionException e) {
+           Log.e("Error Async 2 Video", e.getMessage());
            e.printStackTrace();
        }
 
 
         Log.e ("URL Activity", VideoURL);
         VideoURL = VideoURL.replace(" ","%20");
-        // Get the layout from video_main.xml
-        setContentView(R.layout.activity_video_view);
-
-
-        // Find your VideoView in your video_main.xml layout
-        videoview = (VideoView) findViewById(R.id.VideoView);
-        // Execute StreamVideo AsyncTask
 
         // Create a progressbar
         pDialog = new ProgressDialog(VideoDetalleActivity.this);
@@ -202,21 +202,48 @@ public class VideoDetalleActivity extends AppCompatActivity
         // Show progressbar
         pDialog.show();
 
+        // Find your VideoView in your video_main.xml layout
+        videoview = (VideoView) findViewById(R.id.VideoView);
+
+        if(tvTituloSiguiente!=null)
+            tvTituloSiguiente.setText(s_titulo);
+
+        if(tvTiempoSiguiente!=null)
+            tvTiempoSiguiente.setText(s_duracion);
+
+        if(btnSiguiente != null)
+            btnSiguiente.setTag(s_id);
+
+        if(imgPreviaSiguiente!=null) {
+            Bitmap imagen = null;
+            try {
+                imagen = new GetNetImage().execute(s_img_previa).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            imgPreviaSiguiente.setImageBitmap(imagen);
+        }
+
+        // Execute StreamVideo AsyncTask
+
+
         try {
             // Start the MediaController
-            MediaController mediacontroller = new MediaController(
-                    VideoDetalleActivity.this);
-            mediacontroller.setAnchorView(videoview);
-            // Get the URL from String VideoURL
+        //  MediaController mediacontroller = new MediaController(
+        //          VideoDetalleActivity.this);
+        //  mediacontroller.setAnchorView(videoview);
+        //  // Get the URL from String VideoURL
+        //  videoview.setMediaController(mediacontroller);
+
             Uri video = Uri.parse(VideoURL);
-            videoview.setMediaController(mediacontroller);
             videoview.setVideoURI(video);
-            Log.e ("URL Activity", "1");
+
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
             e.printStackTrace();
         }
-        Log.e ("URL Activity", "2");
         videoview.requestFocus();
         videoview.setOnPreparedListener(new OnPreparedListener() {
             // Close the progress bar and play the video
@@ -226,8 +253,37 @@ public class VideoDetalleActivity extends AppCompatActivity
             }
         });
 
+        if (btnSiguiente != null) {
+            btnSiguiente.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String id_video = v.getTag().toString();
+                    Log.e("Id_videpo_clic aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", id_video);
+                    Intent i = new Intent(VideoDetalleActivity.this, VideoDetalleActivity.class);
+                    i.putExtra("video_id",id_video);
+                    startActivity(i);
+                }
+            });
+        }
+        if (btnPause != null) {
+            btnPause.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    videoview.pause();
+                }
+            });
+        }
+        if (btnPlay != null) {
+            btnPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    videoview.resume();
+                }
+            });
+        }
 
-//Toolbar Menu
+
+       //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

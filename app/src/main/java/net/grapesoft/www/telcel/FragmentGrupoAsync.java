@@ -262,8 +262,8 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             Log.e("Llego", ""+result.getCount());
         }
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelGrupo);
-
-        pBar.setVisibility(View.GONE);
+        if(pBar!= null)
+            pBar.setVisibility(View.GONE);
     }
 
 }
