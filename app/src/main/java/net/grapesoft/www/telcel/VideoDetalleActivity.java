@@ -269,7 +269,8 @@ public class VideoDetalleActivity extends AppCompatActivity
             btnPause.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    videoview.pause();
+
+
                 }
             });
         }
@@ -278,6 +279,7 @@ public class VideoDetalleActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     videoview.resume();
+
                 }
             });
         }
