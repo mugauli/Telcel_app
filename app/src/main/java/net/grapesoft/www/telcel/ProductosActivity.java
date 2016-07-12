@@ -1,19 +1,16 @@
 package net.grapesoft.www.telcel;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +18,7 @@ import android.widget.ImageButton;
 
 import Utitilies.SessionManagement;
 
-public class MainActivity extends AppCompatActivity
+public class ProductosActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
@@ -29,7 +26,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        setContentView(R.layout.activity_productos);
         session = new SessionManagement(getApplicationContext());
 
         //boton ayuda
@@ -38,12 +36,11 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ayuda.class);
+                Intent intent = new Intent(ProductosActivity.this,ayuda.class);
                 startActivity(intent);
             }
         });
         //boton ayuda
-
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,52 +49,58 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else {
-                    drawer.openDrawer(GravityCompat.START);
+        if(imgButton != null)
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
                 }
-            }
-        });
+            });
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
+
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+
+
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
+        tabs.addTab(tabs.newTab().setText("CAMPAÑA"));
+        tabs.addTab(tabs.newTab().setText("LANZAMIENTOS"));
+        tabs.addTab(tabs.newTab().setText("PRODUCTO DEL MES"));
+        tabs.addTab(tabs.newTab().setText("SVA"));
 
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab3).toString()));
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab1).toString()));
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab2).toString()));
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab5).toString()));
 
+        //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        /*final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabs.getTabCount());
+        viewPager.setAdapter(adapter);*/
+        final PageAdapterProductos adapter = new PageAdapterProductos
+                (getSupportFragmentManager(), tabs.getTabCount());
+        viewPager.setAdapter(adapter);
+
+
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.e("TAB",tab.getText().toString());
-
-                if(tab.getText().toString().equals(getString(R.string.tab1).toString())) {
-
-                    Intent i = new Intent(MainActivity.this, ComunicacionInternaActivity.class);
-                    startActivity(i);
-                }
-                if(tab.getText().toString().equals(getString(R.string.tab2).toString())) {
-
-                    Intent i = new Intent(MainActivity.this, ProductosActivity.class);
-                    startActivity(i);
-                }
-
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -110,33 +113,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-        //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
-
-      // final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-      // final PagerAdapter adapter = new PagerAdapter
-      //         (getSupportFragmentManager(), tabs.getTabCount());
-      // viewPager.setAdapter(adapter);
-      // viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
-      // tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-       //     @Override
-       //     public void onTabSelected(TabLayout.Tab tab) {
-
-       //             viewPager.setCurrentItem(tab.getPosition());
-
-
-       //     }
-
-       //     @Override
-       //     public void onTabUnselected(TabLayout.Tab tab) {
-
-       //     }
-
-       //     @Override
-       //     public void onTabReselected(TabLayout.Tab tab) {
-
-       //     }
-       // });
     }
 
     @Override
@@ -165,9 +141,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-       //if (id == R.id.action_settings) {
-       //    return true;
-       //}
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }
@@ -180,17 +156,17 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(MainActivity.this, ActualizarActivity.class);
+            Intent i = new Intent(ProductosActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(MainActivity.this, pin.class);
+            Intent i = new Intent(ProductosActivity.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(MainActivity.this, preferencias.class);
+            Intent i = new Intent(ProductosActivity.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {
