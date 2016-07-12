@@ -184,6 +184,8 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
+                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalCM);
+                        principal.setTag(entrada);
                     }
 
                     ImageView campanaImagen = (ImageView) view.findViewById(R.id.imagenCampanaL);

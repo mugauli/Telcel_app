@@ -202,6 +202,9 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
 
+                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipal);
+                        principal.setTag(entrada);
+
                     }
 
                     ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenGrupoL);
