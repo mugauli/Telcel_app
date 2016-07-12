@@ -20,22 +20,13 @@ public class GetNetImage extends AsyncTask<String,Void,Bitmap> {
     private Exception exception;
 
     ProgressDialog dialog;
-
     Activity activity;
-
     ImageView img;
 
-
-
-
     @Override
-
-    protected void onPreExecute() { //Este método es el primero que se ejecuta al llamar a la clase, después pasa al doInBackground que le da una respuesta onPostExecute. En este caso el doInBackground devuelve un Bitmap pero puede devolver cualquier tipo de variable, indicando el tipo en el último parámetros del extends AsyncTask
+    protected void onPreExecute() {
 
     }
-
-
-
 
     @Override
     protected Bitmap doInBackground(String... params) {
@@ -56,11 +47,8 @@ public class GetNetImage extends AsyncTask<String,Void,Bitmap> {
         }
     }
 
-
     @Override
-
     protected void onPostExecute(Bitmap result) { //Este método recibe el Bitmap que ha generado el método doInBackground
         super.onPostExecute(result);
-
     }
 }

@@ -1,44 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-
         android:weightSum="100">
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="48"></LinearLayout>
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="4"
             android:weightSum="100">
-
-
-
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="48">
-
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -46,53 +36,48 @@
                 android:orientation="vertical"
                 android:weightSum="100"
                 android:background="@drawable/border"
-                android:padding="0dp">
+                android:id="@+id/linearPrincipalCM">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="25"
                     android:orientation="vertical"
-                    android:weightSum="100"
-                    android:padding="1dp">
+                    android:weightSum="100">
                     <ImageView
                         android:layout_width="fill_parent"
-                        android:layout_weight="30"
+                        android:layout_weight="35"
                         android:layout_height="fill_parent"
-                        android:id="@+id/imagenCampana"
-                        android:src="@drawable/videoretro" />
+                        android:id="@+id/imagenCM"  />
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="70"
+                        android:layout_weight="65"
                         android:layout_margin="15px"
                         android:orientation="vertical"
                         android:weightSum="100">
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_weight="40"
-                            android:layout_height="match_parent"
+                            android:layout_height="fill_parent"
                             android:gravity="right"
-                            android:text="NADA"
-
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:id="@+id/fechaCampana"/>
+                            android:id="@+id/fechaCM"/>
                         <TextView
-                            android:layout_width="match_parent"
-                            android:text="Puntualidad"
+                            android:layout_width="fill_parent"
+
                             android:textColor="@color/ColorPrimary"
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:layout_weight="30"
-                            android:layout_height="match_parent"
-                            android:id="@+id/titCampana"/>
+                            android:layout_height="fill_parent"
+                            android:id="@+id/titCM"/>
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:layout_weight="30"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:text="Es una cualidad muy bien recibida por nuestros colaboradores; nos ayuda a mantener un ambiente laboral adecuado"
-                            android:layout_height="match_parent"
-                            android:id="@+id/descCamapana"/>
+                            android:layout_height="fill_parent"
+                            android:id="@+id/descCM"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -101,15 +86,24 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="27">
 
+                <RelativeLayout
+                    android:id="@+id/loadingPanelCampana"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center" >
+                    <ProgressBar
 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true" />
+                </RelativeLayout>
                 <ListView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-
                     android:id="@+id/listCampana" />
             </LinearLayout>
 
@@ -121,6 +115,4 @@
             android:layout_height="fill_parent"
             android:layout_weight="48"></LinearLayout>
     </LinearLayout>
-
-
 </RelativeLayout>
