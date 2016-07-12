@@ -59,14 +59,14 @@ public class FragmentNoticias extends Fragment {
                 Intent i = new Intent(getActivity(), activity_detalle_noticia.class);
 
                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
-
-                i.putExtra("imagen",Entrada.get_img_detalle());
-                i.putExtra("titulo",Entrada.get_titulo());
-                i.putExtra("fecha",Entrada.get_fecha());
-                i.putExtra("descripcion",Entrada.get_textoDebajo());
+            if(Entrada != null) {
+                i.putExtra("imagen", Entrada.get_img_detalle());
+                i.putExtra("titulo", Entrada.get_titulo());
+                i.putExtra("fecha", Entrada.get_fecha());
+                i.putExtra("descripcion", Entrada.get_textoDebajo());
 
                 startActivity(i);
-
+            }
 
             }
         });
