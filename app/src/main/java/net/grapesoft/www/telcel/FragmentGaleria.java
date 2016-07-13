@@ -27,7 +27,7 @@ public class FragmentGaleria  extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootview = inflater.inflate(R.layout.tab_fragment_campana, container, false);
+        View rootview = inflater.inflate(R.layout.tab_fragment_galeria, container, false);
 
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();

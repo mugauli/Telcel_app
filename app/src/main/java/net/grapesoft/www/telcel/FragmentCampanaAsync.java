@@ -100,7 +100,7 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
             }
             else
             {
-                Log.e("Con session COMUNICACOS",campanasInternasDetails);
+                Log.e("Con session Campana",campanasInternasDetails);
                 result11 = campanasInternasDetails;
             }
 
@@ -140,6 +140,8 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
 
+
+
                     datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
 
                 }
@@ -165,24 +167,28 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
                     if (primer) {
                         primer = false;
 
-                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenCM);
-                        if (imagen_noticias != null) {
-                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                        ImageView imagen_campana = (ImageView) activity.findViewById(R.id.imagenCM);
+                        if (imagen_campana != null) {
+                            if(loadedImage == null)
+                            {
+                                imagen_campana.setImageResource(R.drawable.noimage);
+                            }else
+                                imagen_campana.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
 
-                        TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaCM);
-                        if (noticiafecha != null)
-                            noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
+                        TextView fecha_campana = (TextView) activity.findViewById(R.id.fechaCM);
+                        if (fecha_campana != null)
+                            fecha_campana.setText(((Lista_Entrada) entrada).get_fecha());
 
-                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.titCM);
+                        TextView titulo_campana = (TextView) activity.findViewById(R.id.titCM);
 
-                        if (noticiatitulo != null)
-                            noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                        if (titulo_campana != null)
+                            titulo_campana.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descCM);
-                        if (noticiaDescripcion != null) {
+                        TextView descripcion_campana = (TextView) activity.findViewById(R.id.descCM);
+                        if (descripcion_campana != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
-                            noticiaDescripcion.setText(Html.fromHtml(desc));
+                            descripcion_campana.setText(Html.fromHtml(desc));
                         }
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalCM);
                         principal.setTag(entrada);
@@ -190,8 +196,13 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
 
                     ImageView campanaImagen = (ImageView) view.findViewById(R.id.imagenCampanaL);
 
-                    if (campanaImagen != null)
+                    if (campanaImagen != null) {
+                        if(loadedImage == null)
+                        {
+                            campanaImagen.setImageResource(R.drawable.noimage);
+                        }else
                         campanaImagen.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                    }
 
                     TextView campanaFecha = (TextView) view.findViewById(R.id.fechaCampanaL);
                     if (campanaFecha != null)

@@ -289,6 +289,9 @@ public class ActualizarActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        TextView titulo = (TextView) findViewById(R.id.TitleSeccion);
+        titulo.setTypeface(tf);
+        titulo.setText("MODIFICAR O ACTUALIZAR DATOS");
         //ToolBar Menu
     }
 

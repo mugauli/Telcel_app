@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -26,7 +28,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -100,7 +104,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
             }
             else
             {
-                Log.e("Con session COMUNICACOS",campanasInternasDetails);
+                Log.e("Con session Galeria",campanasInternasDetails);
                 result11 = campanasInternasDetails;
             }
 
@@ -119,7 +123,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                     responseArray = new JSONArray("[" + result11 + "]");
             }
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Campana" ,  "Error");
+                Log.e("Item Galeria" ,  "Error");
             }
             else {
                 for (int i = 0; i < responseArray.length(); i++) {
@@ -136,29 +140,35 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                    conn.connect();
-                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                    conn.disconnect();
 
+                    try {
+                        conn.connect();
+                        loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                        conn.disconnect();
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                    }
                     datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
 
                 }
             }
         } catch (JSONException e) {
-            Log.e("Error async Campana", e.getMessage());
+            Log.e("Error async Galeria", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            Log.e("Error async 1 Campana", e.getMessage());
+            Log.e("Error async 1 Galeria", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error async 2 Campana", e.getMessage());
+            Log.e("Error async 2 Galeria", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("Error async 3 Campana", e.getMessage());
+            Log.e("Error async 3 Galeria", e.getMessage());
             e.printStackTrace();
         }
 
-        List_adapted adaptadorLts = new List_adapted(activity, R.layout.entrada_campana, datos){
+        List_adapted adaptadorLts = new List_adapted(activity, R.layout.entrada_galeria, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
                 if (entrada != null) {

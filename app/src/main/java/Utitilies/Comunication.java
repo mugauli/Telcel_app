@@ -63,7 +63,7 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
             HttpClient httpclient = new DefaultHttpClient();
 
-            Log.e("IP",IP + params[0].get(1));
+         //   Log.e("IP",IP + params[0].get(1));
             HttpPost httppost = new HttpPost(IP + params[0].get(1));
 
             httppost.setEntity(new UrlEncodedFormEntity(createPost(params[0])));

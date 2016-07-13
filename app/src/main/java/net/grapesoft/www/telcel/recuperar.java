@@ -48,9 +48,10 @@ public class recuperar extends AppCompatActivity
         tokenCTE = getText(R.string.tokenXM).toString();
         session = new SessionManagement(getApplicationContext());
 
-        TextView texto_superior_entrada = (TextView) findViewById(R.id.textView13);
-        TextView texto_superior = (TextView) findViewById(R.id.textView14);
-        Button btn=(Button) findViewById(R.id.button3);
+        TextView texto_superior_entrada = (TextView) findViewById(R.id.tvCabeceraRecuperar);
+        TextView texto_superior = (TextView) findViewById(R.id.tvCabeceraCampoRecuperar);
+
+        Button btn=(Button) findViewById(R.id.btnEnviarRecuperar);
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/obscura.otf");
         Typeface tfl = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
@@ -59,7 +60,8 @@ public class recuperar extends AppCompatActivity
         texto_superior.setTypeface(tf);
         btn.setTypeface(tfm);
 
-        ImageView btnAyuda = (ImageView) findViewById(R.id.imageView3);
+        //AYUDA
+        ImageView btnAyuda = (ImageView) findViewById(R.id.imgAyudaRecuperar);
         btnAyuda.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -68,9 +70,12 @@ public class recuperar extends AppCompatActivity
                 startActivity(intent);
             }
         });
+        //AYUDA
 
 
 //Toolbar Menu
+
+        //TitleSeccion
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -78,11 +83,9 @@ public class recuperar extends AppCompatActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
 
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,15 +98,17 @@ public class recuperar extends AppCompatActivity
             }
         });
 
-
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TextView titulo = (TextView) findViewById(R.id.TitleSeccion);
+        titulo.setTypeface(tf);
+        titulo.setText("RECUPERAR CONTRASEÑA");
 
         //ToolBar Menu
 
         Button btnEnviarFalla;
-        btnEnviarFalla = (Button) findViewById(R.id.btnEnviarFalla);
+        btnEnviarFalla = (Button) findViewById(R.id.btnEnviarRecuperar);
 
         // add button listener
         if (btnEnviarFalla != null) {
@@ -115,11 +120,11 @@ public class recuperar extends AppCompatActivity
                     JSONArray response;
 
                     TextView tvErrorRecuperar = (TextView) findViewById(R.id.tvErrorRecuperar);
-                    EditText txtUsuario = (EditText) findViewById(R.id.txtUsuario);
+                    EditText txtUsuario = (EditText) findViewById(R.id.txtUsuarioRecuperar);
 
                     tvErrorRecuperar.setText("");
 
-                    //-------//
+
                     ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
                     Boolean isInternetPresent = cd.isConnectingToInternet();
 
@@ -127,10 +132,12 @@ public class recuperar extends AppCompatActivity
                         if(txtUsuario.length()==0)
                         {
                             tvErrorRecuperar.setText("Ingrese el número de Usuario");
+                            txtUsuario.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
                         }else if (isInternetPresent) {
+
                             tvErrorRecuperar.setText("");
 
-                                    ArrayList<String> params = new ArrayList<String>();
+                            ArrayList<String> params = new ArrayList<String>();
                             final HashMap<String, String> user = session.getUserDetails();
                             String idUsuario = user.get(SessionManagement.KEY_ID);
 
@@ -163,6 +170,7 @@ public class recuperar extends AppCompatActivity
                             }
                         } else {
                             tvErrorRecuperar.setText("No hay conexión a internet.");
+
                             //Toast toast = Toast.makeText(login.this,  "No hay conexión a internet.", Toast.LENGTH_LONG);
                             //toast.show();
                         }
