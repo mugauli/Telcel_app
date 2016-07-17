@@ -66,7 +66,17 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
-            <TextView
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/tvErrorCorreoSugerencia"
+                    android:layout_below="@+id/txtCorreoSugerencia"
+                    android:layout_toLeftOf="@+id/btnEnviarSugerencia"
+                    android:layout_toStartOf="@+id/btnEnviarSugerencia"
+                    android:textColor="@color/error_color"/>
+
+                <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/detalle"
@@ -89,7 +99,17 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
-            <Button
+                <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvErrorComentarioSugerencia"
+                android:layout_below="@+id/txtSugerencia"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/error_color"/>
+
+                <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ENVIAR"
@@ -104,7 +124,7 @@
                 android:clickable="false" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:id="@+id/tvErrorSugerencia"
@@ -113,25 +133,6 @@
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/error_color"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/tvErrorCorreoSugerencia"
-                android:layout_below="@+id/txtCorreoSugerencia"
-                android:layout_toLeftOf="@+id/btnEnviarSugerencia"
-                android:layout_toStartOf="@+id/btnEnviarSugerencia"
-                android:textColor="@color/error_color"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/tvErrorComentarioSugerencia"
-                android:layout_below="@+id/txtSugerencia"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textColor="@color/error_color"/>
             </LinearLayout>
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>

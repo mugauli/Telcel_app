@@ -8,14 +8,10 @@ package net.grapesoft.www.telcel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +36,7 @@ public class FragmentNoticias extends Fragment {
         session = new SessionManagement(getActivity());
 
         final HashMap<String, String> user = session.getUserDetails();
-        String region = user.get(SessionManagement.KEY_REGION);
+        String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
         params.add("GetNews.php");

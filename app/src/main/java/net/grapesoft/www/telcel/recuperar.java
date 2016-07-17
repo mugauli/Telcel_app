@@ -7,9 +7,7 @@ import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,8 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -139,7 +135,7 @@ public class recuperar extends AppCompatActivity
 
                             ArrayList<String> params = new ArrayList<String>();
                             final HashMap<String, String> user = session.getUserDetails();
-                            String idUsuario = user.get(SessionManagement.KEY_ID);
+                            String idUsuario = user.get(SessionManagement.KEY_PD_ID);
 
 
                             params.add("5");

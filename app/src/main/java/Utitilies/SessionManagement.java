@@ -46,15 +46,16 @@ public class SessionManagement {
 
     //RESPONSE
     // {"id":"5","num_empleado":"ANDROID","num_celular":"ANDROID","region":"1","nombre":"ANDROID","paterno":"ANDROID","materno":"ANDROID","interes_1":null,"interes_2":null}
-    public static final String KEY_ID = "id";
-    public static final String KEY_NUM_EMPLEADO = "num_empleado";
-    public static final String KEY_NUM_CELULAR = "num_celular";
-    public static final String KEY_REGION = "region";
-    public static final String KEY_NOMBRE = "nombre";
-    public static final String KEY_PATERNO = "paterno";
-    public static final String KEY_MATERNO = "materno";
-    public static final String KEY_INTERES_1 = "interes_1";
-    public static final String KEY_INTERES_2 = "interes_2";
+    public static final String KEY_PD_ID = "id";
+    public static final String KEY_PD_NUM_EMPLEADO = "num_empleado";
+    public static final String KEY_PD_NUM_CELULAR = "num_celular";
+    public static final String KEY_PD_REGION = "region";
+    public static final String KEY_PD_NOMBRE = "nombre";
+    public static final String KEY_PD_PATERNO = "paterno";
+    public static final String KEY_PD_MATERNO = "materno";
+    public static final String KEY_PD_INTERES_1 = "interes_1";
+    public static final String KEY_PD_INTERES_2 = "interes_2";
+    public static final String KEY_PD_CORREO = "correo";
 
     public static final String KEY_COMUNICACION_INTERNA_PODCAST = "comunicacion_interna_podcast";
     public static final String KEY_COMUNICACION_INTERNA_VIDEO = "comunicacion_interna_video";
@@ -88,16 +89,16 @@ public class SessionManagement {
         editor.putString(KEY_PASS,pass);
 
         //RESPONSE
-        editor.putString(KEY_ID,id);
-        editor.putString(KEY_NUM_EMPLEADO,num_empelado);
-        editor.putString(KEY_NUM_CELULAR,num_celular);
-        editor.putString(KEY_REGION,region);
-        editor.putString(KEY_NOMBRE,nombre);
-        editor.putString(KEY_PATERNO, paterno);
-        editor.putString(KEY_MATERNO,materno);
-        editor.putString(KEY_INTERES_1,interes_1);
-        editor.putString(KEY_INTERES_2,interes_2);
-        editor.putString(KEY_INTERES_2,interes_2);
+        editor.putString(KEY_PD_ID,id);
+        editor.putString(KEY_PD_NUM_EMPLEADO,num_empelado);
+        editor.putString(KEY_PD_NUM_CELULAR,num_celular);
+        editor.putString(KEY_PD_REGION,region);
+        editor.putString(KEY_PD_NOMBRE,nombre);
+        editor.putString(KEY_PD_PATERNO, paterno);
+        editor.putString(KEY_PD_MATERNO,materno);
+        editor.putString(KEY_PD_INTERES_1,interes_1);
+        editor.putString(KEY_PD_INTERES_2,interes_2);
+        //editor.putString(KEY_PD_CORREO,interes_2);
 
 
         // commit changes
@@ -151,15 +152,15 @@ public class SessionManagement {
         HashMap<String, String> user = new HashMap<String, String>();
 
         // user name
-        user.put(KEY_ID, pref.getString(KEY_ID,null));
-        user.put(KEY_NUM_EMPLEADO, pref.getString(KEY_NUM_EMPLEADO,null));
-        user.put(KEY_NUM_CELULAR, pref.getString(KEY_NUM_CELULAR,null));
-        user.put(KEY_REGION, pref.getString(KEY_REGION,null));
-        user.put(KEY_NOMBRE, pref.getString(KEY_NOMBRE,null));
-        user.put(KEY_PATERNO, pref.getString(KEY_PATERNO, null));
-        user.put(KEY_MATERNO, pref.getString(KEY_MATERNO,null));
-        user.put(KEY_INTERES_1, pref.getString(KEY_INTERES_1,null));
-        user.put(KEY_INTERES_2, pref.getString(KEY_INTERES_2,null));
+        user.put(KEY_PD_ID, pref.getString(KEY_PD_ID,null));
+        user.put(KEY_PD_NUM_EMPLEADO, pref.getString(KEY_PD_NUM_EMPLEADO,null));
+        user.put(KEY_PD_NUM_CELULAR, pref.getString(KEY_PD_NUM_CELULAR,null));
+        user.put(KEY_PD_REGION, pref.getString(KEY_PD_REGION,null));
+        user.put(KEY_PD_NOMBRE, pref.getString(KEY_PD_NOMBRE,null));
+        user.put(KEY_PD_PATERNO, pref.getString(KEY_PD_PATERNO, null));
+        user.put(KEY_PD_MATERNO, pref.getString(KEY_PD_MATERNO,null));
+        user.put(KEY_PD_INTERES_1, pref.getString(KEY_PD_INTERES_1,null));
+        user.put(KEY_PD_INTERES_2, pref.getString(KEY_PD_INTERES_2,null));
 
         // return user
         return user;

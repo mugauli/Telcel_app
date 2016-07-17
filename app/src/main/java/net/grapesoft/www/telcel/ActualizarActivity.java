@@ -1,14 +1,11 @@
 package net.grapesoft.www.telcel;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,13 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.ExecutionException;
 
-import Utitilies.AlertDialogManager;
 import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
@@ -49,19 +43,23 @@ public class ActualizarActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         session = new SessionManagement(getApplicationContext());
+        final HashMap<String, String> user = session.getUserDetails();
+
+
+
 
         setContentView(R.layout.activity_actualizar);
 
         //Fuentes
-        TextView txtGhost = (TextView) findViewById(R.id.tvCelular);
-        TextView txtGhost2 = (TextView) findViewById(R.id.tvRegion);
-        TextView txtGhost3 = (TextView) findViewById(R.id.tvDireccion);
-        RadioButton rb = (RadioButton) findViewById(R.id.rbAsignado);
-        RadioButton rbp = (RadioButton) findViewById(R.id.rbPersonal);
-        TextView txtGhost5 = (TextView) findViewById(R.id.tvNombres);
-        TextView txtGhost6 = (TextView) findViewById(R.id.tvPaterno);
-        TextView txtGhost7 = (TextView) findViewById(R.id.tvMaterno);
-        TextView txtGhost8 = (TextView) findViewById(R.id.tvCorreo);
+        TextView tvCelular = (TextView) findViewById(R.id.tvCelular);
+        TextView tvRegion = (TextView) findViewById(R.id.tvRegion);
+        TextView tvDireccion = (TextView) findViewById(R.id.tvDireccion);
+        RadioButton rbAsignado = (RadioButton) findViewById(R.id.rbAsignado);
+        RadioButton rbPersonal = (RadioButton) findViewById(R.id.rbPersonal);
+        TextView tvNombres = (TextView) findViewById(R.id.tvNombres);
+        TextView tvPaterno = (TextView) findViewById(R.id.tvPaterno);
+        TextView tvMaterno = (TextView) findViewById(R.id.tvMaterno);
+        TextView tvCorreo = (TextView) findViewById(R.id.tvCorreo);
         TextView txt1 = (TextView) findViewById(R.id.txtCelular);
         TextView txt2 = (TextView) findViewById(R.id.txtNombre);
         TextView txt3 = (TextView) findViewById(R.id.txtPaterno);
@@ -71,21 +69,20 @@ public class ActualizarActivity extends AppCompatActivity
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
         Typeface tfm = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
         // Applying font
-        txtGhost.setTypeface(tfm);
-        txtGhost2.setTypeface(tfm);
-        txtGhost3.setTypeface(tfm);
-        txtGhost5.setTypeface(tfm);
-        txtGhost6.setTypeface(tfm);
-        txtGhost7.setTypeface(tfm);
-        txtGhost8.setTypeface(tfm);
+        tvCelular.setTypeface(tfm);
+        tvRegion.setTypeface(tfm);
+        tvDireccion.setTypeface(tfm);
+        tvNombres.setTypeface(tfm);
+        tvPaterno.setTypeface(tfm);
+        tvMaterno.setTypeface(tfm);
+        tvCorreo.setTypeface(tfm);
         txt1.setTypeface(tf);
         txt2.setTypeface(tf);
         txt3.setTypeface(tf);
         txt4.setTypeface(tf);
         txt5.setTypeface(tf);
-        rb.setTypeface(tfm);
-        rbp.setTypeface(tfm);
-
+        rbAsignado.setTypeface(tfm);
+        rbPersonal.setTypeface(tfm);
 
         tokenCTE = getText(R.string.tokenXM).toString();
         Spinner spinner_Region = (Spinner) findViewById(R.id.spnRegion);
@@ -100,9 +97,49 @@ public class ActualizarActivity extends AppCompatActivity
         spinner_adapterD.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_Direccion.setAdapter(spinner_adapterD);
 
+        //Obtener valores de session
+
+        //asiganción de valores
+
+        // num_celular=5548326608&
+        // tipo_celular=P&
+        // region=9&
+        // nombre=Guillermo&
+        // paterno=Rodriguez&
+        // materno=Garibay&
+        // email=guillermo@telcel.com
+
+        if(user != null) {
+            Spinner spinner_Region1 = (Spinner) findViewById(R.id.spnRegion);
+            Spinner spinner_Direccion1 = (Spinner) findViewById(R.id.spnDireccion);
+
+            spinner_Region1.setSelection(Integer.parseInt(user.get(SessionManagement.KEY_PD_REGION)));
+
+            EditText txtCelular = (EditText) findViewById(R.id.txtCelular);
+            txtCelular.setText(user.get(SessionManagement.KEY_PD_NUM_CELULAR));
+
+            EditText txtNombre = (EditText) findViewById(R.id.txtNombre);
+            txtNombre.setText(user.get(SessionManagement.KEY_PD_NOMBRE));
+
+            EditText txtPaterno = (EditText) findViewById(R.id.txtPaterno);
+            txtPaterno.setText(user.get(SessionManagement.KEY_PD_PATERNO));
+
+            EditText txtMaterno = (EditText) findViewById(R.id.txtMaterno);
+            txtMaterno.setText(user.get(SessionManagement.KEY_PD_MATERNO));
+
+            EditText txtCorreo = (EditText) findViewById(R.id.txtCorreo);
+            //txtCorreo.setText(user.get(SessionManagement.KEY_PD_CORREO));
+        }
+
+
+
+        //and Asignacion de valores
+
+
         Button btnEnviar = (Button) findViewById(R.id.btnEnviar);
 
         // add button listener
+        if(btnEnviar != null)
         btnEnviar.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -142,7 +179,7 @@ public class ActualizarActivity extends AppCompatActivity
 
                         ArrayList<String> params = new ArrayList<String>();
 
-                        String idUsuario = user.get(SessionManagement.KEY_ID);
+                        String idUsuario = user.get(SessionManagement.KEY_PD_ID);
                         String num_Celular = txtCelular.getText().toString();
                         Log.e("Request", "Celular: " + num_Celular);
                         if(num_Celular.length() == 0 || num_Celular.length() > 10 || num_Celular.length() < 10) {
@@ -272,7 +309,7 @@ public class ActualizarActivity extends AppCompatActivity
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-
+        if(imgButton != null)
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

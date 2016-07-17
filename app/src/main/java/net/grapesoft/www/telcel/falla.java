@@ -163,7 +163,7 @@ public class falla extends AppCompatActivity
 
                                 ArrayList<String> params = new ArrayList<String>();
                                 final HashMap<String, String> user = session.getUserDetails();
-                                String idUsuario = user.get(SessionManagement.KEY_ID);
+                                String idUsuario = user.get(SessionManagement.KEY_PD_ID);
                                 Log.e("Response", "Falla: " + itemSelected);
                                 RadioButton rdFalla = (RadioButton)itemSelected.findViewById(R.id.rdfalla);
                                 String opcion = rdFalla.getTag().toString();

@@ -7,9 +7,7 @@ import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,9 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -48,7 +43,7 @@ public class sugerencias extends AppCompatActivity
         setContentView(R.layout.activity_sugerencias);
         tokenCTE = getText(R.string.tokenXM).toString();
         session = new SessionManagement(getApplicationContext());
-
+        final HashMap<String, String> user = session.getUserDetails();
         TextView txtGhost = (TextView) findViewById(R.id.txtCorreoSugerencia);
         TextView txtGhost2 = (TextView) findViewById(R.id.txtSugerencia);
         TextView txtGhost3 = (TextView) findViewById(R.id.textView7);
@@ -138,10 +133,15 @@ public class sugerencias extends AppCompatActivity
                     tvErrorSugerencia.setText("");
 
                     //-------//
-                    if(correo.trim().length() == 0)
+                    if(user == null)
+                    {
+                        Log.e("Response", "Sin usuario ");
+                        tvErrorSugerencia.setText("No existe un usuario logueado.");
+                    }
+                    else if(correo.trim().length() == 0)
                     {
                         Log.e("Response", "Sin correo ");
-                        txtCorreoSugerencia.setText("Ingrese su correo electrónico.");
+                        tvErrorCorreoSugerencia.setText("Ingrese su correo electrónico.");
                         txtCorreoSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
                     }else if (sugerencia.trim().length() == 0)
@@ -163,8 +163,9 @@ public class sugerencias extends AppCompatActivity
                                 Log.e("Response", "Falla: Entro a envio de falla");
 
                                 ArrayList<String> params = new ArrayList<String>();
-                                final HashMap<String, String> user = session.getUserDetails();
-                                String idUsuario = user.get(SessionManagement.KEY_ID);
+
+
+                                String idUsuario = user.get(SessionManagement.KEY_PD_ID);
 
 
 

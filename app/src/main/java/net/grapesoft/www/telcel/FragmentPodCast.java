@@ -26,7 +26,7 @@ public class FragmentPodCast extends Fragment {
         session = new SessionManagement(getActivity());
 
         final HashMap<String, String> user = session.getUserDetails();
-        String region = user.get(SessionManagement.KEY_REGION);
+        String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
         params.add("GetPodcast.php");
