@@ -42,6 +42,7 @@ public class ActualizarActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         session = new SessionManagement(getApplicationContext());
         final HashMap<String, String> user = session.getUserDetails();
 
@@ -109,7 +110,7 @@ public class ActualizarActivity extends AppCompatActivity
         // materno=Garibay&
         // email=guillermo@telcel.com
 
-        if(user != null) {
+        if(user.get(SessionManagement.KEY_PD_ID) != null) {
             Spinner spinner_Region1 = (Spinner) findViewById(R.id.spnRegion);
             Spinner spinner_Direccion1 = (Spinner) findViewById(R.id.spnDireccion);
 
@@ -129,6 +130,12 @@ public class ActualizarActivity extends AppCompatActivity
 
             EditText txtCorreo = (EditText) findViewById(R.id.txtCorreo);
             //txtCorreo.setText(user.get(SessionManagement.KEY_PD_CORREO));
+        }
+        else
+        {
+            Intent i = new Intent(ActualizarActivity.this, login.class);
+            startActivity(i);
+            finish();
         }
 
 
@@ -257,6 +264,8 @@ public class ActualizarActivity extends AppCompatActivity
 
                             if(resp.equals("true")) {
                                 Intent i = new Intent(ActualizarActivity.this, ActualizadosActivity.class);
+                                i.putExtra("titulo","MODIFICAR O ACTUALIZAR DATOS");
+                                i.putExtra("mensaje","Tus datos han sido actualizados.");
                                 startActivity(i);
                                 finish();
                             }else
@@ -367,6 +376,8 @@ public class ActualizarActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
+            finish();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

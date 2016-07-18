@@ -82,18 +82,18 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             String result11 = sb.toString();
             //Log.e("Response: ", result11);
 
-        //   //Checar Parametros
-        //  BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
-        //  StringBuilder sb1 = new StringBuilder();
-        //  sb1.append(reader1.readLine() + "\n");
-        //  String line1 = "0";
-        //  while ((line1 = reader1.readLine()) != null) {
-        //      sb1.append(line1 + "\n");
-        //  }
-        //  reader1.close();
-        //  String result111 = sb1.toString();
-        //  Log.e("Parametros: ", result111);
-        //   //Fin Checar Parametros
+         //Checar Parametros
+        BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append(reader1.readLine() + "\n");
+        String line1 = "0";
+        while ((line1 = reader1.readLine()) != null) {
+            sb1.append(line1 + "\n");
+        }
+        reader1.close();
+        String result111 = sb1.toString();
+        Log.e("Parametros: ", result111);
+         //Fin Checar Parametros
 
 
             if(result11.equals("true"+"\n")) {
@@ -194,7 +194,7 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             nameValuePair.add(new BasicNameValuePair("tipo", paramsPassed.get(4)));
             nameValuePair.add(new BasicNameValuePair("opcion", paramsPassed.get(5)));
             nameValuePair.add(new BasicNameValuePair("comentario", paramsPassed.get(6)));
-            nameValuePair.add(new BasicNameValuePair("correo", paramsPassed.get(7)));
+           // nameValuePair.add(new BasicNameValuePair("correo", paramsPassed.get(7)));
         }else if(paramsPassed.get(0)=="4")
         {
             //Cambiar Contraseña

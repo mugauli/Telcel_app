@@ -31,8 +31,14 @@ public class ActualizadosActivity
         session = new SessionManagement(getApplicationContext());
 
         //Fuentes
-        TextView txtGhost = (TextView) findViewById(R.id.textView12);
+        TextView txtGhost = (TextView) findViewById(R.id.tvMensaje);
 
+        String titulo = getIntent().getExtras().getString("titulo","SIN TÍTULO");
+        String mensaje = getIntent().getExtras().getString("mensaje","SIN MENSAJE");
+
+
+        TextView tvMensaje = (TextView)findViewById(R.id.tvMensaje);
+        tvMensaje.setText(mensaje);
 
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
@@ -83,6 +89,10 @@ public class ActualizadosActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        TextView tituloPrin = (TextView) findViewById(R.id.TitleSeccion);
+        tituloPrin.setTypeface(tf);
+        tituloPrin.setText(titulo);
+
         //ToolBar Menu
     }
     @Override
@@ -119,6 +129,7 @@ public class ActualizadosActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
