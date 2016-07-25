@@ -33,11 +33,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.List;
 
-import Utitilies.List_adapted_Noticias;
 import Utitilies.List_adapted_Producto_Mes;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
@@ -137,7 +134,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                     Log.e("Response Item Prodcuto del mes: ", productos.getJSONObject(i).toString());
 
                     String mes = productos.getJSONObject(i).get("mes").toString();
-                    JSONArray elementos = productos.getJSONObject(0).getJSONArray("elementos");
+                    JSONArray elementos = productos.getJSONObject(i).getJSONArray("elementos");
 
                     String id = elementos.getJSONObject(0).get("id").toString();
                     String titulo = elementos.getJSONObject(0).get("titulo").toString();
@@ -146,6 +143,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                     String texto = elementos.getJSONObject(0).get("texto").toString();
                     JSONArray imagenes_slide = elementos.getJSONObject(0).getJSONArray("imagenes_slide");
 
+                    Log.e("TITULO Prodcuto del mes: ", elementos.getJSONObject(0).get("titulo").toString());
                     ArrayList<String> imagenes_slider = new ArrayList<String>();
 
                     for (int ii = 0; ii < imagenes_slide.length(); ii++) {
@@ -158,7 +156,6 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                     conn.connect();
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
-
                     datos.add(new Lista_Entrada(mes,id,loadedImage, titulo,img_mini,texto,imagenes_slider));
                 }
             }
@@ -186,56 +183,54 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
             @Override
             public void onEntrada(Object entrada, View view) {
 
-                Log.e ("Entrada ProductoMes", ((Lista_Entrada) entrada).get_titulo());
+             if(entrada != null) {
 
-                if (entrada != null) {
+              if(primer3) {
+                  primer3 = false;
 
-                    if(primer3) {
-                        primer3 = false;
+                  Log.e ("Entrada producto mes titulo primero", ((Lista_Entrada) entrada).get_titulo());
 
-                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
-                        if (imagen_noticias != null) {
-                            Log.e("imagen", "pricipal");
-                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                        }
+                  ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
+                  if (imagen_noticias != null) {
+                      Log.e("imagen", "principal");
+                      imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                  }
 
-                        TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUN);
-                        if (noticiafecha != null)
-                            noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
+                  TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUN);
+                  if (noticiafecha != null)
+                      noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.titUN);
+                  TextView noticiatitulo = (TextView) activity.findViewById(R.id.titUN);
 
-                        if (noticiatitulo != null)
-                            noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                  if (noticiatitulo != null)
+                      noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUN);
+                  TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUN);
 
-                        if (noticiaDescripcion != null) {
-                            String desc = ((Lista_Entrada) entrada).get_textoDebajo();
-                            // desc = desc.substring(0,200);
-                            noticiaDescripcion.setText(Html.fromHtml(desc));
-                        }
-                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+                  if (noticiaDescripcion != null) {
+                      String desc = ((Lista_Entrada) entrada).get_textoDebajo();
+                      noticiaDescripcion.setText(Html.fromHtml(desc));
+                  }
+                  LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
-                        principal.setTag(entrada);
+                  principal.setTag(entrada);
 
-                    }
+              }
 
-                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenoticias);
+                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenCaleriaL);
                     if (imagen_noticias != null)
                         imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                    TextView noticiafecha = (TextView) view.findViewById(R.id.noticiafecha);
+                    TextView noticiafecha = (TextView) view.findViewById(R.id.fechaProductoMesL);
                     if (noticiafecha != null)
                         noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                    TextView noticiatitulo = (TextView) view.findViewById(R.id.noticiatitulo);
+                    TextView noticiatitulo = (TextView) view.findViewById(R.id.tituloProductoMesL);
 
                     if (noticiatitulo != null)
                         noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
                     view.setTag(entrada);
-
 
                     view.setOnClickListener(new View.OnClickListener() {
 
@@ -268,14 +263,19 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
     protected void onPostExecute(List_adapted_Producto_Mes result) {
 
         super.onPostExecute(result);
+
         lista = (ListView) activity.findViewById(R.id.lstProductosMes);
         if(result != null && lista != null) {
             lista.setAdapter(result);
             Log.e("Llego", ""+result.getCount());
         }
+        else
+        {
+            Log.e("No llego", "algo paso");
+        }
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelProductoMes);
         if(pBar != null)
-        pBar.setVisibility(View.GONE);
+            pBar.setVisibility(View.GONE);
     }
 
 }

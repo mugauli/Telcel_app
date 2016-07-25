@@ -60,7 +60,7 @@ android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="100"
                     android:orientation="vertical"
                     android:weightSum="100"
                     android:padding="0dp"
@@ -70,7 +70,8 @@ android:orientation="vertical">
                         android:layout_width="fill_parent"
                         android:layout_weight="40"
                         android:layout_height="fill_parent"
-                        android:id="@+id/imagenUNT" />
+                        android:id="@+id/imagenUNT"
+                        android:src="@drawable/ic_launcher" />
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
@@ -85,12 +86,12 @@ android:orientation="vertical">
                             android:textColor="@color/ColorPrimary"
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="35"
+                            android:layout_weight="65"
                             android:layout_height="match_parent"
                             android:id="@+id/titUN"/>
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_weight="30"
+                            android:layout_weight="35"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:layout_height="match_parent"
                             android:id="@+id/descUN"/>
@@ -113,7 +114,6 @@ android:orientation="vertical">
                     android:gravity="center"
                     android:visibility="visible">
                     <ProgressBar
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:indeterminate="true" />
