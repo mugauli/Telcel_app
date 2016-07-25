@@ -91,9 +91,10 @@ public class MainActivity extends AppCompatActivity
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
 
-        tabs.addTab(tabs.newTab().setText(getString(R.string.tab3).toString()));
+        tabs.addTab(tabs.newTab().setText(getString(R.string.tab6).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab1).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab2).toString()));
+        tabs.addTab(tabs.newTab().setText(getString(R.string.tab3).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab5).toString()));
 
 
@@ -101,6 +102,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Log.e("TAB",tab.getText().toString());
+
+                if(tab.getText().toString().equals(getString(R.string.tab6).toString())) {
+
+                    Intent i = new Intent(MainActivity.this, bienvenidos.class);
+                    startActivity(i);
+                }
 
                 if(tab.getText().toString().equals(getString(R.string.tab1).toString())) {
 
