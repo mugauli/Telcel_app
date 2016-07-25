@@ -1,9 +1,11 @@
 package Utitilies;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 
 /**
@@ -12,9 +14,11 @@ import java.util.Dictionary;
 public class Lista_Entrada {
 
 
-    private  Dictionary<String,String> imagenesSlide;
-    private int idImagen,idImagen2,idradio;
+
+    private ArrayList<String> imagenesSlide;
+    private int idImagen,idImagen2,idradio,type;
     private Bitmap img_previa;
+    private SvaElement svaElement1,svaElement2;
     private String
             contenido,
             tipo,
@@ -26,7 +30,8 @@ public class Lista_Entrada {
             fecha,
             mes,
             textoEncima,
-            textoDebajo;
+            textoDebajo,
+            img_mini;
 
     private JSONArray  json;
 
@@ -88,6 +93,28 @@ public class Lista_Entrada {
         this.fecha = fecha;
     }
 
+    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha, String img_mini,SvaElement svaElement1,int type) {
+
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.img_detalle = img_detalle;
+        this.textoDebajo = textoDebajo;
+        this.fecha = fecha;
+        this.img_mini= img_mini;
+        this.type = type;
+        this.svaElement1 = svaElement1;
+
+    }
+    public Lista_Entrada(SvaElement svaElement1,SvaElement svaElement2,int type) {
+
+        this.svaElement1 = svaElement1;
+        this.svaElement2 = svaElement2;
+        this.type = type;
+    }
+
+
+
     public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo,String contenido) {
 
         this.id = id;
@@ -100,7 +127,7 @@ public class Lista_Entrada {
         this.contenido = contenido;
     }
 
-    public Lista_Entrada(String mes, String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  Dictionary<String,String> imagenesSlide) {
+    public Lista_Entrada(String mes, String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  ArrayList<String> imagenesSlide) {
 
         this.mes = mes;
         this.id = id;
@@ -111,7 +138,7 @@ public class Lista_Entrada {
         this.imagenesSlide = imagenesSlide;
     }
 
-    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url,String textoDebajo,  Dictionary<String,String> imagenesSlide) {
+    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url,String textoDebajo,  ArrayList<String> imagenesSlide) {
 
         this.id = id;
         this.img_previa = img_previa;
@@ -145,7 +172,7 @@ public class Lista_Entrada {
     public String get_mes() {
         return mes;
     }
-    public Dictionary<String,String> get_imagenesSlide() {
+    public ArrayList<String> get_imagenesSlide() {
         return imagenesSlide;
     }
     public JSONArray get_json() {
@@ -169,4 +196,17 @@ public class Lista_Entrada {
     public String get_tipo() {
         return tipo;
     }
+    public String get_img_mini() {
+        return img_mini;
+    }
+    public SvaElement get_svaelement1() {
+        return svaElement1;
+    }
+    public SvaElement get_svaelement2() {
+        return svaElement2;
+    }
+    public int get_type() {
+        return type;
+    }
+
 }

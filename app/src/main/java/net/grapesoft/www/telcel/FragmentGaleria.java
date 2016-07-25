@@ -52,13 +52,13 @@ public class FragmentGaleria  extends Fragment {
             @Override
             public void onClick(View arg0) {
 
-                Intent i = new Intent(getActivity(), activity_detalle_campana.class);
+                Intent i = new Intent(getActivity(), activity_detalle_galeria.class);
                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
-                i.putExtra("imagen",Entrada.get_img_detalle());
+            //    i.putExtra("imagen",Entrada.get_img_previa());
                 i.putExtra("titulo",Entrada.get_titulo());
-                i.putExtra("fecha",Entrada.get_fecha());
                 i.putExtra("descripcion",Entrada.get_textoDebajo());
+                i.putStringArrayListExtra("imagenes_slider",Entrada.get_imagenesSlide());
 
                 startActivity(i);
 

@@ -146,46 +146,11 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                     String texto = elementos.getJSONObject(0).get("texto").toString();
                     JSONArray imagenes_slide = elementos.getJSONObject(0).getJSONArray("imagenes_slide");
 
-                    Dictionary<String,String> imagenes_slider = new Dictionary<String, String>() {
-                        @Override
-                        public Enumeration<String> elements() {
-                            return null;
-                        }
-
-                        @Override
-                        public String get(Object key) {
-                            return null;
-                        }
-
-                        @Override
-                        public boolean isEmpty() {
-                            return false;
-                        }
-
-                        @Override
-                        public Enumeration<String> keys() {
-                            return null;
-                        }
-
-                        @Override
-                        public String put(String key, String value) {
-                            return null;
-                        }
-
-                        @Override
-                        public String remove(Object key) {
-                            return null;
-                        }
-
-                        @Override
-                        public int size() {
-                            return 0;
-                        }
-                    };
+                    ArrayList<String> imagenes_slider = new ArrayList<String>();
 
                     for (int ii = 0; ii < imagenes_slide.length(); ii++) {
 
-                        imagenes_slider.put(imagenes_slide.getJSONObject(ii).get("id").toString(),imagenes_slide.getJSONObject(i).get("url_img").toString());
+                        imagenes_slider.add(imagenes_slide.getJSONObject(i).get("url_img").toString());
                     }
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
@@ -214,9 +179,9 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
         }
 
 
-      //  Log.e("Datos Noticias",""+datos.get(2).get_titulo());
+        Log.e("Llego", "al final");
 
-        List_adapted_Producto_Mes ltsNoticias = new List_adapted_Producto_Mes(activity, R.layout.entrada_noticias, datos){
+        return new List_adapted_Producto_Mes(activity, R.layout.entrada_productos_mes, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
@@ -297,15 +262,13 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                 }
             }
         };
-        Log.e("Llego", "al final");
-        return ltsNoticias;
     }
 
     @Override
     protected void onPostExecute(List_adapted_Producto_Mes result) {
 
         super.onPostExecute(result);
-        lista = (ListView) activity.findViewById(R.id.listProductoMes);
+        lista = (ListView) activity.findViewById(R.id.lstProductosMes);
         if(result != null && lista != null) {
             lista.setAdapter(result);
             Log.e("Llego", ""+result.getCount());

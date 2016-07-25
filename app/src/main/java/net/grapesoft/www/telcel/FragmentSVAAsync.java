@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -35,6 +38,7 @@ import java.util.List;
 import Utitilies.List_adapted_SVA;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
+import Utitilies.SvaElement;
 
 /**
  * Created by Mugauli on 21/07/2016.
@@ -47,7 +51,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
     private ListView lista;
     JSONArray responseArray;
     private String imageHttpAddress = "";
-    private Bitmap loadedImage;
+    private Bitmap loadedImage,loadedImage2;
     public String IP = "",tokenCTE = "";
     public boolean primer = true,primer2 = true;
     SessionManagement session;
@@ -116,7 +120,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                 responseArray = new JSONArray("[{'resp':'false'}]");
             } else
             {
-                //Log.e("Response: ", "JSON");
+                Log.e("Response JSON SVA:", result11.toString());
                 if(result11.contains("["))
                     responseArray = new JSONArray(result11);
                 else
@@ -127,23 +131,75 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                 Log.e("Item SVA" ,  "Error");
             }
             else {
+                boolean par = true;
+
+                String id="", titulo="", img_previa="", img_mini="", img_detalle="", texto="", fecha="",
+                        id2, titulo2, img_previa2, img_mini2, img_detalle2, texto2, fecha2;
 
                 for (int i = 0; i < responseArray.length(); i++) {
 
 
-                    String id = responseArray.getJSONObject(i).get("id").toString();
-                    String titulo = responseArray.getJSONObject(i).get("titulo").toString();
-                    String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                    String url_video = responseArray.getJSONObject(i).get("url_video").toString();
-                    String duracion = responseArray.getJSONObject(i).get("duracion").toString();
 
-                    URL imageUrl = null;
-                    imageUrl = new URL(imageHttpAddress + img_previa);
-                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                    conn.connect();
-                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                    conn.disconnect();
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,url_video, duracion,responseArray));
+                    if (par) {
+                        par = false;
+                        id = responseArray.getJSONObject(i).get("id").toString();
+                        titulo = responseArray.getJSONObject(i).get("titulo").toString();
+                        img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
+                        img_mini = responseArray.getJSONObject(i).get("img_mini").toString();
+                        img_detalle = responseArray.getJSONObject(i).get("img_detalle").toString();
+                        texto = responseArray.getJSONObject(i).get("texto").toString();
+                        fecha = responseArray.getJSONObject(i).get("fecha").toString();
+                        URL imageUrl = null;
+                        imageUrl = new URL(imageHttpAddress + img_previa);
+                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+
+                        try {
+                            conn.connect();
+                            loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                            conn.disconnect();
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                        }
+
+
+                    } else {
+                        par= true;
+                        id2 = responseArray.getJSONObject(i).get("id").toString();
+                        titulo2 = responseArray.getJSONObject(i).get("titulo").toString();
+                        img_previa2 = responseArray.getJSONObject(i).get("img_previa").toString();
+                        img_mini2 = responseArray.getJSONObject(i).get("img_mini").toString();
+                        img_detalle2 = responseArray.getJSONObject(i).get("img_detalle").toString();
+                        texto2 = responseArray.getJSONObject(i).get("texto").toString();
+                        fecha2 = responseArray.getJSONObject(i).get("fecha").toString();
+
+                        URL imageUrl = null;
+                        imageUrl = new URL(imageHttpAddress + img_previa2);
+                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+
+                        try {
+                            conn.connect();
+                            loadedImage2 = BitmapFactory.decodeStream(conn.getInputStream());
+                            conn.disconnect();
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                        }
+
+                        SvaElement svaElement1 = new SvaElement(id, loadedImage, titulo, img_detalle, texto, fecha, img_mini);
+                        SvaElement svaElement2 = new SvaElement(id2, loadedImage2, titulo2, img_detalle2, texto2, fecha2, img_mini2);
+                        datos.add(new Lista_Entrada(svaElement1, svaElement2, 2));
+                    }
+
+                    if (i == responseArray.length() - 1 && !par) {
+                        SvaElement svaElement1 = new SvaElement(id, loadedImage, titulo, img_detalle, texto, fecha, img_mini);
+                        datos.add(new Lista_Entrada(id, loadedImage, titulo, img_detalle, texto, fecha, img_mini,svaElement1, 1));
+                    }
+
+
+                    //Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha, String img_mini)
 
                 }
             }
@@ -163,79 +219,136 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
             e.printStackTrace();
         }
 
-        List_adapted_SVA adaptadorLts = new List_adapted_SVA(activity, R.layout.entrada_video, datos){
+        List_adapted_SVA adaptadorLts = new List_adapted_SVA(activity, R.layout.entrada_sva, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
                 //  Log.e ("Entrada Video", ((Lista_Entrada) entrada).get_id());
                 if (entrada != null) {
-                    if(primer){
-                        primer = false;
 
-                        ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
-                        ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
-                        ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
-                        TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
-                        TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
-                        imagenVideo.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                        imagenPlay.setTag(((Lista_Entrada) entrada).get_id());
-                        imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
-                        txtTiempo.setText(((Lista_Entrada) entrada).get_duracion());
-                        txtTitulo.setText(((Lista_Entrada) entrada).get_titulo());
-                    }
+                    int type =  ((Lista_Entrada)entrada).get_type();
 
-                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.videotitulo);
+                    if(type == 2) {
 
-                    if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
+                        SvaElement sva1 = ((Lista_Entrada) entrada).get_svaelement1();
+                        SvaElement sva2 = ((Lista_Entrada) entrada).get_svaelement2();
 
-                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.videoduracion);
+                        if(primer){
+                            primer = false;
 
-                    if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_duracion());
+                            ImageView imgSVA = (ImageView) activity.findViewById(R.id.imgSVA);
+                            TextView tituloSVA = (TextView) activity.findViewById(R.id.tituloSVA);
+                            TextView descSVA = (TextView) activity.findViewById(R.id.descSVA);
 
-                    TextView idVideo = (TextView) view.findViewById(R.id.idVideo);
-
-                    if (idVideo != null)
-                        idVideo.setText(((Lista_Entrada) entrada).get_id());
-
-                    final TextView url_Video = (TextView) view.findViewById(R.id.url_Video);
-
-                    if (url_Video != null)
-                        url_Video.setText(((Lista_Entrada) entrada).get_url());
-
-                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagevideo);
-                    if (imagen_entrada != null) {
-                        imagen_entrada.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                        imagen_entrada.setTag(((Lista_Entrada) entrada).get_img_previa());
-                    }
-
-                    view.setTag(entrada);
-
-                    view.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View arg0) {
-
-                            ImageView imagenVideo = (ImageView) activity.findViewById(R.id.videoCampanaProductos);
-                            ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
-                            ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
-                            TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
-                            TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
-
-                            Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
-
-                            String id_video = ((TextView)arg0.findViewById(R.id.idVideo)).getText().toString();
-
-                            imagenVideo.setImageBitmap(Entrada.get_img_previa());
-                            imagenPlay.setTag(Entrada.get_id());
-                            imagenDescarga.setTag(Entrada.get_url());
-                            txtTiempo.setText(Entrada.get_duracion());
-                            txtTitulo.setText(Entrada.get_titulo());
-
+                            imgSVA.setImageBitmap(sva1.get_img_previaSva());
+                            tituloSVA.setText(sva1.get_tituloSva());
+                            descSVA.setText(Html.fromHtml(sva1.get_textoDebajoSva()));
                         }
-                    });
 
+                        ImageView imagenSva1 = (ImageView) view.findViewById(R.id.imagenSva1);
+                        if (imagenSva1 != null) {
+                            imagenSva1.setImageBitmap(sva1.get_img_previaSva());
+                        }
+                        TextView tituloSVA = (TextView) view.findViewById(R.id.tituloSva1);
+                        if (tituloSVA != null)
+                            tituloSVA.setText(sva1.get_tituloSva());
+                        LinearLayout linearSva1 =  (LinearLayout) view.findViewById(R.id.linearSva1);
+                        if (linearSva1 != null) {
+                            linearSva1.setTag(sva1);
+                            linearSva1.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View arg0) {
+
+                                    ImageView imagenVideo = (ImageView) activity.findViewById(R.id.imgSVA);
+                                    TextView tituloSVA = (TextView) activity.findViewById(R.id.tituloSVA);
+                                    TextView descSVA = (TextView) activity.findViewById(R.id.descSVA);
+
+                                    SvaElement Entrada = (SvaElement) arg0.getTag();
+
+                                    imagenVideo.setImageBitmap(Entrada.get_img_previaSva());
+                                    tituloSVA.setText(Entrada.get_tituloSva());
+                                    descSVA.setText(Html.fromHtml(Entrada.get_textoDebajoSva()));
+
+                                }
+                            });
+                        }
+
+                        ImageView imagenSva2 = (ImageView) view.findViewById(R.id.imagenSva2);
+                        if (imagenSva2 != null) {
+                            imagenSva2.setImageBitmap(sva2.get_img_previaSva());
+                        }
+                        TextView tituloSVA2 = (TextView) view.findViewById(R.id.tituloSva2);
+                        if (tituloSVA2 != null)
+                            tituloSVA2.setText(sva2.get_tituloSva());
+                        LinearLayout linearSva2 =  (LinearLayout) view.findViewById(R.id.linearSva2);
+                        if (linearSva2 != null) {
+                            linearSva2.setTag(sva2);
+                            linearSva2.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View arg0) {
+
+                                    ImageView imagenVideo = (ImageView) activity.findViewById(R.id.imgSVA);
+                                    TextView tituloSVA = (TextView) activity.findViewById(R.id.tituloSVA);
+                                    TextView descSVA = (TextView) activity.findViewById(R.id.descSVA);
+
+                                    SvaElement Entrada = (SvaElement) arg0.getTag();
+
+                                    imagenVideo.setImageBitmap(Entrada.get_img_previaSva());
+                                    tituloSVA.setText(Entrada.get_tituloSva());
+                                    descSVA.setText(Html.fromHtml(Entrada.get_textoDebajoSva()));
+
+                                }
+                            });
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        if(primer){
+                            primer = false;
+
+                            ImageView imgSVA = (ImageView) activity.findViewById(R.id.imgSVA);
+                            TextView tituloSVA = (TextView) activity.findViewById(R.id.tituloSVA);
+                            TextView descSVA = (TextView) activity.findViewById(R.id.descSVA);
+
+                            imgSVA.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                            tituloSVA.setText(((Lista_Entrada) entrada).get_titulo());
+                            descSVA.setText(Html.fromHtml(((Lista_Entrada) entrada).get_textoDebajo()));
+                        }
+
+                        ImageView imagenSva1 = (ImageView) view.findViewById(R.id.imagenSva1);
+                        if (imagenSva1 != null) {
+                            imagenSva1.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                        }
+                        TextView tituloSVA = (TextView) view.findViewById(R.id.tituloSva1);
+                        if (tituloSVA != null)
+                            tituloSVA.setText(((Lista_Entrada) entrada).get_titulo());
+                        LinearLayout linearSva1 =  (LinearLayout) view.findViewById(R.id.linearSva1);
+                        if (linearSva1 != null) {
+                            linearSva1.setTag(((Lista_Entrada) entrada).get_svaelement1());
+                            linearSva1.setOnClickListener(new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View arg0) {
+
+                                    ImageView imagenVideo = (ImageView) activity.findViewById(R.id.imgSVA);
+                                    TextView tituloSVA = (TextView) activity.findViewById(R.id.tituloSVA);
+                                    TextView descSVA = (TextView) activity.findViewById(R.id.descSVA);
+
+                                    Lista_Entrada Entrada = (Lista_Entrada) arg0.getTag();
+
+                                    imagenVideo.setImageBitmap(Entrada.get_img_previa());
+                                    tituloSVA.setText(Entrada.get_titulo());
+                                    descSVA.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+
+                                }
+                            });
+                        }
+                    }
                 }
             }
 
@@ -250,11 +363,11 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
     protected void onPostExecute(List_adapted_SVA result) {
 
         super.onPostExecute(result);
-        lista = (ListView) activity.findViewById(R.id.listCampanaProductos);
+        lista = (ListView) activity.findViewById(R.id.lstSVA);
         if (result != null && lista != null)
             lista.setAdapter(result);
 
-        ProgressBar pBar = (ProgressBar) activity.findViewById(R.id.loadingPanelCampanaProductos);
+        ProgressBar pBar = (ProgressBar) activity.findViewById(R.id.loadingPanelSVA);
         if(pBar != null)
             pBar.setVisibility(View.GONE);
     }

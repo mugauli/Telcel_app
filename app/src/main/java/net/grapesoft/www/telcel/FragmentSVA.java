@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.VideoView;
 
 import java.io.File;
@@ -20,7 +21,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
+import Utitilies.SvaElement;
 
 public class FragmentSVA extends Fragment {
     // Declare variables
@@ -46,88 +49,35 @@ public class FragmentSVA extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetCPublicitarias.php");
+        params.add("GetSVA.php");
         params.add(tokenCTE);
         params.add(region);
 
         new FragmentSVAAsync(getActivity()).execute(params);
 
-        ImageView imagen_play = (ImageView) rootview.findViewById(R.id.play);
+        LinearLayout principal = (LinearLayout) rootview.findViewById(R.id.linearPrincipalSva);
 
-        imagen_play.setOnClickListener(new View.OnClickListener() {
+        principal.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                //TextView idVideo = (TextView) rootview.findViewById(R.id.idVideo);
-                String id_video = arg0.getTag().toString();
-                Intent i = new Intent(getActivity(), VideoDetalleActivity.class);
-                i.putExtra("video_id",id_video);
+                Intent i = new Intent(getActivity(), activity_detalle_sva.class);
+
+                SvaElement Entrada = (SvaElement)arg0.getTag();
+
+                i.putExtra("imagen",Entrada.get_img_detalleSva());
+                i.putExtra("titulo",Entrada.get_tituloSva());
+                i.putExtra("descripcion",Entrada.get_textoDebajoSva());
+                //i.putStringArrayListExtra("imagenes_slider",Entrada.get_imagenesSlide());
+
                 startActivity(i);
-                //Log.e("ID Video", "ID: "+ id_video);
+
+
             }
-
         });
-        ImageView imagen_descarga = (ImageView) rootview.findViewById(R.id.descarga);
-        imagen_descarga.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                download(rootview,arg0.getTag().toString());
-            }
-
-        });
-
 
         return rootview;
-    }
-
-    public void download(View v , String URL)
-    {
-
-        new DownloadFile().execute(URL);
-    }
-
-    public void view(View v,String URL)
-    {
-        Log.e("URL Abrir", URL);
-        File pdfFile = new File(Environment.getExternalStorageDirectory() + "/testthreevid/" + URL);
-        Uri path = Uri.fromFile(pdfFile);
-        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-        pdfIntent.setDataAndType(path, "video/*");
-        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        try{
-            startActivity(pdfIntent);
-        }catch(ActivityNotFoundException e){
-
-        }
-    }
-
-    private class DownloadFile extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... strings) {
-
-
-            String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
-            String fileName = strings[1];  // -> maven.pdf
-            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-            File folder = new File(extStorageDirectory, "testthreevid");
-            folder.mkdir();
-
-            File pdfFile = new File(folder, fileName);
-
-            try{
-                pdfFile.createNewFile();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            Log.e("URL Guardado",fileUrl);
-            Log.e("URL Guardado",pdfFile.toString());
-            FileDownloader.DownloadFile(fileUrl, pdfFile);
-            return null;
-        }
     }
 
 }

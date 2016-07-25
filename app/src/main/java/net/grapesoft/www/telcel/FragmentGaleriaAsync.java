@@ -134,51 +134,18 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
                     String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                    String imagen_detalle = responseArray.getJSONObject(i).get("url").toString();
+                    String url = responseArray.getJSONObject(i).get("url").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
 
                     JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+                   // String imagenes_slide_Json = responseArray.getJSONObject(0).getJSONArray("imagenes_slide").toString();
 
-                    Dictionary<String,String> imagenes_slider = new Dictionary<String, String>() {
-                        @Override
-                        public Enumeration<String> elements() {
-                            return null;
-                        }
+                    ArrayList<String> imagenes_slider = new ArrayList<String>();
 
-                        @Override
-                        public String get(Object key) {
-                            return null;
-                        }
-
-                        @Override
-                        public boolean isEmpty() {
-                            return false;
-                        }
-
-                        @Override
-                        public Enumeration<String> keys() {
-                            return null;
-                        }
-
-                        @Override
-                        public String put(String key, String value) {
-                            return null;
-                        }
-
-                        @Override
-                        public String remove(Object key) {
-                            return null;
-                        }
-
-                        @Override
-                        public int size() {
-                            return 0;
-                        }
-                    };
 
                     for (int ii = 0; ii < imagenes_slide.length(); ii++) {
 
-                        imagenes_slider.put(imagenes_slide.getJSONObject(ii).get("id").toString(),imagenes_slide.getJSONObject(i).get("url_img").toString());
+                        imagenes_slider.add(imagenes_slide.getJSONObject(i).get("url_img").toString());
                     }
 
                     URL imageUrl = null;
@@ -194,7 +161,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                     {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,imagenes_slider));
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,url,texto,imagenes_slider));
 
                 }
             }

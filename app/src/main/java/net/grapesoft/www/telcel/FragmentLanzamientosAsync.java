@@ -2,12 +2,15 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,6 +37,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utitilies.HorizontalListView;
+import Utitilies.List_adapted_Lanzamientos;
 import Utitilies.List_adapted_Noticias;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
@@ -41,7 +46,7 @@ import Utitilies.SessionManagement;
 /**
  * Created by Mugauli on 22/07/2016.
  */
-public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Noticias> {
+public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Lanzamientos> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -60,7 +65,7 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
     }
 
     @Override
-    protected List_adapted_Noticias doInBackground(ArrayList<String>... params) {
+    protected List_adapted_Lanzamientos doInBackground(ArrayList<String>... params) {
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
@@ -144,6 +149,10 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
 
+
+
+               //    datos.add(new Lista_Entrada(id,loadedImage, titulo,img_mini,texto,imagenes_slide));
+               //    datos.add(new Lista_Entrada(id,loadedImage, titulo,img_mini,texto,imagenes_slide));
                     datos.add(new Lista_Entrada(id,loadedImage, titulo,img_mini,texto,imagenes_slide));
                 }
             }
@@ -164,9 +173,9 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
         }
 
 
-        //  Log.e("Datos Noticias",""+datos.get(2).get_titulo());
-
-        List_adapted_Noticias ltsNoticias = new List_adapted_Noticias(activity, R.layout.entrada_lanzamientos, datos){
+          Log.e("Datos Lanzamientos",""+datos.get(1).get_titulo());
+        Log.e("Llego", "al final");
+        return new List_adapted_Lanzamientos(activity, R.layout.entrada_lanzamientos, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
@@ -201,61 +210,70 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                         principal.setTag(entrada);
 
                     }
+                //    else {
 
-                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagelanzamientos);
-                    if (imagen_noticias != null)
-                        imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                    WindowManager wm = (WindowManager) activity.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+                    Display display = wm.getDefaultDisplay();
+                    LinearLayout contentModel = (LinearLayout) view.findViewById(R.id.contentModel);
 
-                    TextView noticiafecha = (TextView) view.findViewById(R.id.lanzamientosfecha);
-                    if (noticiafecha != null)
-                        noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
+                    int width = (int) (display.getWidth() * (0.30));
+                    Log.e("width",""+width);
+                    contentModel.setMinimumWidth(width);
 
-                    TextView noticiatitulo = (TextView) view.findViewById(R.id.lanzamientostitulo);
-
-                    if (noticiatitulo != null)
-                        noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
-
-                    view.setTag(entrada);
+                            ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagelanzamientos);
+                        if (imagen_noticias != null)
+                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
 
-                    view.setOnClickListener(new View.OnClickListener() {
+                        TextView noticiatitulo = (TextView) view.findViewById(R.id.lanzamientostitulo);
 
-                        @Override
-                        public void onClick(View arg0) {
+                        if (noticiatitulo != null)
+                            noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
-                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
-                            TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
-                            TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
-                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+                        view.setTag(entrada);
 
-                            Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
-                            imagenGrupo.setImageBitmap(Entrada.get_img_previa());
-                            fechaGrupo.setText(Entrada.get_fecha());
-                            titGrupo.setText(Entrada.get_titulo());
-                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
-                            principal.setTag(Entrada);
+                        view.setOnClickListener(new View.OnClickListener() {
 
-                        }
-                    });
+                            @Override
+                            public void onClick(View arg0) {
 
-                }
+                                ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
+                                TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
+                                TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
+                                LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+
+                                Lista_Entrada Entrada = (Lista_Entrada) arg0.getTag();
+                                imagenGrupo.setImageBitmap(Entrada.get_img_previa());
+                                titGrupo.setText(Entrada.get_titulo());
+                                descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                                principal.setTag(Entrada);
+
+                            }
+                        });
+                    }
+
+             //   }
             }
         };
-        Log.e("Llego", "al final");
-        return ltsNoticias;
+
+
     }
 
     @Override
-    protected void onPostExecute(List_adapted_Noticias result) {
+    protected void onPostExecute(List_adapted_Lanzamientos result) {
 
         super.onPostExecute(result);
-        lista = (ListView) activity.findViewById(R.id.listLanzamientos);
-        if(result != null && lista != null) {
-            lista.setAdapter(result);
-            Log.e("Llego", ""+result.getCount());
+        HorizontalListView listview = (HorizontalListView) activity.findViewById(R.id.listLanzamientos);
+       // lista = (ListView)activity.findViewById(R.id.listLanzamientos);
+        if(result != null && listview != null) {
+            listview.setAdapter(result);
+            Log.e("Llego Lanzamientos", ""+result.getCount());
+        }else
+        {
+            Log.e("No llego Lanzamientos", "Algo paso");
         }
+
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelNoticias);
         if(pBar != null)
             pBar.setVisibility(View.GONE);
