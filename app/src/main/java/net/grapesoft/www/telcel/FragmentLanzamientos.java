@@ -56,7 +56,6 @@ public class FragmentLanzamientos extends Fragment {
                 if(Entrada != null) {
                     i.putExtra("imagen", Entrada.get_img_detalle());
                     i.putExtra("titulo", Entrada.get_titulo());
-                    i.putExtra("fecha", Entrada.get_fecha());
                     i.putExtra("descripcion", Entrada.get_textoDebajo());
 
                     startActivity(i);

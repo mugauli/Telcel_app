@@ -22,18 +22,21 @@ import java.util.concurrent.ExecutionException;
 import Utitilies.GetNetImage;
 import Utitilies.SessionManagement;
 
-public class activity_detalle_lanzamientos extends AppCompatActivity
+public class activity_detalle_sva extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     SessionManagement session;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_lanzamiento);
+        setContentView(R.layout.activity_detalle_sva);
 
         session = new SessionManagement(getApplicationContext());
 
-    //    String imagen = getIntent().getStringExtra("imagen");
+        String imagen = getIntent().getStringExtra("imagen");
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
 
@@ -41,16 +44,16 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
         TextView titUG = (TextView) findViewById(R.id.titDNT);
         TextView descUG = (TextView) findViewById(R.id.descDNT);
 
-    //   try {
-    //       Bitmap img = new GetNetImage().execute(imagen).get();
-    //       if(img != null)
-    //           imagenUG.setImageBitmap(img);
+        try {
+            Bitmap img = new GetNetImage().execute(imagen).get();
+            if(img != null)
+                imagenUG.setImageBitmap(img);
 
-    //   } catch (InterruptedException e) {
-    //       e.printStackTrace();
-    //   } catch (ExecutionException e) {
-    //       e.printStackTrace();
-    //   }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
 
         titUG.setText(titulo);
@@ -58,7 +61,7 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
         descUG.setText(Html.fromHtml(descripcion));
 
 
-//        Log.e("Imagen", imagen);
+        Log.e("Imagen", imagen);
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -133,17 +136,17 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(activity_detalle_lanzamientos.this, ActualizarActivity.class);
+            Intent i = new Intent(activity_detalle_sva.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_detalle_lanzamientos.this, pin.class);
+            Intent i = new Intent(activity_detalle_sva.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(activity_detalle_lanzamientos.this, preferencias.class);
+            Intent i = new Intent(activity_detalle_sva.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {

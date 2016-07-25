@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.GetNetImage;
@@ -36,7 +38,8 @@ public class activity_detalle_galeria extends AppCompatActivity
 
         session = new SessionManagement(getApplicationContext());
 
-        String imagen = getIntent().getStringExtra("imagen");
+        //String imagen = getIntent().getStringExtra("imagen");
+        ArrayList<String> imagenes_slider = getIntent().getStringArrayListExtra("imagenes_slider");
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
 
@@ -44,16 +47,16 @@ public class activity_detalle_galeria extends AppCompatActivity
         TextView titUG = (TextView) findViewById(R.id.titDNT);
         TextView descUG = (TextView) findViewById(R.id.descDNT);
 
-        try {
-            Bitmap img = new GetNetImage().execute(imagen).get();
-            if(img != null)
-                imagenUG.setImageBitmap(img);
+    //  try {
+    //      Bitmap img = new GetNetImage().execute(imagen).get();
+    //      if(img != null)
+    //          imagenUG.setImageBitmap(img);
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+    //  } catch (InterruptedException e) {
+    //      e.printStackTrace();
+    //  } catch (ExecutionException e) {
+    //      e.printStackTrace();
+    //  }
 
 
         titUG.setText(titulo);
@@ -61,7 +64,7 @@ public class activity_detalle_galeria extends AppCompatActivity
         descUG.setText(Html.fromHtml(descripcion));
 
 
-        Log.e("Imagen", imagen);
+        Log.e("Numero de Imagenes Galeria detalle", ": " + imagenes_slider.size());
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -158,5 +161,7 @@ public class activity_detalle_galeria extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 }
