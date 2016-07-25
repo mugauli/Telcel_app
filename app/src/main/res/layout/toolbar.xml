@@ -24,7 +24,14 @@
             android:layout_alignParentStart="true"
             android:id="@+id/btnMenu"
             android:background="@null"/>
-
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/navtrivias"
+            android:id="@+id/btnTrivia"
+            android:background="@null"/>
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.Toolbar
     android:id="@+id/toolbarName"
