@@ -16,14 +16,36 @@
         android:background="@color/colorToolBar"
         app:popupTheme="@style/AppTheme.PopupOverlay" >
 
-        <ImageButton
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/nav"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/btnMenu"
-            android:background="@null"/>
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:layout_gravity="center_horizontal">
+
+
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/navtrivias"
+                android:layout_weight="50"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/btnTrivia"
+                android:background="@null"/>
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/nav"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="50"
+                android:id="@+id/btnMenu"
+                android:background="@null"/>
+
+        </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
 

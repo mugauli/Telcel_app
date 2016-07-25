@@ -171,78 +171,97 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_detalle_comunicado"
+        <activity
+            android:name=".activity_detalle_comunicado"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_detalle_grupo"
+        <activity
+            android:name=".activity_detalle_grupo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_detalle_noticia"
+        <activity
+            android:name=".activity_detalle_noticia"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductosActivity"
+        <activity
+            android:name=".ProductosActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".PublicitariaDetalleActivity"
+        <activity
+            android:name=".PublicitariaDetalleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_detalle_campana"
+        <activity
+            android:name=".activity_detalle_campana"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_detalle_galeria"
+        <activity
+            android:name=".activity_detalle_galeria"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_detalle_lanzamientos"
+        <activity
+            android:name=".activity_detalle_lanzamientos"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_detalle_sva"
+        <activity
+            android:name=".activity_detalle_sva"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

@@ -1,5 +1,6 @@
 package net.grapesoft.www.telcel;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
+        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -68,9 +71,20 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        imgButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, trivias.class);
+                startActivity(i);
+            }
+        });
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
 
         //ToolBar Menu
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
@@ -81,6 +95,7 @@ public class MainActivity extends AppCompatActivity
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab1).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab2).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab5).toString()));
+
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

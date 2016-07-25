@@ -32,6 +32,7 @@ public class enviado extends AppCompatActivity
         //Fuentes
         TextView txtGhost = (TextView) findViewById(R.id.textView11);
         TextView txtGhost1 = (TextView) findViewById(R.id.textView12);
+        TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
 
         // Loading Font Face
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
@@ -39,7 +40,8 @@ public class enviado extends AppCompatActivity
         // Applying font
         txtGhost.setTypeface(tf);
         txtGhost1.setTypeface(tf);
-
+        txtGhost4.setTypeface(tf);
+        txtGhost4.setText("MENSAJE ENVIADO");
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
