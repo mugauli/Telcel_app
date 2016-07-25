@@ -89,7 +89,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
         Log.e("id_video_DETALLE",video_id);
 
         try {
-            String video = session.getVideoDetails();
+            String video = session.getCampanaProductosDetails();
 
             if (video == null || video == "") {
 
@@ -97,7 +97,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
                 if (pBar != null) pBar.setVisibility(View.VISIBLE);
 
                 params.add("6");
-                params.add("GetVideo.php");
+                params.add("GetCPublicitarias.php");
                 params.add(tokenCTE);
                 params.add(region);
 
@@ -105,7 +105,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
                 if (pBar != null) pBar.setVisibility(View.GONE);
 
             } else {
-                Log.e("Con session VIDEO", video);
+                Log.e("Con session VIDEO Publicitaria", video);
                 result11 = video;
                 if (result11.equals("true" + "\n")) {
                     responseArray = new JSONArray("[{'resp':'true'}]");
@@ -121,7 +121,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
 
 
             if (responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Video Detalle", "Error");
+                Log.e("Item Video Detalle Publicitaria" , "Error");
             } else {
 
                 for (int i = 0; i < responseArray.length(); i++) {

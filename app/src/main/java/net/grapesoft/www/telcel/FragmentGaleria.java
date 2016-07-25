@@ -45,7 +45,7 @@ public class FragmentGaleria  extends Fragment {
 
         new FragmentGaleriaAsync(getActivity()).execute(params);
 
-        LinearLayout principal = (LinearLayout)rootview.findViewById(R.id.linearPrincipalCM);
+        LinearLayout principal = (LinearLayout)rootview.findViewById(R.id.linearPrincipalNT);
 
         principal.setOnClickListener(new View.OnClickListener() {
 

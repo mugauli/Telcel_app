@@ -1,10 +1,10 @@
 package net.grapesoft.www.telcel;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,15 +32,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utitilies.List_adapted;
-import Utitilies.List_adapted_Video;
+import Utitilies.List_adapted_SVA;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
- * Created by memoHack on 11/07/2016.
+ * Created by Mugauli on 21/07/2016.
  */
-public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Video> {
+public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_SVA> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -55,7 +54,7 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
 
 
-    public FragmentPublicitariaAsync(Activity activity) {
+    public FragmentSVAAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
         this.activity = activity;
@@ -65,7 +64,7 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
 
     @Override
-    protected List_adapted_Video doInBackground(ArrayList<String>... params){
+    protected List_adapted_SVA doInBackground(ArrayList<String>... params){
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
@@ -74,11 +73,11 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
         String result11 = "";
         try {
 
-            String video = session.getCampanaProductosDetails();
+            String video = session.getSVAProductosDetails();
 
             if(video == null || video == "") {
 
-                Log.e("Se obtiene VIDEO Campana publicitaria","Procesando...");
+                Log.e("Se obtiene SVA","Procesando...");
 
                 List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient = new DefaultHttpClient();
@@ -101,11 +100,11 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
                 reader.close();
                 result11 = sb.toString();
 
-                session.createCampanasProductosSession(result11);
+                session.createSVAProductosSession(result11);
             }
             else
             {
-                Log.e("Con session VIDEO",video);
+                Log.e("Con session SVA",video);
                 result11 = video;
             }
 
@@ -125,7 +124,7 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
             }
 
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Podcast" ,  "Error");
+                Log.e("Item SVA" ,  "Error");
             }
             else {
 
@@ -151,27 +150,25 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
 
         } catch (JSONException e) {
-            Log.e("Error Async 0 Video", e.getMessage());
+            Log.e("Error Async 0 SVA", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            Log.e("Error Async 1 Video", e.getMessage());
+            Log.e("Error Async 1 SVA", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error Async 2 Video", e.getMessage());
+            Log.e("Error Async 2 SVA", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("Error Async 3 Video", e.getMessage());
+            Log.e("Error Async 3 SVA", e.getMessage());
             e.printStackTrace();
         }
 
-        List_adapted_Video adaptadorLts = new List_adapted_Video(activity, R.layout.entrada_publicitaria, datos){
+        List_adapted_SVA adaptadorLts = new List_adapted_SVA(activity, R.layout.entrada_video, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
                 //  Log.e ("Entrada Video", ((Lista_Entrada) entrada).get_id());
-
                 if (entrada != null) {
-
                     if(primer){
                         primer = false;
 
@@ -220,12 +217,11 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
                         @Override
                         public void onClick(View arg0) {
 
-                            ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
+                            ImageView imagenVideo = (ImageView) activity.findViewById(R.id.videoCampanaProductos);
                             ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
                             ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
                             TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
                             TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
-
 
                             Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
@@ -251,15 +247,15 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
     }
 
     @Override
-    protected void onPostExecute(List_adapted_Video result) {
+    protected void onPostExecute(List_adapted_SVA result) {
 
         super.onPostExecute(result);
-        lista = (ListView) activity.findViewById(R.id.listvideo);
+        lista = (ListView) activity.findViewById(R.id.listCampanaProductos);
         if (result != null && lista != null)
             lista.setAdapter(result);
 
-        ProgressBar pBar = (ProgressBar) activity.findViewById(R.id.loadingPanelVideo);
+        ProgressBar pBar = (ProgressBar) activity.findViewById(R.id.loadingPanelCampanaProductos);
         if(pBar != null)
-            pBar.setVisibility(View.INVISIBLE);
+            pBar.setVisibility(View.GONE);
     }
 }

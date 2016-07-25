@@ -38,7 +38,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 6:
                 FragmentCampana tab6 = new FragmentCampana();
                 return tab6;
-
             case 7:
                 FragmentGaleria tab8 = new FragmentGaleria();
                 return tab8;

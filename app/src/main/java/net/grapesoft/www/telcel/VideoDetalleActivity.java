@@ -59,7 +59,7 @@ public class VideoDetalleActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_view);
+        setContentView(R.layout.activity_detalle_video);
 
         session = new SessionManagement(getApplicationContext());
         tokenCTE = getText(R.string.tokenXM).toString();
@@ -306,8 +306,8 @@ public class VideoDetalleActivity extends AppCompatActivity
         });
 
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
 

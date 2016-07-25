@@ -1,46 +1,68 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
+import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
+import Utitilies.GetNetImage;
 import Utitilies.SessionManagement;
 
-public class ProductosActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class activity_detalle_galeria extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     SessionManagement session;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detalle_galeria);
 
-        setContentView(R.layout.activity_productos);
         session = new SessionManagement(getApplicationContext());
 
-        //boton ayuda
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProductosActivity.this,ayuda.class);
-                startActivity(intent);
-            }
-        });
-        //boton ayuda
+        String imagen = getIntent().getStringExtra("imagen");
+        String titulo = getIntent().getStringExtra("titulo");
+        String descripcion = getIntent().getStringExtra("descripcion");
+
+        ImageView imagenUG = (ImageView) findViewById(R.id.imagenDNT);
+        TextView titUG = (TextView) findViewById(R.id.titDNT);
+        TextView descUG = (TextView) findViewById(R.id.descDNT);
+
+        try {
+            Bitmap img = new GetNetImage().execute(imagen).get();
+            if(img != null)
+                imagenUG.setImageBitmap(img);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        titUG.setText(titulo);
+        if(descripcion != null)
+        descUG.setText(Html.fromHtml(descripcion));
+
+
+        Log.e("Imagen", imagen);
+
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,64 +77,22 @@ public class ProductosActivity extends AppCompatActivity
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-        if(imgButton != null)
-            imgButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (drawer.isDrawerOpen(GravityCompat.START)) {
-                        drawer.closeDrawer(GravityCompat.START);
-                    } else {
-                        drawer.openDrawer(GravityCompat.START);
-                    }
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else {
+                    drawer.openDrawer(GravityCompat.START);
                 }
-            });
+            }
+        });
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
-
-        final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-
-
-        tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
-
-        tabs.addTab(tabs.newTab().setText("CAMPAÑA PUBLICITARIA"));
-        tabs.addTab(tabs.newTab().setText("LANZAMIENTOS"));
-        tabs.addTab(tabs.newTab().setText("PRODUCTO DEL MES"));
-        tabs.addTab(tabs.newTab().setText("SVA"));
-
-
-        //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        /*final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);*/
-        final PageAdapterProductos adapter = new PageAdapterProductos
-                (getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
-
-
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
-        tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
 
     @Override
@@ -156,17 +136,17 @@ public class ProductosActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(ProductosActivity.this, ActualizarActivity.class);
+            Intent i = new Intent(activity_detalle_galeria.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(ProductosActivity.this, pin.class);
+            Intent i = new Intent(activity_detalle_galeria.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(ProductosActivity.this, preferencias.class);
+            Intent i = new Intent(activity_detalle_galeria.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {
@@ -178,4 +158,5 @@ public class ProductosActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

@@ -1,4 +1,5 @@
 package net.grapesoft.www.telcel;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -8,8 +9,9 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
@@ -32,40 +34,33 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utitilies.List_adapted;
-import Utitilies.List_adapted_Video;
+import Utitilies.List_adapted_Noticias;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
- * Created by memoHack on 11/07/2016.
+ * Created by Mugauli on 22/07/2016.
  */
-public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Video> {
+public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Noticias> {
 
     ProgressDialog dialog;
     Activity activity;
-    ImageView img;
     private ListView lista;
     JSONArray responseArray;
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
-    public boolean primer = true,primer2 = true;
+    public boolean primer3 = true;
     SessionManagement session;
 
-
-
-    public FragmentPublicitariaAsync(Activity activity) {
+    public FragmentLanzamientosAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
         this.activity = activity;
-
     }
 
-
-
     @Override
-    protected List_adapted_Video doInBackground(ArrayList<String>... params){
+    protected List_adapted_Noticias doInBackground(ArrayList<String>... params) {
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
@@ -74,11 +69,11 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
         String result11 = "";
         try {
 
-            String video = session.getCampanaProductosDetails();
+            String noticias = session.getLanzamientosProductosDetails();
 
-            if(video == null || video == "") {
+            if(noticias == null || noticias == "") {
 
-                Log.e("Se obtiene VIDEO Campana publicitaria","Procesando...");
+                Log.e("Se obtiene LANZAMIENTOS","Procesando...");
 
                 List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient = new DefaultHttpClient();
@@ -87,7 +82,7 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
                 nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
                 nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-
+                Log.e("IP", IP + params[0].get(1));
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
 
@@ -101,13 +96,16 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
                 reader.close();
                 result11 = sb.toString();
 
-                session.createCampanasProductosSession(result11);
+
+                session.createLanzamientosProductosSession(result11);
             }
             else
             {
-                Log.e("Con session VIDEO",video);
-                result11 = video;
+                Log.e("Con session LANZAMIENTOS",noticias);
+                result11 = noticias;
             }
+
+            //Log.e("Response: ", result11);
 
             if(result11.equals("true"+"\n")) {
                 // Log.e("Response: ", "true Int");
@@ -125,18 +123,19 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
             }
 
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Podcast" ,  "Error");
+                Log.e("Item LANZAMIENTOS" ,  "Error");
             }
             else {
 
                 for (int i = 0; i < responseArray.length(); i++) {
-
+                    Log.e("Response Item: ", responseArray.getJSONObject(i).toString());
 
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
                     String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                    String url_video = responseArray.getJSONObject(i).get("url_video").toString();
-                    String duracion = responseArray.getJSONObject(i).get("duracion").toString();
+                    String img_mini = responseArray.getJSONObject(i).get("img_mini").toString();
+                    String texto = responseArray.getJSONObject(i).get("texto").toString();
+                    String imagenes_slide = responseArray.getJSONObject(i).get("imagenes_slide").toString();
 
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
@@ -144,122 +143,122 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
                     conn.connect();
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,url_video, duracion,responseArray));
 
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,img_mini,texto,imagenes_slide));
                 }
             }
 
 
         } catch (JSONException e) {
-            Log.e("Error Async 0 Video", e.getMessage());
+            Log.e("Error JSONException Lanzamientos", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            Log.e("Error Async 1 Video", e.getMessage());
+            Log.e("Error UnsupportedEncodingException Lanzamientos", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error Async 2 Video", e.getMessage());
+            Log.e("Error ClientProtocolException Lamzamientos", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("Error Async 3 Video", e.getMessage());
+            Log.e("Error IOException Lanzamientos", e.getMessage());
             e.printStackTrace();
         }
 
-        List_adapted_Video adaptadorLts = new List_adapted_Video(activity, R.layout.entrada_publicitaria, datos){
+
+        //  Log.e("Datos Noticias",""+datos.get(2).get_titulo());
+
+        List_adapted_Noticias ltsNoticias = new List_adapted_Noticias(activity, R.layout.entrada_lanzamientos, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
-                //  Log.e ("Entrada Video", ((Lista_Entrada) entrada).get_id());
+
+                Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
 
                 if (entrada != null) {
 
-                    if(primer){
-                        primer = false;
+                    if(primer3) {
+                        primer3 = false;
 
-                        ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
-                        ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
-                        ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
-                        TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
-                        TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
-                        imagenVideo.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                        imagenPlay.setTag(((Lista_Entrada) entrada).get_id());
-                        imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
-                        txtTiempo.setText(((Lista_Entrada) entrada).get_duracion());
-                        txtTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
+                        if (imagen_noticias != null) {
+                            Log.e("imagen", "pricipal");
+                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                        }
+
+                        TextView lanzamientosTitulo = (TextView) activity.findViewById(R.id.titUN);
+
+                        if (lanzamientosTitulo != null)
+                            lanzamientosTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+
+                        TextView lanzamientosDescripcion = (TextView) activity.findViewById(R.id.descUN);
+
+                        if (lanzamientosDescripcion != null) {
+                            String desc = ((Lista_Entrada) entrada).get_textoDebajo();
+                            // desc = desc.substring(0,200);
+                            lanzamientosDescripcion.setText(Html.fromHtml(desc));
+                        }
+                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+
+                        principal.setTag(entrada);
+
                     }
 
-                    TextView texto_superior_entrada = (TextView) view.findViewById(R.id.videotitulo);
+                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagelanzamientos);
+                    if (imagen_noticias != null)
+                        imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                    if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
+                    TextView noticiafecha = (TextView) view.findViewById(R.id.lanzamientosfecha);
+                    if (noticiafecha != null)
+                        noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.videoduracion);
+                    TextView noticiatitulo = (TextView) view.findViewById(R.id.lanzamientostitulo);
 
-                    if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_duracion());
-
-                    TextView idVideo = (TextView) view.findViewById(R.id.idVideo);
-
-                    if (idVideo != null)
-                        idVideo.setText(((Lista_Entrada) entrada).get_id());
-
-                    final TextView url_Video = (TextView) view.findViewById(R.id.url_Video);
-
-                    if (url_Video != null)
-                        url_Video.setText(((Lista_Entrada) entrada).get_url());
-
-                    ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imagevideo);
-                    if (imagen_entrada != null) {
-                        imagen_entrada.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                        imagen_entrada.setTag(((Lista_Entrada) entrada).get_img_previa());
-                    }
+                    if (noticiatitulo != null)
+                        noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
                     view.setTag(entrada);
+
 
                     view.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View arg0) {
 
-                            ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
-                            ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
-                            ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
-                            TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
-                            TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
-
+                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
+                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
+                            TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
+                            TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
+                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
                             Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
-                            String id_video = ((TextView)arg0.findViewById(R.id.idVideo)).getText().toString();
-
-                            imagenVideo.setImageBitmap(Entrada.get_img_previa());
-                            imagenPlay.setTag(Entrada.get_id());
-                            imagenDescarga.setTag(Entrada.get_url());
-                            txtTiempo.setText(Entrada.get_duracion());
-                            txtTitulo.setText(Entrada.get_titulo());
+                            imagenGrupo.setImageBitmap(Entrada.get_img_previa());
+                            fechaGrupo.setText(Entrada.get_fecha());
+                            titGrupo.setText(Entrada.get_titulo());
+                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                            principal.setTag(Entrada);
 
                         }
                     });
 
                 }
             }
-
-
-
         };
-
-        return adaptadorLts;
+        Log.e("Llego", "al final");
+        return ltsNoticias;
     }
 
     @Override
-    protected void onPostExecute(List_adapted_Video result) {
+    protected void onPostExecute(List_adapted_Noticias result) {
 
         super.onPostExecute(result);
-        lista = (ListView) activity.findViewById(R.id.listvideo);
-        if (result != null && lista != null)
+        lista = (ListView) activity.findViewById(R.id.listLanzamientos);
+        if(result != null && lista != null) {
             lista.setAdapter(result);
-
-        ProgressBar pBar = (ProgressBar) activity.findViewById(R.id.loadingPanelVideo);
+            Log.e("Llego", ""+result.getCount());
+        }
+        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelNoticias);
         if(pBar != null)
-            pBar.setVisibility(View.INVISIBLE);
+            pBar.setVisibility(View.GONE);
     }
+
 }

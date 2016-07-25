@@ -65,6 +65,11 @@ public class SessionManagement {
     public static final String KEY_COMUNICACION_INTERNA_GRUPO_CARSO = "comunicacion_interna_grupo_carso";
     public static final String KEY_COMUNICACION_INTERNA_CAMPANAS_INTERNAS = "comunicacion_interna_campanas_internas";
     public static final String KEY_COMUNICACION_INTERNA_GALERIA = "comunicacion_interna_galeria";
+    public static final String KEY_PRODUCTOS_CAMPANAS = "productos_campana";
+    public static final String KEY_PRODUCTOS_LANZAMIENTOS = "productos_lanzamientos";
+    public static final String KEY_PRODUCTOS_MES = "productos_mes";
+    public static final String KEY_PRODUCTOS_SVA = "productos_sva";
+
 
     // Constructor
     public SessionManagement(Context context){
@@ -120,6 +125,16 @@ public class SessionManagement {
     public void createCampanasInternasSession(String value){ editor.putString(KEY_COMUNICACION_INTERNA_CAMPANAS_INTERNAS,value);  editor.commit(); }
 
     public void createGaleriaSession(String value){ editor.putString(KEY_COMUNICACION_INTERNA_GALERIA,value); editor.commit(); }
+
+    //productos
+    public void createCampanasProductosSession(String value){ editor.putString(KEY_PRODUCTOS_CAMPANAS,value);  editor.commit(); }
+
+    public void createLanzamientosProductosSession(String value){ editor.putString(KEY_PRODUCTOS_LANZAMIENTOS,value);  editor.commit(); }
+
+    public void createMesProductosSession(String value){ editor.putString(KEY_PRODUCTOS_MES,value);  editor.commit(); }
+
+    public void createSVAProductosSession(String value){ editor.putString(KEY_PRODUCTOS_SVA,value);  editor.commit(); }
+
 
     /**
      * Check login method wil check user login status
@@ -184,12 +199,17 @@ public class SessionManagement {
 
     public String getGaleriaDetails() {  return pref.getString(KEY_COMUNICACION_INTERNA_GALERIA, null); }
 
-    /**
-     * Clear session details
-     * */
+    public String getCampanaProductosDetails() { return pref.getString(KEY_PRODUCTOS_CAMPANAS, null); }
+
+    public String getLanzamientosProductosDetails() { return pref.getString(KEY_PRODUCTOS_LANZAMIENTOS, null); }
+
+    public String getMesProductosDetails() { return pref.getString(KEY_PRODUCTOS_MES, null); }
+
+    public String getSVAProductosDetails() { return pref.getString(KEY_PRODUCTOS_SVA, null); }
 
 
 
+    //productos
     public void logoutUser(){
         // Clearing all data from Shared Preferences
         editor.clear();

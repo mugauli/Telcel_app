@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -26,11 +24,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -40,47 +37,47 @@ import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.List;
 
-import Utitilies.List_adapted;
-import Utitilies.List_adapted_galeria;
+import Utitilies.List_adapted_Noticias;
+import Utitilies.List_adapted_Producto_Mes;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
- * Created by umunoz on 11/07/2016.
+ * Created by Mugauli on 24/06/2016.
  */
-public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer, List_adapted_galeria> {
+public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Producto_Mes> {
 
     ProgressDialog dialog;
     Activity activity;
-    ImageView img;
     private ListView lista;
     JSONArray responseArray;
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
-    public boolean primer = true,primer2 = true;
+    public boolean primer3 = true;
     SessionManagement session;
 
-    public FragmentGaleriaAsync(Activity activity) {
+    public FragmentProductoMesAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
-        imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
     }
 
     @Override
-    protected List_adapted_galeria doInBackground(ArrayList<String>... params){
+    protected List_adapted_Producto_Mes doInBackground(ArrayList<String>... params) {
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
-
+        imageHttpAddress = activity.getText(R.string.URL_media).toString();
 
         session = new SessionManagement(activity.getApplicationContext());
         String result11 = "";
         try {
 
-            String galeriaDetails = session.getGaleriaDetails();
+            String noticias = session.getMesProductosDetails();
 
-            if(galeriaDetails == null || galeriaDetails == "") {
+            if(noticias == null || noticias == "") {
+
+                Log.e("Se obtiene Producto del mes","Procesando...");
 
                 List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient = new DefaultHttpClient();
@@ -89,7 +86,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                 nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
                 nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-
+                Log.e("IP", IP + params[0].get(1));
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
 
@@ -103,13 +100,16 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                 reader.close();
                 result11 = sb.toString();
 
-                session.createGaleriaSession(result11);
+
+                session.createMesProductosSession(result11);
             }
             else
             {
-                Log.e("Con session Galeria",galeriaDetails);
-                result11 = galeriaDetails;
+                Log.e("Con session Producto del mes",noticias);
+                result11 = noticias;
             }
+
+            //Log.e("Response: ", result11);
 
             if(result11.equals("true"+"\n")) {
                 // Log.e("Response: ", "true Int");
@@ -119,25 +119,32 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                 responseArray = new JSONArray("[{'resp':'false'}]");
             } else
             {
-                Log.e("JSON Galeria",result11.toString());
+                //Log.e("Response: ", "JSON");
                 if(result11.contains("["))
                     responseArray = new JSONArray(result11);
                 else
                     responseArray = new JSONArray("[" + result11 + "]");
             }
+
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Galeria" ,  "Error");
+                Log.e("Item Producto del mes" ,  "Error");
             }
             else {
-                for (int i = 0; i < responseArray.length(); i++) {
+                JSONObject prod = responseArray.getJSONObject(0);
 
-                    String id = responseArray.getJSONObject(i).get("id").toString();
-                    String titulo = responseArray.getJSONObject(i).get("titulo").toString();
-                    String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                    String imagen_detalle = responseArray.getJSONObject(i).get("url").toString();
-                    String texto = responseArray.getJSONObject(i).get("texto").toString();
+                JSONArray productos = prod.getJSONArray("productos");
+                for (int i = 0; i < productos.length(); i++) {
+                    Log.e("Response Item Prodcuto del mes: ", productos.getJSONObject(i).toString());
 
-                    JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+                    String mes = productos.getJSONObject(i).get("mes").toString();
+                    JSONArray elementos = productos.getJSONObject(0).getJSONArray("elementos");
+
+                    String id = elementos.getJSONObject(0).get("id").toString();
+                    String titulo = elementos.getJSONObject(0).get("titulo").toString();
+                    String img_previa = elementos.getJSONObject(0).get("img_previa").toString();
+                    String img_mini = elementos.getJSONObject(0).get("img_mini").toString();
+                    String texto = elementos.getJSONObject(0).get("texto").toString();
+                    JSONArray imagenes_slide = elementos.getJSONObject(0).getJSONArray("imagenes_slide");
 
                     Dictionary<String,String> imagenes_slider = new Dictionary<String, String>() {
                         @Override
@@ -180,89 +187,96 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
 
                         imagenes_slider.put(imagenes_slide.getJSONObject(ii).get("id").toString(),imagenes_slide.getJSONObject(i).get("url_img").toString());
                     }
-
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                    conn.connect();
+                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                    conn.disconnect();
 
-                    try {
-                        conn.connect();
-                        loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                        conn.disconnect();
-                    }
-                    catch (FileNotFoundException e)
-                    {
-                        loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                    }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,imagenes_slider));
-
+                    datos.add(new Lista_Entrada(mes,id,loadedImage, titulo,img_mini,texto,imagenes_slider));
                 }
             }
+
+
         } catch (JSONException e) {
-            Log.e("Error async Galeria", e.getMessage());
+            Log.e("Error JSONException ProductoMes", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            Log.e("Error async 1 Galeria", e.getMessage());
+            Log.e("Error UnsupportedEncodingException ProductoMes", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error async 2 Galeria", e.getMessage());
+            Log.e("Error ClientProtocolException ProductoMes", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("Error async 3 Galeria", e.getMessage());
+            Log.e("Error IOException ProductoMes", e.getMessage());
             e.printStackTrace();
         }
 
-        List_adapted_galeria adaptadorLts = new List_adapted_galeria(activity, R.layout.entrada_galeria, datos){
+
+      //  Log.e("Datos Noticias",""+datos.get(2).get_titulo());
+
+        List_adapted_Producto_Mes ltsNoticias = new List_adapted_Producto_Mes(activity, R.layout.entrada_noticias, datos){
+
             @Override
             public void onEntrada(Object entrada, View view) {
-                if (entrada != null) {
-                    if (primer) {
-                        primer = false;
 
-                        ImageView imagen_galeria = (ImageView) activity.findViewById(R.id.imagenUNT);
-                        if (imagen_galeria != null) {
-                            imagen_galeria.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                Log.e ("Entrada ProductoMes", ((Lista_Entrada) entrada).get_titulo());
+
+                if (entrada != null) {
+
+                    if(primer3) {
+                        primer3 = false;
+
+                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
+                        if (imagen_noticias != null) {
+                            Log.e("imagen", "pricipal");
+                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
 
-                        TextView galeriaFecha = (TextView) activity.findViewById(R.id.fechaUN);
-                        if (galeriaFecha != null)
-                            galeriaFecha.setText(((Lista_Entrada) entrada).get_fecha());
+                        TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUN);
+                        if (noticiafecha != null)
+                            noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                        TextView galeriaTitulo = (TextView) activity.findViewById(R.id.titUN);
+                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.titUN);
 
-                        if (galeriaTitulo != null)
-                            galeriaTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                        if (noticiatitulo != null)
+                            noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        TextView galeriaDescripcion = (TextView) activity.findViewById(R.id.descUN);
-                        if (galeriaDescripcion != null) {
+                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUN);
+
+                        if (noticiaDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
-                            galeriaDescripcion.setText(Html.fromHtml(desc));
+                            // desc = desc.substring(0,200);
+                            noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+
                         principal.setTag(entrada);
+
                     }
 
-                    ImageView campanaImagen = (ImageView) view.findViewById(R.id.imagenCaleriaL);
+                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenoticias);
+                    if (imagen_noticias != null)
+                        imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                    if (campanaImagen != null)
-                        campanaImagen.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                    TextView noticiafecha = (TextView) view.findViewById(R.id.noticiafecha);
+                    if (noticiafecha != null)
+                        noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                    TextView campanaFecha = (TextView) view.findViewById(R.id.fechaGaleriaL);
-                    if (campanaFecha != null)
-                        campanaFecha.setText(((Lista_Entrada) entrada).get_fecha());
+                    TextView noticiatitulo = (TextView) view.findViewById(R.id.noticiatitulo);
 
-                    TextView campanaTitulo = (TextView) view.findViewById(R.id.tituloGaleriaL);
-
-                    if (campanaTitulo != null)
-                        campanaTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                    if (noticiatitulo != null)
+                        noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
                     view.setTag(entrada);
 
 
-                    //assert imagen_entrada2 != null;
                     view.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View arg0) {
+
                             ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
                             TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
                             TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
@@ -276,28 +290,29 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                             titGrupo.setText(Entrada.get_titulo());
                             descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
                             principal.setTag(Entrada);
+
                         }
                     });
-
-
 
                 }
             }
         };
-        return adaptadorLts;
+        Log.e("Llego", "al final");
+        return ltsNoticias;
     }
 
     @Override
-    protected void onPostExecute(List_adapted_galeria result) {
+    protected void onPostExecute(List_adapted_Producto_Mes result) {
 
         super.onPostExecute(result);
-        lista = (ListView) activity.findViewById(R.id.listGaleria);
-        if(result != null && lista != null)
+        lista = (ListView) activity.findViewById(R.id.listProductoMes);
+        if(result != null && lista != null) {
             lista.setAdapter(result);
-        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelGaleria);
+            Log.e("Llego", ""+result.getCount());
+        }
+        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelProductoMes);
         if(pBar != null)
-            pBar.setVisibility(View.GONE);
-
+        pBar.setVisibility(View.GONE);
     }
-}
 
+}
