@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -127,7 +125,7 @@ public class pin extends AppCompatActivity
 
                             ArrayList<String> params = new ArrayList<String>();
                             final HashMap<String, String> user = session.getUserDetails();
-                            String idUsuario = user.get(SessionManagement.KEY_ID);
+                            String idUsuario = user.get(SessionManagement.KEY_PD_ID);
 
 
                             params.add("5");
@@ -211,6 +209,7 @@ public class pin extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

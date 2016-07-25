@@ -179,13 +179,12 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
 
                 if (entrada != null) {
 
-                    if(primer3)
-                    {
+                    if(primer3) {
                         primer3 = false;
 
                         ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
                         if (imagen_noticias != null) {
-                            Log.e("imagen","pricipal");
+                            Log.e("imagen", "pricipal");
                             imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
 
@@ -205,38 +204,11 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                             // desc = desc.substring(0,200);
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
+                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
-                        view.setTag(entrada);
-
-
-                        //assert imagen_entrada2 != null;
-                        view.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View arg0) {
-
-                                ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
-                                TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
-                                TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
-                                TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
-                                LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
-
-                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
-
-                                imagenGrupo.setImageBitmap(Entrada.get_img_previa());
-                                fechaGrupo.setText(Entrada.get_fecha());
-                                titGrupo.setText(Entrada.get_titulo());
-                                descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
-                                principal.setTag(Entrada);
-
-                            }
-                        });
-
+                        principal.setTag(entrada);
 
                     }
-
-
-
 
                     ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenoticias);
                     if (imagen_noticias != null)

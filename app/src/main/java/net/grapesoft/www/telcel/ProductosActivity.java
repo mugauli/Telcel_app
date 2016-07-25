@@ -78,7 +78,7 @@ public class ProductosActivity extends AppCompatActivity
 
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        tabs.addTab(tabs.newTab().setText("CAMPAÑA"));
+        tabs.addTab(tabs.newTab().setText("CAMPAÑA PUBLICITARIA"));
         tabs.addTab(tabs.newTab().setText("LANZAMIENTOS"));
         tabs.addTab(tabs.newTab().setText("PRODUCTO DEL MES"));
         tabs.addTab(tabs.newTab().setText("SVA"));
@@ -171,6 +171,7 @@ public class ProductosActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

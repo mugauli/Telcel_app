@@ -18,16 +18,17 @@ public class PageAdapterProductos extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                FragmentPodCast tab1 = new FragmentPodCast();
+                FragmentPublicitaria tab1 = new FragmentPublicitaria();
                 return tab1;
             case 1:
-                FragmentVideo tab2 = new FragmentVideo();
+                FragmentLanzamientos tab2 = new FragmentLanzamientos();
                 return tab2;
             case 2:
-                FragmentRevista tab3 = new FragmentRevista();
+                FragmentProductoMes tab3 = new FragmentProductoMes();
                 return tab3;
             case 3:
-                FragmentPublicitaria tab4 = new FragmentPublicitaria();
+                FragmentSVA tab4 = new FragmentSVA();
+               // FragmentPublicitaria tab4 = new FragmentPublicitaria();
                 return tab4;
 
             default:

@@ -2,7 +2,6 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,21 +24,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.Comunication;
 import Utitilies.GetNetImage;
-import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 public class VideoDetalleActivity extends AppCompatActivity
@@ -66,14 +59,14 @@ public class VideoDetalleActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_view);
+        setContentView(R.layout.activity_detalle_video);
 
         session = new SessionManagement(getApplicationContext());
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
 
         final HashMap<String, String> user = session.getUserDetails();
-        String region = user.get(SessionManagement.KEY_REGION);
+        String region = user.get(SessionManagement.KEY_PD_REGION);
 
         TextView tvTituloSiguiente = (TextView) findViewById(R.id.tvTituloSiguiente);
         TextView tvTiempoSiguiente = (TextView) findViewById(R.id.tvTiempoSiguiente);
@@ -313,8 +306,8 @@ public class VideoDetalleActivity extends AppCompatActivity
         });
 
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
 
@@ -376,6 +369,7 @@ public class VideoDetalleActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

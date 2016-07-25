@@ -198,6 +198,10 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                             // desc = desc.substring(0,200);
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
+
+                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalUC);
+
+                        principal.setTag(entrada);
                     }
 
                     TextView texto_superior_entrada = (TextView) view.findViewById(R.id.comunicadofecha);

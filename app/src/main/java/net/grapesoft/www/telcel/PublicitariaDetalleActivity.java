@@ -2,7 +2,6 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,21 +24,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.Comunication;
 import Utitilies.GetNetImage;
-import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 public class PublicitariaDetalleActivity extends AppCompatActivity
@@ -73,7 +66,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
         ArrayList<String> params = new ArrayList<String>();
 
         final HashMap<String, String> user = session.getUserDetails();
-        String region = user.get(SessionManagement.KEY_REGION);
+        String region = user.get(SessionManagement.KEY_PD_REGION);
 
         TextView tvTituloSiguiente = (TextView) findViewById(R.id.tvTituloSiguiente);
         TextView tvTiempoSiguiente = (TextView) findViewById(R.id.tvTiempoSiguiente);
@@ -96,7 +89,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
         Log.e("id_video_DETALLE",video_id);
 
         try {
-            String video = session.getVideoDetails();
+            String video = session.getCampanaProductosDetails();
 
             if (video == null || video == "") {
 
@@ -104,7 +97,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
                 if (pBar != null) pBar.setVisibility(View.VISIBLE);
 
                 params.add("6");
-                params.add("GetVideo.php");
+                params.add("GetCPublicitarias.php");
                 params.add(tokenCTE);
                 params.add(region);
 
@@ -112,7 +105,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
                 if (pBar != null) pBar.setVisibility(View.GONE);
 
             } else {
-                Log.e("Con session VIDEO", video);
+                Log.e("Con session VIDEO Publicitaria", video);
                 result11 = video;
                 if (result11.equals("true" + "\n")) {
                     responseArray = new JSONArray("[{'resp':'true'}]");
@@ -128,7 +121,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
 
 
             if (responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Video Detalle", "Error");
+                Log.e("Item Video Detalle Publicitaria" , "Error");
             } else {
 
                 for (int i = 0; i < responseArray.length(); i++) {
@@ -376,6 +369,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

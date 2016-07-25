@@ -2,7 +2,6 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -14,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -24,6 +24,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,19 +33,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.List;
 
-import Utitilies.List_adapted_Grupo;
-
+import Utitilies.List_adapted_Noticias;
+import Utitilies.List_adapted_Producto_Mes;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
-
- * Created by umunoz on 27/06/2016.
-
+ * Created by Mugauli on 24/06/2016.
  */
-public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Grupo> {
+public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Producto_Mes> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -53,18 +54,17 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
-    public boolean primer = true;
+    public boolean primer3 = true;
     SessionManagement session;
 
-    public FragmentGrupoAsync(Activity activity) {
+    public FragmentProductoMesAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
-        imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
     }
 
     @Override
-    protected List_adapted_Grupo doInBackground(ArrayList<String>... params) {
+    protected List_adapted_Producto_Mes doInBackground(ArrayList<String>... params) {
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
@@ -73,11 +73,11 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
         String result11 = "";
         try {
 
-            String grupo_carso= session.getGrupoCarsoDetails();
+            String noticias = session.getMesProductosDetails();
 
-            if(grupo_carso == null || grupo_carso == "") {
+            if(noticias == null || noticias == "") {
 
-                Log.e("Se obtiene GRUPO","Procesando...");
+                Log.e("Se obtiene Producto del mes","Procesando...");
 
                 List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient = new DefaultHttpClient();
@@ -101,12 +101,12 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                 result11 = sb.toString();
 
 
-                session.createGrupoCarsoSession(result11);
+                session.createMesProductosSession(result11);
             }
             else
             {
-                Log.e("Con session GRUPO",grupo_carso);
-                result11 = grupo_carso;
+                Log.e("Con session Producto del mes",noticias);
+                result11 = noticias;
             }
 
             //Log.e("Response: ", result11);
@@ -127,20 +127,66 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             }
 
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item GRUPO" ,  "Error");
+                Log.e("Item Producto del mes" ,  "Error");
             }
             else {
+                JSONObject prod = responseArray.getJSONObject(0);
 
-                for (int i = 0; i < responseArray.length(); i++) {
-                    Log.e("Response Item: ", responseArray.getJSONObject(i).toString());
+                JSONArray productos = prod.getJSONArray("productos");
+                for (int i = 0; i < productos.length(); i++) {
+                    Log.e("Response Item Prodcuto del mes: ", productos.getJSONObject(i).toString());
 
-                    String id = responseArray.getJSONObject(i).get("id").toString();
-                    String titulo = responseArray.getJSONObject(i).get("titulo").toString();
-                    String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                    String imagen_detalle = responseArray.getJSONObject(i).get("imagen_detalle").toString();
-                    String texto = responseArray.getJSONObject(i).get("texto").toString();
-                    String fecha = responseArray.getJSONObject(i).get("fecha").toString();
+                    String mes = productos.getJSONObject(i).get("mes").toString();
+                    JSONArray elementos = productos.getJSONObject(0).getJSONArray("elementos");
 
+                    String id = elementos.getJSONObject(0).get("id").toString();
+                    String titulo = elementos.getJSONObject(0).get("titulo").toString();
+                    String img_previa = elementos.getJSONObject(0).get("img_previa").toString();
+                    String img_mini = elementos.getJSONObject(0).get("img_mini").toString();
+                    String texto = elementos.getJSONObject(0).get("texto").toString();
+                    JSONArray imagenes_slide = elementos.getJSONObject(0).getJSONArray("imagenes_slide");
+
+                    Dictionary<String,String> imagenes_slider = new Dictionary<String, String>() {
+                        @Override
+                        public Enumeration<String> elements() {
+                            return null;
+                        }
+
+                        @Override
+                        public String get(Object key) {
+                            return null;
+                        }
+
+                        @Override
+                        public boolean isEmpty() {
+                            return false;
+                        }
+
+                        @Override
+                        public Enumeration<String> keys() {
+                            return null;
+                        }
+
+                        @Override
+                        public String put(String key, String value) {
+                            return null;
+                        }
+
+                        @Override
+                        public String remove(Object key) {
+                            return null;
+                        }
+
+                        @Override
+                        public int size() {
+                            return 0;
+                        }
+                    };
+
+                    for (int ii = 0; ii < imagenes_slide.length(); ii++) {
+
+                        imagenes_slider.put(imagenes_slide.getJSONObject(ii).get("id").toString(),imagenes_slide.getJSONObject(i).get("url_img").toString());
+                    }
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
@@ -148,74 +194,77 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
 
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+                    datos.add(new Lista_Entrada(mes,id,loadedImage, titulo,img_mini,texto,imagenes_slider));
                 }
             }
 
 
         } catch (JSONException e) {
-            Log.e("Error JSONException Noticia", e.getMessage());
+            Log.e("Error JSONException ProductoMes", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            Log.e("Error UnsupportedEncodingException Noticia", e.getMessage());
+            Log.e("Error UnsupportedEncodingException ProductoMes", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error ClientProtocolException Noticia", e.getMessage());
+            Log.e("Error ClientProtocolException ProductoMes", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("Error IOException Noticia", e.getMessage());
+            Log.e("Error IOException ProductoMes", e.getMessage());
             e.printStackTrace();
         }
 
-        List_adapted_Grupo ltsGrupo = new List_adapted_Grupo(activity, R.layout.entrada_grupo, datos){
+
+      //  Log.e("Datos Noticias",""+datos.get(2).get_titulo());
+
+        List_adapted_Producto_Mes ltsNoticias = new List_adapted_Producto_Mes(activity, R.layout.entrada_noticias, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
 
-               // Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
+                Log.e ("Entrada ProductoMes", ((Lista_Entrada) entrada).get_titulo());
 
                 if (entrada != null) {
 
-                    if (primer) {
-                        primer = false;
+                    if(primer3) {
+                        primer3 = false;
 
-                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenGrupo);
+                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
                         if (imagen_noticias != null) {
-                            Log.e("imagen","pricipal");
+                            Log.e("imagen", "pricipal");
                             imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
 
-                        TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaGrupo);
+                        TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUN);
                         if (noticiafecha != null)
                             noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.titGrupo);
+                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.titUN);
 
                         if (noticiatitulo != null)
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descGrupo);
+                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUN);
 
                         if (noticiaDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                             // desc = desc.substring(0,200);
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
+                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
-                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipal);
                         principal.setTag(entrada);
 
                     }
 
-                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenGrupoL);
+                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenoticias);
                     if (imagen_noticias != null)
                         imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                    TextView noticiafecha = (TextView) view.findViewById(R.id.grupofechal);
+                    TextView noticiafecha = (TextView) view.findViewById(R.id.noticiafecha);
                     if (noticiafecha != null)
                         noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                    TextView noticiatitulo = (TextView) view.findViewById(R.id.grupotitulol);
+                    TextView noticiatitulo = (TextView) view.findViewById(R.id.noticiatitulo);
 
                     if (noticiatitulo != null)
                         noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
@@ -223,17 +272,16 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     view.setTag(entrada);
 
 
-                    //assert imagen_entrada2 != null;
                     view.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View arg0) {
 
-                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenGrupo);
-                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaGrupo);
-                            TextView titGrupo = (TextView) activity.findViewById(R.id.titGrupo);
-                            TextView descGrupo = (TextView) activity.findViewById(R.id.descGrupo);
-                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipal);
+                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
+                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
+                            TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
+                            TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
+                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
                             Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
@@ -243,30 +291,28 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
                             principal.setTag(Entrada);
 
-                       }
+                        }
                     });
 
                 }
             }
         };
-
-        return ltsGrupo;
+        Log.e("Llego", "al final");
+        return ltsNoticias;
     }
 
     @Override
-    protected void onPostExecute(List_adapted_Grupo result) {
+    protected void onPostExecute(List_adapted_Producto_Mes result) {
 
         super.onPostExecute(result);
-
-        lista = (ListView) activity.findViewById(R.id.listGrupo);
-
+        lista = (ListView) activity.findViewById(R.id.listProductoMes);
         if(result != null && lista != null) {
             lista.setAdapter(result);
             Log.e("Llego", ""+result.getCount());
         }
-        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelGrupo);
-        if(pBar!= null)
-            pBar.setVisibility(View.GONE);
+        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelProductoMes);
+        if(pBar != null)
+        pBar.setVisibility(View.GONE);
     }
 
 }

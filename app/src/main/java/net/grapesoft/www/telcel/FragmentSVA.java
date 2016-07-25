@@ -1,6 +1,5 @@
 package net.grapesoft.www.telcel;
 
-import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -8,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +22,7 @@ import java.util.HashMap;
 
 import Utitilies.SessionManagement;
 
-/**
- * Created by memoHack on 11/07/2016.
- */
-public class FragmentPublicitaria extends Fragment {
-
+public class FragmentSVA extends Fragment {
     // Declare variables
     ProgressDialog pDialog;
     VideoView videoview;
@@ -34,14 +30,13 @@ public class FragmentPublicitaria extends Fragment {
     // Insert your Video URL
     String VideoURL = "http://internetencaja.com.mx/telcel/videos/Grafica%20Informativa.mp4";
 
-
     public String tokenCTE = "";
     SessionManagement session;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootview = inflater.inflate(R.layout.tab_fragment_publicitaria, container, false);
+        final View rootview = inflater.inflate(R.layout.tab_fragment_sva, container, false);
 
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
@@ -55,7 +50,7 @@ public class FragmentPublicitaria extends Fragment {
         params.add(tokenCTE);
         params.add(region);
 
-        new FragmentPublicitariaAsync(getActivity()).execute(params);
+        new FragmentSVAAsync(getActivity()).execute(params);
 
         ImageView imagen_play = (ImageView) rootview.findViewById(R.id.play);
 
@@ -66,7 +61,7 @@ public class FragmentPublicitaria extends Fragment {
 
                 //TextView idVideo = (TextView) rootview.findViewById(R.id.idVideo);
                 String id_video = arg0.getTag().toString();
-                Intent i = new Intent(getActivity(), PublicitariaDetalleActivity.class);
+                Intent i = new Intent(getActivity(), VideoDetalleActivity.class);
                 i.putExtra("video_id",id_video);
                 startActivity(i);
                 //Log.e("ID Video", "ID: "+ id_video);
@@ -134,4 +129,5 @@ public class FragmentPublicitaria extends Fragment {
             return null;
         }
     }
+
 }

@@ -2,7 +2,6 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -14,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -34,17 +34,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utitilies.List_adapted_Grupo;
-
+import Utitilies.List_adapted_Noticias;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 /**
-
- * Created by umunoz on 27/06/2016.
-
+ * Created by Mugauli on 22/07/2016.
  */
-public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Grupo> {
+public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Integer, List_adapted_Noticias> {
 
     ProgressDialog dialog;
     Activity activity;
@@ -53,18 +50,17 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
-    public boolean primer = true;
+    public boolean primer3 = true;
     SessionManagement session;
 
-    public FragmentGrupoAsync(Activity activity) {
+    public FragmentLanzamientosAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
-        imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
     }
 
     @Override
-    protected List_adapted_Grupo doInBackground(ArrayList<String>... params) {
+    protected List_adapted_Noticias doInBackground(ArrayList<String>... params) {
 
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
@@ -73,11 +69,11 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
         String result11 = "";
         try {
 
-            String grupo_carso= session.getGrupoCarsoDetails();
+            String noticias = session.getLanzamientosProductosDetails();
 
-            if(grupo_carso == null || grupo_carso == "") {
+            if(noticias == null || noticias == "") {
 
-                Log.e("Se obtiene GRUPO","Procesando...");
+                Log.e("Se obtiene LANZAMIENTOS","Procesando...");
 
                 List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient = new DefaultHttpClient();
@@ -101,12 +97,12 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                 result11 = sb.toString();
 
 
-                session.createGrupoCarsoSession(result11);
+                session.createLanzamientosProductosSession(result11);
             }
             else
             {
-                Log.e("Con session GRUPO",grupo_carso);
-                result11 = grupo_carso;
+                Log.e("Con session LANZAMIENTOS",noticias);
+                result11 = noticias;
             }
 
             //Log.e("Response: ", result11);
@@ -127,7 +123,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             }
 
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item GRUPO" ,  "Error");
+                Log.e("Item LANZAMIENTOS" ,  "Error");
             }
             else {
 
@@ -137,9 +133,9 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
                     String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                    String imagen_detalle = responseArray.getJSONObject(i).get("imagen_detalle").toString();
+                    String img_mini = responseArray.getJSONObject(i).get("img_mini").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
-                    String fecha = responseArray.getJSONObject(i).get("fecha").toString();
+                    String imagenes_slide = responseArray.getJSONObject(i).get("imagenes_slide").toString();
 
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
@@ -148,74 +144,73 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                     conn.disconnect();
 
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,img_mini,texto,imagenes_slide));
                 }
             }
 
 
         } catch (JSONException e) {
-            Log.e("Error JSONException Noticia", e.getMessage());
+            Log.e("Error JSONException Lanzamientos", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            Log.e("Error UnsupportedEncodingException Noticia", e.getMessage());
+            Log.e("Error UnsupportedEncodingException Lanzamientos", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error ClientProtocolException Noticia", e.getMessage());
+            Log.e("Error ClientProtocolException Lamzamientos", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("Error IOException Noticia", e.getMessage());
+            Log.e("Error IOException Lanzamientos", e.getMessage());
             e.printStackTrace();
         }
 
-        List_adapted_Grupo ltsGrupo = new List_adapted_Grupo(activity, R.layout.entrada_grupo, datos){
+
+        //  Log.e("Datos Noticias",""+datos.get(2).get_titulo());
+
+        List_adapted_Noticias ltsNoticias = new List_adapted_Noticias(activity, R.layout.entrada_lanzamientos, datos){
 
             @Override
             public void onEntrada(Object entrada, View view) {
 
-               // Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
+                Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
 
                 if (entrada != null) {
 
-                    if (primer) {
-                        primer = false;
+                    if(primer3) {
+                        primer3 = false;
 
-                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenGrupo);
+                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
                         if (imagen_noticias != null) {
-                            Log.e("imagen","pricipal");
+                            Log.e("imagen", "pricipal");
                             imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
 
-                        TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaGrupo);
-                        if (noticiafecha != null)
-                            noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
+                        TextView lanzamientosTitulo = (TextView) activity.findViewById(R.id.titUN);
 
-                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.titGrupo);
+                        if (lanzamientosTitulo != null)
+                            lanzamientosTitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        if (noticiatitulo != null)
-                            noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                        TextView lanzamientosDescripcion = (TextView) activity.findViewById(R.id.descUN);
 
-                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descGrupo);
-
-                        if (noticiaDescripcion != null) {
+                        if (lanzamientosDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                             // desc = desc.substring(0,200);
-                            noticiaDescripcion.setText(Html.fromHtml(desc));
+                            lanzamientosDescripcion.setText(Html.fromHtml(desc));
                         }
+                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
-                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipal);
                         principal.setTag(entrada);
 
                     }
 
-                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenGrupoL);
+                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagelanzamientos);
                     if (imagen_noticias != null)
                         imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                    TextView noticiafecha = (TextView) view.findViewById(R.id.grupofechal);
+                    TextView noticiafecha = (TextView) view.findViewById(R.id.lanzamientosfecha);
                     if (noticiafecha != null)
                         noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                    TextView noticiatitulo = (TextView) view.findViewById(R.id.grupotitulol);
+                    TextView noticiatitulo = (TextView) view.findViewById(R.id.lanzamientostitulo);
 
                     if (noticiatitulo != null)
                         noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
@@ -223,17 +218,16 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     view.setTag(entrada);
 
 
-                    //assert imagen_entrada2 != null;
                     view.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View arg0) {
 
-                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenGrupo);
-                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaGrupo);
-                            TextView titGrupo = (TextView) activity.findViewById(R.id.titGrupo);
-                            TextView descGrupo = (TextView) activity.findViewById(R.id.descGrupo);
-                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipal);
+                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
+                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
+                            TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
+                            TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
+                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
                             Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
@@ -243,29 +237,27 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
                             principal.setTag(Entrada);
 
-                       }
+                        }
                     });
 
                 }
             }
         };
-
-        return ltsGrupo;
+        Log.e("Llego", "al final");
+        return ltsNoticias;
     }
 
     @Override
-    protected void onPostExecute(List_adapted_Grupo result) {
+    protected void onPostExecute(List_adapted_Noticias result) {
 
         super.onPostExecute(result);
-
-        lista = (ListView) activity.findViewById(R.id.listGrupo);
-
+        lista = (ListView) activity.findViewById(R.id.listLanzamientos);
         if(result != null && lista != null) {
             lista.setAdapter(result);
             Log.e("Llego", ""+result.getCount());
         }
-        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelGrupo);
-        if(pBar!= null)
+        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelNoticias);
+        if(pBar != null)
             pBar.setVisibility(View.GONE);
     }
 

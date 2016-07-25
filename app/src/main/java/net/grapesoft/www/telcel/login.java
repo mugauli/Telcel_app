@@ -59,11 +59,17 @@ public class login extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+
+
+
         TextView txtGhost = (TextView) findViewById(R.id.textView3);
         TextView txtGhost2 = (TextView) findViewById(R.id.textView4);
         TextView txtGhost3 = (TextView) findViewById(R.id.tvRecuperar);
         TextView txtGhost4 = (TextView) findViewById(R.id.tvRegistrarme);
         TextView spinner_text=(TextView)findViewById(R.id.txtDato);
+
         final TextView txtpass=(TextView)findViewById(R.id.txtPassword);
         Button btn=(Button) findViewById(R.id.btnIngresar);
         // Loading Font Face
@@ -81,6 +87,8 @@ public class login extends Activity  {
         txtGhost4.setPaintFlags(txtGhost4.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         session = new SessionManagement(getApplicationContext());
 
+        //session.logoutUser();
+
         tokenCTE = getText(R.string.tokenXM).toString();
         //Creamos la lista
         LinkedList SpnCampos = new LinkedList();
@@ -97,6 +105,7 @@ public class login extends Activity  {
         Spinner spinner_campos = (Spinner) findViewById(R.id.spnCampos);
         spinner_campos.setAdapter(spinner_adapter);
         spinner_campos.setPrompt("Elige un dato e ingreso ...");
+
         spinner_campos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override

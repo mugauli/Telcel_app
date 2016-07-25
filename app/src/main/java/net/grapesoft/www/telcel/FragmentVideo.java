@@ -8,36 +8,23 @@ package net.grapesoft.www.telcel;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.MediaController;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.VideoView;
-
-import org.json.JSONArray;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 public class FragmentVideo extends Fragment {
@@ -62,7 +49,7 @@ public class FragmentVideo extends Fragment {
         session = new SessionManagement(getActivity());
 
         final HashMap<String, String> user = session.getUserDetails();
-        String region = user.get(SessionManagement.KEY_REGION);
+        String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
         params.add("GetVideo.php");

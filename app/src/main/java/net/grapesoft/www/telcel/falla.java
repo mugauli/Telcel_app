@@ -163,7 +163,7 @@ public class falla extends AppCompatActivity
 
                                 ArrayList<String> params = new ArrayList<String>();
                                 final HashMap<String, String> user = session.getUserDetails();
-                                String idUsuario = user.get(SessionManagement.KEY_ID);
+                                String idUsuario = user.get(SessionManagement.KEY_PD_ID);
                                 Log.e("Response", "Falla: " + itemSelected);
                                 RadioButton rdFalla = (RadioButton)itemSelected.findViewById(R.id.rdfalla);
                                 String opcion = rdFalla.getTag().toString();
@@ -201,6 +201,8 @@ public class falla extends AppCompatActivity
 
                                     if(resp.equals("true")) {
                                         Intent i = new Intent(falla.this, ActualizadosActivity.class);
+                                        i.putExtra("titulo","MENSAJE ENVIADO");
+                                        i.putExtra("mensaje","Gracias, Tu mensaje ha sido enviado.");
                                         startActivity(i);
                                         finish();
                                     }else
@@ -304,6 +306,7 @@ public class falla extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
