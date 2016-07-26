@@ -41,6 +41,12 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
     }
 
+    public Lista_Entrada (int idImagen, int idImagen2, String textoDebajo) {
+        this.idImagen = idImagen;
+        this.idImagen2 = idImagen2;
+        this.textoDebajo = textoDebajo;
+    }
+
     public Lista_Entrada (String textoEncima, String textoDebajo) {
 
         this.textoEncima =  textoEncima;
@@ -138,15 +144,7 @@ public class Lista_Entrada {
         this.imagenesSlide = imagenesSlide;
     }
 
-    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url,String textoDebajo,  ArrayList<String> imagenesSlide) {
 
-        this.id = id;
-        this.img_previa = img_previa;
-        this.titulo = titulo;
-        this.url = url;
-        this.textoDebajo = textoDebajo;
-        this.imagenesSlide = imagenesSlide;
-    }
 
     public Bitmap get_img_previa() {
         return img_previa;
