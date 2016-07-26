@@ -115,7 +115,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                     responseArray = new JSONArray("[{'resp':'false'}]");
                 } else
                 {
-                    //Log.e("Response: ", "JSON");
+                    Log.e("Response: JSON Podcast", result11.toString());
                     if(result11.contains("["))
                         responseArray = new JSONArray(result11);
                     else
@@ -125,8 +125,9 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
 
             if(responseArray.getJSONObject(0).has("resp")) {
                 Log.e("Item Podcast" ,  "Error");
-            }
-            else {
+            }else  if(responseArray.getJSONObject(0).has("error")) {
+                Log.e("Item Podcast" ,  "Error");
+            } else {
 
                 for (int i = 0; i < responseArray.length(); i++) {
 
