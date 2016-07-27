@@ -599,7 +599,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
             }
         };
 
-       // Log.e("tamaño", ""+a.getCount());
+        Log.e("tamaño", ""+a.getCount());
         return a;
     }
 

@@ -80,14 +80,12 @@ public class ProductosActivity extends AppCompatActivity
 
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
 
-
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         tabs.addTab(tabs.newTab().setText("CAMPAÑA PUBLICITARIA"));
         tabs.addTab(tabs.newTab().setText("LANZAMIENTOS"));
         tabs.addTab(tabs.newTab().setText("PRODUCTO DEL MES"));
         tabs.addTab(tabs.newTab().setText("SVA"));
-
 
         //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
