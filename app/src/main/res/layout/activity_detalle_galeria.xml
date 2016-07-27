@@ -135,24 +135,24 @@
             </LinearLayout>
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/derecha"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="bottom|end"
                 app:rippleColor="@color/ColorPrimary"
                 android:src="@drawable/derecha"
                 android:layout_alignParentBottom="false"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
+                android:layout_alignParentEnd="false"
                 android:layout_marginRight="20dp"
-                android:layout_marginEnd="42dp"
                 android:layout_marginBottom="20dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginLeft="20dp"
+                android:background="@android:color/transparent" />
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/izquierda"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="bottom|end"
                 app:rippleColor="@color/ColorPrimary"
                 android:src="@drawable/izquierda"
@@ -165,7 +165,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent" />
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
     <include layout="@layout/navigation"/>
