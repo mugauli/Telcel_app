@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -64,7 +65,16 @@ public class activity_detalle_galeria extends AppCompatActivity
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
 
             public View makeView() {
-                return new ImageView(activity_detalle_galeria.this);
+                ImageView imageView = new ImageView(activity_detalle_galeria.this);
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                ImageSwitcher.LayoutParams params = new ImageSwitcher.LayoutParams(
+                        ImageSwitcher.LayoutParams.MATCH_PARENT, ImageSwitcher.LayoutParams.MATCH_PARENT);
+
+                imageView.setLayoutParams(params);
+                return imageView;
+
+               // return new ImageView(activity_detalle_galeria.this);
             }
         });
 
@@ -310,5 +320,7 @@ public class activity_detalle_galeria extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 }
