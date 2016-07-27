@@ -117,11 +117,13 @@ public class MainActivity extends AppCompatActivity
                 if(tab.getText().toString().equals(getString(R.string.tab1).toString())) {
 
                     Intent i = new Intent(MainActivity.this, ComunicacionInternaActivity.class);
+                    i.putExtra("direccion","0");
                     startActivity(i);
                 }
                 if(tab.getText().toString().equals(getString(R.string.tab2).toString())) {
 
                     Intent i = new Intent(MainActivity.this, ProductosActivity.class);
+                    i.putExtra("direccion","0");
                     startActivity(i);
                 }
 

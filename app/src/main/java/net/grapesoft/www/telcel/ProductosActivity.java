@@ -1,6 +1,7 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +31,9 @@ public class ProductosActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_productos);
         session = new SessionManagement(getApplicationContext());
+
+        final int direccion = Integer.parseInt(getIntent().getStringExtra("direccion"));
+        Log.e("direccion","" + direccion);
 
         //boton ayuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -101,6 +106,7 @@ public class ProductosActivity extends AppCompatActivity
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                Log.e("Posicion",""+tab.getPosition());
             }
 
             @Override
@@ -113,6 +119,17 @@ public class ProductosActivity extends AppCompatActivity
 
             }
         });
+        if(direccion != 0) {
+          //  TabLayout.Tab tabAt = tabs.getTabAt(direccion - 1);
+          //  Log.e("Nombre Tab", tabAt.getText().toString());
+            new Handler().postDelayed(
+                    new Runnable(){
+                        @Override
+                        public void run() {
+                            tabs.getTabAt(direccion - 1).select();
+                        }
+                    }, 100);
+        }
     }
 
     @Override

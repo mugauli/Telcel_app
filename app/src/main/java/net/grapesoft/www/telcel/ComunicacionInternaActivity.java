@@ -1,6 +1,7 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +30,9 @@ public class ComunicacionInternaActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_comunicacion_interna);
         session = new SessionManagement(getApplicationContext());
+
+        final int direccion = Integer.parseInt(getIntent().getStringExtra("direccion"));
+        Log.e("direccion","" + direccion);
 
         //boton ayuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -93,13 +98,25 @@ public class ComunicacionInternaActivity extends AppCompatActivity
                 (getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);
 
-
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+
+        if(direccion != 0) {
+           //TabLayout.Tab tabAt = tabs.getTabAt(direccion - 1);
+           //Log.e("Nombre Tab", tabAt.getText().toString());
+            new Handler().postDelayed(
+                    new Runnable(){
+                        @Override
+                        public void run() {
+                            tabs.getTabAt(direccion - 1).select();
+                        }
+                    }, 100);
+        }
+
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                Log.e("Posicion",""+tab.getPosition());
             }
 
             @Override
@@ -111,7 +128,10 @@ public class ComunicacionInternaActivity extends AppCompatActivity
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
+
         });
+
+
     }
 
     @Override
@@ -177,4 +197,6 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

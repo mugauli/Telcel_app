@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -143,6 +144,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                     String seccion = homeArray.getJSONObject(i).get("seccion").toString();
                     JSONArray elementos = homeArray.getJSONObject(i).getJSONArray("elementos");
+
 
                     if (seccion.equals("podcast")) {
 
@@ -382,9 +384,10 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                     Log.e("Entrada Home", seccion);
 
-                    if(seccion.equals("podcast")) {
 
-                        Log.e ("Entrada Home Podcast", ((Lista_Entrada) entrada).get_titulo());
+                    if (seccion.equals("podcast")) {
+
+                       // Log.e ("Entrada Home Podcast", ((Lista_Entrada) entrada).get_titulo());
 
                         ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenPodcast);
                         if (imagen_noticias != null) {
@@ -409,7 +412,165 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.lnPodcast);
                         principal.setTag(entrada);
 
-                    }else {
+                        principal.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","1");
+                                activity.startActivity(i);
+
+                            }
+                        });
+
+                    } else if (seccion.equals("promociones")) {
+
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Prestaciones > Promociones");
+
+                   // view.setOnClickListener(new View.OnClickListener() {
+
+                   //     @Override
+                   //     public void onClick(View arg0) {
+
+                   //         Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                   //         i.putExtra("direccion","1");
+                   //         activity.startActivity(i);
+
+                   //     }
+                   // });
+
+
+                    } else if (seccion.equals("revista")) {
+
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Comunicación Interna > Revista");
+
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","3");
+                                activity.startActivity(i);
+
+                            }
+                        });
+
+                    } else if (seccion.equals("SVA")) {
+
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Productos y Servicios > SVA");
+
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                Intent i = new Intent(activity, ProductosActivity.class);
+                                i.putExtra("direccion","4");
+                                activity.startActivity(i);
+                            }
+                        });
+
+                    } else if (seccion.equals("carso")) {
+
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Comunicación Interna > Grupo Carso");
+
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","6");
+                                activity.startActivity(i);
+                            }
+                        });
+
+                    } else if (seccion.equals("internas")) {
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Comunicación Interna > Campañas Internas");
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0) {
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","7");
+                                activity.startActivity(i);
+                            }
+                        });
+
+                    } else if (seccion.equals("publicitarias")) {
+
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Productos y Servicios > Campaña Publicitaria");
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0) {
+                                Intent i = new Intent(activity, ProductosActivity.class);
+                                i.putExtra("direccion","4");
+                                activity.startActivity(i);
+                            }
+                        });
+
+                    } else if (seccion.equals("noticias")) {
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Comunicación Interna > Noticias");
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0) {
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","4");
+                                activity.startActivity(i);
+                            }
+                        });
+
+                    } else if (seccion.equals("comunicados")) {
+
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Comunicación Interna > Comunicados");
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0) {
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","5");
+                                activity.startActivity(i);
+                            }
+                        });
+
+                    } else if (seccion.equals("video")) {
+
+                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
+                        if (homeTitulo != null)
+                            homeTitulo.setText("Comunicación Interna > Videos");
+                        view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0) {
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","2");
+                                activity.startActivity(i);
+                            }
+                        });
+
+                    }
+
+
+                    if(!seccion.equals("podcast")) {
 
                         ImageView imagen_home = (ImageView) view.findViewById(R.id.imagenHome);
                         if (imagen_home != null)
@@ -433,42 +594,12 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             if (homeDescripcion != null)
                                 homeDescripcion.setText(Html.fromHtml(((Lista_Entrada) entrada).get_textoDebajo()));
                         }
-
-
-                        TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
-
-                        if (homeTitulo != null)
-                            homeTitulo.setText(((Lista_Entrada) entrada).get_titulo());
-
-                        view.setTag(entrada);
-
-                        view.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View arg0) {
-
-                             //  ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
-                             //  TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
-                             //  TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
-                             //  TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
-                             //  LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
-
-                             //  Lista_Entrada Entrada = (Lista_Entrada) arg0.getTag();
-
-                             //  imagenGrupo.setImageBitmap(Entrada.get_img_previa());
-                             //  fechaGrupo.setText(Entrada.get_fecha());
-                             //  titGrupo.setText(Entrada.get_titulo());
-                             //  descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
-                             //  principal.setTag(Entrada);
-
-                            }
-                        });
                     }
                 }
             }
         };
 
-        Log.e("tamaño", ""+a.getCount());
+       // Log.e("tamaño", ""+a.getCount());
         return a;
     }
 

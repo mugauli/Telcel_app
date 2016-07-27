@@ -195,10 +195,8 @@ public class ActualizarActivity extends AppCompatActivity
                             return;
                         }
                         tipo_celular = Radio;
-                        //String region = region;
 
                         region = Long.toString(spinner_Region.getSelectedItemId()+1);
-
 
                         if (region == "11") {
                             region = "C";
@@ -233,7 +231,6 @@ public class ActualizarActivity extends AppCompatActivity
                             return;
                         }
 
-                        //-- PARAMETROS PETICION Actualizar trabajador-----//
                         params.add("2");
                         params.add("ChangeData.php");
                         params.add(tokenCTE);
@@ -246,19 +243,16 @@ public class ActualizarActivity extends AppCompatActivity
                         params.add(materno);
                         params.add(email);
 
-
                         JSONArray response = new Comunication(ActualizarActivity.this).execute(params).get();
 
                         Log.e("Response", "Actualizar: " + response);
                         if(response.getJSONObject(0).has("error")) {
                             Log.e("Response Actualizar: ", "ERROR");
-                            Toast toast = Toast.makeText(ActualizarActivity.this, "Error al actualiar los datos", Toast.LENGTH_LONG);
+                            Toast toast = Toast.makeText(ActualizarActivity.this, "Error al actualizar los datos", Toast.LENGTH_LONG);
                             toast.show();
-
                         }
                         else if(response.getJSONObject(0).has("resp"))
                         {
-
                             String resp = response.getJSONObject(0).get("resp").toString();
                             Log.e("Response Actualizar: ", resp);
 
@@ -273,7 +267,6 @@ public class ActualizarActivity extends AppCompatActivity
                                 Toast toast = Toast.makeText(ActualizarActivity.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
                                 toast.show();
                             }
-
                         }
                         else
                         {
@@ -281,9 +274,6 @@ public class ActualizarActivity extends AppCompatActivity
                             Toast toast = Toast.makeText(ActualizarActivity.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
                             toast.show();
                         }
-
-
-
                     } else {
                         //Toast
                     }
@@ -337,6 +327,7 @@ public class ActualizarActivity extends AppCompatActivity
 
         TextView titulo = (TextView) findViewById(R.id.TitleSeccion);
         titulo.setTypeface(tf);
+
         titulo.setText("MODIFICAR O ACTUALIZAR DATOS");
         //ToolBar Menu
     }

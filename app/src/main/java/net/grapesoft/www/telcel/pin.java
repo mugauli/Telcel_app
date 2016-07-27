@@ -43,7 +43,7 @@ public class pin extends AppCompatActivity
 
         TextView texto_superior_entrada = (TextView) findViewById(R.id.tit1);
         TextView texto_superior = (TextView) findViewById(R.id.tit2);
-        Button btn=(Button) findViewById(R.id.generar);
+        Button btn=(Button) findViewById(R.id.btnGenerar);
         TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
 
 
@@ -55,7 +55,9 @@ public class pin extends AppCompatActivity
         btn.setTypeface(tfm);
         txtGhost4.setTypeface(tfm);
         txtGhost4.setText("CAMBIAR PIN");
+
         ImageView btnAyuda = (ImageView) findViewById(R.id.ayudaint);
+        if(btnAyuda != null)
         btnAyuda.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -79,32 +81,29 @@ public class pin extends AppCompatActivity
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else {
-                    drawer.openDrawer(GravityCompat.START);
+        if(imgButton != null)
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
                 }
-            }
-        });
-
-
+            });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
 
-
-        Button btnEnviarFalla;
-        btnEnviarFalla = (Button) findViewById(R.id.btnEnviarFalla);
+        Button btnGenerar;
+        btnGenerar = (Button) findViewById(R.id.btnGenerar);
 
         // add button listener
-        if (btnEnviarFalla != null) {
-            btnEnviarFalla.setOnClickListener(new View.OnClickListener() {
+        if (btnGenerar != null) {
+            btnGenerar.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
@@ -112,10 +111,8 @@ public class pin extends AppCompatActivity
                     JSONArray response;
 
                     TextView tvErrorPin = (TextView) findViewById(R.id.tvErrorPin);
-
                     tvErrorPin.setText("");
 
-                    //-------//
                     ConnectionDetector cd = new ConnectionDetector(getApplicationContext());
                     Boolean isInternetPresent = cd.isConnectingToInternet();
 
@@ -135,10 +132,10 @@ public class pin extends AppCompatActivity
 
                             response = new Comunication(pin.this).execute(params).get();
 
-                            Log.e("Response", "Falla: " + response);
+                            Log.e("Response", "PIN: " + response);
                             if (response.getJSONObject(0).has("error")) {
                                 Log.e("Response Falla: ", "ERROR");
-                                tvErrorPin.setText("Error al enviar reporte.");
+                                tvErrorPin.setText("Error al recuperar contraseña.");
 
                             } else if (response.getJSONObject(0).has("resp")) {
                                 String resp = response.getJSONObject(0).get("resp").toString();
