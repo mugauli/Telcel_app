@@ -6,14 +6,14 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorMenu">#878787</color>
     <color name="white">#ffffff</color>
-    <color name="accent">#FF4081</color>
+    <color name="accent">#ff4081</color>
     <color name="bordes">#4DB1D1</color>
     <color name="error">#ff0000</color>
     <color name="colorToolBar">#3068b2</color>
     <color name="tituloRevista">#c077b1</color>
     <color name="fondoRevista">#FFFFFF</color>
     <color name="bordeRevista">#efe0de</color>
-    <color name="bordePodCast">#F0E0C9</color>
+    <color name="bordePodCast">#f0e0c9</color>
     <color name="tabfirst">#35BEBE</color>
 
 </resources>

@@ -31,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -142,10 +143,15 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                        URL imageUrl = null;
                        imageUrl = new URL(imageHttpAddress + img_previa);
                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                       conn.connect();
-                       loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                       conn.disconnect();
-
+                    try {
+                        conn.connect();
+                        loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                        conn.disconnect();
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                    }
                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
                //    datos.add(new Lista_Entrada(R.drawable.mas, fecha,texto));
 

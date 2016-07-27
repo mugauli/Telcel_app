@@ -313,9 +313,10 @@ public class login extends Activity  {
                                 String materno = response.getJSONObject(0).get("materno").toString();
                                 String interes_1 = response.getJSONObject(0).get("materno").toString();
                                 String interes_2 = response.getJSONObject(0).get("materno").toString();
+                                String correo = response.getJSONObject(0).get("correo").toString();
 
                                 session.createLoginSession(tokenCTE, dato, campo, password, id, num_empleado, num_celular,
-                                        region, nombre, paterno, materno, interes_1, interes_2);
+                                        region, nombre, paterno, materno, interes_1, interes_2,correo);
                                 Intent i = new Intent(login.this, MainActivity.class);
                                 startActivity(i);
                                 finish();

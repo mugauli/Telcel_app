@@ -29,12 +29,6 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@color/ColorFondo">
 
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp" />
-
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
@@ -49,6 +43,104 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginEnd="42dp"
                 android:layout_marginBottom="20dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="100">
+                <RelativeLayout
+                    android:id="@+id/loadingPanelHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="visible">
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true" />
+                </RelativeLayout>
+                <ListView
+                    android:id="@+id/lstHome"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="24"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+                </ListView>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:layout_weight="76"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="0dp"
+                    android:id="@+id/lnPodcast"
+                    android:background="@color/primary_text_default_material_dark"
+                    android:paddingRight="50dp">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="37"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/LL1">
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:id="@+id/imagenPodcast" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="20"
+                        android:weightSum="10"
+                        android:padding="10dp"
+                        android:background="@drawable/border_bottom_podcast"
+                        android:id="@+id/LL2">
+                        <TextView
+                            android:id="@+id/textView_superior"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:textColor="@color/ColorPrimary"
+                            android:textStyle="bold"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:layout_weight="4" />
+
+                        <TextView
+                            android:id="@+id/textView_inferior"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_centerHorizontal="true"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:layout_weight="6" />
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="43"
+                        android:weightSum="100"
+                        android:background="@drawable/border_bottom_podcast"
+                        android:id="@+id/LL3">
+
+                        <ImageView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:id="@+id/descargarPodcast"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="5dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 
         </RelativeLayout>
    </android.support.design.widget.CoordinatorLayout>

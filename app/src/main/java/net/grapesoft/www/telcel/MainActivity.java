@@ -21,11 +21,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import Utitilies.SessionManagement;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    String styledText = "This is <font color='red'>simple</font>.";
+    public String tokenCTE = "";
     SessionManagement session;
 
     @Override
@@ -103,11 +108,11 @@ public class MainActivity extends AppCompatActivity
             public void onTabSelected(TabLayout.Tab tab) {
                 Log.e("TAB",tab.getText().toString());
 
-                if(tab.getText().toString().equals(getString(R.string.tab6).toString())) {
+            //   if(tab.getText().toString().equals(getString(R.string.tab6).toString())) {
 
-                    Intent i = new Intent(MainActivity.this, bienvenidos.class);
-                    startActivity(i);
-                }
+            //       Intent i = new Intent(MainActivity.this, bienvenidos.class);
+            //       startActivity(i);
+            //   }
 
                 if(tab.getText().toString().equals(getString(R.string.tab1).toString())) {
 
@@ -159,6 +164,22 @@ public class MainActivity extends AppCompatActivity
 
        //     }
        // });
+
+        tokenCTE = getText(R.string.tokenXM).toString();
+        ArrayList<String> params = new ArrayList<String>();
+
+        String imageHttpAddress = getText(R.string.URL_media).toString();
+        session = new SessionManagement(MainActivity.this);
+
+        final HashMap<String, String> user = session.getUserDetails();
+        String region = user.get(SessionManagement.KEY_PD_REGION);
+
+        params.add("6");
+        params.add("GetHome.php");
+        params.add(tokenCTE);
+        params.add(region);
+
+        new MainActivityAsync(MainActivity.this).execute(params);
     }
 
     @Override

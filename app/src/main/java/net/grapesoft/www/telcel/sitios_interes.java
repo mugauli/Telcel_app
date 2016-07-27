@@ -43,9 +43,6 @@ public class sitios_interes extends Fragment {
         final HashMap<String, String> user = session.getUserDetails();
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
-
-
-
         return rootview;
 
     }

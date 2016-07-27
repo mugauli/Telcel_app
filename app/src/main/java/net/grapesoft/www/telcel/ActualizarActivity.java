@@ -129,7 +129,7 @@ public class ActualizarActivity extends AppCompatActivity
             txtMaterno.setText(user.get(SessionManagement.KEY_PD_MATERNO));
 
             EditText txtCorreo = (EditText) findViewById(R.id.txtCorreo);
-            //txtCorreo.setText(user.get(SessionManagement.KEY_PD_CORREO));
+            txtCorreo.setText(user.get(SessionManagement.KEY_PD_CORREO));
         }
         else
         {

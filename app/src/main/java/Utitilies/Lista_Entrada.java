@@ -1,19 +1,14 @@
 package Utitilies;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
-import java.util.Dictionary;
 
 /**
  * Created by Mugauli on 20/06/2016.
  */
+
 public class Lista_Entrada {
-
-
 
     private ArrayList<String> imagenesSlide;
     private int idImagen,idImagen2,idradio,type;
@@ -31,7 +26,8 @@ public class Lista_Entrada {
             mes,
             textoEncima,
             textoDebajo,
-            img_mini;
+            img_mini,
+            seccion;
 
     private JSONArray  json;
 
@@ -112,6 +108,7 @@ public class Lista_Entrada {
         this.svaElement1 = svaElement1;
 
     }
+
     public Lista_Entrada(SvaElement svaElement1,SvaElement svaElement2,int type) {
 
         this.svaElement1 = svaElement1;
@@ -120,7 +117,6 @@ public class Lista_Entrada {
     }
 
     public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo,String contenido) {
-
         this.id = id;
         this.img_previa = img_previa;
         this.titulo = titulo;
@@ -150,6 +146,62 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.imagenesSlide = imagenesSlide;
     }
+
+    //Home
+    public Lista_Entrada (String seccion,String id,Bitmap img_previa,String titulo, String url,String duracion, int idImagen2) {
+
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.url = url;
+        this.duracion = duracion;
+        this.idImagen2 = idImagen2;
+        this.seccion = seccion;
+    }
+
+    public Lista_Entrada (String seccion,String id,Bitmap img_previa,String titulo, String img_detalle,String textoDebajo) {
+
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.seccion = seccion;
+        this.img_detalle = img_detalle;
+        this.textoDebajo = textoDebajo;
+    }
+
+    public Lista_Entrada(String seccion,String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha) {
+        this.seccion = seccion;
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.img_detalle = img_detalle;
+        this.textoDebajo = textoDebajo;
+        this.fecha = fecha;
+    }
+
+    public Lista_Entrada (String seccion,String id,Bitmap img_previa,String titulo, String img_mini,String img_detalle,String textoDebajo,String fecha) {
+        this.seccion = seccion;
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.img_mini = img_mini;
+        this.img_detalle = img_detalle;
+        this.fecha = fecha;
+        this.textoDebajo = textoDebajo;
+    }
+
+    public Lista_Entrada(String seccion,String id, Bitmap img_previa, String titulo, String url, String duracion, JSONArray json) {
+        this.seccion= seccion;
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.url = url;
+        this.duracion = duracion;
+        this.json = json;
+    }
+
+    //End Home
+
 
 
 
@@ -212,6 +264,9 @@ public class Lista_Entrada {
     }
     public int get_type() {
         return type;
+    }
+    public String get_seccion() {
+        return seccion;
     }
 
 }

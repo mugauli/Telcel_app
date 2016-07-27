@@ -69,6 +69,7 @@ public class SessionManagement {
     public static final String KEY_PRODUCTOS_LANZAMIENTOS = "productos_lanzamientos";
     public static final String KEY_PRODUCTOS_MES = "productos_mes";
     public static final String KEY_PRODUCTOS_SVA = "productos_sva";
+    public static final String KEY_HOME = "home";
 
 
     // Constructor
@@ -82,7 +83,7 @@ public class SessionManagement {
      * Create login session
      * */
     public void createLoginSession(String token, String dato, String campo, String pass, String id, String num_empelado, String num_celular,
-                                   String region, String nombre, String paterno, String materno, String interes_1, String interes_2) {
+                                   String region, String nombre, String paterno, String materno, String interes_1, String interes_2,String correo) {
         editor.clear();
         //SHARED
         editor.putBoolean(IS_LOGIN, true);
@@ -103,7 +104,7 @@ public class SessionManagement {
         editor.putString(KEY_PD_MATERNO,materno);
         editor.putString(KEY_PD_INTERES_1,interes_1);
         editor.putString(KEY_PD_INTERES_2,interes_2);
-        //editor.putString(KEY_PD_CORREO,interes_2);
+        editor.putString(KEY_PD_CORREO,correo);
 
 
         // commit changes
@@ -134,6 +135,9 @@ public class SessionManagement {
     public void createMesProductosSession(String value){ editor.putString(KEY_PRODUCTOS_MES,value);  editor.commit(); }
 
     public void createSVAProductosSession(String value){ editor.putString(KEY_PRODUCTOS_SVA,value);  editor.commit(); }
+
+    //HOME
+    public void createHomeSession(String value){ editor.putString(KEY_HOME,value);  editor.commit(); }
 
 
     /**
@@ -176,6 +180,7 @@ public class SessionManagement {
         user.put(KEY_PD_MATERNO, pref.getString(KEY_PD_MATERNO,null));
         user.put(KEY_PD_INTERES_1, pref.getString(KEY_PD_INTERES_1,null));
         user.put(KEY_PD_INTERES_2, pref.getString(KEY_PD_INTERES_2,null));
+        user.put(KEY_PD_CORREO, pref.getString(KEY_PD_CORREO,null));
 
         // return user
         return user;
@@ -206,6 +211,8 @@ public class SessionManagement {
     public String getMesProductosDetails() { return pref.getString(KEY_PRODUCTOS_MES, null); }
 
     public String getSVAProductosDetails() { return pref.getString(KEY_PRODUCTOS_SVA, null); }
+
+    public String getHomeDetails() { return pref.getString(KEY_HOME, null); }
 
 
 
