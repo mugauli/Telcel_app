@@ -57,6 +57,13 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
     public boolean primer3 = true;
     SessionManagement session;
 
+    private String idP = "";
+    private String tituloP = "";
+    private String img_previaP ="";
+    private String url_podcastP ="";
+    private String duracionP ="";
+    private Bitmap loadedImageP = null;
+
     public MainActivityAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
@@ -148,23 +155,25 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                     if (seccion.equals("podcast")) {
 
-                        String id = elementos.getJSONObject(0).get("id").toString();
-                        String titulo = elementos.getJSONObject(0).get("titulo").toString();
-                        String img_previa = elementos.getJSONObject(0).get("img_previa").toString();
-                        String url_podcast = elementos.getJSONObject(0).get("url_podcast").toString();
-                        String duracion = elementos.getJSONObject(0).get("duracion").toString();
+                        idP = elementos.getJSONObject(0).get("id").toString();
+                        tituloP = elementos.getJSONObject(0).get("titulo").toString();
+                        img_previaP = elementos.getJSONObject(0).get("img_previa").toString();
+                        url_podcastP = elementos.getJSONObject(0).get("url_podcast").toString();
+                        duracionP = elementos.getJSONObject(0).get("duracion").toString();
 
                         URL imageUrl = null;
-                        imageUrl = new URL(imageHttpAddress + img_previa);
+                        imageUrl = new URL(imageHttpAddress + img_previaP);
                         HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
                         try {
                             conn.connect();
-                            loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                            loadedImageP = BitmapFactory.decodeStream(conn.getInputStream());
                             conn.disconnect();
                         } catch (FileNotFoundException e) {
-                            loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                            loadedImageP = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                         }
-                        datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, url_podcast, duracion, R.drawable.play));
+
+
+                       // datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, url_podcast, duracion, R.drawable.play));
 
                     } else if (seccion.equals("promociones")) {
                         String id = elementos.getJSONObject(0).get("id").toString();
@@ -385,46 +394,49 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                     Log.e("Entrada Home", seccion);
 
 
-                    if (seccion.equals("podcast")) {
+               //  if (seccion.equals("podcast")) {
 
-                       // Log.e ("Entrada Home Podcast", ((Lista_Entrada) entrada).get_titulo());
+               //      // Log.e ("Entrada Home Podcast", ((Lista_Entrada) entrada).get_titulo());
 
-                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenPodcast);
-                        if (imagen_noticias != null) {
-                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                        }
+               //      ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenPodcast);
+               //      if (imagen_noticias != null) {
+               //          imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+               //      }
 
-                        TextView noticiafecha = (TextView) activity.findViewById(R.id.textView_superior);
-                        if (noticiafecha != null)
-                            noticiafecha.setText(((Lista_Entrada) entrada).get_titulo());
+               //      TextView noticiafecha = (TextView) activity.findViewById(R.id.textView_superior);
+               //      if (noticiafecha != null)
+               //          noticiafecha.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        TextView noticiatitulo = (TextView) activity.findViewById(R.id.textView_inferior);
+               //      TextView noticiatitulo = (TextView) activity.findViewById(R.id.textView_inferior);
 
-                        if (noticiatitulo != null)
-                            noticiatitulo.setText(((Lista_Entrada) entrada).get_duracion());
+               //      if (noticiatitulo != null)
+               //          noticiatitulo.setText(((Lista_Entrada) entrada).get_duracion());
 
-                        ImageView imagen_entrada2 = (ImageView) view.findViewById(R.id.descargarPodcast);
-                        if (imagen_entrada2 != null) {
-                            imagen_entrada2.setImageResource(((Lista_Entrada) entrada).get_idImagen2());
-                            imagen_entrada2.setTag(((Lista_Entrada)entrada).get_url());
-                        }
+               //      ImageView imagen_entrada2 = (ImageView) view.findViewById(R.id.descargarPodcast);
+               //      if (imagen_entrada2 != null) {
+               //          imagen_entrada2.setImageResource(((Lista_Entrada) entrada).get_idImagen2());
+               //          imagen_entrada2.setTag(((Lista_Entrada)entrada).get_url());
+               //      }
 
-                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.lnPodcast);
-                        principal.setTag(entrada);
+               //      LinearLayout principal = (LinearLayout) activity.findViewById(R.id.lnPodcast);
+               //      principal.setTag(entrada);
 
-                        principal.setOnClickListener(new View.OnClickListener() {
+               //      principal.setOnClickListener(new View.OnClickListener() {
 
-                            @Override
-                            public void onClick(View arg0) {
+               //          @Override
+               //          public void onClick(View arg0) {
 
-                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                                i.putExtra("direccion","1");
-                                activity.startActivity(i);
+               //              Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+               //              i.putExtra("direccion","1");
+               //              activity.startActivity(i);
 
-                            }
-                        });
+               //          }
+               //      });
 
-                    } else if (seccion.equals("promociones")) {
+               //      view.setVisibility(View.GONE);
+
+               //  } else
+                    if (seccion.equals("promociones")) {
 
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
 
@@ -566,10 +578,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                                 activity.startActivity(i);
                             }
                         });
-
                     }
-
-
                     if(!seccion.equals("podcast")) {
 
                         ImageView imagen_home = (ImageView) view.findViewById(R.id.imagenHome);
@@ -585,8 +594,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                             TextView homeDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
                             if (homeDescripcion != null) {
-                                homeDescripcion.setText("Descargar");
-                                homeDescripcion.setVisibility(View.GONE);
+                                homeDescripcion.setText(((Lista_Entrada)entrada).get_titulo());
+                              //  homeDescripcion.setVisibility(View.GONE);
                             }
                         }else
                         {
@@ -617,6 +626,35 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
         {
             Log.e("No llego", "algo paso");
         }
+
+        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenPodcast);
+        if (imagen_noticias != null) {
+            imagen_noticias.setImageBitmap(loadedImageP);
+        }
+
+        TextView noticiafecha = (TextView) activity.findViewById(R.id.textView_superior);
+        if (noticiafecha != null)
+            noticiafecha.setText(tituloP);
+
+        TextView noticiatitulo = (TextView) activity.findViewById(R.id.textView_inferior);
+
+        if (noticiatitulo != null)
+            noticiatitulo.setText(duracionP);
+
+        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.lnPodcast);
+        principal.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                i.putExtra("direccion","1");
+                activity.startActivity(i);
+
+            }
+        });
+
+
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelHome);
         if(pBar != null)
             pBar.setVisibility(View.GONE);
