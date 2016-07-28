@@ -91,7 +91,11 @@
                         android:orientation="vertical"
                         android:weightSum="100"
                         android:layout_marginTop="0dp"
-                        android:background="@drawable/border" >
+                        android:background="@drawable/border"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
 
 
                         <LinearLayout
@@ -136,10 +140,9 @@
             </LinearLayout>
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/derecha"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom|end"
-                app:rippleColor="@color/ColorPrimary"
                 android:src="@drawable/derecha"
                 android:layout_alignParentBottom="false"
                 android:layout_alignParentRight="true"
@@ -147,15 +150,15 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginLeft="20dp"
-                android:background="@android:color/transparent" />
+                android:onClick="fwdSlider"
+                app:backgroundTint="@android:color/transparent" />
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/izquierda"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="bottom|end"
-                app:rippleColor="@color/ColorPrimary"
                 android:src="@drawable/izquierda"
                 android:layout_alignParentBottom="false"
                 android:layout_alignParentRight="false"
@@ -166,14 +169,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@android:color/transparent" />
+                android:layout_marginTop="60dp"
+                android:onClick="backSlider"
+                android:background="@android:color/transparent"
+                app:backgroundTint="@android:color/transparent" />
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/imgDerecha"
-                android:src="@drawable/derecha" />
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
     <include layout="@layout/navigation"/>

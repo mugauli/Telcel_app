@@ -179,8 +179,6 @@ public class activity_detalle_galeria extends AppCompatActivity
                 // "Only the original thread that created a view hierarchy can touch its views"
                 runOnUiThread(new Runnable() {
                     public void run() {
-
-
                         //position++;
                         //if (position == imagenes_slider.size()) {
                         //    position = 0;
@@ -194,6 +192,7 @@ public class activity_detalle_galeria extends AppCompatActivity
                         }
                         imageSwitcher.setImageResource(gallery[position]);
                     }
+
                 });
             }
 
@@ -201,7 +200,10 @@ public class activity_detalle_galeria extends AppCompatActivity
     }
 
     public void backSlider(View button) {
-
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
       // if (position == 0) {
       //     position = imagenes_slider.size()-1;
       // }
