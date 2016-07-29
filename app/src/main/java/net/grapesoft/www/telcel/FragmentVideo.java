@@ -67,7 +67,7 @@ public class FragmentVideo extends Fragment {
 
                 //TextView idVideo = (TextView) rootview.findViewById(R.id.idVideo);
                String id_video = arg0.getTag().toString();
-               Intent i = new Intent(getActivity(), VideoDetalleActivity.class);
+               Intent i = new Intent(getActivity(), activity_detalle_video.class);
                i.putExtra("video_id",id_video);
                startActivity(i);
                //Log.e("ID Video", "ID: "+ id_video);

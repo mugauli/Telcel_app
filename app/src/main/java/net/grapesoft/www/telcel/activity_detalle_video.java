@@ -35,7 +35,7 @@ import Utitilies.Comunication;
 import Utitilies.GetNetImage;
 import Utitilies.SessionManagement;
 
-public class VideoDetalleActivity extends AppCompatActivity
+public class activity_detalle_video extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     // Declare variables
@@ -60,6 +60,19 @@ public class VideoDetalleActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_video);
+
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null) {
+            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > VIDEO");
+            breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(activity_detalle_video.this, ComunicacionInternaActivity.class);
+                    i.putExtra("direccion","5");
+                    startActivity(i);
+                }
+            });
+        }
 
         session = new SessionManagement(getApplicationContext());
         tokenCTE = getText(R.string.tokenXM).toString();
@@ -101,7 +114,7 @@ public class VideoDetalleActivity extends AppCompatActivity
                params.add(tokenCTE);
                params.add(region);
 
-               responseArray = new Comunication(VideoDetalleActivity.this).execute(params).get();
+               responseArray = new Comunication(activity_detalle_video.this).execute(params).get();
                if (pBar != null) pBar.setVisibility(View.GONE);
 
            } else {
@@ -185,7 +198,7 @@ public class VideoDetalleActivity extends AppCompatActivity
         VideoURL = VideoURL.replace(" ","%20");
 
         // Create a progressbar
-        pDialog = new ProgressDialog(VideoDetalleActivity.this);
+        pDialog = new ProgressDialog(activity_detalle_video.this);
         // Set progressbar title
 
         // Set progressbar message
@@ -225,7 +238,7 @@ public class VideoDetalleActivity extends AppCompatActivity
         try {
             // Start the MediaController
          MediaController mediacontroller = new MediaController(
-                 VideoDetalleActivity.this);
+                 activity_detalle_video.this);
          mediacontroller.setAnchorView(videoview);
          // Get the URL from String VideoURL
          videoview.setMediaController(mediacontroller);
@@ -254,7 +267,7 @@ public class VideoDetalleActivity extends AppCompatActivity
                 public void onClick(View v) {
                     String id_video = v.getTag().toString();
                     Log.e("Id_videpo_clic aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", id_video);
-                    Intent i = new Intent(VideoDetalleActivity.this, VideoDetalleActivity.class);
+                    Intent i = new Intent(activity_detalle_video.this, activity_detalle_video.class);
                     i.putExtra("video_id",id_video);
                     startActivity(i);
                 }
@@ -354,17 +367,17 @@ public class VideoDetalleActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(VideoDetalleActivity.this, ActualizarActivity.class);
+            Intent i = new Intent(activity_detalle_video.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(VideoDetalleActivity.this, pin.class);
+            Intent i = new Intent(activity_detalle_video.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(VideoDetalleActivity.this, preferencias.class);
+            Intent i = new Intent(activity_detalle_video.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {

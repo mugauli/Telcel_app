@@ -469,7 +469,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             public void onClick(View arg0) {
 
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                                i.putExtra("direccion","3");
+                                i.putExtra("direccion","4");
                                 activity.startActivity(i);
 
                             }
@@ -506,7 +506,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             public void onClick(View arg0) {
 
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                                i.putExtra("direccion","6");
+                                i.putExtra("direccion","8");
                                 activity.startActivity(i);
                             }
                         });
@@ -519,7 +519,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                                i.putExtra("direccion","7");
+                                i.putExtra("direccion","2");
                                 activity.startActivity(i);
                             }
                         });
@@ -546,7 +546,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                                i.putExtra("direccion","4");
+                                i.putExtra("direccion","3");
                                 activity.startActivity(i);
                             }
                         });
@@ -560,7 +560,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                                i.putExtra("direccion","5");
+                                i.putExtra("direccion","1");
                                 activity.startActivity(i);
                             }
                         });
@@ -574,7 +574,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                                i.putExtra("direccion","2");
+                                i.putExtra("direccion","5");
                                 activity.startActivity(i);
                             }
                         });
@@ -648,7 +648,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
             public void onClick(View arg0) {
 
                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                i.putExtra("direccion","1");
+                i.putExtra("direccion","6");
                 activity.startActivity(i);
 
             }
