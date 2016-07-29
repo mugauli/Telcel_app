@@ -18,28 +18,34 @@ public class PagerAdapterComunicacionInterna extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                FragmentPodCast tab1 = new FragmentPodCast();
+                FragmentComunicados tab1 = new FragmentComunicados();
                 return tab1;
+
             case 1:
-                FragmentVideo tab2 = new FragmentVideo();
+                FragmentCampana tab2 = new FragmentCampana();
                 return tab2;
+
             case 2:
-                FragmentRevista tab3 = new FragmentRevista();
+                FragmentNoticias tab3 = new FragmentNoticias();
                 return tab3;
+
             case 3:
-                FragmentNoticias tab4 = new FragmentNoticias();
+                FragmentRevista tab4 = new FragmentRevista();
                 return tab4;
             case 4:
-                FragmentComunicados tab5 = new FragmentComunicados();
+                FragmentVideo tab5 = new FragmentVideo();
                 return tab5;
+
             case 5:
-                FragmentGrupo tab7 = new FragmentGrupo();
-                return tab7;
-            case 6:
-                FragmentCampana tab6 = new FragmentCampana();
+                FragmentPodCast tab6 = new FragmentPodCast();
                 return tab6;
+
+            case 6:
+                FragmentGaleria tab7 = new FragmentGaleria();
+                return tab7;
+
             case 7:
-                FragmentGaleria tab8 = new FragmentGaleria();
+                FragmentGrupo tab8 = new FragmentGrupo();
                 return tab8;
             default:
                 return null;

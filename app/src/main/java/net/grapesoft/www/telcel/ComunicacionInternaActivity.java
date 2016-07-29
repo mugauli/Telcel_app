@@ -82,14 +82,18 @@ public class ComunicacionInternaActivity extends AppCompatActivity
 
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        tabs.addTab(tabs.newTab().setText("PODCAST"));
-        tabs.addTab(tabs.newTab().setText("VIDEO"));
-        tabs.addTab(tabs.newTab().setText("REVISTA"));
-        tabs.addTab(tabs.newTab().setText("NOTICIAS"));
         tabs.addTab(tabs.newTab().setText("COMUNICADOS"));
-        tabs.addTab(tabs.newTab().setText("GRUPO CARSO"));
         tabs.addTab(tabs.newTab().setText("CAMPAÑAS INTERNAS"));
-        tabs.addTab(tabs.newTab().setText("GALERIAS"));
+        tabs.addTab(tabs.newTab().setText("NOTICIAS"));
+        tabs.addTab(tabs.newTab().setText("REVISTA"));
+
+        tabs.addTab(tabs.newTab().setText("VIDEO"));
+        tabs.addTab(tabs.newTab().setText("PODCAST"));
+        tabs.addTab(tabs.newTab().setText("GALERIA"));
+
+        tabs.addTab(tabs.newTab().setText("GRUPO CARSO INFORMA"));
+
+
 
         //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
