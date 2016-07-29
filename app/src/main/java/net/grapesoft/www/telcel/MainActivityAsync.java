@@ -352,7 +352,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         String url_video = elementos.getJSONObject(0).get("url_video").toString();
                         String duracion = elementos.getJSONObject(0).get("duracion").toString();
 
-                        Log.e("img_previa",img_previa);
+                        Log.e("Img_previa Home",img_previa);
 
                         URL imageUrl = null;
                         imageUrl = new URL(imageHttpAddress + img_previa);

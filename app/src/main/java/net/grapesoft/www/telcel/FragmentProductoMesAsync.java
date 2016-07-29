@@ -197,26 +197,26 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
                   Log.e ("Entrada producto mes titulo primero", ((Lista_Entrada) entrada).get_titulo());
 
-                  ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
-                  if (imagen_noticias != null) {
+                  ImageView imagen_producto_mes = (ImageView) activity.findViewById(R.id.imagenUNT);
+                  if (imagen_producto_mes != null) {
                       Log.e("imagen", "principal");
-                      imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                      imagen_producto_mes.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                   }
 
-                  TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUN);
-                  if (noticiafecha != null)
-                      noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
+                  TextView productoMesFecha = (TextView) activity.findViewById(R.id.fechaUN);
+                  if (productoMesFecha != null)
+                      productoMesFecha.setText(((Lista_Entrada) entrada).get_fecha());
 
-                  TextView noticiatitulo = (TextView) activity.findViewById(R.id.titUN);
+                  TextView productoMesTitulo = (TextView) activity.findViewById(R.id.titUN);
 
-                  if (noticiatitulo != null)
-                      noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                  if (productoMesTitulo != null)
+                      productoMesTitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                  TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUN);
+                  TextView productoMesDescripcion = (TextView) activity.findViewById(R.id.descUN);
 
-                  if (noticiaDescripcion != null) {
+                  if (productoMesDescripcion != null) {
                       String desc = ((Lista_Entrada) entrada).get_textoDebajo();
-                      noticiaDescripcion.setText(Html.fromHtml(desc));
+                      productoMesDescripcion.setText(Html.fromHtml(desc));
                   }
                   LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
@@ -245,7 +245,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                         public void onClick(View arg0) {
 
                             ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
-                            TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
+                      //      TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
                             TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
                             TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
                             LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
@@ -253,7 +253,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                             Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
                             imagenGrupo.setImageBitmap(Entrada.get_img_previa());
-                            fechaGrupo.setText(Entrada.get_fecha());
+                      //      fechaGrupo.setText(Entrada.get_fecha());
                             titGrupo.setText(Entrada.get_titulo());
                             descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
                             principal.setTag(Entrada);

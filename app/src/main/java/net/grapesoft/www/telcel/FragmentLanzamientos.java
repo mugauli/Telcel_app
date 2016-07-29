@@ -43,23 +43,22 @@ public class FragmentLanzamientos extends Fragment {
 
         new FragmentLanzamientosAsync(getActivity()).execute(params);
 
-        LinearLayout principal = (LinearLayout)rootview.findViewById(R.id.linearPrincipalNT);
-
+        LinearLayout principal = (LinearLayout)rootview.findViewById(R.id.linearPrincipalLZ);
+        if(principal != null)
         principal.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent i = new Intent(getActivity(), activity_detalle_lanzamientos.class);
-
                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
-                if(Entrada != null) {
-                    i.putExtra("imagen", Entrada.get_img_detalle());
-                    i.putExtra("titulo", Entrada.get_titulo());
-                    i.putExtra("descripcion", Entrada.get_textoDebajo());
 
-                    startActivity(i);
-                }
+                //    i.putExtra("imagen",Entrada.get_img_previa());
+                i.putExtra("titulo",Entrada.get_titulo());
+                i.putExtra("descripcion",Entrada.get_textoDebajo());
+                i.putStringArrayListExtra("imagenes_slider",Entrada.get_imagenesSlide());
+
+                startActivity(i);
 
             }
         });

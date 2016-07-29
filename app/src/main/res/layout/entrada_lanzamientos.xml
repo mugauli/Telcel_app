@@ -14,7 +14,10 @@
         android:weightSum="100"
         android:layout_margin="10dp"
         android:background="@drawable/border"
-        android:id="@+id/contentModel">
+        android:id="@+id/contentModel"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:padding="2dp">
 
         <ImageView
             android:id="@+id/imagelanzamientos"

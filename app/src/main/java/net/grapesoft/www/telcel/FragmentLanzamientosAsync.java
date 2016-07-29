@@ -75,11 +75,11 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
         String result11 = "";
         try {
 
-            String noticias = session.getLanzamientosProductosDetails();
+            String lanzamientosProductosDetails = session.getLanzamientosProductosDetails();
 
-            if(noticias == null || noticias == "") {
+            if (lanzamientosProductosDetails == null || lanzamientosProductosDetails == "") {
 
-                Log.e("Se obtiene LANZAMIENTOS","Procesando...");
+                Log.e("Se obtiene LANZAMIENTOS", "Procesando...");
 
                 List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient = new DefaultHttpClient();
@@ -104,44 +104,49 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
 
 
                 session.createLanzamientosProductosSession(result11);
-            }
-            else
-            {
-                Log.e("Con session LANZAMIENTOS",noticias);
-                result11 = noticias;
+            } else {
+                Log.e("Con session LANZAMIENTOS", lanzamientosProductosDetails);
+                result11 = lanzamientosProductosDetails;
             }
 
             //Log.e("Response: ", result11);
 
-            if(result11.equals("true"+"\n")) {
+            if (result11.equals("true" + "\n")) {
                 // Log.e("Response: ", "true Int");
                 responseArray = new JSONArray("[{'resp':'true'}]");
-            }else if(result11.equals("false"+"\n")) {
+            } else if (result11.equals("false" + "\n")) {
                 //Log.e("Response: ", "false int");
                 responseArray = new JSONArray("[{'resp':'false'}]");
-            } else
-            {
+            } else {
                 //Log.e("Response: ", "JSON");
-                if(result11.contains("["))
+                if (result11.contains("["))
                     responseArray = new JSONArray(result11);
                 else
                     responseArray = new JSONArray("[" + result11 + "]");
             }
 
-            if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item LANZAMIENTOS" ,  "Error");
-            }
-            else {
+            if (responseArray.getJSONObject(0).has("resp")) {
+                Log.e("Item LANZAMIENTOS", "RESP FALSE");
+            }else  if (responseArray.getJSONObject(0).has("error")) {
+                Log.e("Item LANZAMIENTOS", "Error");
+            }  else {
 
                 for (int i = 0; i < responseArray.length(); i++) {
-                    Log.e("Response Item: ", responseArray.getJSONObject(i).toString());
+                    Log.e("Response Item Lanzamientos: ", responseArray.getJSONObject(i).toString());
 
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
                     String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
                     String img_mini = responseArray.getJSONObject(i).get("img_mini").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
-                    String imagenes_slide = responseArray.getJSONObject(i).get("imagenes_slide").toString();
+                    JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+                    // String imagenes_slide_Json = responseArray.getJSONObject(0).getJSONArray("imagenes_slide").toString();
+                    ArrayList<String> imagenes_slider = new ArrayList<String>();
+
+                    for (int ii = 0; ii < imagenes_slide.length(); ii++) {
+
+                        imagenes_slider.add(imagenes_slide.getJSONObject(i).get("url_img").toString());
+                    }
 
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
@@ -150,12 +155,11 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                         conn.connect();
                         loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                         conn.disconnect();
-                    }
-                    catch (FileNotFoundException e)
-                    {
+                    } catch (FileNotFoundException e) {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,img_mini,texto,imagenes_slide));
+                    datos.add(new Lista_Entrada(id, loadedImage, titulo, img_mini, texto, imagenes_slider));
+
                 }
             }
 
@@ -167,7 +171,7 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
             Log.e("Error UnsupportedEncodingException Lanzamientos", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error ClientProtocolException Lamzamientos", e.getMessage());
+            Log.e("Error ClientProtocolException Lanzamientos", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
             Log.e("Error IOException Lanzamientos", e.getMessage());
@@ -175,87 +179,77 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
         }
 
 
-          Log.e("Datos Lanzamientos",""+datos.get(1).get_titulo());
+        Log.e("Datos Lanzamientos", "" + datos.get(1).get_titulo());
         Log.e("Llego", "al final");
-        return new List_adapted_Lanzamientos(activity, R.layout.entrada_lanzamientos, datos){
+        return new List_adapted_Lanzamientos(activity, R.layout.entrada_lanzamientos, datos) {
 
             @Override
             public void onEntrada(Object entrada, View view) {
 
-                Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
+                Log.e("Entrada Lanzamientos", ((Lista_Entrada) entrada).get_titulo());
 
                 if (entrada != null) {
 
-                    if(primer3) {
+                    if (primer3) {
                         primer3 = false;
 
-                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenUNT);
+                        ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenLZ);
                         if (imagen_noticias != null) {
                             Log.e("imagen", "pricipal");
                             imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         }
 
-                        TextView lanzamientosTitulo = (TextView) activity.findViewById(R.id.titUN);
+                        TextView lanzamientosTitulo = (TextView) activity.findViewById(R.id.titLZ);
 
                         if (lanzamientosTitulo != null)
                             lanzamientosTitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                        TextView lanzamientosDescripcion = (TextView) activity.findViewById(R.id.descUN);
+                        TextView lanzamientosDescripcion = (TextView) activity.findViewById(R.id.descLZ);
 
                         if (lanzamientosDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                             // desc = desc.substring(0,200);
                             lanzamientosDescripcion.setText(Html.fromHtml(desc));
                         }
-                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
-
+                        LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalLZ);
                         principal.setTag(entrada);
 
                     }
-                //    else {
+                    //    else {
 
-                    WindowManager wm = (WindowManager) activity.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-                    Display display = wm.getDefaultDisplay();
-                    LinearLayout contentModel = (LinearLayout) view.findViewById(R.id.contentModel);
+                    ImageView imagen_lanzamientos = (ImageView) view.findViewById(R.id.imagelanzamientos);
+                    if (imagen_lanzamientos != null)
+                        imagen_lanzamientos.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                    int width = (int) (display.getWidth() * (0.30));
-                    Log.e("width",""+width);
-                    contentModel.setMinimumWidth(width);
+                    TextView lanzamientosTitulo = (TextView) view.findViewById(R.id.lanzamientostitulo);
 
-                            ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagelanzamientos);
-                        if (imagen_noticias != null)
-                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                    if (lanzamientosTitulo != null)
+                        lanzamientosTitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-
-                        TextView noticiatitulo = (TextView) view.findViewById(R.id.lanzamientostitulo);
-
-                        if (noticiatitulo != null)
-                            noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
-
-                        view.setTag(entrada);
+                    view.setTag(entrada);
 
 
-                        view.setOnClickListener(new View.OnClickListener() {
+                    view.setOnClickListener(new View.OnClickListener() {
 
-                            @Override
-                            public void onClick(View arg0) {
+                        @Override
+                        public void onClick(View arg0) {
 
-                                ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
-                                TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
-                                TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
-                                LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenLZ);
+                            TextView titGrupo = (TextView) activity.findViewById(R.id.titLZ);
+                            TextView descGrupo = (TextView) activity.findViewById(R.id.descLZ);
+                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalLZ);
 
-                                Lista_Entrada Entrada = (Lista_Entrada) arg0.getTag();
-                                imagenGrupo.setImageBitmap(Entrada.get_img_previa());
-                                titGrupo.setText(Entrada.get_titulo());
-                                descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
-                                principal.setTag(Entrada);
+                            Lista_Entrada Entrada = (Lista_Entrada) arg0.getTag();
+                            imagenGrupo.setImageBitmap(Entrada.get_img_previa());
+                            titGrupo.setText(Entrada.get_titulo());
+                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                            principal.setTag(Entrada);
 
-                            }
-                        });
-                    }
+                        }
+                    });
+                }
 
-             //   }
+                //   }
             }
         };
 
@@ -276,7 +270,7 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
             Log.e("No llego Lanzamientos", "Algo paso");
         }
 
-        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelNoticias);
+        RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelLanzamientos);
         if(pBar != null)
             pBar.setVisibility(View.GONE);
     }

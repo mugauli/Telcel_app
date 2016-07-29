@@ -75,9 +75,9 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
         String result11 = "";
         try {
 
-            String video = session.getCampanaProductosDetails();
+            String campanaProductosDetails = session.getCampanaProductosDetails();
 
-            if(video == null || video == "") {
+            if(campanaProductosDetails == null || campanaProductosDetails == "") {
 
                 Log.e("Se obtiene VIDEO Campana publicitaria","Procesando...");
 
@@ -106,8 +106,8 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
             }
             else
             {
-                Log.e("Con session VIDEO",video);
-                result11 = video;
+                Log.e("Con session Publicitaria",campanaProductosDetails);
+                result11 = campanaProductosDetails;
             }
 
             if(result11.equals("true"+"\n")) {
@@ -126,7 +126,10 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
             }
 
             if(responseArray.getJSONObject(0).has("resp")) {
-                Log.e("Item Podcast" ,  "Error");
+                Log.e("Item Publicitaria" ,  "RESP FALSE");
+            }else
+            if(responseArray.getJSONObject(0).has("error")) {
+                Log.e("Item Publicitaria" ,  "Error");
             }
             else {
 
@@ -158,16 +161,16 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
 
         } catch (JSONException e) {
-            Log.e("Error Async 0 Video", e.getMessage());
+            Log.e("Error Async 0 Publicitaria", e.getMessage());
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
-            Log.e("Error Async 1 Video", e.getMessage());
+            Log.e("Error Async 1 Publicitaria", e.getMessage());
             e.printStackTrace();
         } catch (ClientProtocolException e) {
-            Log.e("Error Async 2 Video", e.getMessage());
+            Log.e("Error Async 2 Publicitaria", e.getMessage());
             e.printStackTrace();
         } catch (IOException e) {
-            Log.e("Error Async 3 Video", e.getMessage());
+            Log.e("Error Async 3 Publicitaria", e.getMessage());
             e.printStackTrace();
         }
 
