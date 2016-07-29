@@ -19,7 +19,7 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="90dp"
-                android:id="@+id/imagenCaleriaL"
+                android:id="@+id/imagenProductoMesL"
                 android:layout_marginLeft="3dp" />
         </LinearLayout>
 
@@ -30,24 +30,37 @@
             android:weightSum="10"
             android:padding="15dp">
 
-            <TextView android:id="@+id/fechaProductoMesL"
+            <TextView
+                android:id="@+id/txtMesProductoMesL"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:gravity="right"
+                android:gravity="left"
                 android:layout_centerHorizontal="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_weight="6" />
+                android:layout_weight="4"
+                android:text="Enero" />
 
             <TextView android:id="@+id/tituloProductoMesL"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:text="Small Text"
+                android:text="Apple iPhone 6S / 6S Plus"
                 android:textColor="@color/ColorPrimary"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_weight="4"/>
+                android:layout_weight="4"
+                android:gravity="left" />
+
+            <TextView
+                android:id="@+id/txtDescripcionProductoMesL"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerHorizontal="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_weight="2"
+                android:gravity="left"
+                android:text="El más buscado por su tecnología 3D touch." />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -46,6 +46,9 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_lanzamiento);
 
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null)
+            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > LANZAMIENTOS");
 //Slider
         imageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcherLanzamiento);
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
