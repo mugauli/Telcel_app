@@ -77,7 +77,9 @@ public class activity_detalle_galeria extends AppCompatActivity
                // return new ImageView(activity_detalle_galeria.this);
             }
         });
-
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null)
+            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > GALERIA");
         // Set animations
         // http://danielme.com/2013/08/18/diseno-android-transiciones-entre-activities/
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);

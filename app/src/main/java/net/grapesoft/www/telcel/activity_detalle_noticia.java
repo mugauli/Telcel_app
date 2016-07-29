@@ -39,6 +39,18 @@ public class activity_detalle_noticia extends AppCompatActivity
         String imagen = getIntent().getStringExtra("imagen");
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null)
+            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > NOTICIAS");
+
+       /* breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(activity_detalle_noticia.this,ComunicacionInternaActivity.class);
+                startActivity(intent);
+            }
+        });*/
 
         ImageView imagenUG = (ImageView) findViewById(R.id.imagenDNT);
         TextView titUG = (TextView) findViewById(R.id.titDNT);

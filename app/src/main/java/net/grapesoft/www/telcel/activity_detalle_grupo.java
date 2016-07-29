@@ -33,7 +33,9 @@ public class activity_detalle_grupo extends AppCompatActivity
         setContentView(R.layout.activity_detalle_grupo);
 
         session = new SessionManagement(getApplicationContext());
-
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null)
+            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > GRUPO CARSO INFORMA");
         String imagen = getIntent().getStringExtra("imagen");
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");

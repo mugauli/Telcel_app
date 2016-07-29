@@ -63,7 +63,9 @@ public class activity_detalle_comunicado extends AppCompatActivity
 
 
         Log.e("Imagen", imagen);
-
+    TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+    if(breadcrumComunicado != null)
+        breadcrumComunicado.setText("COMUNICACIÓN INTERNA > COMUNICADOS");
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

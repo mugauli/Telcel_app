@@ -35,6 +35,8 @@ public class FragmentComunicados extends Fragment {
         String imageHttpAddress = getText(R.string.URL_media).toString();
         session = new SessionManagement(getActivity());
 
+
+
         final HashMap<String, String> user = session.getUserDetails();
         String region = user.get(SessionManagement.KEY_PD_REGION);
 

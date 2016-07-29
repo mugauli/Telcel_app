@@ -55,7 +55,9 @@ public class activity_detalle_sva extends AppCompatActivity
             e.printStackTrace();
         }
 
-
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null)
+            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > SVA");
         titUG.setText(titulo);
         if(descripcion != null)
         descUG.setText(Html.fromHtml(descripcion));
