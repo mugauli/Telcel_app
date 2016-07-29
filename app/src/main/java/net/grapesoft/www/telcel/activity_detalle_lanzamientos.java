@@ -36,9 +36,7 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
     //    String imagen = getIntent().getStringExtra("imagen");
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
-        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
-        if(breadcrumComunicado != null)
-            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > LANZAMIENTOS");
+
         ImageView imagenUG = (ImageView) findViewById(R.id.imagenDNT);
         TextView titUG = (TextView) findViewById(R.id.titDNT);
         TextView descUG = (TextView) findViewById(R.id.descDNT);
