@@ -55,6 +55,14 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
     public boolean primer3 = true;
     SessionManagement session;
 
+    //Mes Actual
+
+    private String mesActual = "",tituloActual="", img_miniActual="", textoActual="",idActual="0";
+    private Bitmap loadedImageActual= null;
+    private ArrayList<String> imagenes_sliderActual = new ArrayList<String>();
+
+    //END Mes Actual
+
     public FragmentProductoMesAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
@@ -144,7 +152,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                     String texto = elementos.getJSONObject(0).get("texto").toString();
                     JSONArray imagenes_slide = elementos.getJSONObject(0).getJSONArray("imagenes_slide");
 
-                    Log.e("TITULO Prodcuto del mes: ", elementos.getJSONObject(0).get("titulo").toString());
+                    Log.e("TITULO Producto del mes: ", elementos.getJSONObject(0).get("titulo").toString());
                     ArrayList<String> imagenes_slider = new ArrayList<String>();
 
                     for (int ii = 0; ii < imagenes_slide.length(); ii++) {
@@ -158,12 +166,24 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                         conn.connect();
                         loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
                         conn.disconnect();
-                    }
-                    catch (FileNotFoundException e)
-                    {
+                    } catch (FileNotFoundException e) {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(mes,id,loadedImage, titulo,img_mini,texto,imagenes_slider));
+
+
+                    datos.add(new Lista_Entrada(mes, id, loadedImage, titulo, img_mini, texto, imagenes_slider));
+
+                    if (mes.equals("actual")) {
+                        Log.e("Entrada producto mes ACTUAL llenado----------------------------------1", mes);
+                        idActual = id;
+                        tituloActual = titulo;
+                        loadedImageActual = loadedImage;
+                        img_miniActual = img_mini;
+                        textoActual = texto;
+                        imagenes_sliderActual = imagenes_slider;
+                    }
+
+
                 }
             }
 
@@ -183,7 +203,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
         }
 
 
-        Log.e("Llego", "al final");
+        Log.e("Llego Producto Mes", "al final");
 
         return new List_adapted_Producto_Mes(activity, R.layout.entrada_productos_mes, datos){
 
@@ -192,76 +212,64 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
              if(entrada != null) {
 
-              if(primer3) {
-                  primer3 = false;
+                 String mes = ((Lista_Entrada) entrada).get_mes();
 
-                  Log.e ("Entrada producto mes titulo primero", ((Lista_Entrada) entrada).get_titulo());
+                 //else {
 
-                  ImageView imagen_producto_mes = (ImageView) activity.findViewById(R.id.imagenUNT);
-                  if (imagen_producto_mes != null) {
-                      Log.e("imagen", "principal");
-                      imagen_producto_mes.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                  }
+                     ImageView imagen_producto_mes_l = (ImageView) view.findViewById(R.id.imagenProductoMesL);
+                     if (imagen_producto_mes_l != null)
+                         imagen_producto_mes_l.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
-                  TextView productoMesFecha = (TextView) activity.findViewById(R.id.fechaUN);
-                  if (productoMesFecha != null)
-                      productoMesFecha.setText(((Lista_Entrada) entrada).get_fecha());
+                     TextView producto_mes = (TextView) view.findViewById(R.id.txtMesProductoMesL);
+                     if (producto_mes != null) {
+                            String MS = ((Lista_Entrada) entrada).get_mes();
+                         if(MS.equals("actual"))
+                             producto_mes.setText("");
+                         else
+                             producto_mes.setText(MS);
+                     }
 
-                  TextView productoMesTitulo = (TextView) activity.findViewById(R.id.titUN);
+                     TextView producto_titulo = (TextView) view.findViewById(R.id.tituloProductoMesL);
+                     if (producto_titulo != null)
+                         producto_titulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                  if (productoMesTitulo != null)
-                      productoMesTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                     TextView producto_descripcion = (TextView) view.findViewById(R.id.txtDescripcionProductoMesL);
 
-                  TextView productoMesDescripcion = (TextView) activity.findViewById(R.id.descUN);
+                     if (producto_descripcion != null)
+                         producto_descripcion.setText(Html.fromHtml(((Lista_Entrada) entrada).get_textoDebajo()));
 
-                  if (productoMesDescripcion != null) {
-                      String desc = ((Lista_Entrada) entrada).get_textoDebajo();
-                      productoMesDescripcion.setText(Html.fromHtml(desc));
-                  }
-                  LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+                     view.setTag(entrada);
 
-                  principal.setTag(entrada);
+                     view.setOnClickListener(new View.OnClickListener() {
 
-              }
+                         @Override
+                         public void onClick(View arg0) {
 
-                    ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenCaleriaL);
-                    if (imagen_noticias != null)
-                        imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                             ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
+                             //      TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
+                             TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
+                             TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
+                             TextView productoMes = (TextView) activity.findViewById(R.id.txtMesMain);
 
-                    TextView noticiafecha = (TextView) view.findViewById(R.id.fechaProductoMesL);
-                    if (noticiafecha != null)
-                        noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
+                             LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
 
-                    TextView noticiatitulo = (TextView) view.findViewById(R.id.tituloProductoMesL);
+                             Lista_Entrada Entrada = (Lista_Entrada) arg0.getTag();
 
-                    if (noticiatitulo != null)
-                        noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                             imagenGrupo.setImageBitmap(Entrada.get_img_previa());
+                             String MS = Entrada.get_mes();
+                             if(MS.equals("actual"))
+                                 productoMes.setText("Este Mes");
+                             else
+                                 productoMes.setText(MS);
+                             titGrupo.setText(Entrada.get_titulo());
+                             descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                             principal.setTag(Entrada);
 
-                    view.setTag(entrada);
+                         }
+                     });
 
-                    view.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View arg0) {
-
-                            ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
-                      //      TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
-                            TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
-                            TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
-                            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
-
-                            Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
-
-                            imagenGrupo.setImageBitmap(Entrada.get_img_previa());
-                      //      fechaGrupo.setText(Entrada.get_fecha());
-                            titGrupo.setText(Entrada.get_titulo());
-                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
-                            principal.setTag(Entrada);
-
-                        }
-                    });
-
-                }
+               //  }
+             }
             }
         };
     }
@@ -283,6 +291,34 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelProductoMes);
         if(pBar != null)
             pBar.setVisibility(View.GONE);
+
+        if (!idActual.equals("0")) {
+            Log.e("Entrada producto mes ACTUAL----------------------------------1", mesActual);
+
+
+
+            TextView productoMes = (TextView) activity.findViewById(R.id.txtMesMain);
+            if (productoMes != null)
+                productoMes.setText("Este Mes");
+
+            ImageView imagen_producto_mes = (ImageView) activity.findViewById(R.id.imagenUNT);
+            if (imagen_producto_mes != null) {
+                imagen_producto_mes.setImageBitmap(loadedImageActual);
+            }
+            TextView productoMesTitulo = (TextView) activity.findViewById(R.id.titUN);
+            if (productoMesTitulo != null)
+                productoMesTitulo.setText(tituloActual);
+
+            TextView productoMesDescripcion = (TextView) activity.findViewById(R.id.descUN);
+
+            if (productoMesDescripcion != null) {
+                productoMesDescripcion.setText(Html.fromHtml(textoActual));
+            }
+            LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
+
+            principal.setTag(new Lista_Entrada(mesActual, idActual, loadedImageActual, tituloActual, img_miniActual, textoActual, imagenes_sliderActual));
+
+        }
     }
 
 }

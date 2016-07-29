@@ -34,6 +34,19 @@ public class activity_detalle_sva extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_sva);
 
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null) {
+            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > SVA");
+            breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(activity_detalle_sva.this, ProductosActivity.class);
+                    i.putExtra("direccion","4");
+                    startActivity(i);
+                }
+            });
+        }
+
         session = new SessionManagement(getApplicationContext());
 
         String imagen = getIntent().getStringExtra("imagen");

@@ -32,6 +32,20 @@ public class activity_detalle_campana extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_campana);
 
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null) {
+            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > CAMPAÑAS INTERNAS");
+
+            breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(activity_detalle_campana.this, ComunicacionInternaActivity.class);
+                    i.putExtra("direccion","2");
+                    startActivity(i);
+                }
+            });
+        }
+
         session = new SessionManagement(getApplicationContext());
         TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null)

@@ -166,7 +166,7 @@
             android:name=".ComunicacionInternaActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".VideoDetalleActivity"
+            android:name=".activity_detalle_video"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

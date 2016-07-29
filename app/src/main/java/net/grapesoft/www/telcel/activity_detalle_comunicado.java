@@ -36,6 +36,20 @@ public class activity_detalle_comunicado extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_comunicado);
 
+    TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+    if(breadcrumComunicado != null) {
+        breadcrumComunicado.setText("COMUNICACIÓN INTERNA > COMUNICADOS");
+
+        breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(activity_detalle_comunicado.this, ComunicacionInternaActivity.class);
+                i.putExtra("direccion","1");
+                startActivity(i);
+            }
+        });
+    }
+
         session = new SessionManagement(getApplicationContext());
 
         String imagen = getIntent().getStringExtra("imagen");

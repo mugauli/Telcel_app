@@ -145,7 +145,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
 
                     for (int ii = 0; ii < imagenes_slide.length(); ii++) {
 
-                        imagenes_slider.add(imagenes_slide.getJSONObject(i).get("url_img").toString());
+                        imagenes_slider.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
                     }
 
                     URL imageUrl = null;

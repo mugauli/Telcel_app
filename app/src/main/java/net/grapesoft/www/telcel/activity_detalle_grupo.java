@@ -32,6 +32,20 @@ public class activity_detalle_grupo extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_grupo);
 
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null) {
+            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > GRUPO CARSO INFORMA");
+            breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(activity_detalle_grupo.this, ComunicacionInternaActivity.class);
+                    i.putExtra("direccion","8");
+                    startActivity(i);
+                }
+            });
+
+        }
+
         session = new SessionManagement(getApplicationContext());
         TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null)
