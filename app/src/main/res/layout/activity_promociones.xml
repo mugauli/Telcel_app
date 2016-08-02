@@ -18,7 +18,7 @@
         android:fitsSystemWindows="true"
         tools:context="net.grapesoft.menu.MainActivity">
 
-        <include layout="@layout/toolbar_tab_first"/>
+        <include layout="@layout/toolbar_tab"/>
 
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,6 +28,16 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@color/ColorFondo">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pagerPromos"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                />
+            <TextView
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
@@ -43,44 +53,6 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginEnd="42dp"
                 android:layout_marginBottom="20dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:weightSum="100">
-                <RelativeLayout
-                    android:id="@+id/loadingPanelHome"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:visibility="visible">
-                    <ProgressBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:indeterminate="true" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:weightSum="100">
-
-                    <ListView
-                        android:id="@+id/lstPromo"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="100"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp">
-                    </ListView>
-
-
-                </LinearLayout>
-
-            </LinearLayout>
 
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>

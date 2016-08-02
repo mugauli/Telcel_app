@@ -139,6 +139,12 @@ public class MainActivity extends AppCompatActivity
                     i.putExtra("direccion","0");
                     startActivity(i);
                 }
+                if(tab.getText().toString().equals(getString(R.string.tab3).toString())) {
+
+                    Intent i = new Intent(MainActivity.this, PromocionesActivity.class);
+                    i.putExtra("direccion","0");
+                    startActivity(i);
+                }
                 if(tab.getText().toString().equals(getString(R.string.tab5).toString())) {
 
                     Intent i = new Intent(MainActivity.this, sitios.class);

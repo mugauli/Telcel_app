@@ -179,7 +179,7 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
         }
 
 
-        Log.e("Datos Lanzamientos", "" + datos.get(1).get_titulo());
+//        Log.e("Datos Lanzamientos", "" + datos.get(1).get_titulo());
         Log.e("Llego", "al final");
         return new List_adapted_Lanzamientos(activity, R.layout.entrada_lanzamientos, datos) {
 
