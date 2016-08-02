@@ -131,12 +131,16 @@ public class pin extends AppCompatActivity
                             ArrayList<String> params = new ArrayList<String>();
                             final HashMap<String, String> user = session.getUserDetails();
                             String idUsuario = user.get(SessionManagement.KEY_PD_ID);
+                            String reg = user.get(SessionManagement.KEY_PD_REGION);
+                            String pass = user.get(SessionManagement.KEY_PD_PATERNO);
 
 
-                            params.add("5");
-                            params.add("RecoveryPassword.php");
+                            params.add("7");
+                            params.add("ChangePassword.php");
                             params.add(tokenCTE);
+                            params.add(reg);
                             params.add(idUsuario);
+                            params.add(pass);
 
                             response = new Comunication(pin.this).execute(params).get();
 
