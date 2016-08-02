@@ -95,9 +95,9 @@ public class activity_detalle_galeria extends AppCompatActivity
                // return new ImageView(activity_detalle_galeria.this);
             }
         });
-        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        /*TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null)
-            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > GALERIA");
+            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > GALERIA");*/
         // Set animations
         // http://danielme.com/2013/08/18/diseno-android-transiciones-entre-activities/
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -137,7 +137,15 @@ public class activity_detalle_galeria extends AppCompatActivity
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(activity_detalle_galeria.this, MainActivity.class);
+                i.putExtra("direccion","0");
+                startActivity(i);
+            }
+        });
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
@@ -373,6 +381,7 @@ Log.e("Position",""+position);
         } else if (id == R.id.nav_send) {
             session.logoutUser();
             finish();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

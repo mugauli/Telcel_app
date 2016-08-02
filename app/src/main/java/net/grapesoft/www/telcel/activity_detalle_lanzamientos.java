@@ -63,6 +63,18 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
                 // return new ImageView(activity_detalle_galeria.this);
             }
         });
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null) {
+            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > LANZAMIENTOS");
+            breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(activity_detalle_lanzamientos.this, ProductosActivity.class);
+                    i.putExtra("direccion","4");
+                    startActivity(i);
+                }
+            });
+        }
 
         // Set animations
         // http://danielme.com/2013/08/18/diseno-android-transiciones-entre-activities/
@@ -113,7 +125,15 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(activity_detalle_lanzamientos.this, MainActivity.class);
+                i.putExtra("direccion","0");
+                startActivity(i);
+            }
+        });
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -302,6 +322,7 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             session.logoutUser();
             finish();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

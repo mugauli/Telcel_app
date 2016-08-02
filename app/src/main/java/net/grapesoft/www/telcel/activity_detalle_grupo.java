@@ -47,9 +47,9 @@ public class activity_detalle_grupo extends AppCompatActivity
         }
 
         session = new SessionManagement(getApplicationContext());
-        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        /*TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null)
-            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > GRUPO CARSO INFORMA");
+            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > GRUPO CARSO INFORMA");*/
         String imagen = getIntent().getStringExtra("imagen");
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
@@ -83,7 +83,15 @@ public class activity_detalle_grupo extends AppCompatActivity
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(activity_detalle_grupo.this, MainActivity.class);
+                i.putExtra("direccion","0");
+                startActivity(i);
+            }
+        });
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
@@ -165,6 +173,7 @@ public class activity_detalle_grupo extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             session.logoutUser();
             finish();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

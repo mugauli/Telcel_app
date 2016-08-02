@@ -75,7 +75,15 @@ public class pin extends AppCompatActivity
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(pin.this, MainActivity.class);
+                i.putExtra("direccion","0");
+                startActivity(i);
+            }
+        });
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
@@ -207,6 +215,7 @@ public class pin extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             session.logoutUser();
             finish();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

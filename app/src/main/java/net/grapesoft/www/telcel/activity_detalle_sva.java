@@ -68,9 +68,9 @@ public class activity_detalle_sva extends AppCompatActivity
             e.printStackTrace();
         }
 
-        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        /*TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null)
-            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > SVA");
+            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > SVA");*/
         titUG.setText(titulo);
         if(descripcion != null)
         descUG.setText(Html.fromHtml(descripcion));
@@ -85,7 +85,15 @@ public class activity_detalle_sva extends AppCompatActivity
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(activity_detalle_sva.this, MainActivity.class);
+                i.putExtra("direccion","0");
+                startActivity(i);
+            }
+        });
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
@@ -167,6 +175,7 @@ public class activity_detalle_sva extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             session.logoutUser();
             finish();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

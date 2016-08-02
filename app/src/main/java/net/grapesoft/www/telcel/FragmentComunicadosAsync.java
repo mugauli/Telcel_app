@@ -152,7 +152,11 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                     {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
+                    if(texto == null) {
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto.substring(0, 10),fecha));
+                    }else{
                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+                    }
                //    datos.add(new Lista_Entrada(R.drawable.mas, fecha,texto));
 
                 }
@@ -201,7 +205,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                         if (noticiaDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
-                            // desc = desc.substring(0,200);
+                            //desc = desc.substring(0,10);
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
 

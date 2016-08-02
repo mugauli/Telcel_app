@@ -242,6 +242,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         String texto = elementos.getJSONObject(0).get("texto").toString();
                         String fecha = elementos.getJSONObject(0).get("fecha").toString();
 
+
                         URL imageUrl = null;
                         imageUrl = new URL(imageHttpAddress + img_previa);
                         HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();

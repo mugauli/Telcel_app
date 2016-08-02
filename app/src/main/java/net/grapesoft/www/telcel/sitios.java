@@ -52,11 +52,12 @@ public class sitios extends AppCompatActivity
         ImageView img5 =  (ImageView) findViewById(R.id.imageView11);
         ImageView img6 =  (ImageView) findViewById(R.id.imageView12);
         ImageView img7 =  (ImageView) findViewById(R.id.imageView13);
+        ImageView img8 =  (ImageView) findViewById(R.id.imageView14);
 
         img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://internetencaja.com.mx/telcel-registro/"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://aprende.org/pages.php?r=.index"));
                 startActivity(intent);
             }
         });
@@ -64,7 +65,7 @@ public class sitios extends AppCompatActivity
         img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://internetencaja.com.mx/telcel-registro/"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.claromusica.com/intro"));
                 startActivity(intent);
             }
         });
@@ -72,35 +73,43 @@ public class sitios extends AppCompatActivity
         img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://internetencaja.com.mx/telcel-registro/"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://www.clarovideo.com/"));
                 startActivity(intent);
             }
         });
         img4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://internetencaja.com.mx/telcel-registro/"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://www.clikisalud.net/"));
                 startActivity(intent);
             }
         });
         img5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://internetencaja.com.mx/telcel-registro/"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://holatelcel.com/"));
                 startActivity(intent);
             }
         });
         img6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://internetencaja.com.mx/telcel-registro/"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://lanaturalezanosllama.com/"));
                 startActivity(intent);
             }
         });
         img7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://internetencaja.com.mx/telcel-registro/"));
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://telcelracing.com/v2/"));
+                startActivity(intent);
+            }
+        });
+
+        img8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://telcelracing.com/v2/"));
                 startActivity(intent);
             }
         });
@@ -166,7 +175,15 @@ public class sitios extends AppCompatActivity
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(sitios.this, MainActivity.class);
+                i.putExtra("direccion","0");
+                startActivity(i);
+            }
+        });
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
@@ -227,6 +244,7 @@ public class sitios extends AppCompatActivity
         } else if (id == R.id.nav_send) {
             session.logoutUser();
             finish();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
