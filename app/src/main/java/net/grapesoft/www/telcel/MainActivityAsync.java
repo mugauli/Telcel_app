@@ -586,6 +586,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         if (imagen_home != null)
                             imagen_home.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
+                           // imagen_home.setImageResource(R.drawable.iconpodcast);
+
                         if(seccion.equals("video")||seccion.equals("publicitarias")) {
 
                             TextView homeDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
@@ -630,7 +632,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
         ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenPodcast);
         if (imagen_noticias != null) {
-            imagen_noticias.setImageBitmap(loadedImageP);
+            //imagen_noticias.setImageBitmap(loadedImageP);
+            imagen_noticias.setImageResource(R.drawable.iconpodcast);
         }
 
         TextView noticiafecha = (TextView) activity.findViewById(R.id.textView_superior);
