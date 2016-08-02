@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight=".10"
-        android:id="@+id/spnCampos"
+        android:id="@+id/spnCamposPromos"
         android:spinnerMode="dropdown"
         android:theme="@style/MyEditTextTheme"
         style="@style/SpinnerAppTheme"
@@ -25,7 +25,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView15"
+        android:id="@+id/imgPromos"
         android:layout_below="@+id/spnCampos"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="41dp"

@@ -14,6 +14,7 @@ public class Lista_Entrada {
     private int idImagen,idImagen2,idradio,type;
     private Bitmap img_previa;
     private SvaElement svaElement1,svaElement2;
+    private ArrayList<DescElement> pdf;
     private String
             contenido,
             tipo,
@@ -200,6 +201,12 @@ public class Lista_Entrada {
         this.json = json;
     }
 
+    public Lista_Entrada (int idImagen, String titulo, ArrayList<DescElement> pdf) {
+        this.idImagen = idImagen;
+        this.titulo = titulo;
+        this.pdf = pdf;
+    }
+
     //End Home
 
 
@@ -267,6 +274,9 @@ public class Lista_Entrada {
     }
     public String get_seccion() {
         return seccion;
+    }
+    public ArrayList<DescElement> get_pdf() {
+        return pdf;
     }
 
 }

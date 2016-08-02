@@ -8,6 +8,6 @@ public class activity_descuentos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_descuentos);
+        setContentView(R.layout.tab_fragment_descuentos);
     }
 }

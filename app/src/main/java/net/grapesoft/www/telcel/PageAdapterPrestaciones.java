@@ -21,7 +21,7 @@ public class PageAdapterPrestaciones extends FragmentStatePagerAdapter {
                 FragmentPromociones tab1 = new FragmentPromociones();
                 return tab1;
             case 1:
-                FragmentLanzamientos tab2 = new FragmentLanzamientos();
+                FragmentDescuentos tab2 = new FragmentDescuentos();
                 return tab2;
 
             default:

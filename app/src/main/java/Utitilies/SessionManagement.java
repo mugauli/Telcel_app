@@ -71,6 +71,7 @@ public class SessionManagement {
     public static final String KEY_PRODUCTOS_SVA = "productos_sva";
     public static final String KEY_HOME = "home";
     public static final String KEY_PROMOS = "promos";
+    public static final String KEY_DESCUENTOS = "descuentos";
 
 
     // Constructor
@@ -142,6 +143,9 @@ public class SessionManagement {
 
     //PROMOS
     public void createPromosSession(String value){ editor.putString(KEY_PROMOS,value);  editor.commit(); }
+
+    //Descuentos
+    public void createDescuentosSession(String value){ editor.putString(KEY_DESCUENTOS,value);  editor.commit(); }
 
 
     /**
@@ -219,6 +223,8 @@ public class SessionManagement {
     public String getHomeDetails() { return pref.getString(KEY_HOME, null); }
 
     public String getPromosDetails() { return pref.getString(KEY_PROMOS, null); }
+
+    public String getDescuentosDetails() { return pref.getString(KEY_DESCUENTOS, null); }
 
 
 
