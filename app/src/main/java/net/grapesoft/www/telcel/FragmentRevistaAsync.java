@@ -202,6 +202,12 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                         imagen_descarga.setTag(((Lista_Entrada) entrada).get_url());
                     }
 
+                    TextView textView15 = (TextView) view.findViewById(R.id.textView15);
+                    if (textView15 != null) {
+
+                        textView15.setTag(((Lista_Entrada) entrada).get_url());
+                    }
+
                     WindowManager wm = (WindowManager) activity.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
                     Display display = wm.getDefaultDisplay();
 
@@ -218,6 +224,17 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                             abrirPDF(arg0.getTag().toString());
                         }
                     });
+
+                    assert textView15 != null;
+                    textView15.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.e("URL PDF", v.getTag().toString());
+                            abrirPDF(v.getTag().toString());
+                        }
+                    });
+
+
                 }
             }
         };
