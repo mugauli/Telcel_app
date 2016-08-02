@@ -287,7 +287,8 @@
         </activity>
         <activity android:name=".bienvenidos" />
         <activity android:name=".activity_pregunta_respuesta" />
-        <activity android:name=".activity_promociones"></activity>
+        <activity android:name=".activity_promociones" />
+        <activity android:name=".activity_descuentos"></activity>
     </application>
 
 </manifest>
