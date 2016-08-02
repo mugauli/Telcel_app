@@ -114,7 +114,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                 result11 = home;
             }
 
-            //Log.e("Response: ", result11);
+            Log.e("Response: ", result11);
 
             if(result11.equals("true"+"\n")) {
                 Log.e("Response: ", "true Int");
@@ -136,15 +136,15 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
             if(responseArray.getJSONObject(0).has("resp")) {
                 Log.e("Item Home" ,  "Error");
             }
-          //  if(responseArray.getJSONObject(0).has("error")) {
-          //      Log.e("Item Home" ,  "Error");
-          //  }
+            if(responseArray.getJSONObject(0).has("error")) {
+                Log.e("Item Home" ,  "Error");
+            }
             else {
                 JSONObject prod1 = responseArray.getJSONObject(0);
 
-                JSONObject prod = prod1.getJSONObject("0");
+               // JSONObject prod = prod1.getJSONObject("0");
 
-                JSONArray homeArray = prod.getJSONArray("home");
+                JSONArray homeArray = prod1.getJSONArray("home");
 
                 for (int i = 0; i < homeArray.length(); i++) {
                    //Log.e("Response Item Home: ", homeArray.getJSONObject(i).toString());
