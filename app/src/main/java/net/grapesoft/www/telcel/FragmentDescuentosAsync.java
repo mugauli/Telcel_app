@@ -120,6 +120,7 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
 
 
                 session.createDescuentosSession(result11);
+
             }
             else
             {
