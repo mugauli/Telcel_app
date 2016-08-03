@@ -17,6 +17,7 @@ public class Lista_Entrada {
     private ArrayList<DescElement> pdf;
     private String
             contenido,
+            contenidos,
             tipo,
             id,
             titulo,
@@ -117,7 +118,7 @@ public class Lista_Entrada {
         this.type = type;
     }
 
-    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo,String contenido) {
+    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo,String contenidos) {
         this.id = id;
         this.img_previa = img_previa;
         this.titulo = titulo;
@@ -125,7 +126,7 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.fecha = fecha;
         this.tipo = tipo;
-        this.contenido = contenido;
+        this.contenidos = contenidos;
     }
     public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo) {
         this.id = id;
@@ -135,6 +136,7 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.fecha = fecha;
         this.tipo = tipo;
+
 
     }
 
@@ -274,6 +276,9 @@ public class Lista_Entrada {
     }
     public String get_contenido() {
         return contenido;
+    }
+    public String get_contenidos() {
+        return contenidos;
     }
     public String get_tipo() {
         return tipo;
