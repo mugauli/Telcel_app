@@ -52,23 +52,21 @@
             <TextView
                 android:id="@+id/triviatitulo"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:text="Small Text"
                 android:textColor="@color/ColorPrimary"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_weight="4" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/triviadetalle"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:text="Small Text"
                 android:layout_centerHorizontal="true"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_weight="6" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
             <TextView
                 android:id="@+id/json"
                 android:layout_width="fill_parent"
