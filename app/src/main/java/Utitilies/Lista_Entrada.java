@@ -157,13 +157,14 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.imagenesSlide = imagenesSlide;
     }
-    public Lista_Entrada (String id,Bitmap img_previa,String titulo, String tipo,String textoDebajo) {
+    public Lista_Entrada (String id,Bitmap img_previa,String titulo, String tipo,String textoDebajo,int ids,String img_detalle) {
 
         this.id = id;
         this.img_previa = img_previa;
         this.titulo = titulo;
         this.tipo = tipo;
         this.textoDebajo = textoDebajo;
+        this.img_detalle = img_detalle;
     }
     //Home
     public Lista_Entrada (String seccion,String id,Bitmap img_previa,String titulo, String url,String duracion, int idImagen2) {

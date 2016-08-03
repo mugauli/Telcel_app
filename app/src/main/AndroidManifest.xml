@@ -300,6 +300,7 @@
         <activity android:name=".activity_promociones" />
         <activity android:name=".activity_descuentos" />
         <activity android:name=".activity_detalle_promociones"></activity>
+        <activity android:name=".activity_detalle_triviaC"></activity>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -153,7 +154,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                     {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,tipo,texto));
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,tipo,texto,0,img_previa));
                 }
             }
 
@@ -180,7 +181,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                 Log.e ("Entrada Trivias", ((Lista_Entrada) entrada).get_titulo());
 
-                if (entrada != null) {
+                if (entrada != null){
 
                     ImageView imagen_trivias = (ImageView) view.findViewById(R.id.imagetrivia);
                     if (imagen_trivias != null) {
@@ -193,7 +194,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                     if (titulo_trivias != null)
                         titulo_trivias.setText(((Lista_Entrada) entrada).get_titulo());
 
-                    TextView Descripcion_trivias = (TextView) view.findViewById(R.id.triviadetalle);
+                    final TextView Descripcion_trivias = (TextView) view.findViewById(R.id.triviadetalle);
 
                     if (Descripcion_trivias != null) {
                         String desc = ((Lista_Entrada) entrada).get_textoDebajo();
@@ -205,6 +206,18 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                         @Override
                         public void onClick(View arg0) {
+
+                            Lista_Entrada entrada = (Lista_Entrada)arg0.getTag();
+
+                            Intent i = new Intent(activity, activity_detalle_triviaC.class);
+
+                            i.putExtra("imagen",entrada.get_img_detalle());
+                            i.putExtra("titulo",entrada.get_titulo());
+                            i.putExtra("descripcion",entrada.get_textoDebajo());
+
+                            activity.startActivity(i);
+
+
 
                         //  ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
                         //  TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
