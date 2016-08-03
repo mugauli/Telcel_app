@@ -32,7 +32,6 @@ public class FragmentNoticias extends Fragment {
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
 
-        String imageHttpAddress = getText(R.string.URL_media).toString();
         session = new SessionManagement(getActivity());
 
         final HashMap<String, String> user = session.getUserDetails();

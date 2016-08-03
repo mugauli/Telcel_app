@@ -3,13 +3,11 @@ package net.grapesoft.www.telcel;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +18,14 @@ import java.util.HashMap;
 
 import Utitilies.SessionManagement;
 
-public class trivias extends AppCompatActivity
+public class triviasActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    String styledText = "This is <font color='red'>simple</font>.";
+    public String tokenCTE = "";
     SessionManagement session;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +38,7 @@ public class trivias extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(trivias.this,ayuda.class);
+                Intent intent = new Intent(triviasActivity.this,ayuda.class);
                 startActivity(intent);
             }
         });
@@ -48,47 +51,64 @@ public class trivias extends AppCompatActivity
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(trivias.this, MainActivity.class);
-                i.putExtra("direccion","0");
-                startActivity(i);
-            }
-        });
+        if (toolbar != null) {
+            toolbar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(triviasActivity.this, MainActivity.class);
+                    i.putExtra("direccion","0");
+                    startActivity(i);
+                }
+            });
+        }
 // Find logo
+
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
         ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else {
-                    drawer.openDrawer(GravityCompat.START);
+        if (imgButton != null) {
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
                 }
-            }
-        });
+            });
+        }
 
-        imgButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(trivias.this, trivias.class);
-                startActivity(i);
-            }
-        });
-
+        if (imgButton2 != null) {
+            imgButton2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(triviasActivity.this, triviasActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+        }
 
+        tokenCTE = getText(R.string.tokenXM).toString();
+        ArrayList<String> params = new ArrayList<String>();
 
-        session = new SessionManagement(trivias.this);
+        final HashMap<String, String> user = session.getUserDetails();
+        String region = user.get(SessionManagement.KEY_PD_REGION);
+
+        params.add("6");
+        params.add("GetTrivia.php");
+        params.add(tokenCTE);
+        params.add(region);
+
+        new triviasActivityAsync(triviasActivity.this).execute(params);
 
 
     }
@@ -134,17 +154,17 @@ public class trivias extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(trivias.this, ActualizarActivity.class);
+            Intent i = new Intent(triviasActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(trivias.this, pin.class);
+            Intent i = new Intent(triviasActivity.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(trivias.this, preferencias.class);
+            Intent i = new Intent(triviasActivity.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {

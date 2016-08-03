@@ -66,15 +66,15 @@ public class Lista_Entrada {
 
     public Lista_Entrada (String id,Bitmap img_previa,String titulo, String url,String duracion, int idImagen2) {
 
-        this.id = id;
-        this.img_previa = img_previa;
-        this.titulo = titulo;
-        this.url = url;
-        this.duracion = duracion;
-        this.idImagen2 = idImagen2;
+            this.id = id;
+            this.img_previa = img_previa;
+            this.titulo = titulo;
+            this.url = url;
+            this.duracion = duracion;
+            this.idImagen2 = idImagen2;
 
 
-    }
+        }
 
     public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url, String duracion, JSONArray json) {
 
@@ -157,7 +157,14 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.imagenesSlide = imagenesSlide;
     }
+    public Lista_Entrada (String id,Bitmap img_previa,String titulo, String tipo,String textoDebajo) {
 
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.textoDebajo = textoDebajo;
+    }
     //Home
     public Lista_Entrada (String seccion,String id,Bitmap img_previa,String titulo, String url,String duracion, int idImagen2) {
 

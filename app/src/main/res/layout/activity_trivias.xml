@@ -54,85 +54,139 @@
                 >
 
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="100"
-                    android:weightSum="100"
-                    android:layout_gravity="center_horizontal">
-
-
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:weightSum="100" >
 
                     <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="100"
-                        android:layout_marginTop="0dp"
-                        android:padding="10dp"
-                        android:layout_weight="32" >
+                        android:layout_weight="48" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="4"
+                        android:weightSum="100" >
 
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="fill_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="49" />
 
-                            android:layout_weight="100" >
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="39"
+                            android:orientation="vertical"
+                            android:weightSum="100"
+                            android:padding="3dp" >
 
                             <LinearLayout
-                                android:orientation="horizontal"
                                 android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:orientation="horizontal"
                                 android:weightSum="100"
-                                android:background="@drawable/border"
-                                android:id="@+id/btnSiguiente"
-                                android:layout_marginTop="10dp"
-                                android:layout_margin="5dp">
+                                android:layout_marginTop="0dp"
+                                android:padding="10dp"
+                                android:layout_weight="70">
 
                                 <LinearLayout
                                     android:orientation="horizontal"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="55"
-                                    android:paddingTop="3dp"
-                                    android:paddingBottom="3dp">
+                                    android:layout_weight="80" >
+
                                     <ImageView
                                         android:layout_width="fill_parent"
                                         android:layout_height="fill_parent"
-
-                                        android:id="@+id/imgPreviaSiguiente"
-                                        android:src="@drawable/appicon" />
-
+                                        android:id="@+id/imageView16"
+                                        android:src="@drawable/pregunta"
+                                        android:padding="4dp"
+                                        android:layout_weight="100" />
                                 </LinearLayout>
+
                                 <LinearLayout
                                     android:orientation="vertical"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="45">
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_weight="20"
+                                    android:weightSum="100"
+                                    android:padding="10dp" >
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="fill_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/tvTituloSiguiente"
-                                        android:text="Siguiente Video"
-                                        android:padding="10dp"
-                                        />
+                                        android:textAppearance="?android:attr/textAppearanceLarge"
+                                        android:text="@string/tituloPregunta"
+                                        android:id="@+id/txtTituloPregunta"
+                                        android:layout_weight="75"
+                                        android:textColor="@color/ColorPrimary"
+                                        android:paddingLeft="0dp" />
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="fill_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/tvTiempoSiguiente"
-                                        android:text="Siguiente Video"
-                                        android:padding="10dp"
-                                        />
+                                        android:text="¿Que se celebra el 5 de febrero?"
+                                        android:id="@+id/txtPreguntaTrivia"
+                                        android:layout_weight="25"
+                                        android:textSize="17dp"
+                                        android:padding="0dp" />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="14" >
+
+                            <RelativeLayout
+                                android:id="@+id/loadingTrivias"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:visibility="gone" >
+
+                                <ProgressBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:indeterminate="true" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/textoTrivias"
+                                android:id="@+id/txtTrivias"
+                                android:textSize="16dp"
+                                android:padding="4dp" />
+
+                            <ListView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/lstTrivias" />
+                        </LinearLayout>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="48" />
                 </LinearLayout>
+
             </LinearLayout>
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
-    <include layout="@layout/navigation"/>
+    <!--<include layout="@layout/navigation"/>-->
 </android.support.v4.widget.DrawerLayout>
 
