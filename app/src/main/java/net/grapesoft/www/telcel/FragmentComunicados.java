@@ -63,6 +63,7 @@ public class FragmentComunicados extends Fragment {
                 i.putExtra("fecha",Entrada.get_fecha());
                 i.putExtra("descripcion",Entrada.get_textoDebajo());
                 i.putExtra("tipo",Entrada.get_tipo());
+                i.putExtra("contenido",Entrada.get_tipo());
                 startActivity(i);
 
 

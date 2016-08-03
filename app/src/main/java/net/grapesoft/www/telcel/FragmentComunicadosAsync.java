@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -131,6 +132,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                 Log.e("Item Comunicados" ,  "Error");
             }
             else {
+                String contenidos="";
                 for (int i = 0; i < responseArray.length(); i++) {
 
                        String id = responseArray.getJSONObject(i).get("id").toString();
@@ -142,9 +144,9 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                        String tipo = responseArray.getJSONObject(i).get("tipo").toString();
 
                        String contenido = responseArray.getJSONObject(i).get("contenido").toString();
-                    String contenidos="";
 
-                    if(contenido == "TP"){
+
+                    /*if(contenido == "TP"){
                         contenidos="TIPS";
                     }else if(contenido == "IF"){
                         contenidos="INFOGRAFIA";
@@ -152,9 +154,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         contenidos="INFORMACION";
                     }else if(contenido == "CM"){
                         contenidos="COMPARTE";
-                    }else{
-                        contenidos="";
-                    }
+                    }*/
 
                        URL imageUrl = null;
                        imageUrl = new URL(imageHttpAddress + img_previa);
@@ -170,9 +170,11 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                     }
                     if(texto == null) {
 
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo,contenidos));
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo,contenido));
+
                     }else{
-                       datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo,contenidos));
+                       datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo,contenido));
+
                     }
                //    datos.add(new Lista_Entrada(R.drawable.mas, fecha,texto));
 
@@ -229,7 +231,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         TextView texto_tipo = (TextView) view.findViewById(R.id.comunicadotipoUC);
 
                         if (texto_tipo != null)
-                            texto_tipo.setText(((Lista_Entrada) entrada).get_contenidos());
+                            texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());
 
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalUC);
 
@@ -252,7 +254,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                     if (texto_tipo != null)
 
-                        texto_tipo.setText(((Lista_Entrada) entrada).get_contenidos());
+                        texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());
 
                     view.setTag(entrada);
 
