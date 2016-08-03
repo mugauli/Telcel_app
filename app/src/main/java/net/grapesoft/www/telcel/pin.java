@@ -141,6 +141,7 @@ public class pin extends AppCompatActivity
                             params.add(reg);
                             params.add(idUsuario);
 
+
                             response = new Comunication(pin.this).execute(params).get();
 
                             Log.e("Response", "PIN: " + response);

@@ -234,6 +234,7 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             nameValuePair.add(new BasicNameValuePair("reg", paramsPassed.get(3)));
             nameValuePair.add(new BasicNameValuePair("idUsuario", paramsPassed.get(4)));
            // nameValuePair.add(new BasicNameValuePair("password", paramsPassed.get(5)));
+
         }else if(paramsPassed.get(0)=="8")
         {
             //Descuentos
