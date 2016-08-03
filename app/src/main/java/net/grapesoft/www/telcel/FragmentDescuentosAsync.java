@@ -72,6 +72,7 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
     public String IP = "",tokenCTE = "";
     public boolean primer3 = true;
     SessionManagement session;
+    private String url="";
 
     public FragmentDescuentosAsync(Activity activity) {
         IP = activity.getString(R.string.URL);
@@ -204,7 +205,7 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
             if (result != null) {
                 pdfCampos.setTag(result.get(0).get_pdf());
 
-                LinkedList pdfs = new LinkedList();
+                final LinkedList pdfs = new LinkedList();
                 for (DescElement obj : result.get(0).get_pdf()) {
 
                     pdfs.add(obj);
@@ -213,21 +214,30 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
                 ArrayAdapter spinner_adapter = new ArrayAdapter(activity, android.R.layout.simple_spinner_item, pdfs);
                 spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 pdfCampos.setAdapter(spinner_adapter);
+                pdfCampos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                        ArrayList<DescElement> a = (ArrayList<DescElement>)pdfCampos.getTag();
+                        //Log.e("url_pdf", pdfCampos.getTag().toString());
+                        //pdfCampos.getTag().toString()
+                        for( int i = 0 ; i < a.size() ; i++ ){
+                            if(id == a.get(i).get_idDesc()){
+                               abrirPDF(a.get(i).get_url_pdfDesc());
+                            }
+                        }
+
+
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parentView) {
+                        // your code here
+                    }
+
+                });
 
             }
-        pdfCampos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                abrirPDF("http://internetencaja.com.mx/telcel/descuentos/Agenda2016TELMEX.PDF");
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
 
 
 

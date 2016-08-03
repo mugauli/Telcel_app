@@ -64,13 +64,46 @@
                         android:layout_margin="15px"
                         android:orientation="vertical"
                         android:weightSum="100">
-                        <TextView
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="40"
+                            android:weightSum="10"
+                            android:padding="0dp"
+                            android:layout_marginRight="5dp">
+
+
+                            <TextView
+                                android:id="@+id/comunicadotipoUC"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+
+                                android:gravity="left"
+                                android:layout_weight="5"
+                                android:layout_centerHorizontal="true"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <TextView
+                                android:id="@+id/fechaUC"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+
+                                android:gravity="right"
+                                android:layout_weight="5"
+                                android:layout_centerHorizontal="true"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+                        </LinearLayout>
+                        <!--<TextView
                             android:layout_width="fill_parent"
                             android:layout_weight="40"
                             android:layout_height="fill_parent"
                             android:gravity="right"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:id="@+id/fechaUC"/>
+                            android:id="@+id/fechaUC"/>-->
                         <TextView
                             android:layout_width="fill_parent"
 

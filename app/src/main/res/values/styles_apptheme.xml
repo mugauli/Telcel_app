@@ -22,4 +22,9 @@
   <style name="SpinnerDropDownItemAppTheme" parent="android:Widget.DropDownItem.Spinner">
       <item name="android:checkMark">@drawable/apptheme_btn_radio_holo_light</item>
   </style>
+
+    <style name="SpinnerAppThemePromo" parent="android:Widget.Spinner">
+        <item name="android:background">@color/tabfirst</item>
+        <item name="android:dropDownSelector">@drawable/apptheme_list_selector_holo_light</item>
+    </style>
 </resources>

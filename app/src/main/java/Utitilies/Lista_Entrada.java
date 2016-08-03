@@ -127,6 +127,16 @@ public class Lista_Entrada {
         this.tipo = tipo;
         this.contenido = contenido;
     }
+    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo) {
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.img_detalle = img_detalle;
+        this.textoDebajo = textoDebajo;
+        this.fecha = fecha;
+        this.tipo = tipo;
+
+    }
 
     public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  ArrayList<String> imagenesSlide) {
         this.id = id;

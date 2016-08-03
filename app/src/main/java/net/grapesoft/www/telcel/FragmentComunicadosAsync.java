@@ -155,9 +155,9 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
                     if(texto == null) {
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo));
                     }else{
-                       datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+                       datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo));
                     }
                //    datos.add(new Lista_Entrada(R.drawable.mas, fecha,texto));
 
@@ -211,6 +211,11 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
 
+                        TextView texto_tipo = (TextView) view.findViewById(R.id.comunicadotipoUC);
+
+                        if (texto_tipo != null)
+                            texto_tipo.setText(((Lista_Entrada) entrada).get_tipo());
+
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalUC);
 
                         principal.setTag(entrada);
@@ -225,6 +230,13 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                     if (texto_inferior_entrada != null)
                         texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
+
+
+
+                    TextView texto_tipo = (TextView) view.findViewById(R.id.comunicadotipo);
+
+                    if (texto_tipo != null)
+                        texto_tipo.setText(((Lista_Entrada) entrada).get_tipo());
 
                     view.setTag(entrada);
 
