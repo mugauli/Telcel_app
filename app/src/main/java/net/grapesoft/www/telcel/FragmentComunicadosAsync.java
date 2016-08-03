@@ -140,7 +140,20 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                        String texto = responseArray.getJSONObject(i).get("texto").toString();
                        String fecha = responseArray.getJSONObject(i).get("fecha").toString();
                        String tipo = responseArray.getJSONObject(i).get("tipo").toString();
+
                        String contenido = responseArray.getJSONObject(i).get("contenido").toString();
+                    String contenidos;
+                    if(contenido == "TP"){
+                        contenidos="TIPS";
+                    }else if(contenido == "IF"){
+                        contenidos="INFOGRAFIA";
+                    }else if(contenido == "IX"){
+                        contenidos="INFORMACION";
+                    }else if(contenido == "CM"){
+                        contenidos="COMPARTE";
+                    }else{
+                        contenidos="";
+                    }
 
                        URL imageUrl = null;
                        imageUrl = new URL(imageHttpAddress + img_previa);
@@ -155,9 +168,10 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
                     if(texto == null) {
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo));
+
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo,contenidos));
                     }else{
-                       datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo));
+                       datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo,contenidos));
                     }
                //    datos.add(new Lista_Entrada(R.drawable.mas, fecha,texto));
 
@@ -214,7 +228,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         TextView texto_tipo = (TextView) view.findViewById(R.id.comunicadotipoUC);
 
                         if (texto_tipo != null)
-                            texto_tipo.setText(((Lista_Entrada) entrada).get_tipo());
+                            texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());
 
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalUC);
 
@@ -236,7 +250,8 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                     TextView texto_tipo = (TextView) view.findViewById(R.id.comunicadotipo);
 
                     if (texto_tipo != null)
-                        texto_tipo.setText(((Lista_Entrada) entrada).get_tipo());
+
+                        texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());
 
                     view.setTag(entrada);
 
