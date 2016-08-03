@@ -142,7 +142,8 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                        String tipo = responseArray.getJSONObject(i).get("tipo").toString();
 
                        String contenido = responseArray.getJSONObject(i).get("contenido").toString();
-                    String contenidos;
+                    String contenidos="";
+
                     if(contenido == "TP"){
                         contenidos="TIPS";
                     }else if(contenido == "IF"){
@@ -228,7 +229,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         TextView texto_tipo = (TextView) view.findViewById(R.id.comunicadotipoUC);
 
                         if (texto_tipo != null)
-                            texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());
+                            texto_tipo.setText(((Lista_Entrada) entrada).get_contenidos());
 
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalUC);
 
@@ -251,7 +252,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                     if (texto_tipo != null)
 
-                        texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());
+                        texto_tipo.setText(((Lista_Entrada) entrada).get_contenidos());
 
                     view.setTag(entrada);
 

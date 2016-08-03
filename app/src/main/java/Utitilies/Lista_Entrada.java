@@ -277,6 +277,9 @@ public class Lista_Entrada {
     public String get_contenido() {
         return contenido;
     }
+    public String get_contenidos() {
+        return contenidos;
+    }
     public String get_tipo() {
         return tipo;
     }
