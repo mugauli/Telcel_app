@@ -17,9 +17,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:context="net.grapesoft.menu.MainActivity">
-
         <include layout="@layout/toolbar_sola"/>
-
         <RelativeLayout     xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -88,9 +86,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-
-
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
     <include layout="@layout/navigation"/>

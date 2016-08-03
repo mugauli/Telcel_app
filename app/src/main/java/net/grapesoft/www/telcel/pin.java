@@ -140,7 +140,6 @@ public class pin extends AppCompatActivity
                             params.add(tokenCTE);
                             params.add(reg);
                             params.add(idUsuario);
-                            params.add(pass);
 
                             response = new Comunication(pin.this).execute(params).get();
 
