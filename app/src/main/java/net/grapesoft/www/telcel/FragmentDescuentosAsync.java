@@ -158,7 +158,8 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
                     JSONArray prod = responseArray.getJSONObject(ii).getJSONArray("pdfs");
                     ArrayList<DescElement> data = new ArrayList<DescElement>();
 
-                    for (int i = 0; i < prod.length(); i++) {
+                    datos.add(new Lista_Entrada(0,"SELECCIONAR...",data));
+                    for (int i = 1; i < prod.length()+1; i++) {
 
 
                         Log.e("Response Item: ", prod.getJSONObject(i).toString());
@@ -221,6 +222,7 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
                         ArrayList<DescElement> a = (ArrayList<DescElement>)pdfCampos.getTag();
                         //Log.e("url_pdf", pdfCampos.getTag().toString());
                         //pdfCampos.getTag().toString()
+                        if(id != 0)
                         for( int i = 0 ; i < a.size() ; i++ ){
                             if(id == a.get(i).get_idDesc()){
                                abrirPDF(a.get(i).get_url_pdfDesc());
