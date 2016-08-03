@@ -47,7 +47,8 @@
                         android:layout_width="fill_parent"
                         android:layout_weight="50"
                         android:layout_height="fill_parent"
-                        android:id="@+id/imagenTrivias" />
+                        android:id="@+id/imagenTrivias"
+                        android:layout_gravity="top" />
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
@@ -62,15 +63,22 @@
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:layout_weight="88"
-                            android:layout_height="wrap_content"
+                            android:layout_height="fill_parent"
                             android:id="@+id/tituloTrivias"/>
-
-                        <TextView
+                        <ScrollView
+                            android:id="@+id/SCROLLER_ID"
                             android:layout_width="fill_parent"
-                            android:layout_weight="1.0"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/descripcionTrivias"/>
+                            android:layout_height="fill_parent"
+                            android:scrollbars="vertical"
+                            android:fillViewport="true"
+                            android:layout_weight="12">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_weight="1.0"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_height="match_parent"
+                                android:id="@+id/descripcionTrivias"/>
+                        </ScrollView>
 
 
                     </LinearLayout>
