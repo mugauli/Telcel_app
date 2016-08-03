@@ -139,6 +139,8 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                        String imagen_detalle = responseArray.getJSONObject(i).get("imagen_detalle").toString();
                        String texto = responseArray.getJSONObject(i).get("texto").toString();
                        String fecha = responseArray.getJSONObject(i).get("fecha").toString();
+                       String tipo = responseArray.getJSONObject(i).get("tipo").toString();
+                       String contenido = responseArray.getJSONObject(i).get("contenido").toString();
 
                        URL imageUrl = null;
                        imageUrl = new URL(imageHttpAddress + img_previa);
@@ -153,7 +155,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
                     if(texto == null) {
-                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto.substring(0, 10),fecha));
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
                     }else{
                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
                     }

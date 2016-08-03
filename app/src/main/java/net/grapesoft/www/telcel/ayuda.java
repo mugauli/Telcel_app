@@ -55,9 +55,9 @@ public class ayuda  extends AppCompatActivity
         txtGhost4.setTypeface(tfi);
         txtGhost4.setText("AYUDA");
 
-        Drawable img = this.getResources().getDrawable( R.drawable.ayudat);
-        img.setBounds( 0, 0, 50, 50 );
-        txtGhost4.setCompoundDrawables( img, null, null, null );
+       // Drawable img = this.getResources().getDrawable( R.drawable.ayudat);
+        //img.setBounds( 0, 0, 50, 50 );
+        //txtGhost4.setCompoundDrawables( img, null, null, null );
 
 
 

@@ -2,19 +2,30 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.Html;
+import android.text.InputType;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -39,9 +50,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import Utitilies.Campos;
 import Utitilies.DescElement;
 import Utitilies.List_adapted;
 import Utitilies.List_adapted_Noticias;
+import Utitilies.List_adapted_Revista;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
@@ -176,6 +189,8 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
 
 
         Log.e("Llego", "al final");
+
+
       return datos;
 
     }
@@ -184,7 +199,7 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
     protected void onPostExecute(ArrayList<Lista_Entrada> result) {
         super.onPostExecute(result);
 
-        Spinner pdfCampos = (Spinner) activity.findViewById(R.id.spnCamposPromos);
+        final Spinner pdfCampos = (Spinner) activity.findViewById(R.id.spnCamposPromos);
         if (pdfCampos != null)
             if (result != null) {
                 pdfCampos.setTag(result.get(0).get_pdf());
@@ -200,6 +215,19 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
                 pdfCampos.setAdapter(spinner_adapter);
 
             }
+        pdfCampos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                abrirPDF("http://internetencaja.com.mx/telcel/descuentos/Agenda2016TELMEX.PDF");
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
 
 
@@ -209,4 +237,13 @@ public class FragmentDescuentosAsync extends AsyncTask<ArrayList<String>, Intege
             pBar.setVisibility(View.GONE);
     }
 
+    public void abrirPDF(String URL){
+
+
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+        Uri data = Uri.parse(URL);
+        intent.setDataAndType(data, "application/pdf");
+        activity.startActivity(intent);
+
+    }
 }

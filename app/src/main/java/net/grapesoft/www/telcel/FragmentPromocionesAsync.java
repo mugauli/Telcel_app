@@ -198,13 +198,13 @@ public class FragmentPromocionesAsync extends AsyncTask<ArrayList<String>, Integ
 
                             LinearLayout principal = (LinearLayout)activity.findViewById(R.id.linearPromo);
 
-                            if (principal != null) {
-                                principal.setOnClickListener(new View.OnClickListener() {
+                            //if (principal != null) {
+                              //  principal.setOnClickListener(new View.OnClickListener() {
 
-                                    @Override
-                                    public void onClick(View arg0) {
+                                    //@Override
+                                    //public void onClick(View arg0) {
 
-                                        Intent i = new Intent(activity, activity_detalle_noticia.class);
+                                        Intent i = new Intent(activity, activity_detalle_promociones.class);
 
                                         Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
                                         if(Entrada != null) {
@@ -212,9 +212,9 @@ public class FragmentPromocionesAsync extends AsyncTask<ArrayList<String>, Integ
                                             activity.startActivity(i);
                                         }
 
-                                    }
-                                });
-                            }
+                                   // }
+                               // });
+                            //}
 
                         }
                     });
