@@ -1,6 +1,7 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +44,10 @@ public class triviasActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
+        Typeface tfm = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
+        TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
+        txtGhost4.setTypeface(tfm);
+        txtGhost4.setText("PREGUNTA DEL DIA");
         //boton ayuda
 
         //Toolbar Menu

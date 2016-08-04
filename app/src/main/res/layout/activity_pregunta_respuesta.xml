@@ -29,20 +29,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@color/ColorFondo">
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                app:rippleColor="@color/ColorPrimary"
-                app:backgroundTint="@color/ColorPrimary"
-                android:src="@drawable/asc"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="20dp"
-                android:layout_marginEnd="42dp"
-                android:layout_marginBottom="20dp" />
+
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -52,7 +39,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:weightSum="100"
-                android:minHeight="500dp"
+                android:minHeight="300dp"
                 android:id="@+id/RelRevista">
 
                 <LinearLayout
@@ -112,6 +99,7 @@
 
                         </LinearLayout>
 
+
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
@@ -133,6 +121,7 @@
                             android:layout_weight="70"
                             android:weightSum="100">
 
+
                             <LinearLayout
                                 android:orientation="horizontal"
                                 android:layout_width="fill_parent"
@@ -143,6 +132,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:text="ENVIAR >"
+                                android:textColor="@color/bordes"
                                 android:id="@+id/btnEnviar"
                                 android:textAlignment="center"
                                 android:layout_weight="40" />
@@ -176,8 +166,21 @@
 
 
         </RelativeLayout>
-
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:rippleColor="@color/ColorPrimary"
+            app:backgroundTint="@color/ColorPrimary"
+            android:src="@drawable/asc"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginBottom="20dp" />
     </android.support.design.widget.CoordinatorLayout>
-    <!--<include layout="@layout/navigation"/>-->
+    <include layout="@layout/navigation"/>
 </android.support.v4.widget.DrawerLayout>
 
