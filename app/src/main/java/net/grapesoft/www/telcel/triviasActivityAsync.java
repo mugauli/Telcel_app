@@ -314,6 +314,8 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
             txtPreguntaTrivia.setText(preguntaPreg);
         }
 
+
+
         LinearLayout btnPreguntaDia = (LinearLayout) activity.findViewById(R.id.btnPreguntaDia);
         if(btnPreguntaDia != null  && PregBool)
         {

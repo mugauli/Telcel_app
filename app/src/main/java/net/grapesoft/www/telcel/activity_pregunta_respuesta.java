@@ -1,8 +1,10 @@
 package net.grapesoft.www.telcel;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -24,10 +26,10 @@ public class activity_pregunta_respuesta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pregunta_respuesta);
 
-        String pregunta = getIntent().getExtras().getString("pregunta","No hay pregunta del día");
+        final String pregunta = getIntent().getExtras().getString("pregunta","No hay pregunta del día");
         String result2 = getIntent().getExtras().getString("json","0");
 
-        TextView txtPreguntaTrivia = (TextView)findViewById(R.id.txtPregunta);
+        final TextView txtPreguntaTrivia = (TextView)findViewById(R.id.txtPregunta);
         if(txtPreguntaTrivia!= null )
         {
             txtPreguntaTrivia.setText(pregunta);
@@ -62,8 +64,9 @@ public class activity_pregunta_respuesta extends AppCompatActivity {
                     String idPreg = responseArray2.getJSONObject(0).get("id").toString();
                     String preguntaPreg = responseArray2.getJSONObject(0).get("pregunta").toString();
                     JSONArray respuestas = responseArray2.getJSONObject(0).getJSONArray("respuestas");
+                    String RespuestaCorrecta = "";
 
-                    RadioGroup group = new RadioGroup(this);
+                    final RadioGroup group = new RadioGroup(this);
                     group.setOrientation(RadioGroup.VERTICAL);
                     LinearLayout lytRespuestas = (LinearLayout) findViewById(R.id.lytRespuestas);
 
@@ -78,11 +81,47 @@ public class activity_pregunta_respuesta extends AppCompatActivity {
                         String valRespuesta = respuestas.getJSONObject(i).get("valRespuesta").toString();
                        // preguntas.add(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
 
+                        if(valRespuesta.equals("1")) {
+
+                            RespuestaCorrecta = txtRespuesta;
+                            Log.e("RespuestaCorrecta",RespuestaCorrecta);
+                        }
+
                         RadioButton btn1 = new RadioButton(this);
                         btn1.setText(txtRespuesta);
-                        btn1.setTag(valRespuesta);
+                        btn1.setTag(new PreguntaElement(idResp,txtRespuesta,valRespuesta));
                         group.addView(btn1);
 
+                    }
+
+                    TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
+                    if(btnEnviar!= null)
+                    {
+                        final String finalRespuestaCorrecta = RespuestaCorrecta;
+
+
+                        btnEnviar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                int radioButtonID = group.getCheckedRadioButtonId();
+
+                                Log.e("elegido",""+radioButtonID);
+                                View radioButton = group.findViewById(radioButtonID);
+                                RadioButton rb = (RadioButton)radioButton;
+
+                                PreguntaElement element = (PreguntaElement)rb.getTag();
+
+                                Log.e("elegido",element.get_valRespuesta());
+
+                                Intent i = new Intent(activity_pregunta_respuesta.this,activity_respuesta.class);
+                                i.putExtra("val",element.get_valRespuesta());
+                                i.putExtra("pregunta",pregunta.toString());
+                                i.putExtra("respuesta", finalRespuestaCorrecta.toString());
+                                startActivity(i);
+
+                            }
+                        });
                     }
 
                 }
