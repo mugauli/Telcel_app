@@ -42,6 +42,8 @@ public class triviasActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+
         //boton ayuda
 
         //Toolbar Menu
