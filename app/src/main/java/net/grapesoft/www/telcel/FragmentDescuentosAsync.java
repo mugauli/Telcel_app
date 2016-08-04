@@ -169,6 +169,7 @@
                             //String img_previa = prod.getJSONObject(i).get("img_previa").toString();
                             String url_pdf = prod.getJSONObject(i).get("url_pdf").toString();
                             data.add(new DescElement(i+1,"",tipo.toUpperCase(),url_pdf));
+
                         }
                         datos.add(new Lista_Entrada(ii,titulo.toUpperCase(),data));
                     }
