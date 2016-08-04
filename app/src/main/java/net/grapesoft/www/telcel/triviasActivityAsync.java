@@ -39,6 +39,7 @@ import java.util.List;
 import Utitilies.List_adapted;
 import Utitilies.List_adapted_Noticias;
 import Utitilies.Lista_Entrada;
+import Utitilies.PreguntaElement;
 import Utitilies.SessionManagement;
 
 /**
@@ -49,11 +50,11 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
     ProgressDialog dialog;
     Activity activity;
     private ListView lista;
-    JSONArray responseArray;
+    JSONArray responseArray,responseArray2;
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
-    public String IP = "",tokenCTE = "";
-    public boolean primer3 = true;
+    public String IP = "",tokenCTE = "",preguntaPreg="",jsonPreguntas="";
+    public boolean primer3 = true,PregBool = true;
     SessionManagement session;
 
     public triviasActivityAsync(Activity activity) {
@@ -69,8 +70,80 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
 
         session = new SessionManagement(activity.getApplicationContext());
-        String result11 = "";
+        String result11 = "", result2 = "";
         try {
+
+            //Pregunta del dia
+            String preguntaDiaDetails = session.getPreguntaDetails();
+
+            if(preguntaDiaDetails == null || preguntaDiaDetails == "") {
+
+                Log.e("Se obtiene Trivias","Procesando...");
+
+                List<NameValuePair> nameValuePair2 = new ArrayList<NameValuePair>(2);
+                HttpClient httpclient2 = new DefaultHttpClient();
+
+                HttpPost httppost2 = new HttpPost(IP + params[0].get(0));
+                nameValuePair2.add(new BasicNameValuePair("token", params[0].get(2)));
+                nameValuePair2.add(new BasicNameValuePair("reg", params[0].get(3)));
+                httppost2.setEntity(new UrlEncodedFormEntity(nameValuePair2));
+                Log.e("IP", IP + params[0].get(1));
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient2.execute(httppost2);
+
+                BufferedReader reader2 = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+                StringBuilder sb2 = new StringBuilder();
+                sb2.append(reader2.readLine() + "\n");
+                String line = "0";
+                while ((line = reader2.readLine()) != null) {
+                    sb2.append(line + "\n");
+                }
+                reader2.close();
+                result2 = sb2.toString();
+
+
+                session.createPreguntaSession(result11);
+            }
+            else
+            {
+                Log.e("Con session Preguntas",preguntaDiaDetails);
+                result2 = preguntaDiaDetails;
+            }
+            jsonPreguntas = result2;
+
+            if(result2.equals("true"+"\n")) {
+                // Log.e("Response: ", "true Int");
+                responseArray2 = new JSONArray("[{'resp':'true'}]");
+            }else if(result2.equals("false"+"\n")) {
+                //Log.e("Response: ", "false int");
+                responseArray2 = new JSONArray("[{'resp':'false'}]");
+            } else
+            {
+                //Log.e("Response: ", "JSON");
+                if(result2.contains("["))
+                    responseArray2 = new JSONArray(result2);
+                else
+                    responseArray2 = new JSONArray("[" + result2 + "]");
+            }
+            if(responseArray2.getJSONObject(0).has("resp")) {
+                Log.e("Item Preguntas" ,  "Error");
+                PregBool = false;
+            }
+            else if(responseArray2.getJSONObject(0).has("error")) {
+                Log.e("Item Preguntas" ,  "Error");
+                PregBool = false;
+            }
+            else {
+                if (responseArray2.length() > 0) {
+                    Log.e("Response Item: ", responseArray2.getJSONObject(0).toString());
+                    preguntaPreg = responseArray2.getJSONObject(0).get("pregunta").toString();
+                }
+                else
+                {
+                    PregBool = false;
+                }
+            }
+            //END pregunta del dia
 
             String triviasDetails = session.getTriviasDetails();
 
@@ -216,23 +289,6 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                             i.putExtra("descripcion",entrada.get_textoDebajo());
 
                             activity.startActivity(i);
-
-
-
-                        //  ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
-                        //  TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
-                        //  TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
-                        //  TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
-                        //  LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
-
-                        //  Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
-
-                        //  imagenGrupo.setImageBitmap(Entrada.get_img_previa());
-                        //  fechaGrupo.setText(Entrada.get_fecha());
-                        //  titGrupo.setText(Entrada.get_titulo());
-                        //  descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
-                        //    principal.setTag(Entrada);
-
                         }
                     });
 
@@ -251,6 +307,28 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
             lista.setAdapter(result);
             Log.e("Llego", ""+result.getCount());
         }
+
+        TextView txtPreguntaTrivia = (TextView) activity.findViewById(R.id.txtPreguntaTrivia);
+        if(txtPreguntaTrivia!= null && PregBool)
+        {
+            txtPreguntaTrivia.setText(preguntaPreg);
+        }
+
+        LinearLayout btnPreguntaDia = (LinearLayout) activity.findViewById(R.id.btnPreguntaDia);
+        if(btnPreguntaDia != null  && PregBool)
+        {
+            btnPreguntaDia.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(activity,activity_pregunta_respuesta.class);
+                    i.putExtra("pregunta",preguntaPreg);
+                    i.putExtra("json",jsonPreguntas);
+                    activity.startActivity(i);
+                }
+            });
+        }
+
+
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingTrivias);
         if(pBar != null)
             pBar.setVisibility(View.GONE);
