@@ -69,7 +69,7 @@ public class PromocionesActivity extends AppCompatActivity
             toolbar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(PromocionesActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PromocionesActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(PromocionesActivity.this, MainActivity.class);
                     i.putExtra("direccion","0");
                     startActivity(i);
