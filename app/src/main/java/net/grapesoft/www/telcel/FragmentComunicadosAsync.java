@@ -132,7 +132,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                 Log.e("Item Comunicados" ,  "Error");
             }
             else {
-                String contenidos="";
+
                 for (int i = 0; i < responseArray.length(); i++) {
 
                        String id = responseArray.getJSONObject(i).get("id").toString();
@@ -146,15 +146,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                        String contenido = responseArray.getJSONObject(i).get("contenido").toString();
 
 
-                    /*if(contenido == "TP"){
-                        contenidos="TIPS";
-                    }else if(contenido == "IF"){
-                        contenidos="INFOGRAFIA";
-                    }else if(contenido == "IX"){
-                        contenidos="INFORMACION";
-                    }else if(contenido == "CM"){
-                        contenidos="COMPARTE";
-                    }*/
+
 
                        URL imageUrl = null;
                        imageUrl = new URL(imageHttpAddress + img_previa);
@@ -252,10 +244,28 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                     TextView texto_tipo = (TextView) view.findViewById(R.id.comunicadotipo);
 
-                    if (texto_tipo != null)
+                    if (texto_tipo != null) {
+                        String tp = "TP";
+                        String in = "IF";
+                        String ix = "IX";
+                        String cm = "CM";
+                        String todos = ((Lista_Entrada) entrada).get_contenido();
 
-                        texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());
+                        if(todos.compareTo(tp)==0 ){
+                            texto_tipo.setText("TIPS");
+                        }
+                        if(todos.compareTo(in)==0 ){
+                            texto_tipo.setText("INFOGRAFIA");
+                        }
+                        if(todos.compareTo(ix)==0 ){
+                            texto_tipo.setText("INFORMACION");
+                        }
+                        if(todos.compareTo(cm)==0 ){
+                            texto_tipo.setText("COMPARTE");
+                        }
 
+//                        texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());
+                    }
                     view.setTag(entrada);
 
 

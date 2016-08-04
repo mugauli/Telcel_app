@@ -118,7 +118,7 @@ public class Lista_Entrada {
         this.type = type;
     }
 
-    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo,String contenidos) {
+    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo,String contenido) {
         this.id = id;
         this.img_previa = img_previa;
         this.titulo = titulo;
@@ -126,7 +126,7 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.fecha = fecha;
         this.tipo = tipo;
-        this.contenidos = contenidos;
+        this.contenido = contenido;
     }
     public Lista_Entrada(String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha,String tipo) {
         this.id = id;

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,18 +54,46 @@ public class FragmentComunicados extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-
-                Intent i = new Intent(getActivity(), activity_detalle_comunicado.class);
-
                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+                //if(Entrada.get_tipo().toString() == "I"){
+                    Intent i = new Intent(getActivity(), activity_detalle_comunicados_imagen.class);
+                    Intent p = new Intent(getActivity(), activity_detalle_comunicado.class);
+                    String nada ="I";
+                    String todo = Entrada.get_tipo();
 
-                i.putExtra("imagen",Entrada.get_img_detalle());
-                i.putExtra("titulo",Entrada.get_titulo());
-                i.putExtra("fecha",Entrada.get_fecha());
-                i.putExtra("descripcion",Entrada.get_textoDebajo());
-                i.putExtra("tipo",Entrada.get_tipo());
-                i.putExtra("contenido",Entrada.get_tipo());
-                startActivity(i);
+
+                //Toast toast2 = Toast.makeText(getActivity(), nada + todo, Toast.LENGTH_SHORT);
+                //toast2.show();
+
+                if( todo.compareTo("I")==0 ) {
+
+                    i.putExtra("imagen", Entrada.get_img_detalle());
+
+                    startActivity(i);
+                }else{
+
+                    p.putExtra("imagen",Entrada.get_img_detalle());
+                    p.putExtra("titulo",Entrada.get_titulo());
+                    p.putExtra("fecha",Entrada.get_fecha());
+                    p.putExtra("descripcion",Entrada.get_textoDebajo());
+                    p.putExtra("tipo",Entrada.get_tipo());
+                    p.putExtra("contenido",Entrada.get_contenido());
+                    startActivity(p);
+                }
+
+                /*}else{
+                    Intent i = new Intent(getActivity(), activity_detalle_comunicado.class);
+
+                    i.putExtra("imagen",Entrada.get_img_detalle());
+                    i.putExtra("titulo",Entrada.get_titulo());
+                    i.putExtra("fecha",Entrada.get_fecha());
+                    i.putExtra("descripcion",Entrada.get_textoDebajo());
+                    i.putExtra("tipo",Entrada.get_tipo());
+                    i.putExtra("contenido",Entrada.get_tipo());
+                    startActivity(i);
+
+                }*/
+
 
 
             }
