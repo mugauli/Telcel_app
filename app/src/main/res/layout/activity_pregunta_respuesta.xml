@@ -162,6 +162,7 @@
 
 
         </RelativeLayout>
+
     </android.support.design.widget.CoordinatorLayout>
     <!--<include layout="@layout/navigation"/>-->
 </android.support.v4.widget.DrawerLayout>
