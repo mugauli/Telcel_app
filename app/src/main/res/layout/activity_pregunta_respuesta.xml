@@ -74,7 +74,7 @@
                             android:layout_width="fill_parent"
                             android:weightSum="100"
                             android:layout_height="fill_parent"
-                            android:layout_weight="15">
+                            android:layout_weight="20">
 
                             <TextView
 
@@ -104,21 +104,22 @@
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_weight="15">
+                            android:layout_weight="45">
                             <TextView
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:text="error"
                                 android:textColor="@color/error"
                                 android:id="@+id/txtError"
-                                android:textAlignment="center"/>
+                                android:textAlignment="center"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_weight="70"
+                            android:layout_weight="35"
                             android:weightSum="100">
 
 
