@@ -177,21 +177,27 @@ public class activity_pregunta_respuesta extends AppCompatActivity
                             @Override
                             public void onClick(View v) {
 
+
                                 int radioButtonID = group.getCheckedRadioButtonId();
-
                                 Log.e("elegido",""+radioButtonID);
-                                View radioButton = group.findViewById(radioButtonID);
-                                RadioButton rb = (RadioButton)radioButton;
+                                if(radioButtonID != -1) {
+                                    View radioButton = group.findViewById(radioButtonID);
+                                    RadioButton rb = (RadioButton) radioButton;
 
-                                PreguntaElement element = (PreguntaElement)rb.getTag();
+                                    PreguntaElement element = (PreguntaElement) rb.getTag();
 
-                                Log.e("elegido",element.get_valRespuesta());
+                                    Log.e("elegido", element.get_valRespuesta());
 
-                                Intent i = new Intent(activity_pregunta_respuesta.this,activity_respuesta.class);
-                                i.putExtra("val",element.get_valRespuesta());
-                                i.putExtra("pregunta",pregunta.toString());
-                                i.putExtra("respuesta", finalRespuestaCorrecta.toString());
-                                startActivity(i);
+                                    Intent i = new Intent(activity_pregunta_respuesta.this, activity_respuesta.class);
+                                    i.putExtra("val", element.get_valRespuesta());
+                                    i.putExtra("pregunta", pregunta.toString());
+                                    i.putExtra("respuesta", finalRespuestaCorrecta.toString());
+                                    startActivity(i);
+                                }
+                                else
+                                {
+
+                                }
 
                             }
                         });
