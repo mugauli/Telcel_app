@@ -87,7 +87,8 @@
                             android:layout_weight="39"
                             android:orientation="vertical"
                             android:weightSum="100"
-                            android:padding="3dp" >
+                            android:padding="3dp"
+                            android:id="@+id/btnPreguntaDia">
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
@@ -134,7 +135,6 @@
                                     <TextView
                                         android:layout_width="fill_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="¿Que se celebra el 5 de febrero?"
                                         android:id="@+id/txtPreguntaTrivia"
                                         android:layout_weight="25"
                                         android:textSize="17dp"
