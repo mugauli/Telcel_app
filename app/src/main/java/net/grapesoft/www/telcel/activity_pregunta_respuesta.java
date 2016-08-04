@@ -195,6 +195,7 @@ public class activity_pregunta_respuesta extends AppCompatActivity
                                     i.putExtra("respuesta", finalRespuestaCorrecta.toString());
                                     startActivity(i);
                                     finish();
+
                                 }
                                 else
                                 {
