@@ -43,7 +43,6 @@ public class triviasActivity extends AppCompatActivity
             }
         });
 
-
         //boton ayuda
 
         //Toolbar Menu
