@@ -160,7 +160,7 @@
                         ArrayList<DescElement> data = new ArrayList<DescElement>();
 
                         data.add(new DescElement(0,"","SELECCIONE...",""));
-                        for (int i = 1; i < prod.length()+1; i++) {
+                        for (int i = 0; i < prod.length(); i++) {
 
 
                             Log.e("Response Item: ", prod.getJSONObject(i).toString());
@@ -168,11 +168,9 @@
                             String tipo = prod.getJSONObject(i).get("tipo").toString();
                             //String img_previa = prod.getJSONObject(i).get("img_previa").toString();
                             String url_pdf = prod.getJSONObject(i).get("url_pdf").toString();
-                            data.add(new DescElement(i,"",tipo.toUpperCase(),url_pdf));
-
-
+                            data.add(new DescElement(i+1,"",tipo.toUpperCase(),url_pdf));
                         }
-                        datos.add(new Lista_Entrada(ii+1,titulo.toUpperCase(),data));
+                        datos.add(new Lista_Entrada(ii,titulo.toUpperCase(),data));
                     }
                 }
 
@@ -205,7 +203,7 @@
 
             final Spinner pdfCampos = (Spinner) activity.findViewById(R.id.spnCamposPromos);
             if (pdfCampos != null)
-                if (result != null) {
+                if (result != null && result.size()>0) {
                     pdfCampos.setTag(result.get(0).get_pdf());
 
                     final LinkedList pdfs = new LinkedList();
