@@ -104,10 +104,11 @@ public class activity_pregunta_respuesta extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
 
-
+                                TextView txtError = (TextView)findViewById(R.id.txtError);
                                 int radioButtonID = group.getCheckedRadioButtonId();
                                 Log.e("elegido",""+radioButtonID);
                                 if(radioButtonID != -1) {
+                                    txtError.setText("");
                                     View radioButton = group.findViewById(radioButtonID);
                                     RadioButton rb = (RadioButton) radioButton;
 
@@ -123,7 +124,7 @@ public class activity_pregunta_respuesta extends AppCompatActivity {
                                 }
                                 else
                                 {
-
+                                  txtError.setText("Debe seleccionar una respuesta.");
                                 }
 
                             }

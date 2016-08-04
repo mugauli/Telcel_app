@@ -116,7 +116,21 @@
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:layout_weight="85"
+                            android:layout_weight="15">
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:text="error"
+                                android:textColor="@color/error"
+                                android:id="@+id/txtError"
+                                android:textAlignment="center"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="70"
                             android:weightSum="100">
 
                             <LinearLayout
