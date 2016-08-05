@@ -218,12 +218,6 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
         Log.e("Llego Producto Mes", "al final");
 
-        ImageView imgFaltaInfo = (ImageView) activity.findViewById(R.id.imgFaltaInfo);
-        if(datos.size() < 1 ) {
-            if (imgFaltaInfo != null)
-                imgFaltaInfo.setVisibility(View.VISIBLE);
-        }
-
         return new List_adapted_Producto_Mes(activity, R.layout.entrada_productos_mes, datos){
 
             @Override
@@ -300,10 +294,11 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
         super.onPostExecute(result);
         ImageView imgFaltaInfo = (ImageView) activity.findViewById(R.id.imgFaltaInfo);
-
+        LinearLayout linearPrincipalProductos = (LinearLayout) activity.findViewById(R.id.linearPrincipalProductos);
         if(vacio) {
-Log.e("imagens","imagen");
+            Log.e("imagens","imagen");
             imgFaltaInfo.setVisibility(View.VISIBLE);
+            linearPrincipalProductos.setVisibility(View.GONE);
         }
 
 
