@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
 
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
-        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-
+        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
