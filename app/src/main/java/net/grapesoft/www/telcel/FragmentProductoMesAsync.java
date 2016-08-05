@@ -55,7 +55,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
     public String IP = "",tokenCTE = "";
-    public boolean primer3 = true;
+    public boolean primer3 = true,vacio= false;
     SessionManagement session;
     Context thiscontext;
     //Mes Actual
@@ -134,9 +134,17 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                 else
                     responseArray = new JSONArray("[" + result11 + "]");
             }
+            Log.e("JSON Producto del mes" ,  result11);
 
             if(responseArray.getJSONObject(0).has("resp")) {
                 Log.e("Item Producto del mes" ,  "Error");
+            }
+            if(responseArray.getJSONObject(0).has("error")) {
+                Log.e("Item Producto del mes" ,  "Error");
+                ImageView imgFaltaInfo = (ImageView) activity.findViewById(R.id.imgFaltaInfo);
+vacio = true;
+                if (imgFaltaInfo != null)
+                    imgFaltaInfo.setVisibility(View.VISIBLE);
             }
             else {
                 JSONObject prod = responseArray.getJSONObject(0);
@@ -194,6 +202,8 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
         } catch (JSONException e) {
             Log.e("Error JSONException ProductoMes", e.getMessage());
             e.printStackTrace();
+
+
         } catch (UnsupportedEncodingException e) {
             Log.e("Error UnsupportedEncodingException ProductoMes", e.getMessage());
             e.printStackTrace();
@@ -207,6 +217,12 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
 
         Log.e("Llego Producto Mes", "al final");
+
+        ImageView imgFaltaInfo = (ImageView) activity.findViewById(R.id.imgFaltaInfo);
+        if(datos.size() < 1 ) {
+            if (imgFaltaInfo != null)
+                imgFaltaInfo.setVisibility(View.VISIBLE);
+        }
 
         return new List_adapted_Producto_Mes(activity, R.layout.entrada_productos_mes, datos){
 
@@ -283,14 +299,35 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
     protected void onPostExecute(List_adapted_Producto_Mes result) {
 
         super.onPostExecute(result);
+        ImageView imgFaltaInfo = (ImageView) activity.findViewById(R.id.imgFaltaInfo);
+
+        if(vacio)
+
+        if (imgFaltaInfo != null)
+            imgFaltaInfo.setVisibility(View.VISIBLE);
+
 
         lista = (ListView) activity.findViewById(R.id.lstProductosMes);
+
         if(result != null && lista != null) {
-            lista.setAdapter(result);
-            Log.e("Llego", ""+result.getCount());
+            if(result.getCount() > 0) {
+                if (imgFaltaInfo != null)
+                    imgFaltaInfo.setVisibility(View.GONE);
+                lista.setAdapter(result);
+                Log.e("Llego Producto del mes", "" + result.getCount());
+            }
+            else
+            {
+                if(imgFaltaInfo != null)
+                    imgFaltaInfo.setVisibility(View.VISIBLE);
+
+            }
         }
         else
         {
+
+            if(imgFaltaInfo != null)
+                imgFaltaInfo.setVisibility(View.VISIBLE);
             Log.e("No llego", "algo paso");
         }
         RelativeLayout pBar = (RelativeLayout)activity.findViewById(R.id.loadingPanelProductoMes);
