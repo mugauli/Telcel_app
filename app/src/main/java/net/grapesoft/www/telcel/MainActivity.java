@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 if(tab.getText().toString().equals(getString(R.string.tab5).toString())) {
 
-                    Intent i = new Intent(MainActivity.this, sitios.class);
+                    Intent i = new Intent(MainActivity.this, SitiosInteresActivity.class);
                     i.putExtra("direccion","0");
                     startActivity(i);
                 }

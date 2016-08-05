@@ -28,8 +28,6 @@ public class FragmentSitios extends Fragment {
 
         View rootview = inflater.inflate(R.layout.tab_fragment_sitios, container, false);
 
-
-
         ImageView img1 = (ImageView)rootview.findViewById(R.id.imageView7);
         ImageView img2 = (ImageView)rootview.findViewById(R.id.imageView8);
         ImageView img3 = (ImageView)rootview.findViewById(R.id.imageView9);
