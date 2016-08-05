@@ -105,7 +105,14 @@ public class activity_detalle_comunicados_imagen extends AppCompatActivity
             }
         });
 
-
+        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+        imgButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(activity_detalle_comunicados_imagen.this, triviasActivity.class);
+                startActivity(i);
+            }
+        });
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 

@@ -42,28 +42,28 @@
                     android:weightSum="100"
                     android:layout_marginTop="0dp"
                     android:background="@drawable/border" >
-                    <ImageView
+                    <net.grapesoft.www.telcel.TouchImageView
                         android:layout_width="fill_parent"
-                        android:layout_weight="50"
+                        android:layout_weight="20"
                         android:layout_height="fill_parent"
                         android:id="@+id/imagenTrivias"
                         android:layout_gravity="top" />
-                    <LinearLayout
+                 <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="50"
+                        android:layout_weight="80"
                         android:layout_margin="15px"
                         android:orientation="vertical"
-                        android:weightSum="100">
+                        android:weightSum="100">-->
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="fill_parent"
                             android:textColor="@color/ColorPrimary"
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:layout_weight="88"
                             android:layout_height="fill_parent"
-                            android:id="@+id/tituloTrivias"/>
+                            android:id="@+id/tituloTrivias"/>-->
                         <ScrollView
                             android:id="@+id/SCROLLER_ID"
                             android:layout_width="fill_parent"

@@ -54,7 +54,7 @@ public class activity_detalle_sva extends AppCompatActivity
         String descripcion = getIntent().getStringExtra("descripcion");
 
         ImageView imagenUG = (ImageView) findViewById(R.id.imagenDNT);
-        TextView titUG = (TextView) findViewById(R.id.titDNT);
+        //TextView titUG = (TextView) findViewById(R.id.titDNT);
         TextView descUG = (TextView) findViewById(R.id.descDNT);
 
         try {
@@ -71,7 +71,7 @@ public class activity_detalle_sva extends AppCompatActivity
         /*TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null)
             breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > SVA");*/
-        titUG.setText(titulo);
+        //titUG.setText(titulo);
         if(descripcion != null)
         descUG.setText(Html.fromHtml(descripcion));
 
@@ -110,7 +110,14 @@ public class activity_detalle_sva extends AppCompatActivity
                 }
             }
         });
-
+        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+        imgButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(activity_detalle_sva.this, triviasActivity.class);
+                startActivity(i);
+            }
+        });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

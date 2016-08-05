@@ -150,7 +150,14 @@ public class ayuda  extends AppCompatActivity
                 }
             }
         });
-
+        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+        imgButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ayuda.this, triviasActivity.class);
+                startActivity(i);
+            }
+        });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

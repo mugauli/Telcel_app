@@ -42,7 +42,7 @@ public class activity_detalle_triviaC extends AppCompatActivity
         String descripcion = getIntent().getStringExtra("descripcion");
 
         ImageView imagenUG = (ImageView) findViewById(R.id.imagenTrivias);
-        TextView titUG = (TextView) findViewById(R.id.tituloTrivias);
+        //TextView titUG = (TextView) findViewById(R.id.tituloTrivias);
         TextView descUG = (TextView) findViewById(R.id.descripcionTrivias);
 
         try {
@@ -57,7 +57,7 @@ public class activity_detalle_triviaC extends AppCompatActivity
         }
 
 
-        titUG.setText(titulo);
+        //titUG.setText(titulo);
         if(descripcion != null)
         descUG.setText(Html.fromHtml(descripcion));
 
@@ -167,8 +167,7 @@ public class activity_detalle_triviaC extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(activity_detalle_triviaC.this, preferencias.class);
-            startActivity(i);*/
+
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

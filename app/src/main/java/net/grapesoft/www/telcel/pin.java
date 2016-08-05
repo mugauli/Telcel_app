@@ -115,7 +115,14 @@ public class pin extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+        imgButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(pin.this, triviasActivity.class);
+                startActivity(i);
+            }
+        });
         //ToolBar Menu
 
         Button btnGenerar;
