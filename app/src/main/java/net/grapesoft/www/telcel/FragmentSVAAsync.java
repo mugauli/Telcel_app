@@ -138,8 +138,6 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
 
                 for (int i = 0; i < responseArray.length(); i++) {
 
-
-
                     if (par) {
                         par = false;
                         id = responseArray.getJSONObject(i).get("id").toString();
@@ -317,6 +315,11 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                     }
                     else
                     {
+
+                        LinearLayout linear = (LinearLayout) activity.findViewById(R.id.linearSva2);
+                        if(linear != null)
+                            linear.setVisibility(View.VISIBLE);
+
                         if(primer){
                             primer = false;
 
