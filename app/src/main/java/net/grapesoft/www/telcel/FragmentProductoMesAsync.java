@@ -301,10 +301,10 @@ vacio = true;
         super.onPostExecute(result);
         ImageView imgFaltaInfo = (ImageView) activity.findViewById(R.id.imgFaltaInfo);
 
-        if(vacio)
-
-        if (imgFaltaInfo != null)
+        if(vacio) {
+Log.e("imagens","imagen");
             imgFaltaInfo.setVisibility(View.VISIBLE);
+        }
 
 
         lista = (ListView) activity.findViewById(R.id.lstProductosMes);
