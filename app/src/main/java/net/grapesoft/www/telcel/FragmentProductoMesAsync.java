@@ -138,13 +138,13 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
             if(responseArray.getJSONObject(0).has("resp")) {
                 Log.e("Item Producto del mes" ,  "Error");
+                vacio = true;
             }
             if(responseArray.getJSONObject(0).has("error")) {
                 Log.e("Item Producto del mes" ,  "Error");
-                ImageView imgFaltaInfo = (ImageView) activity.findViewById(R.id.imgFaltaInfo);
-vacio = true;
-                if (imgFaltaInfo != null)
-                    imgFaltaInfo.setVisibility(View.VISIBLE);
+
+                vacio = true;
+
             }
             else {
                 JSONObject prod = responseArray.getJSONObject(0);
