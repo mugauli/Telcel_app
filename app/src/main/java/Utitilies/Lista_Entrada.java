@@ -29,7 +29,9 @@ public class Lista_Entrada {
             textoEncima,
             textoDebajo,
             img_mini,
-            seccion;
+            seccion,
+            jsonStr,
+            idSiguiente;
 
     private JSONArray  json;
 
@@ -140,13 +142,15 @@ public class Lista_Entrada {
 
     }
 
-    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  ArrayList<String> imagenesSlide) {
+    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  ArrayList<String> imagenesSlide,String jsonStr, String idSiguiente) {
         this.id = id;
         this.img_previa = img_previa;
         this.titulo = titulo;
         this.url = url;
         this.textoDebajo = textoDebajo;
         this.imagenesSlide = imagenesSlide;
+        this.jsonStr = jsonStr;
+        this.idSiguiente = idSiguiente;
     }
 
     public Lista_Entrada(String mes, String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  ArrayList<String> imagenesSlide) {
@@ -298,6 +302,8 @@ public class Lista_Entrada {
     public String get_seccion() {
         return seccion;
     }
+    public String get_jsonStr() { return jsonStr; }
+    public String get_idSiguiente() { return idSiguiente; }
     public ArrayList<DescElement> get_pdf() {
         return pdf;
     }

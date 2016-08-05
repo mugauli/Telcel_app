@@ -59,6 +59,8 @@ public class FragmentGaleria  extends Fragment {
                 i.putExtra("titulo",Entrada.get_titulo());
                 i.putExtra("descripcion",Entrada.get_textoDebajo());
                 i.putStringArrayListExtra("imagenes_slider",Entrada.get_imagenesSlide());
+                i.putExtra("json",Entrada.get_jsonStr());
+                i.putExtra("idSiguiente",Entrada.get_jsonStr());
 
                 startActivity(i);
 

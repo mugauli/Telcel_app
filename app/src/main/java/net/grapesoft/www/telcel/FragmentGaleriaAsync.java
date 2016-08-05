@@ -129,40 +129,48 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                 Log.e("Item Galeria" ,  "Error");
             }
             else {
-                for (int i = 0; i < responseArray.length(); i++) {
+                if(responseArray.length() > 0) {
+                    String idSiguiente = "0";
+                    for (int i = 0; i < responseArray.length(); i++) {
 
-                    String id = responseArray.getJSONObject(i).get("id").toString();
-                    String titulo = responseArray.getJSONObject(i).get("titulo").toString();
-                    String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                    String url = responseArray.getJSONObject(i).get("url").toString();
-                    String texto = responseArray.getJSONObject(i).get("texto").toString();
+                        String id = responseArray.getJSONObject(i).get("id").toString();
+                        String titulo = responseArray.getJSONObject(i).get("titulo").toString();
+                        String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
+                        String url = responseArray.getJSONObject(i).get("url").toString();
+                        String texto = responseArray.getJSONObject(i).get("texto").toString();
 
-                    JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
-                   // String imagenes_slide_Json = responseArray.getJSONObject(0).getJSONArray("imagenes_slide").toString();
+                        if(i+1 < responseArray.length()){
+                            idSiguiente = responseArray.getJSONObject(i+1).get("id").toString();
+                        }else
+                        {
+                            idSiguiente = responseArray.getJSONObject(0).get("id").toString();
+                        }
 
-                    ArrayList<String> imagenes_slider = new ArrayList<String>();
+                        JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+                        // String imagenes_slide_Json = responseArray.getJSONObject(0).getJSONArray("imagenes_slide").toString();
+
+                        ArrayList<String> imagenes_slider = new ArrayList<String>();
 
 
-                    for (int ii = 0; ii < imagenes_slide.length(); ii++) {
+                        for (int ii = 0; ii < imagenes_slide.length(); ii++) {
 
-                        imagenes_slider.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
+                            imagenes_slider.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
+                        }
+
+                        URL imageUrl = null;
+                        imageUrl = new URL(imageHttpAddress + img_previa);
+                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+
+                        try {
+                            conn.connect();
+                            loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                            conn.disconnect();
+                        } catch (FileNotFoundException e) {
+                            loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                        }
+                        datos.add(new Lista_Entrada(id, loadedImage, titulo, url, texto, imagenes_slider,result11,idSiguiente));
+
                     }
-
-                    URL imageUrl = null;
-                    imageUrl = new URL(imageHttpAddress + img_previa);
-                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-
-                    try {
-                        conn.connect();
-                        loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                        conn.disconnect();
-                    }
-                    catch (FileNotFoundException e)
-                    {
-                        loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                    }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,url,texto,imagenes_slider));
-
                 }
             }
         } catch (JSONException e) {

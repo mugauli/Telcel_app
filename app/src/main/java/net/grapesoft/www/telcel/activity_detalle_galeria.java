@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -20,12 +21,20 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.FileNotFoundException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -33,6 +42,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.GetNetImage;
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 public class activity_detalle_galeria extends AppCompatActivity
@@ -115,6 +125,7 @@ public class activity_detalle_galeria extends AppCompatActivity
         imagenes_slider = getIntent().getStringArrayListExtra("imagenes_slider");
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
+        String jsonSiguiente = getIntent().getStringExtra("jsonSiguiente");
 
         ImageView imagenUG = (ImageView) findViewById(R.id.imagenDNT);
         TextView titUG = (TextView) findViewById(R.id.titDNT);
@@ -169,6 +180,71 @@ public class activity_detalle_galeria extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        LinearLayout lnySiguienteGaleria = (LinearLayout) findViewById(R.id.lnySiguienteGaleria);
+
+        if(lnySiguienteGaleria != null) {
+            try {
+                JSONArray responseArray = null;
+
+                if (jsonSiguiente.contains("["))
+                    responseArray = new JSONArray(jsonSiguiente);
+                else
+                    responseArray = new JSONArray("[" + jsonSiguiente + "]");
+
+                if (responseArray.getJSONObject(0).has("resp")) {
+                    Log.e("Item Galeria", "Error");
+                } else {
+                    if (responseArray.length() > 0) {
+
+                        String idSiguiente = "0";
+                        for (int i = 0; i < responseArray.length(); i++) {
+                            String id = responseArray.getJSONObject(i).get("id").toString();
+                            if(id== idSiguiente) {
+
+                                String titulo1 = responseArray.getJSONObject(i).get("titulo").toString();
+                                String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
+                                String url = responseArray.getJSONObject(i).get("url").toString();
+                                String texto = responseArray.getJSONObject(i).get("texto").toString();
+
+                                if (i + 1 < responseArray.length()) {
+                                    idSiguiente = responseArray.getJSONObject(i + 1).get("id").toString();
+                                } else {
+                                    idSiguiente = responseArray.getJSONObject(0).get("id").toString();
+                                }
+                                JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+
+                                ArrayList<String> imagenes_slider = new ArrayList<String>();
+
+
+                                for (int ii = 0; ii < imagenes_slide.length(); ii++) {
+
+                                    imagenes_slider.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
+                                }
+
+                                Intent intent = new Intent(activity_detalle_galeria.this, activity_detalle_galeria.class);
+
+                                intent.putExtra("titulo", titulo1);
+                                intent.putExtra("descripcion", texto);
+                                intent.putStringArrayListExtra("imagenes_slider", imagenes_slider);
+                                intent.putExtra("json", jsonSiguiente);
+                                intent.putExtra("idSiguiente", idSiguiente);
+                                startActivity(intent);
+
+                            }
+
+
+                        }
+
+                    }
+
+
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         //ToolBar Menu
     }
 

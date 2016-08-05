@@ -180,7 +180,7 @@
                             android:layout_height="wrap_content"
                             android:weightSum="100"
                             android:background="@drawable/border"
-                            android:id="@+id/linearLayout"
+                            android:id="@+id/lnySiguienteGaleria"
                             android:layout_marginTop="10dp"
                             android:layout_margin="5dp" >
 
@@ -262,5 +262,5 @@
 
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
-    <include layout="@layout/navigation"/>
+    <!--<include layout="@layout/navigation"/>-->
 </android.support.v4.widget.DrawerLayout>
