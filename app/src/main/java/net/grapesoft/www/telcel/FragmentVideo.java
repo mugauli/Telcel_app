@@ -74,15 +74,19 @@ public class FragmentVideo extends Fragment {
             }
 
         });
-       ImageView imagen_descarga = (ImageView) rootview.findViewById(R.id.descarga);
+      /* ImageView imagen_descarga = (ImageView) rootview.findViewById(R.id.descarga);
        imagen_descarga.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                download(rootview,arg0.getTag().toString());
+                //download(rootview,arg0.getTag().toString());
+                String id_video = arg0.getTag().toString();
+                Intent i = new Intent(getActivity(), activity_detalle_video.class);
+                i.putExtra("video_id",id_video);
+                startActivity(i);
             }
 
-        });
+        });*/
 
 
         return rootview;

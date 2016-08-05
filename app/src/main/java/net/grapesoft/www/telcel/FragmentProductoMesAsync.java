@@ -2,8 +2,11 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -54,7 +57,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
     public String IP = "",tokenCTE = "";
     public boolean primer3 = true;
     SessionManagement session;
-
+    Context thiscontext;
     //Mes Actual
 
     private String mesActual = "",tituloActual="", img_miniActual="", textoActual="",idActual="0";
@@ -269,6 +272,8 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                      });
 
                //  }
+
+
              }
             }
         };

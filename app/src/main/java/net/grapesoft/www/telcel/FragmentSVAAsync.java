@@ -282,6 +282,8 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                         ImageView imagenSva2 = (ImageView) view.findViewById(R.id.imagenSva2);
                         if (imagenSva2 != null) {
                             imagenSva2.setImageBitmap(sva2.get_img_previaSva());
+                        }else{
+                            ///imagenSva2.setImageBitmap();
                         }
                         TextView tituloSVA2 = (TextView) view.findViewById(R.id.tituloSva2);
                         if (tituloSVA2 != null)

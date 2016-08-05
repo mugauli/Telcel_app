@@ -253,13 +253,17 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(MainActivity.this, preferencias.class);
-            startActivity(i);
+            /*Intent i = new Intent(MainActivity.this, preferencias.class);
+            startActivity(i);*/
 
         } else if (id == R.id.nav_send) {
-            session.logoutUser();
+            /*session.logoutUser();
             finish();
-            System.exit(0);
+            System.exit(0);*/
+            Intent intent = new Intent(getApplicationContext(), login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

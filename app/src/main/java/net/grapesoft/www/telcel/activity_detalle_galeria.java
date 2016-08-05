@@ -375,8 +375,8 @@ Log.e("Position",""+position);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(activity_detalle_galeria.this, preferencias.class);
-            startActivity(i);
+           /* Intent i = new Intent(activity_detalle_galeria.this, preferencias.class);
+            startActivity(i);*/
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

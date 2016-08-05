@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -56,7 +57,7 @@ public class pin extends AppCompatActivity
         txtGhost4.setTypeface(tfm);
         txtGhost4.setText("CAMBIAR PIN");
 
-        ImageView btnAyuda = (ImageView) findViewById(R.id.ayudaint);
+       /* ImageView btnAyuda = (ImageView) findViewById(R.id.ayudaint);
         if(btnAyuda != null)
         btnAyuda.setOnClickListener(new View.OnClickListener() {
 
@@ -65,7 +66,18 @@ public class pin extends AppCompatActivity
                 Intent intent = new Intent(pin.this,ayuda.class);
                 startActivity(intent);
             }
+        });*/
+        //boton ayuda
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(pin.this,ayuda.class);
+                startActivity(intent);
+            }
         });
+        //boton ayuda
 
 
 //Toolbar Menu
@@ -213,8 +225,8 @@ public class pin extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(pin.this, preferencias.class);
-            startActivity(i);
+            /*Intent i = new Intent(pin.this, preferencias.class);
+            startActivity(i);*/
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
