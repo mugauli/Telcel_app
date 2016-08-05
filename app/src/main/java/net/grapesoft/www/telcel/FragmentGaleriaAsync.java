@@ -130,9 +130,10 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
             }
             else {
                 if(responseArray.length() > 0) {
-                    String idSiguiente = "0";
-                    for (int i = 0; i < responseArray.length(); i++) {
+                    String idSiguiente = "0",imagenSig="",tituloSig = "",textoSig ="";
 
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        Log.e("Item Galeria" ,  responseArray.getJSONObject(i).toString());
                         String id = responseArray.getJSONObject(i).get("id").toString();
                         String titulo = responseArray.getJSONObject(i).get("titulo").toString();
                         String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
@@ -141,9 +142,15 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
 
                         if(i+1 < responseArray.length()){
                             idSiguiente = responseArray.getJSONObject(i+1).get("id").toString();
+                            tituloSig = responseArray.getJSONObject(i+1).get("titulo").toString();
+                            imagenSig = responseArray.getJSONObject(i+1).get("img_previa").toString();
+                            textoSig = responseArray.getJSONObject(i+1).get("texto").toString();
                         }else
                         {
                             idSiguiente = responseArray.getJSONObject(0).get("id").toString();
+                            tituloSig = responseArray.getJSONObject(0).get("titulo").toString();
+                            imagenSig = responseArray.getJSONObject(0).get("img_previa").toString();
+                            textoSig = responseArray.getJSONObject(0).get("texto").toString();
                         }
 
                         JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
@@ -168,7 +175,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                         } catch (FileNotFoundException e) {
                             loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                         }
-                        datos.add(new Lista_Entrada(id, loadedImage, titulo, url, texto, imagenes_slider,result11,idSiguiente));
+                        datos.add(new Lista_Entrada(id, loadedImage, titulo, url, texto, imagenes_slider,result11,idSiguiente,tituloSig,imagenSig,textoSig));
 
                     }
                 }

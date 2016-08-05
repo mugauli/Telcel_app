@@ -158,7 +158,7 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                     } catch (FileNotFoundException e) {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id, loadedImage, titulo, img_mini, texto, imagenes_slider,"",""));
+                    datos.add(new Lista_Entrada(id, loadedImage, titulo, img_mini, texto, imagenes_slider,"","","","",""));
 
                 }
             }

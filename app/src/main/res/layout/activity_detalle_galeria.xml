@@ -108,18 +108,17 @@
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:layout_weight="80"
+                                android:layout_weight="75"
                                 android:layout_margin="15px"
                                 android:orientation="vertical"
                                 android:weightSum="100">
 
                                 <TextView
-                                    android:layout_width="match_parent"
+                                    android:layout_width="fill_parent"
                                     android:textColor="@color/ColorPrimary"
                                     android:textStyle="bold"
                                     android:textAppearance="?android:attr/textAppearanceSmall"
-                                    android:layout_weight="88"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:id="@+id/titDNT"/>
 
 
@@ -131,7 +130,7 @@
                                 android:layout_height="fill_parent"
                                 android:scrollbars="vertical"
                                 android:fillViewport="true"
-                                android:layout_weight="50">
+                                android:layout_weight="25">
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_weight="1.0"
@@ -262,5 +261,5 @@
 
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
-    <!--<include layout="@layout/navigation"/>-->
+    <include layout="@layout/navigation"/>
 </android.support.v4.widget.DrawerLayout>
