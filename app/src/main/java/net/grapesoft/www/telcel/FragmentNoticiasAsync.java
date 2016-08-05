@@ -154,7 +154,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                     {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto.substring(0,42)+"...",fecha));
                 }
             }
 

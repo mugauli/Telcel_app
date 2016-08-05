@@ -193,8 +193,8 @@ public class activity_respuesta extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(activity_respuesta.this, preferencias.class);
-            startActivity(i);
+           /* Intent i = new Intent(activity_respuesta.this, preferencias.class);
+            startActivity(i);*/
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

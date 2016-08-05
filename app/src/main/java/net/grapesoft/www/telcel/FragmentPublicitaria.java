@@ -73,7 +73,7 @@ public class FragmentPublicitaria extends Fragment {
             }
 
         });
-        ImageView imagen_descarga = (ImageView) rootview.findViewById(R.id.descarga);
+        /*ImageView imagen_descarga = (ImageView) rootview.findViewById(R.id.descarga);
         imagen_descarga.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -81,7 +81,7 @@ public class FragmentPublicitaria extends Fragment {
                 download(rootview,arg0.getTag().toString());
             }
 
-        });
+        });*/
 
 
         return rootview;

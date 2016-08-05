@@ -43,7 +43,7 @@
                     android:weightSum="100"
                     android:layout_marginTop="0dp"
                     android:background="@drawable/border" >
-                    <ImageView
+                    <net.grapesoft.www.telcel.TouchImageView
                         android:layout_width="fill_parent"
                         android:layout_weight="50"
                         android:layout_height="fill_parent"

@@ -163,8 +163,8 @@ public class activity_detalle_comunicados_imagen extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(activity_detalle_comunicados_imagen.this, preferencias.class);
-            startActivity(i);
+            /*Intent i = new Intent(activity_detalle_comunicados_imagen.this, preferencias.class);
+            startActivity(i);*/
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

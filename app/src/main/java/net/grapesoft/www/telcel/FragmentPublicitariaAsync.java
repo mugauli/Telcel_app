@@ -187,12 +187,12 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
                         ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
                         ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
-                        ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
+                        //ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
                         TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
                         TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
                         imagenVideo.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
                         imagenPlay.setTag(((Lista_Entrada) entrada).get_id());
-                        imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
+                        //imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
                         txtTiempo.setText(((Lista_Entrada) entrada).get_duracion());
                         txtTitulo.setText(((Lista_Entrada) entrada).get_titulo());
                     }
@@ -232,7 +232,7 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
                             ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
                             ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
-                            ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
+                            //ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
                             TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
                             TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
 
@@ -243,7 +243,7 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
                             imagenVideo.setImageBitmap(Entrada.get_img_previa());
                             imagenPlay.setTag(Entrada.get_id());
-                            imagenDescarga.setTag(Entrada.get_url());
+                            //imagenDescarga.setTag(Entrada.get_url());
                             txtTiempo.setText(Entrada.get_duracion());
                             txtTitulo.setText(Entrada.get_titulo());
 

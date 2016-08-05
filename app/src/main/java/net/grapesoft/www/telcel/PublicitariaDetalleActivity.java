@@ -372,8 +372,8 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(PublicitariaDetalleActivity.this, preferencias.class);
-            startActivity(i);
+            /*Intent i = new Intent(PublicitariaDetalleActivity.this, preferencias.class);
+            startActivity(i);*/
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

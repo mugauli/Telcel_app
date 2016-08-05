@@ -116,13 +116,13 @@
                                 android:src="@drawable/play"
                                 android:layout_weight="50"
                                 android:layout_margin="10dp" />
-                            <ImageView
+                           <!-- <ImageView
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:id="@+id/descarga"
                                 android:src="@drawable/descarga"
                                 android:layout_weight="50"
-                                android:layout_margin="10dp" />
+                                android:layout_margin="10dp" />-->
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
