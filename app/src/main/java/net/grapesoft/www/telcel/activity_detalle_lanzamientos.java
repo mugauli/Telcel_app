@@ -2,6 +2,8 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,6 +38,9 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
     private ImageSwitcher imageSwitcher;
     private int[] gallery = { R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f };
     private ArrayList<String> imagenes_slider = new ArrayList<String>();
+
+    private ArrayList<Drawable> imagenes_slider_drawable = new ArrayList<Drawable>();
+
     private int position,descargado=0;
     private static final Integer DURATION = 2500;
     private Timer timer = null;
@@ -185,18 +190,34 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
                 // "Only the original thread that created a view hierarchy can touch its views"
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        //position++;
-                        //if (position == imagenes_slider.size()) {
-                        //    position = 0;
-                        //}
-                        //Uri imgUri = Uri.parse(imagenes_slider.get(position));
-                        //imageSwitcher.setImageURI(imgUri);
-
                         position++;
-                        if (position == gallery.length) {
+                        if (position == imagenes_slider.size()) {
                             position = 0;
                         }
-                        imageSwitcher.setImageResource(gallery[position]);
+
+                        if(imagenes_slider_drawable.size() > position) {
+                            imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
+//                            Log.e("Imagenes Del Objeto",imagenes_slider.get(position));
+                        }
+                        else {
+                            try {
+                                //                        Log.e("Imagenes Galeria",imagenes_slider.get(position));
+                                Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
+                                if (img != null) {
+                                    BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
+                                    imagenes_slider_drawable.add(bmDraw);
+                                    imageSwitcher.setImageDrawable(bmDraw);
+
+                                }
+                                else
+                                    imageSwitcher.setImageResource(R.drawable.noimage);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
                     }
 
                 });
@@ -210,39 +231,69 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
             timer.cancel();
             timer = null;
         }
-        // if (position == 0) {
-        //     position = imagenes_slider.size()-1;
-        // }
-        // else
-        // {
-        //     position--;
-        // }
-        // Uri imgUri = Uri.parse(imagenes_slider.get(position));
-        // imageSwitcher.setImageURI(imgUri);
-
         if (position == 0) {
-            position = gallery.length-1;
+            position = imagenes_slider.size()-1;
         }
         else
         {
             position--;
         }
-        imageSwitcher.setImageResource(gallery[position]);
+
+        if(imagenes_slider_drawable.size() > position) {
+            imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
+            Log.e("Imagenes Del Objeto",imagenes_slider.get(position));
+        }
+        else {
+            try {
+                Log.e("Imagenes Galeria",imagenes_slider.get(position));
+                Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
+                if (img != null) {
+                    BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
+                    imagenes_slider_drawable.add(bmDraw);
+                    imageSwitcher.setImageDrawable(bmDraw);
+
+                }
+                else
+                    imageSwitcher.setImageResource(R.drawable.noimage);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+        }
+
 
     }
 
     public void fwdSlider(View button) {
         position++;
-        if (position == gallery.length) {
+        if (position == imagenes_slider.size()) {
             position = 0;
         }
-        imageSwitcher.setImageResource(gallery[position]);
-        // position++;
-        // if (position == imagenes_slider.size()) {
-        //     position = 0;
-        // }
-        // Uri imgUri = Uri.parse(imagenes_slider.get(position));
-        // imageSwitcher.setImageURI(imgUri);
+        if(imagenes_slider_drawable.size() > position) {
+            imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
+            Log.e("Imagenes Del Objeto",imagenes_slider.get(position));
+        }
+        else {
+            try {
+                Log.e("Position",""+position);
+                Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
+                if (img != null) {
+                    BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
+                    imagenes_slider_drawable.add(bmDraw);
+                    imageSwitcher.setImageDrawable(bmDraw);
+
+                }
+                else
+                    imageSwitcher.setImageResource(R.drawable.noimage);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     // Stops the slider when the Activity is going into the background
