@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -206,11 +207,16 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUC);
                         if (noticiafecha != null)
                             noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        noticiafecha.setTypeface(tfl);
 
                         TextView noticiatitulo = (TextView) activity.findViewById(R.id.titUC);
 
                         if (noticiatitulo != null)
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
+
+                        noticiatitulo.setTypeface(tf);
 
                         TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUC);
 
@@ -235,6 +241,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                     if (texto_superior_entrada != null)
                         texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
 
+
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.comunicadotitulo);
 
                     if (texto_inferior_entrada != null)
@@ -250,18 +257,26 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         String ix = "IX";
                         String cm = "CM";
                         String todos = ((Lista_Entrada) entrada).get_contenido();
+                        //Toast toast = Toast.makeText(view.getContext(), todos + texto_tipo, Toast.LENGTH_SHORT);
+                        //toast.show();
 
+
+                        //Toast.makeText(view.getContext(), todos , Toast.LENGTH_SHORT).show();
                         if(todos.compareTo(tp)==0 ){
                             texto_tipo.setText("TIPS");
+
                         }
                         if(todos.compareTo(in)==0 ){
                             texto_tipo.setText("INFOGRAFIA");
+
                         }
                         if(todos.compareTo(ix)==0 ){
                             texto_tipo.setText("INFORMACION");
+
                         }
                         if(todos.compareTo(cm)==0 ){
                             texto_tipo.setText("COMPARTE");
+
                         }
 
 //                        texto_tipo.setText(((Lista_Entrada) entrada).get_contenido());

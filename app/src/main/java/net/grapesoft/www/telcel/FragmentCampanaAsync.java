@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -134,6 +135,9 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
                     String contenido = responseArray.getJSONObject(i).get("contenido").toString();
                     String fecha = responseArray.getJSONObject(i).get("fecha").toString();
 
+
+
+
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
@@ -146,7 +150,12 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
                     {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+
+                        datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,tipo));
+
+
+
+
 
                 }
             }
@@ -185,9 +194,21 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
                             fecha_campana.setText(((Lista_Entrada) entrada).get_fecha());
 
                         TextView titulo_campana = (TextView) activity.findViewById(R.id.titCM);
-
-                        if (titulo_campana != null)
+                        Integer conteo = 0;
+                        conteo = ((Lista_Entrada) entrada).get_titulo().length();
+                        if (titulo_campana != null && conteo <=40){
                             titulo_campana.setText(((Lista_Entrada) entrada).get_titulo());
+                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                            titulo_campana.setTypeface(tf);
+                        }else{
+                            titulo_campana.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30)+ "...");
+                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                            titulo_campana.setTypeface(tf);
+                        }
+
+
 
                         TextView descripcion_campana = (TextView) activity.findViewById(R.id.descCM);
                         if (descripcion_campana != null) {
@@ -214,8 +235,20 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
 
                     TextView campanaTitulo = (TextView) view.findViewById(R.id.tituloCampanaL);
 
-                    if (campanaTitulo != null)
+                    Integer conteo = 0;
+                    conteo = ((Lista_Entrada) entrada).get_titulo().length();
+                    if (campanaTitulo != null && conteo <=40){
                         campanaTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        campanaTitulo.setTypeface(tf);
+                    }else{
+                        campanaTitulo.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30) + "...");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        campanaTitulo.setTypeface(tf);
+                    }
+
 
                     view.setTag(entrada);
 

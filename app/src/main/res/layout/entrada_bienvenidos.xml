@@ -73,6 +73,7 @@
                             android:padding="10dp"
                             android:id="@+id/txtDescripcion"
                             android:text="00.00.00"
+                            android:textColor="@color/ColorPrimary"
                             android:textAlignment="center" />
 
 

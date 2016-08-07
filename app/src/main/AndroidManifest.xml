@@ -366,7 +366,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".bienvenidos" />
-        <activity android:name=".activity_detalle_comunicados_imagen"></activity>
+        <activity android:name=".activity_detalle_comunicados_imagen" />
+        <activity android:name=".activity_detalle_campana_imagen"></activity>
     </application>
 
 </manifest>

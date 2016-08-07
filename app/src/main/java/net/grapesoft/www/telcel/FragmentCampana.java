@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,15 +52,31 @@ public class FragmentCampana extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-
-                Intent i = new Intent(getActivity(), activity_detalle_campana.class);
+                Intent i = new Intent(getActivity(), activity_detalle_campana_imagen.class);
+                Intent p = new Intent(getActivity(), activity_detalle_campana.class);
                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
-                i.putExtra("imagen",Entrada.get_img_detalle());
-                i.putExtra("titulo",Entrada.get_titulo());
-                i.putExtra("descripcion",Entrada.get_textoDebajo());
+                String nada ="I";
+                String todo = Entrada.get_tipo();
 
-                startActivity(i);
+                Toast toast2 = Toast.makeText(getActivity(), nada + todo, Toast.LENGTH_SHORT);
+                toast2.show();
+
+                if( todo.compareTo("I")==0 ) {
+
+                    i.putExtra("imagen", Entrada.get_img_detalle());
+
+                    startActivity(i);
+
+                }else{
+                    p.putExtra("imagen",Entrada.get_img_detalle());
+                    p.putExtra("titulo",Entrada.get_titulo());
+                    p.putExtra("descripcion",Entrada.get_textoDebajo());
+
+                    startActivity(p);
+                }
+
+
 
 
             }

@@ -16,24 +16,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.GetNetImage;
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
-public class activity_detalle_campana extends AppCompatActivity
+public class activity_detalle_campana_imagen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     SessionManagement session;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_campana);
+        setContentView(R.layout.activity_detalle_campana_imagen);
         Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
         Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
+
         TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null) {
             breadcrumComunicado.setText("COMUNICACIÓN INTERNA > CAMPAÑAS INTERNAS");
@@ -43,13 +45,13 @@ public class activity_detalle_campana extends AppCompatActivity
             breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(activity_detalle_campana.this, ComunicacionInternaActivity.class);
+                    Intent i = new Intent(activity_detalle_campana_imagen.this, ComunicacionInternaActivity.class);
                     i.putExtra("direccion","2");
                     startActivity(i);
                 }
             });
-        }
 
+        }
         session = new SessionManagement(getApplicationContext());
 
         String imagen = getIntent().getStringExtra("imagen");
@@ -90,7 +92,7 @@ public class activity_detalle_campana extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(activity_detalle_campana.this, MainActivity.class);
+                Intent i = new Intent(activity_detalle_campana_imagen.this, MainActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
@@ -116,7 +118,7 @@ public class activity_detalle_campana extends AppCompatActivity
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(activity_detalle_campana.this, triviasActivity.class);
+                Intent i = new Intent(activity_detalle_campana_imagen.this, triviasActivity.class);
                 startActivity(i);
             }
         });
@@ -166,12 +168,12 @@ public class activity_detalle_campana extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(activity_detalle_campana.this, ActualizarActivity.class);
+            Intent i = new Intent(activity_detalle_campana_imagen.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_detalle_campana.this, pin.class);
+            Intent i = new Intent(activity_detalle_campana_imagen.this, pin.class);
             startActivity(i);
 
 

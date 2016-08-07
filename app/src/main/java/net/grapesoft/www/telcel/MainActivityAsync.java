@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -443,18 +444,23 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         if (homeTitulo != null)
                             homeTitulo.setText("Prestaciones > Promociones");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
 
-                   // view.setOnClickListener(new View.OnClickListener() {
+                    view.setOnClickListener(new View.OnClickListener() {
 
-                   //     @Override
-                   //     public void onClick(View arg0) {
+                       @Override
+                       public void onClick(View arg0) {
 
-                   //         Intent i = new Intent(activity, ComunicacionInternaActivity.class);
-                   //         i.putExtra("direccion","1");
-                   //         activity.startActivity(i);
+                           Intent i = new Intent(activity, PromocionesActivity.class);
+                           i.putExtra("direccion","1");
+                           activity.startActivity(i);
 
-                   //     }
-                   // });
+                        }
+                    });
+
+
 
 
                     } else if (seccion.equals("revista")) {
@@ -463,6 +469,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         if (homeTitulo != null)
                             homeTitulo.setText("Comunicación Interna > Revista");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
 
                         view.setOnClickListener(new View.OnClickListener() {
 
@@ -482,6 +491,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         if (homeTitulo != null)
                             homeTitulo.setText("Productos y Servicios > SVA");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
 
                         view.setOnClickListener(new View.OnClickListener() {
 
@@ -500,6 +512,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         if (homeTitulo != null)
                             homeTitulo.setText("Comunicación Interna > Grupo Carso");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
 
                         view.setOnClickListener(new View.OnClickListener() {
 
@@ -516,6 +531,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
                             homeTitulo.setText("Comunicación Interna > Campañas Internas");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
@@ -530,6 +548,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
                             homeTitulo.setText("Productos y Servicios > Campaña Publicitaria");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
@@ -543,6 +564,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
                             homeTitulo.setText("Comunicación Interna > Noticias");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
@@ -557,6 +581,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
                             homeTitulo.setText("Comunicación Interna > Comunicados");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
@@ -571,6 +598,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
                             homeTitulo.setText("Comunicación Interna > Videos");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        homeTitulo.setTypeface(tfl);
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
@@ -593,18 +623,28 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             TextView homeDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
                             if (homeDescripcion != null)
                                 homeDescripcion.setText(((Lista_Entrada) entrada).get_duracion());
+                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                            homeDescripcion.setTypeface(tf);
                         }else if(seccion.equals("revista")) {
 
                             TextView homeDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
                             if (homeDescripcion != null) {
                                 homeDescripcion.setText(((Lista_Entrada)entrada).get_titulo());
+                                Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                                Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                                homeDescripcion.setTypeface(tf);
                               //  homeDescripcion.setVisibility(View.GONE);
                             }
                         }else
                         {
+
                             TextView homeDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
                             if (homeDescripcion != null)
-                                homeDescripcion.setText(Html.fromHtml(((Lista_Entrada) entrada).get_textoDebajo()));
+                                homeDescripcion.setText(Html.fromHtml(((Lista_Entrada) entrada).get_titulo()));
+                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                            homeDescripcion.setTypeface(tf);
                         }
                     }
                 }
