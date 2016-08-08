@@ -140,28 +140,31 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                         String url = responseArray.getJSONObject(i).get("url").toString();
                         String texto = responseArray.getJSONObject(i).get("texto").toString();
 
+                        JSONArray imagenes_slide;
                         if(i+1 < responseArray.length()){
                             idSiguiente = responseArray.getJSONObject(i+1).get("id").toString();
                             tituloSig = responseArray.getJSONObject(i+1).get("titulo").toString();
                             imagenSig = responseArray.getJSONObject(i+1).get("img_previa").toString();
                             textoSig = responseArray.getJSONObject(i+1).get("texto").toString();
+
                         }else
                         {
                             idSiguiente = responseArray.getJSONObject(0).get("id").toString();
                             tituloSig = responseArray.getJSONObject(0).get("titulo").toString();
                             imagenSig = responseArray.getJSONObject(0).get("img_previa").toString();
                             textoSig = responseArray.getJSONObject(0).get("texto").toString();
+
                         }
 
-                        JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+                        imagenes_slide = responseArray.getJSONObject(i).getJSONArray("imagenes_slide");
                         // String imagenes_slide_Json = responseArray.getJSONObject(0).getJSONArray("imagenes_slide").toString();
 
                         ArrayList<String> imagenes_slider = new ArrayList<String>();
 
-
                         for (int ii = 0; ii < imagenes_slide.length(); ii++) {
 
                             imagenes_slider.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
+                            Log.e("galeria " + i +" " + ii,imagenes_slide.getJSONObject(ii).get("url_img").toString());
                         }
 
                         URL imageUrl = null;
