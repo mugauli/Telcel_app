@@ -34,7 +34,8 @@ public class Lista_Entrada {
             idSiguiente,
             tituloSig,
             imagenSig,
-            textoSig ;
+            textoSig,
+            preguntas;
 
     private JSONArray  json;
 
@@ -178,6 +179,16 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.img_detalle = img_detalle;
     }
+
+    public Lista_Entrada (String id,String titulo, String tipo,String textoDebajo,String img_detalle,String preguntas) {
+
+        this.id = id;
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.textoDebajo = textoDebajo;
+        this.img_detalle = img_detalle;
+        this.preguntas = preguntas;
+    }
     //Home
     public Lista_Entrada (String seccion,String id,Bitmap img_previa,String titulo, String url,String duracion, int idImagen2) {
 
@@ -317,6 +328,9 @@ public class Lista_Entrada {
     public String get_tituloSig() { return tituloSig; }
     public String get_textoSig() {
         return textoSig;
+    }
+    public String get_preguntas() {
+        return preguntas;
     }
 
 }

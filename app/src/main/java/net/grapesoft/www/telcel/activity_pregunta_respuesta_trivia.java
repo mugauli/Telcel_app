@@ -99,36 +99,28 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             });
         }
 
-        final String pregunta = getIntent().getExtras().getString("pregunta","No hay pregunta del día");
-        String result2 = getIntent().getExtras().getString("json","0");
 
-        final TextView txtPreguntaTrivia = (TextView)findViewById(R.id.txtPregunta);
-        if(txtPreguntaTrivia!= null )
-        {
-            txtPreguntaTrivia.setText(pregunta);
-        }
+        //i.putExtra("preguntas", entrada.get_preguntas());
+        //i.putExtra("preguntasPosicion", "0");
+        //i.putExtra("puntos","0");
+      //  final String pregunta = getIntent().getExtras().getString("pregunta","No hay pregunta del día");
+
+        String preguntasJSON = getIntent().getExtras().getString("preguntas","0");
+        String preguntasPosicion = getIntent().getExtras().getString("preguntasPosicion","0");
+        String puntos = getIntent().getExtras().getString("puntos","0");
 
         try {
-            if (result2.equals("true" + "\n")) {
-                // Log.e("Response: ", "true Int");
+            //Log.e("Response: ", "JSON");
+            if (preguntasJSON.substring(0,3).contains("["))
+                responseArray2 = new JSONArray(preguntasJSON);
+            else
+                responseArray2 = new JSONArray("[" + preguntasJSON + "]");
 
-                responseArray2 = new JSONArray("[{'resp':'true'}]");
-
-            } else if (result2.equals("false" + "\n")) {
-                //Log.e("Response: ", "false int");
-                responseArray2 = new JSONArray("[{'resp':'false'}]");
-            } else {
-                //Log.e("Response: ", "JSON");
-                if (result2.contains("["))
-                    responseArray2 = new JSONArray(result2);
-                else
-                    responseArray2 = new JSONArray("[" + result2 + "]");
-            }
             if (responseArray2.getJSONObject(0).has("resp")) {
-                Log.e("Item Preguntas", "Error");
+                Log.e("Item Preguntas_Trivias", "Error");
 
             } else if (responseArray2.getJSONObject(0).has("error")) {
-                Log.e("Item Preguntas", "Error");
+                Log.e("Item Preguntas_Trivias", "Error");
             } else {
                 if (responseArray2.length() > 0) {
 
@@ -136,6 +128,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
 
                     String idPreg = responseArray2.getJSONObject(0).get("id").toString();
                     String preguntaPreg = responseArray2.getJSONObject(0).get("pregunta").toString();
+                    String img_previa = responseArray2.getJSONObject(0).get("img_previa").toString();
                     JSONArray respuestas = responseArray2.getJSONObject(0).getJSONArray("respuestas");
                     String RespuestaCorrecta = "";
 
@@ -152,24 +145,23 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                         String idResp = respuestas.getJSONObject(i).get("idResp").toString();
                         String txtRespuesta = respuestas.getJSONObject(i).get("txtRespuesta").toString();
                         String valRespuesta = respuestas.getJSONObject(i).get("valRespuesta").toString();
-                       // preguntas.add(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
+                        // preguntas.add(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
 
-                        if(valRespuesta.equals("1")) {
+                        if (valRespuesta.equals("1")) {
 
                             RespuestaCorrecta = txtRespuesta;
-                            Log.e("RespuestaCorrecta",RespuestaCorrecta);
+                            Log.e("RespuestaCorrecta", RespuestaCorrecta);
                         }
 
                         RadioButton btn1 = new RadioButton(this);
                         btn1.setText(txtRespuesta);
-                        btn1.setTag(new PreguntaElement(idResp,txtRespuesta,valRespuesta));
+                        btn1.setTag(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
                         group.addView(btn1);
 
                     }
 
                     TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
-                    if(btnEnviar!= null)
-                    {
+                    if (btnEnviar != null) {
                         final String finalRespuestaCorrecta = RespuestaCorrecta;
 
 
@@ -177,10 +169,10 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                             @Override
                             public void onClick(View v) {
 
-                                TextView txtError = (TextView)findViewById(R.id.txtError);
+                                TextView txtError = (TextView) findViewById(R.id.txtError);
                                 int radioButtonID = group.getCheckedRadioButtonId();
-                                Log.e("elegido",""+radioButtonID);
-                                if(radioButtonID != -1) {
+                                Log.e("elegido", "" + radioButtonID);
+                                if (radioButtonID != -1) {
                                     txtError.setText("");
                                     View radioButton = group.findViewById(radioButtonID);
                                     RadioButton rb = (RadioButton) radioButton;
@@ -191,15 +183,15 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
 
                                     Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_respuesta.class);
                                     i.putExtra("val", element.get_valRespuesta());
-                                    i.putExtra("pregunta", pregunta.toString());
                                     i.putExtra("respuesta", finalRespuestaCorrecta.toString());
+                                    //i.putExtra("preguntas", entrada.get_preguntas());
+                                    //i.putExtra("preguntasPosicion", "0");
+                                    //i.putExtra("puntos","0");
                                     startActivity(i);
                                     finish();
 
-                                }
-                                else
-                                {
-                                  txtError.setText("Debe seleccionar una respuesta.");
+                                } else {
+                                    txtError.setText("Debe seleccionar una respuesta.");
                                 }
 
                             }

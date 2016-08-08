@@ -149,26 +149,27 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                 Log.e("Se obtiene Trivias","Procesando...");
 
-                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-                HttpClient httpclient = new DefaultHttpClient();
-
-                HttpPost httppost = new HttpPost(IP + params[0].get(1));
-                nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
-                nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-                Log.e("IP", IP + params[0].get(1));
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
-                StringBuilder sb = new StringBuilder();
-                sb.append(reader.readLine() + "\n");
-                String line = "0";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                reader.close();
-                result11 = sb.toString();
+            //    List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+            //    HttpClient httpclient = new DefaultHttpClient();
+//
+            //    HttpPost httppost = new HttpPost(IP + params[0].get(1));
+            //    nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
+            //    nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
+            //    httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+            //    Log.e("IP", IP + params[0].get(1));
+            //    // Execute HTTP Post Request
+            //    HttpResponse response = httpclient.execute(httppost);
+//
+            //    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+            //    StringBuilder sb = new StringBuilder();
+            //    sb.append(reader.readLine() + "\n");
+            //    String line = "0";
+            //    while ((line = reader.readLine()) != null) {
+            //        sb.append(line + "\n");
+            //    }
+            //    reader.close();
+            //    result11 = sb.toString();
+                result11= "[{\"id\":\"1\",\"texto\":\"\",\"tipo\":\"C\",\"titulo\":\"Cruz Azul vs. Pumas\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\"},{\"id\":\"2\",\"texto\":\"\",\"tipo\":\"T\",\"titulo\":\"Trivia de prueba\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\",\"preguntas\":[{\"id\":\"1\",\"pregunta\":\"Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 1\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 1\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 1\",\"valRespuesta\":\"0\"}]},{\"id\":\"2\",\"pregunta\":\"Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 2\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 2\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 2\",\"valRespuesta\":\"0\"}]},{\"id\":\"3\",\"pregunta\":\"Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 3\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 3\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 3\",\"valRespuesta\":\"0\"}]}]}]\n";
 
 
                 session.createTriviasSession(result11);
@@ -212,20 +213,13 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                     String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
                     String tipo = responseArray.getJSONObject(i).get("tipo").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
-
-                    URL imageUrl = null;
-                    imageUrl = new URL(imageHttpAddress + img_previa);
-                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                    try {
-                        conn.connect();
-                        loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                        conn.disconnect();
-                    }
-                    catch (FileNotFoundException e)
+                    String preguntas = "0";
+                    if(tipo.equals("T"))
                     {
-                        loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                        preguntas = responseArray.getJSONObject(i).getJSONArray("preguntas").toString();
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,tipo,texto,0,img_previa));
+
+                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_previa,preguntas));
                 }
             }
 
@@ -256,8 +250,17 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                     ImageView imagen_trivias = (ImageView) view.findViewById(R.id.imagetrivia);
                     if (imagen_trivias != null) {
-                        Log.e("imagen", "pricipal");
-                        imagen_trivias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                        if(((Lista_Entrada)entrada).get_tipo().equals("T"))
+                        {
+                            Log.e("imagen", "trivias");
+                            //imagen_trivias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                            imagen_trivias.setImageResource(R.drawable.trivia);
+                        }else
+                        {
+                            imagen_trivias.setImageResource(R.drawable.concurso);
+                        }
+
+
                     }
 
                     TextView titulo_trivias = (TextView) view.findViewById(R.id.triviatitulo);
@@ -280,13 +283,25 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                             Lista_Entrada entrada = (Lista_Entrada)arg0.getTag();
 
-                            Intent i = new Intent(activity, activity_detalle_trivia.class);
+                            if(entrada.get_tipo().equals("C")) {
 
-                            i.putExtra("imagen",entrada.get_img_detalle());
-                            i.putExtra("titulo",entrada.get_titulo());
-                            i.putExtra("descripcion",entrada.get_textoDebajo());
+                                Intent i = new Intent(activity, activity_detalle_trivia.class);
 
-                            activity.startActivity(i);
+                                i.putExtra("imagen", entrada.get_img_detalle());
+                                i.putExtra("titulo", entrada.get_titulo());
+                                i.putExtra("descripcion", entrada.get_textoDebajo());
+
+                                activity.startActivity(i);
+                            }else
+                            {
+                                Intent i = new Intent(activity, activity_pregunta_respuesta_trivia.class);
+
+                                i.putExtra("preguntas", entrada.get_preguntas());
+                                i.putExtra("preguntasPosicion", "0");
+                                i.putExtra("puntos","0");
+
+                                activity.startActivity(i);
+                            }
                         }
                     });
 
