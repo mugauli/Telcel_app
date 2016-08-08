@@ -37,9 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Utitilies.List_adapted;
-import Utitilies.List_adapted_Noticias;
 import Utitilies.Lista_Entrada;
-import Utitilies.PreguntaElement;
 import Utitilies.SessionManagement;
 
 /**
@@ -282,7 +280,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                             Lista_Entrada entrada = (Lista_Entrada)arg0.getTag();
 
-                            Intent i = new Intent(activity, activity_detalle_triviaC.class);
+                            Intent i = new Intent(activity, activity_detalle_trivia.class);
 
                             i.putExtra("imagen",entrada.get_img_detalle());
                             i.putExtra("titulo",entrada.get_titulo());

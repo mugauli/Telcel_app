@@ -296,7 +296,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity_detalle_triviaC"
+            android:name=".activity_detalle_trivia"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
