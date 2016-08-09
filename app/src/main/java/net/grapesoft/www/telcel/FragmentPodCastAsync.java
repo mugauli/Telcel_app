@@ -260,7 +260,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
 
             Log.e("URL audio", path);
-            Uri data = Uri.parse(path);
+            Uri data = Uri.parse(path.replace(" ","%20"));
             intent.setDataAndType(data, "audio/mp3");
             activity.startActivity(intent);
         } catch (Exception e) {
