@@ -130,7 +130,8 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
             }
             else {
                 if(responseArray.length() > 0) {
-                    String idSiguiente = "0",imagenSig="",tituloSig = "",textoSig ="";
+                     int idSiguiente = 0;
+                    String imagenSig="",tituloSig = "",textoSig ="";
 
                     for (int i = 0; i < responseArray.length(); i++) {
                         //Log.e("Item Galeria" ,  responseArray.getJSONObject(i).toString());
@@ -140,30 +141,16 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                         String url = responseArray.getJSONObject(i).get("url").toString();
                         String texto = responseArray.getJSONObject(i).get("texto").toString();
 
-                        if(i+1 < responseArray.length()){
-                            idSiguiente = responseArray.getJSONObject(i+1).get("id").toString();
-                            tituloSig = responseArray.getJSONObject(i+1).get("titulo").toString();
-                            imagenSig = responseArray.getJSONObject(i+1).get("img_previa").toString();
-                            textoSig = responseArray.getJSONObject(i+1).get("texto").toString();
+                        if(i+1 == responseArray.length()){
+                            idSiguiente = Integer.parseInt(responseArray.getJSONObject(0).get("id").toString());
+
                         }else
                         {
-                            idSiguiente = responseArray.getJSONObject(0).get("id").toString();
-                            tituloSig = responseArray.getJSONObject(0).get("titulo").toString();
-                            imagenSig = responseArray.getJSONObject(0).get("img_previa").toString();
-                            textoSig = responseArray.getJSONObject(0).get("texto").toString();
+                            idSiguiente = Integer.parseInt(responseArray.getJSONObject(i+1).get("id").toString());
+
                         }
 
-                        JSONArray imagenes_slide = responseArray.getJSONObject(i).getJSONArray("imagenes_slide");
-                        // String imagenes_slide_Json = responseArray.getJSONObject(0).getJSONArray("imagenes_slide").toString();
 
-                        ArrayList<String> imagenes_slider = new ArrayList<String>();
-
-
-                        for (int ii = 0; ii < imagenes_slide.length(); ii++) {
-
-                            imagenes_slider.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
-                            Log.e("Objeto " + i + " " + ii + " " + id,imagenes_slide.getJSONObject(ii).get("url_img").toString());
-                        }
 
                         URL imageUrl = null;
                         imageUrl = new URL(imageHttpAddress + img_previa);
@@ -176,7 +163,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                         } catch (FileNotFoundException e) {
                             loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                         }
-                        datos.add(new Lista_Entrada(id, loadedImage, titulo, url, texto, imagenes_slider,result11,idSiguiente,tituloSig,imagenSig,textoSig));
+                        datos.add(new Lista_Entrada(id, loadedImage, titulo, url, texto,result11,idSiguiente));
 
                     }
                 }

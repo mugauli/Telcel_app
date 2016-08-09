@@ -55,15 +55,8 @@ public class FragmentGaleria  extends Fragment {
                 Intent i = new Intent(getActivity(), activity_detalle_galeria.class);
                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
-            //    i.putExtra("imagen",Entrada.get_img_previa());
-                i.putExtra("titulo",Entrada.get_titulo());
-                i.putExtra("descripcion",Entrada.get_textoDebajo());
-                i.putStringArrayListExtra("imagenes_slider",Entrada.get_imagenesSlide());
                 i.putExtra("json",Entrada.get_jsonStr());
-                i.putExtra("idSiguiente",Entrada.get_idSiguiente());
-                i.putExtra("imagenSig",Entrada.get_imagenSig());
-                i.putExtra("tituloSig",Entrada.get_titulo());
-                i.putExtra("textoSig",Entrada.get_textoSig());
+                i.putExtra("idSiguiente",""+Entrada.get_idSiguiente());
 
 
                 startActivity(i);

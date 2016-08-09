@@ -54,23 +54,15 @@ public class activity_detalle_galeria extends AppCompatActivity
     //Slider
 
     private ImageSwitcher imageSwitcher;
-
     private int[] gallery = { R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f };
-
     private ArrayList<String> imagenes_slider = new ArrayList<String>();
-
     private ArrayList<Drawable> imagenes_slider_drawable = new ArrayList<Drawable>();
-
     private int position = 0,descargado=0;
-
     private static final Integer DURATION = 5000;
-
     private Timer timer = null;
-
-    private String idSiguiente2;
-
+    private String idSiguiente2 = "0";
+    private String idSiguienteR;
     private boolean soloUna = true,soloUna2 = false,soloUna3 = true;
-
     //Slider End
 
 
@@ -124,55 +116,107 @@ public class activity_detalle_galeria extends AppCompatActivity
         Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         imageSwitcher.setInAnimation(fadeIn);
         imageSwitcher.setOutAnimation(fadeOut);
-        soloUna = true;
-        soloUna2 = false;
-        soloUna3 = true;
-        startSlider();
+
 
         //Slider
 
         session = new SessionManagement(getApplicationContext());
 
-        //String imagen = getIntent().getStringExtra("imagen");
-        imagenes_slider = getIntent().getStringArrayListExtra("imagenes_slider");
 
-        String titulo = getIntent().getStringExtra("titulo");
-        String descripcion = getIntent().getStringExtra("descripcion");
         final String jsonSiguiente = getIntent().getStringExtra("json");
         idSiguiente2 = getIntent().getStringExtra("idSiguiente");
 
-        String imgS = getIntent().getStringExtra("imagenSig");
-        String textoS = getIntent().getStringExtra("textoSig");
-        String tituloS = getIntent().getStringExtra("tituloSig");
-
-
-        TextView txtTituloSiguiente =  (TextView) findViewById(R.id.txtTituloSiguiente);
-        txtTituloSiguiente.setText(tituloS);
-        TextView  txtDuracionSiguente  = (TextView) findViewById(R.id.txtDuracionSiguente);
-        txtDuracionSiguente.setText(Html.fromHtml(textoS));
-
-        ImageView imagenGaleriaSiguiente = (ImageView) findViewById(R.id.imagenGaleriaSiguiente);
 
         try {
-            Bitmap img = new GetNetImage().execute(imgS).get();
-            if(img != null)
-                imagenGaleriaSiguiente.setImageBitmap(img);
+            JSONArray responseArray = null;
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+
+            if (jsonSiguiente.contains("["))
+                responseArray = new JSONArray(jsonSiguiente);
+            else
+                responseArray = new JSONArray("[" + jsonSiguiente + "]");
+
+            if (responseArray.getJSONObject(0).has("resp")) {
+                Log.e("Item Galeria", "Error");
+            } else {
+
+                if (responseArray.length() > 0) {
+                    Log.e("Item Galeria JSON siguiente", idSiguiente2);
+                    String idSiguiente = "0", tituloSig = "", imagenSig = "", textoSig = "";
+                    for (int i = 0; i < responseArray.length(); i++) {
+                        String id = responseArray.getJSONObject(i).get("id").toString();
+                        if (id.equals(idSiguiente2)) {
+
+                            Log.e("Idsiguiente2", id + " " + idSiguiente2);
+
+                            String titulo1 = responseArray.getJSONObject(i).get("titulo").toString();
+                            String texto = responseArray.getJSONObject(i).get("texto").toString();
+                            JSONArray imagenes_slide = responseArray.getJSONObject(i).getJSONArray("imagenes_slide");
+
+                            if (i+1 == responseArray.length()) {
+                                idSiguiente = responseArray.getJSONObject(0).get("id").toString();
+                                tituloSig = responseArray.getJSONObject(0).get("titulo").toString();
+                                imagenSig = responseArray.getJSONObject(0).get("img_previa").toString();
+                                textoSig = responseArray.getJSONObject(0).get("texto").toString();
+
+                            } else {
+                                idSiguiente = responseArray.getJSONObject(i + 1).get("id").toString();
+                                tituloSig = responseArray.getJSONObject(i + 1).get("titulo").toString();
+                                imagenSig = responseArray.getJSONObject(i + 1).get("img_previa").toString();
+                                textoSig = responseArray.getJSONObject(i + 1).get("texto").toString();
+
+                            }
+
+
+                            ArrayList<String> imagenes_slider1 = new ArrayList<String>();
+
+                            for (int ii = 0; ii < imagenes_slide.length(); ii++) {
+
+                                imagenes_slider1.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
+                            }
+
+                            Log.e("Imagenes", imagenes_slide.toString());
+//                                            Log.e("Prubea", idSiguiente2 + " " + idSiguiente);
+
+
+                            TextView txtTituloSiguiente =  (TextView) findViewById(R.id.txtTituloSiguiente);
+                            txtTituloSiguiente.setText(tituloSig);
+                            TextView  txtDuracionSiguente  = (TextView) findViewById(R.id.txtDuracionSiguente);
+                            txtDuracionSiguente.setText(Html.fromHtml(textoSig));
+                            ImageView imagenGaleriaSiguiente = (ImageView) findViewById(R.id.imagenGaleriaSiguiente);
+
+                            idSiguienteR = idSiguiente;
+                            imagenes_slider = imagenes_slider1;
+
+                            try {
+                                Bitmap img = new GetNetImage().execute(imagenSig).get();
+                                if(img != null)
+                                    imagenGaleriaSiguiente.setImageBitmap(img);
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            }
+                            TextView titUG = (TextView) findViewById(R.id.titDNT);
+                            TextView descUG = (TextView) findViewById(R.id.descDNT);
+
+                            titUG.setText(titulo1);
+                            if(descUG != null)
+                                descUG.setText(Html.fromHtml(texto));
+
+                        }
+                    }
+                    //idSiguiente2 =  idSiguiente;
+                }
+            }
+
+            startSlider();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        TextView titUG = (TextView) findViewById(R.id.titDNT);
-        TextView descUG = (TextView) findViewById(R.id.descDNT);
-
-        titUG.setText(titulo);
-        if(descripcion != null)
-        descUG.setText(Html.fromHtml(descripcion));
-
-
-       // Log.e("Numero de Imagenes Galeria detalle", ": " + imagenes_slider.size());
+        // Log.e("Numero de Imagenes Galeria detalle", ": " + imagenes_slider.size());
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -226,82 +270,12 @@ public class activity_detalle_galeria extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
 
-                        try {
-                            JSONArray responseArray = null;
+                    Intent intent = new Intent(activity_detalle_galeria.this, activity_detalle_galeria.class);
+                    intent.putExtra("json", jsonSiguiente);
+                    intent.putExtra("idSiguiente", idSiguienteR);
+                    startActivity(intent);
 
-
-                            if (jsonSiguiente.contains("["))
-                                responseArray = new JSONArray(jsonSiguiente);
-                            else
-                                responseArray = new JSONArray("[" + jsonSiguiente + "]");
-
-                            if (responseArray.getJSONObject(0).has("resp")) {
-                                Log.e("Item Galeria", "Error");
-                            } else {
-
-                                if (responseArray.length() > 0) {
-                                    Log.e("Item Galeria JSON siguiente", idSiguiente2);
-                                    String idSiguiente = "0", tituloSig = "", imagenSig = "", textoSig = "";
-                                    for (int i = 0; i < responseArray.length(); i++) {
-
-
-                                        String id = responseArray.getJSONObject(i).get("id").toString();
-
-                                        if (id.equals(idSiguiente2)) {
-                                            Log.e("Idsiguiente2", id + " " + idSiguiente2);
-
-                                            String titulo1 = responseArray.getJSONObject(i).get("titulo").toString();
-                                            String texto = responseArray.getJSONObject(i).get("texto").toString();
-                                            JSONArray imagenes_slide;
-
-                                            if ((i + 1) < responseArray.length()) {
-                                                idSiguiente = responseArray.getJSONObject(i + 1).get("id").toString();
-                                                tituloSig = responseArray.getJSONObject(i + 1).get("titulo").toString();
-                                                imagenSig = responseArray.getJSONObject(i + 1).get("img_previa").toString();
-                                                textoSig = responseArray.getJSONObject(i + 1).get("texto").toString();
-                                                imagenes_slide = responseArray.getJSONObject(i+1).getJSONArray("imagenes_slide");
-                                            } else {
-                                                idSiguiente = responseArray.getJSONObject(0).get("id").toString();
-                                                tituloSig = responseArray.getJSONObject(0).get("titulo").toString();
-                                                imagenSig = responseArray.getJSONObject(0).get("img_previa").toString();
-                                                textoSig = responseArray.getJSONObject(0).get("texto").toString();
-                                                imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
-                                            }
-
-
-                                            ArrayList<String> imagenes_slider1 = new ArrayList<String>();
-
-                                            for (int ii = 0; ii < imagenes_slide.length(); ii++) {
-
-                                                imagenes_slider1.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
-                                            }
-
-                                            Log.e("Imagenes", imagenes_slide.toString());
-//                                            Log.e("Prubea", idSiguiente2 + " " + idSiguiente);
-
-                                            Intent intent = new Intent(activity_detalle_galeria.this, activity_detalle_galeria.class);
-//
-                                            intent.putExtra("titulo", titulo1);
-                                            intent.putExtra("descripcion", texto);
-                                            intent.putStringArrayListExtra("imagenes_slider", imagenes_slider1);
-                                            intent.putExtra("json", jsonSiguiente);
-                                            intent.putExtra("idSiguiente", idSiguiente);
-
-                                            intent.putExtra("imagenSig", imagenSig);
-                                            intent.putExtra("tituloSig", tituloSig);
-                                            intent.putExtra("textoSig", textoSig);
-
-                                            startActivity(intent);
-
-                                        }
-                                    }
-                                    //idSiguiente2 =  idSiguiente;
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                }
 
             });
         }
@@ -349,6 +323,7 @@ public class activity_detalle_galeria extends AppCompatActivity
                                 }
                                 Log.e("Position X1", ""+position);
                             }
+                            if(imagenes_slider.size() >0)
                             if (imagenes_slider_drawable.size() > position) {
                                 imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
                                 Log.e("Position 1", ""+position);
