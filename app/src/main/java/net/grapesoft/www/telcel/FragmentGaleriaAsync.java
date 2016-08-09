@@ -133,7 +133,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                     String idSiguiente = "0",imagenSig="",tituloSig = "",textoSig ="";
 
                     for (int i = 0; i < responseArray.length(); i++) {
-                        Log.e("Item Galeria" ,  responseArray.getJSONObject(i).toString());
+                        //Log.e("Item Galeria" ,  responseArray.getJSONObject(i).toString());
                         String id = responseArray.getJSONObject(i).get("id").toString();
                         String titulo = responseArray.getJSONObject(i).get("titulo").toString();
                         String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
@@ -153,7 +153,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                             textoSig = responseArray.getJSONObject(0).get("texto").toString();
                         }
 
-                        JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+                        JSONArray imagenes_slide = responseArray.getJSONObject(i).getJSONArray("imagenes_slide");
                         // String imagenes_slide_Json = responseArray.getJSONObject(0).getJSONArray("imagenes_slide").toString();
 
                         ArrayList<String> imagenes_slider = new ArrayList<String>();
@@ -162,6 +162,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                         for (int ii = 0; ii < imagenes_slide.length(); ii++) {
 
                             imagenes_slider.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
+                            Log.e("Objeto " + i + " " + ii + " " + id,imagenes_slide.getJSONObject(ii).get("url_img").toString());
                         }
 
                         URL imageUrl = null;

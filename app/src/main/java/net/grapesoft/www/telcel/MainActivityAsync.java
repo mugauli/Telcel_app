@@ -242,7 +242,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         String id = elementos.getJSONObject(0).get("id").toString();
                         String titulo = elementos.getJSONObject(0).get("titulo").toString();
                         String img_previa = elementos.getJSONObject(0).get("img_previa").toString();
-                        String imagen_detalle = elementos.getJSONObject(0).get("img_detalle").toString();
+                        String imagen_detalle = elementos.getJSONObject(0).get("imagen_detalle").toString();
                         String texto = elementos.getJSONObject(0).get("texto").toString();
                         String fecha = elementos.getJSONObject(0).get("fecha").toString();
 
@@ -282,9 +282,6 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha));
                     } else if (seccion.equals("publicitarias")) {
 
-                        Log.e("Response Item Seccion Home: ", seccion);
-                        Log.e("Response Item Seccion Home: ", seccion);
-                        Log.e("Response Item Seccion Home: ", seccion);
                         Log.e("Response Item Seccion Home: ", seccion);
 
                         String id = elementos.getJSONObject(0).get("id").toString();

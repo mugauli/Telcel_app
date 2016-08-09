@@ -135,11 +135,11 @@ public class activity_detalle_galeria extends AppCompatActivity
 
         //String imagen = getIntent().getStringExtra("imagen");
         imagenes_slider = getIntent().getStringArrayListExtra("imagenes_slider");
+
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
         final String jsonSiguiente = getIntent().getStringExtra("json");
-         idSiguiente2 = getIntent().getStringExtra("idSiguiente");
-
+        idSiguiente2 = getIntent().getStringExtra("idSiguiente");
 
         String imgS = getIntent().getStringExtra("imagenSig");
         String textoS = getIntent().getStringExtra("textoSig");
@@ -172,7 +172,7 @@ public class activity_detalle_galeria extends AppCompatActivity
         descUG.setText(Html.fromHtml(descripcion));
 
 
-        Log.e("Numero de Imagenes Galeria detalle", ": " + imagenes_slider.size());
+       // Log.e("Numero de Imagenes Galeria detalle", ": " + imagenes_slider.size());
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -347,6 +347,7 @@ public class activity_detalle_galeria extends AppCompatActivity
                                 if (position == imagenes_slider.size()) {
                                     position = 0;
                                 }
+                                Log.e("Position X1", ""+position);
                             }
                             if (imagenes_slider_drawable.size() > position) {
                                 imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
@@ -373,10 +374,12 @@ public class activity_detalle_galeria extends AppCompatActivity
                             }
                             if (soloUna3) {
                                 soloUna3 = false;
+                                soloUna2 = true;
                                 position++;
                                 if (position == imagenes_slider.size()) {
                                     position = 0;
                                 }
+                                Log.e("Position X2", ""+position);
                             }
 
 
