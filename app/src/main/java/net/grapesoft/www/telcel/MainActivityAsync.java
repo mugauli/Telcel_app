@@ -158,6 +158,9 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         idP = elementos.getJSONObject(0).get("id").toString();
                         tituloP = elementos.getJSONObject(0).get("titulo").toString();
+                        if(tituloP.length() >= 20){
+                            tituloP = tituloP.substring(0,15) + "...";
+                        }
                         img_previaP = elementos.getJSONObject(0).get("img_previa").toString();
                         url_podcastP = elementos.getJSONObject(0).get("url_podcast").toString();
                         duracionP = elementos.getJSONObject(0).get("duracion").toString();
@@ -443,7 +446,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
 
                         if (homeTitulo != null)
-                            homeTitulo.setText("Prestaciones > Promociones");
+                            homeTitulo.setText("  Prestaciones > Promociones");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.beadcrumpres, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -468,7 +472,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
 
                         if (homeTitulo != null)
-                            homeTitulo.setText("Comunicación Interna > Revista");
+                            homeTitulo.setText("  Comunicación Interna > Revista");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -490,7 +495,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
 
                         if (homeTitulo != null)
-                            homeTitulo.setText("Productos y Servicios > SVA");
+                            homeTitulo.setText("  Productos y Servicios > SVA");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadcrumprod, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -511,7 +517,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
 
                         if (homeTitulo != null)
-                            homeTitulo.setText("Comunicación Interna > Grupo Carso");
+                            homeTitulo.setText("  Comunicación Interna > Grupo Carso");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -530,7 +537,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                     } else if (seccion.equals("internas")) {
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
-                            homeTitulo.setText("Comunicación Interna > Campañas Internas");
+                            homeTitulo.setText("  Comunicación Interna > Campañas Internas");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -547,7 +555,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
-                            homeTitulo.setText("Productos y Servicios > Campaña Publicitaria");
+                            homeTitulo.setText("  Productos y Servicios > Campaña Publicitaria");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadcrumprod, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -563,7 +572,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                     } else if (seccion.equals("noticias")) {
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
-                            homeTitulo.setText("Comunicación Interna > Noticias");
+                            homeTitulo.setText("  Comunicación Interna > Noticias");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -580,7 +590,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
-                            homeTitulo.setText("Comunicación Interna > Comunicados");
+                            homeTitulo.setText("  Comunicación Interna > Comunicados");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -597,7 +608,8 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         TextView homeTitulo = (TextView) view.findViewById(R.id.txtTitulo);
                         if (homeTitulo != null)
-                            homeTitulo.setText("Comunicación Interna > Videos");
+                            homeTitulo.setText("  Comunicación Interna > Videos");
+                        homeTitulo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
@@ -673,10 +685,11 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
         ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenPodcast);
         if (imagen_noticias != null) {
             //imagen_noticias.setImageBitmap(loadedImageP);
-            imagen_noticias.setImageResource(R.drawable.iconpodcast);
+            imagen_noticias.setImageResource(R.drawable.podcasthome);
         }
 
         TextView noticiafecha = (TextView) activity.findViewById(R.id.textView_superior);
+
         if (noticiafecha != null)
             noticiafecha.setText(tituloP);
 

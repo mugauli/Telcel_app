@@ -38,8 +38,8 @@ public class activity_detalle_campana_imagen extends AppCompatActivity
 
         TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null) {
-            breadcrumComunicado.setText("COMUNICACIÓN INTERNA > CAMPAÑAS INTERNAS");
-
+            breadcrumComunicado.setText("   COMUNICACIÓN INTERNA > CAMPAÑAS INTERNAS");
+            breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
             breadcrumComunicado.setTypeface(tfl);
 
             breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
@@ -55,28 +55,22 @@ public class activity_detalle_campana_imagen extends AppCompatActivity
         session = new SessionManagement(getApplicationContext());
 
         String imagen = getIntent().getStringExtra("imagen");
-        String titulo = getIntent().getStringExtra("titulo");
-        String descripcion = getIntent().getStringExtra("descripcion");
 
-        ImageView imagenUG = (ImageView) findViewById(R.id.imagenDNT);
-        TextView titUG = (TextView) findViewById(R.id.titDNT);
-        TextView descUG = (TextView) findViewById(R.id.descDNT);
+        TouchImageView vista;
+
+        TouchImageView img2 = (TouchImageView) findViewById(R.id.img);
 
         try {
             Bitmap img = new GetNetImage().execute(imagen).get();
             if(img != null)
-                imagenUG.setImageBitmap(img);
+
+                img2.setImageBitmap(img);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-        titUG.setText(titulo);
-        titUG.setTypeface(tf);
-        if(descripcion != null)
-            descUG.setText(Html.fromHtml(descripcion));
 
         Log.e("Imagen", imagen);
 

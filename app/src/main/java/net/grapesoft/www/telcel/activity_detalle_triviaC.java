@@ -33,7 +33,7 @@ public class activity_detalle_triviaC extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_triviac);
+        setContentView(R.layout.activity_detalle_trivia);
 
         session = new SessionManagement(getApplicationContext());
 

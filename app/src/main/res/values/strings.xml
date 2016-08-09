@@ -137,6 +137,15 @@
     <string name="URL_media"></string>
     <string name="textoTrivias">Si ganas una trivia, no podrás participar hasta dentro de dos trivias. ¡Gracia por tu participación!</string>
     <string name="tituloPregunta">Pregunta del día</string>
+    <!--Interes -->-
+    <string name="aprende">aprende.org</string>
+    <string name="clarom">claromusica.com</string>
+    <string name="clarov">clarovideo.com</string>
+    <string name="salud">clikisalud.net</string>
+    <string name="holatel">holatelcel.com</string>
+    <string name="naturaleza">lanaturalezanosllama.com</string>
+    <string name="racing">telcelracing.com</string>
+    <string name="prox">¡Próximamente!</string>
 
 
 </resources>

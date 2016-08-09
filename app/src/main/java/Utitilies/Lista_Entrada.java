@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Lista_Entrada {
 
     private ArrayList<String> imagenesSlide;
-    private int idImagen,idImagen2,idradio,type;
+    private int idImagen,idImagen2,idradio,type,idImagenDetalle, idImagenA;
     private Bitmap img_previa;
     private SvaElement svaElement1,svaElement2;
     private ArrayList<DescElement> pdf;
@@ -34,6 +34,7 @@ public class Lista_Entrada {
             idSiguiente,
             tituloSig,
             imagenSig,
+
             textoSig ;
 
     private JSONArray  json;
@@ -43,6 +44,14 @@ public class Lista_Entrada {
         this.textoEncima = textoEncima;
         this.textoDebajo = textoDebajo;
     }
+    //sitios de interes
+    public Lista_Entrada (int idImagenA,int idImagen,int idImagenDetalle, String textoDebajo) {
+        this.idImagenA = idImagenA;
+        this.idImagen = idImagen;
+        this.idImagenDetalle = idImagenDetalle;
+        this.textoDebajo = textoDebajo;
+    }
+
 
     public Lista_Entrada (int idImagen, int idImagen2, String textoDebajo) {
         this.idImagen = idImagen;
@@ -318,5 +327,7 @@ public class Lista_Entrada {
     public String get_textoSig() {
         return textoSig;
     }
+    public int get_idImagenDetalle(){return idImagenDetalle; }
+    public int get_idImagenA(){return idImagenA;}
 
 }

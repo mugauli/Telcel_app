@@ -64,6 +64,8 @@
                     android:layout_height="fill_parent"
                     android:id="@+id/txtTitulo"
                     android:layout_weight="80"
+                    android:drawableLeft="@drawable/breadci"
+                    android:drawablePadding="5dp"
                     android:background="@drawable/border_top_revista"
                     android:textColor="@android:color/white"
                     />

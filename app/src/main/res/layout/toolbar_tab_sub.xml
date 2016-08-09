@@ -57,7 +57,7 @@
         android:linksClickable="true"
         android:layout_weight="94"
         android:autoLink="web"
-        android:background="@drawable/border_breadscrum"
+        android:background="@drawable/vead"
         android:textColor="@android:color/white"
         />
 </android.support.design.widget.AppBarLayout>

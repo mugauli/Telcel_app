@@ -52,6 +52,8 @@
                     android:text="Revista prueba 03-06-16 Mariana y Marcos"
                     android:id="@+id/textView2"
                     android:layout_weight="46"
+                    android:drawableLeft="@drawable/breadci"
+                    android:drawablePadding="5dp"
                     android:background="@drawable/border_top_revista"
                     android:textColor="@android:color/white"
                     />
