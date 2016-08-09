@@ -180,7 +180,7 @@ public class activity_detalle_galeria extends AppCompatActivity
 
 
                             TextView txtTituloSiguiente =  (TextView) findViewById(R.id.txtTituloSiguiente);
-                            txtTituloSiguiente.setText(tituloSig);
+                            txtTituloSiguiente.setText(Html.fromHtml(tituloSig));
                             TextView  txtDuracionSiguente  = (TextView) findViewById(R.id.txtDuracionSiguente);
                             txtDuracionSiguente.setText(Html.fromHtml(textoSig));
                             ImageView imagenGaleriaSiguiente = (ImageView) findViewById(R.id.imagenGaleriaSiguiente);
@@ -201,7 +201,7 @@ public class activity_detalle_galeria extends AppCompatActivity
                             TextView titUG = (TextView) findViewById(R.id.titDNT);
                             TextView descUG = (TextView) findViewById(R.id.descDNT);
 
-                            titUG.setText(titulo1);
+                            titUG.setText(Html.fromHtml(titulo1));
                             if(descUG != null)
                                 descUG.setText(Html.fromHtml(texto));
 

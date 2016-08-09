@@ -201,7 +201,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                         TextView galeriaTitulo = (TextView) activity.findViewById(R.id.titUN);
 
                         if (galeriaTitulo != null)
-                            galeriaTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                            galeriaTitulo.setText(Html.fromHtml(((Lista_Entrada) entrada).get_titulo()));
 
                         TextView galeriaDescripcion = (TextView) activity.findViewById(R.id.descUN);
                         if (galeriaDescripcion != null) {
