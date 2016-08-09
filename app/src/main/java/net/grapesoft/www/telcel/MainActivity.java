@@ -211,6 +211,10 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+        Intent intent = new Intent(getApplicationContext(), login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
     }
 
     @Override
