@@ -59,8 +59,8 @@ public class FragmentCampana extends Fragment {
                 String nada ="I";
                 String todo = Entrada.get_tipo();
 
-                Toast toast2 = Toast.makeText(getActivity(), nada + todo, Toast.LENGTH_SHORT);
-                toast2.show();
+                /*Toast toast2 = Toast.makeText(getActivity(), nada +
+                toast2.show();*/
 
                 if( todo.compareTo("I")==0 ) {
 

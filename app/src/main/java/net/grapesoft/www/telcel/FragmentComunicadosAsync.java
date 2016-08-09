@@ -237,15 +237,20 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                     }
 
                     TextView texto_superior_entrada = (TextView) view.findViewById(R.id.comunicadofecha);
-
+                    Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                    Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                     if (texto_superior_entrada != null)
                         texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
+
+                    texto_superior_entrada.setTypeface(tfl);
+
 
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.comunicadotitulo);
 
                     if (texto_inferior_entrada != null)
                         texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
+                    texto_inferior_entrada.setTypeface(tfl);
 
 
 
@@ -264,18 +269,22 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         //Toast.makeText(view.getContext(), todos , Toast.LENGTH_SHORT).show();
                         if(todos.compareTo(tp)==0 ){
                             texto_tipo.setText("TIPS");
+                            texto_tipo.setTypeface(tfl);
 
                         }
                         if(todos.compareTo(in)==0 ){
                             texto_tipo.setText("INFOGRAFIA");
+                            texto_tipo.setTypeface(tfl);
 
                         }
                         if(todos.compareTo(ix)==0 ){
                             texto_tipo.setText("INFORMACION");
+                            texto_tipo.setTypeface(tfl);
 
                         }
                         if(todos.compareTo(cm)==0 ){
                             texto_tipo.setText("COMPARTE");
+                            texto_tipo.setTypeface(tfl);
 
                         }
 

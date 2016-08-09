@@ -286,6 +286,8 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                         TextView tituloSVA2 = (TextView) view.findViewById(R.id.tituloSva2);
                         if (tituloSVA2 != null)
                             tituloSVA2.setText(sva2.get_tituloSva());
+
+
                         LinearLayout linearSva2 =  (LinearLayout) view.findViewById(R.id.linearSva2);
                         if (linearSva2 != null) {
                             linearSva2.setTag(sva2);
@@ -353,13 +355,14 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                                     TextView tituloSVA = (TextView) activity.findViewById(R.id.tituloSVA);
                                     TextView descSVA = (TextView) activity.findViewById(R.id.descSVA);
 
-                                    Lista_Entrada Entrada = (Lista_Entrada) arg0.getTag();
 
-                                    imagenVideo.setImageBitmap(Entrada.get_img_previa());
-                                    tituloSVA.setText(Entrada.get_titulo());
-                                    descSVA.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                                    SvaElement Entrada = (SvaElement) arg0.getTag();
+
+                                    imagenVideo.setImageBitmap(Entrada.get_img_previaSva());
+                                    tituloSVA.setText(Entrada.get_tituloSva());
+                                    descSVA.setText(Html.fromHtml(Entrada.get_textoDebajoSva()));
                                     LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalSva);
-                                    principal.setTag(((Lista_Entrada) Entrada).get_svaelement1());
+                                    principal.setTag(Entrada);
 
                                 }
                             });

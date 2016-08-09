@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,7 +37,12 @@ public class activity_detalle_sva extends AppCompatActivity
 
         TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null) {
-            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > SVA");
+            breadcrumComunicado.setText("  PRODUCTOS Y SERVICIOS > SVA");
+            Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
+            Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
+            breadcrumComunicado.setTypeface(tfl);
+
+            breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadcrumprod, 0, 0, 0);
             breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

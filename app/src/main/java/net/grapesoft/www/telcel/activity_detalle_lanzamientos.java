@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -70,7 +71,12 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
         });
         TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null) {
-            breadcrumComunicado.setText("PRODUCTOS Y SERVICIOS > LANZAMIENTOS");
+            breadcrumComunicado.setText(" PRODUCTOS Y SERVICIOS > LANZAMIENTOS");
+            Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
+            Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
+            breadcrumComunicado.setTypeface(tfl);
+
+            breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadcrumprod, 0, 0, 0);
             breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

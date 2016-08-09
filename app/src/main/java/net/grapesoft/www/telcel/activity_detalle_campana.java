@@ -38,6 +38,8 @@ public class activity_detalle_campana extends AppCompatActivity
         if(breadcrumComunicado != null) {
             breadcrumComunicado.setText("COMUNICACIÓN INTERNA > CAMPAÑAS INTERNAS");
 
+            breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
+
             breadcrumComunicado.setTypeface(tfl);
 
             breadcrumComunicado.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -37,8 +38,12 @@ public class activity_detalle_comunicado extends AppCompatActivity
         setContentView(R.layout.activity_detalle_comunicado);
 
     TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+    Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
+    Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
+    breadcrumComunicado.setTypeface(tfl);
     if(breadcrumComunicado != null) {
-        breadcrumComunicado.setText("COMUNICACIÓN INTERNA > COMUNICADOS");
+        breadcrumComunicado.setText("   COMUNICACIÓN INTERNA > COMUNICADOS");
+        breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
 
         breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
             @Override

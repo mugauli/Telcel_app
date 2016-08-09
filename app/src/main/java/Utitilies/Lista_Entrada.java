@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Lista_Entrada {
 
     private ArrayList<String> imagenesSlide;
-    private int idImagen,idImagen2,idradio,type;
+    private int idImagen,idImagen2,idradio,type,idImagenDetalle, idImagenA,idSiguiente;
     private Bitmap img_previa;
     private SvaElement svaElement1,svaElement2;
     private ArrayList<DescElement> pdf;
@@ -31,7 +31,7 @@ public class Lista_Entrada {
             img_mini,
             seccion,
             jsonStr,
-            idSiguiente,
+
             tituloSig,
             imagenSig,
             textoSig,
@@ -146,7 +146,7 @@ public class Lista_Entrada {
 
     }
 
-    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  ArrayList<String> imagenesSlide,String jsonStr, String idSiguiente,String tituloSig,String imagenSig, String textoSig ) {
+    public Lista_Entrada(String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  ArrayList<String> imagenesSlide,String jsonStr, int idSiguiente,String tituloSig,String imagenSig, String textoSig ) {
         this.id = id;
         this.img_previa = img_previa;
         this.titulo = titulo;
@@ -170,6 +170,17 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.imagenesSlide = imagenesSlide;
     }
+
+    public Lista_Entrada(String id,Bitmap img_previa,String titulo,String url,String textoDebajo,String jsonStr,int idSiguiente)    {
+        this.id = id;
+        this.img_previa = img_previa;
+        this.titulo = titulo;
+        this.url = url;
+        this.textoDebajo = textoDebajo;
+        this.jsonStr = jsonStr;
+        this.idSiguiente = idSiguiente;
+    }
+
     public Lista_Entrada (String id,Bitmap img_previa,String titulo, String tipo,String textoDebajo,int ids,String img_detalle) {
 
         this.id = id;
@@ -320,7 +331,7 @@ public class Lista_Entrada {
         return seccion;
     }
     public String get_jsonStr() { return jsonStr; }
-    public String get_idSiguiente() { return idSiguiente; }
+    public int get_idSiguiente() { return idSiguiente; }
     public ArrayList<DescElement> get_pdf() {
         return pdf;
     }
@@ -329,6 +340,8 @@ public class Lista_Entrada {
     public String get_textoSig() {
         return textoSig;
     }
+    public int get_idImagenDetalle(){return idImagenDetalle; }
+    public int get_idImagenA(){return idImagenA;}
     public String get_preguntas() {
         return preguntas;
     }
