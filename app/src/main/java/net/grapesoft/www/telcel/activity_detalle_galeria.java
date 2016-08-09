@@ -61,13 +61,15 @@ public class activity_detalle_galeria extends AppCompatActivity
 
     private ArrayList<Drawable> imagenes_slider_drawable = new ArrayList<Drawable>();
 
-    private int position,descargado=0;
+    private int position = 0,descargado=0;
 
-    private static final Integer DURATION = 2500;
+    private static final Integer DURATION = 5000;
 
     private Timer timer = null;
 
     private String idSiguiente2;
+
+    private boolean soloUna = true,soloUna2 = false,soloUna3 = true;
 
     //Slider End
 
@@ -122,7 +124,9 @@ public class activity_detalle_galeria extends AppCompatActivity
         Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         imageSwitcher.setInAnimation(fadeIn);
         imageSwitcher.setOutAnimation(fadeOut);
-
+        soloUna = true;
+        soloUna2 = false;
+        soloUna3 = true;
         startSlider();
 
         //Slider
@@ -141,8 +145,6 @@ public class activity_detalle_galeria extends AppCompatActivity
         String textoS = getIntent().getStringExtra("textoSig");
         String tituloS = getIntent().getStringExtra("tituloSig");
 
-
-        Log.e("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",imgS);
 
         TextView txtTituloSiguiente =  (TextView) findViewById(R.id.txtTituloSiguiente);
         txtTituloSiguiente.setText(tituloS);
@@ -239,86 +241,63 @@ public class activity_detalle_galeria extends AppCompatActivity
 
                                 if (responseArray.length() > 0) {
                                     Log.e("Item Galeria JSON siguiente", idSiguiente2);
-                                    String idSiguiente = "0",tituloSig="",imagenSig="",textoSig ="";
+                                    String idSiguiente = "0", tituloSig = "", imagenSig = "", textoSig = "";
                                     for (int i = 0; i < responseArray.length(); i++) {
 
 
-
                                         String id = responseArray.getJSONObject(i).get("id").toString();
-                                        Log.e("item",responseArray.getJSONObject(i).toString());
-                                        Log.e("Idsiguiente",id+" "+idSiguiente2);
 
-                                        if(id.equals(idSiguiente2)) {
-                                            Log.e("Idsiguiente2",id+" "+idSiguiente2);
+                                        if (id.equals(idSiguiente2)) {
+                                            Log.e("Idsiguiente2", id + " " + idSiguiente2);
 
                                             String titulo1 = responseArray.getJSONObject(i).get("titulo").toString();
-                                            String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
-                                            String url = responseArray.getJSONObject(i).get("url").toString();
                                             String texto = responseArray.getJSONObject(i).get("texto").toString();
+                                            JSONArray imagenes_slide;
 
-                                            if (i+1  < responseArray.length()) {
-
+                                            if ((i + 1) < responseArray.length()) {
                                                 idSiguiente = responseArray.getJSONObject(i + 1).get("id").toString();
-
-                                                tituloSig = responseArray.getJSONObject(i+1).get("titulo").toString();
-                                                imagenSig = responseArray.getJSONObject(i+1).get("img_previa").toString();
-                                                textoSig = responseArray.getJSONObject(i+1).get("texto").toString();
-
-
+                                                tituloSig = responseArray.getJSONObject(i + 1).get("titulo").toString();
+                                                imagenSig = responseArray.getJSONObject(i + 1).get("img_previa").toString();
+                                                textoSig = responseArray.getJSONObject(i + 1).get("texto").toString();
+                                                imagenes_slide = responseArray.getJSONObject(i+1).getJSONArray("imagenes_slide");
                                             } else {
                                                 idSiguiente = responseArray.getJSONObject(0).get("id").toString();
                                                 tituloSig = responseArray.getJSONObject(0).get("titulo").toString();
                                                 imagenSig = responseArray.getJSONObject(0).get("img_previa").toString();
                                                 textoSig = responseArray.getJSONObject(0).get("texto").toString();
+                                                imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
                                             }
-                                            JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+
 
                                             ArrayList<String> imagenes_slider1 = new ArrayList<String>();
-
 
                                             for (int ii = 0; ii < imagenes_slide.length(); ii++) {
 
                                                 imagenes_slider1.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
                                             }
 
-                                       // TextView titUG2 = (TextView) findViewById(R.id.titDNT);
-                                       // TextView descUG2 = (TextView) findViewById(R.id.descDNT);
-                                       // imagenes_slider.clear();
-                                       // imagenes_slider_drawable.clear();
-                                       // position = 0;
-                                       // imagenes_slider = getIntent().getStringArrayListExtra("imagenes_slider");
-                                       // titUG2.setText(titulo1);
-                                       // descUG2.setText(Html.fromHtml(texto));
+                                            Log.e("Imagenes", imagenes_slide.toString());
+//                                            Log.e("Prubea", idSiguiente2 + " " + idSiguiente);
 
-                                            Log.e("Prubea",idSiguiente2 + " " + idSiguiente);
-
-                                           Intent intent = new Intent(activity_detalle_galeria.this, activity_detalle_galeria.class);
+                                            Intent intent = new Intent(activity_detalle_galeria.this, activity_detalle_galeria.class);
 //
-                                           intent.putExtra("titulo", titulo1);
-                                           intent.putExtra("descripcion", texto);
-                                           intent.putStringArrayListExtra("imagenes_slider", imagenes_slider1);
-                                           intent.putExtra("json", jsonSiguiente);
-                                           intent.putExtra("idSiguiente", idSiguiente);
+                                            intent.putExtra("titulo", titulo1);
+                                            intent.putExtra("descripcion", texto);
+                                            intent.putStringArrayListExtra("imagenes_slider", imagenes_slider1);
+                                            intent.putExtra("json", jsonSiguiente);
+                                            intent.putExtra("idSiguiente", idSiguiente);
 
-                                            intent.putExtra("imagenSig",imagenSig);
-                                            intent.putExtra("tituloSig",tituloSig);
-                                            intent.putExtra("textoSig",textoSig);
+                                            intent.putExtra("imagenSig", imagenSig);
+                                            intent.putExtra("tituloSig", tituloSig);
+                                            intent.putExtra("textoSig", textoSig);
 
-                                           startActivity(intent);
+                                            startActivity(intent);
 
                                         }
                                     }
-
                                     //idSiguiente2 =  idSiguiente;
-
-
-
                                 }
-
-
-
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -330,14 +309,14 @@ public class activity_detalle_galeria extends AppCompatActivity
         //ToolBar Menu
     }
 
-    //Slider
+        //Slider
 
     public void start(View button) {
         if (timer != null) {
             timer.cancel();
         }
         position = 0;
-        startSlider();
+       // startSlider();
     }
 
     public void stop(View button) {
@@ -348,48 +327,69 @@ public class activity_detalle_galeria extends AppCompatActivity
     }
 
     public void startSlider() {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
 
-            public void run() {
-                // avoid exception:
-                // "Only the original thread that created a view hierarchy can touch its views"
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        position++;
-                        if (position == imagenes_slider.size()) {
-                            position = 0;
-                        }
 
-                        if(imagenes_slider_drawable.size() > position) {
-                            imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
-//                            Log.e("Imagenes Del Objeto",imagenes_slider.get(position));
-                        }
-                        else {
-                            try {
-        //                        Log.e("Imagenes Galeria",imagenes_slider.get(position));
-                                Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
-                                if (img != null) {
-                                    BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
-                                    imagenes_slider_drawable.add(bmDraw);
-                                    imageSwitcher.setImageDrawable(bmDraw);
+        if (soloUna) {
+            soloUna = false;
 
+            Log.e("inicio", "Start");
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+
+                public void run() {
+                    // avoid exception:
+                    // "Only the original thread that created a view hierarchy can touch its views"
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            if (soloUna2) {
+                                soloUna2 = true;
+                                position++;
+                                if (position == imagenes_slider.size()) {
+                                    position = 0;
                                 }
-                                else
-                                    imageSwitcher.setImageResource(R.drawable.noimage);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } catch (ExecutionException e) {
-                                e.printStackTrace();
+                            }
+                            if (imagenes_slider_drawable.size() > position) {
+                                imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
+                                Log.e("Position 1", ""+position);
+                                Log.e("Imagenes Del Objeto 1", imagenes_slider.get(position));
+                            } else {
+                                try {
+                                    Log.e("Position 1", ""+position);
+                                    Log.e("Imagenes Galeria 1", imagenes_slider.get(position));
+                                    Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
+                                    if (img != null) {
+                                        BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
+                                        imagenes_slider_drawable.add(bmDraw);
+                                        imageSwitcher.setImageDrawable(bmDraw);
+
+                                    } else
+                                        imageSwitcher.setImageResource(R.drawable.noimage);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                            if (soloUna3) {
+                                soloUna3 = false;
+                                position++;
+                                if (position == imagenes_slider.size()) {
+                                    position = 0;
+                                }
                             }
 
+
+
+
+
                         }
-                    }
 
-                });
-            }
+                    });
+                }
 
-        }, 0, DURATION);
+            }, 0, DURATION);
+        }
     }
 
     public void backSlider(View button) {
@@ -437,22 +437,25 @@ public class activity_detalle_galeria extends AppCompatActivity
         if (position == imagenes_slider.size()) {
             position = 0;
         }
-        if(imagenes_slider_drawable.size() > position) {
+        if (imagenes_slider_drawable.size() > (position)) {
+
+            Log.e("Position", "" + position);
+            Log.e("Imagenes Del Objeto", imagenes_slider.get(position));
+            Log.e("Imagenes Del Objeto Drawable", imagenes_slider_drawable.get(position).toString());
             imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
-            Log.e("Imagenes Del Objeto",imagenes_slider.get(position));
-        }
-        else {
+
+        } else {
             try {
-Log.e("Position",""+position);
+
                 Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
                 if (img != null) {
                     BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
                     imagenes_slider_drawable.add(bmDraw);
                     imageSwitcher.setImageDrawable(bmDraw);
-
-                }
-                else
+                } else
                     imageSwitcher.setImageResource(R.drawable.noimage);
+                Log.e("Position", "" + position);
+                Log.e("Imagenes Del Agregada", img.toString());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -460,6 +463,7 @@ Log.e("Position",""+position);
             }
 
         }
+
     }
 
     // Stops the slider when the Activity is going into the background
@@ -475,7 +479,7 @@ Log.e("Position",""+position);
     protected void onResume() {
         super.onResume();
         if (timer != null) {
-            startSlider();
+           // startSlider();
         }
 
     }

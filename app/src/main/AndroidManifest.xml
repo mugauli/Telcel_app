@@ -286,7 +286,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity_detalle_triviaC"
+            android:name=".activity_detalle_trivia"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -347,6 +347,16 @@
         </activity>
         <activity
             android:name=".SitiosInteresActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.coderefer.androidsplashscreenexample.MAINACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity_pregunta_respuesta_trivia"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

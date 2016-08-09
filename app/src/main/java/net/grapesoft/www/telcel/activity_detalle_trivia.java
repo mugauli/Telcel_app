@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 import Utitilies.GetNetImage;
 import Utitilies.SessionManagement;
 
-public class activity_detalle_triviaC extends AppCompatActivity
+public class activity_detalle_trivia extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     SessionManagement session;
@@ -70,7 +70,7 @@ public class activity_detalle_triviaC extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity_detalle_triviaC.this,ayuda.class);
+                Intent intent = new Intent(activity_detalle_trivia.this,ayuda.class);
                 startActivity(intent);
             }
         });
@@ -87,7 +87,7 @@ public class activity_detalle_triviaC extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(activity_detalle_triviaC.this, MainActivity.class);
+                Intent i = new Intent(activity_detalle_trivia.this, MainActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
@@ -157,12 +157,12 @@ public class activity_detalle_triviaC extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(activity_detalle_triviaC.this, ActualizarActivity.class);
+            Intent i = new Intent(activity_detalle_trivia.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_detalle_triviaC.this, pin.class);
+            Intent i = new Intent(activity_detalle_trivia.this, pin.class);
             startActivity(i);
 
 
