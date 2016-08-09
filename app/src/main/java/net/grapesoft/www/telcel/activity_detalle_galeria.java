@@ -274,6 +274,7 @@ public class activity_detalle_galeria extends AppCompatActivity
                     intent.putExtra("json", jsonSiguiente);
                     intent.putExtra("idSiguiente", idSiguienteR);
                     startActivity(intent);
+                    finish();
 
                 }
 
