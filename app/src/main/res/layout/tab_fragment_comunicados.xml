@@ -79,11 +79,12 @@
                                 android:id="@+id/comunicadotipoUC"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-
+                                android:textColor="@color/positivoclaro"
                                 android:gravity="left"
                                 android:layout_weight="5"
+                                android:text="memo"
                                 android:layout_centerHorizontal="true"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                                 />
 
                             <TextView
                                 android:id="@+id/fechaUC"
