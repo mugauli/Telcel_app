@@ -28,6 +28,7 @@ android:layout_height="match_parent"
             android:text="Small Texhhht"
             android:gravity="left"
             android:layout_weight="5"
+            android:textColor="@color/positivoclaro"
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 

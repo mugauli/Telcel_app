@@ -82,7 +82,7 @@
                                 android:textColor="@color/positivoclaro"
                                 android:gravity="left"
                                 android:layout_weight="5"
-                                android:text="memo"
+
                                 android:layout_centerHorizontal="true"
                                  />
 
