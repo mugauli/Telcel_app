@@ -144,7 +144,9 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                             String txtPregunta = responseArray2.getJSONObject(a).get("txtPregunta").toString();
 
                             TextView pregunta = (TextView) findViewById(R.id.txtPreguntaTrivia);
-                            pregunta.setText(txtPregunta);
+                            if (pregunta != null) {
+                                pregunta.setText(txtPregunta);
+                            }
 
                             JSONArray respuestas = responseArray2.getJSONObject(a).getJSONArray("respuestas");
 
@@ -163,6 +165,9 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                                 RadioButton btn1 = new RadioButton(this);
                                 btn1.setText(txtRespuesta);
                                 btn1.setTag(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
+                                btn1.setPadding(80,80,80,80);
+                                btn1.setTextSize(15);
+                                btn1.setTextColor(R.color.ColorPrimary);
                                 group.addView(btn1);
                             }
 

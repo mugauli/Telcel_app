@@ -163,6 +163,10 @@ public class activity_pregunta_respuesta extends AppCompatActivity
                         RadioButton btn1 = new RadioButton(this);
                         btn1.setText(txtRespuesta);
                         btn1.setTag(new PreguntaElement(idResp,txtRespuesta,valRespuesta));
+                        btn1.setPadding(80,80,80,80);
+                        btn1.setTextSize(15);
+                        btn1.setTextColor(R.color.ColorPrimary);
+                       // btn1.setHeight(150);
                         group.addView(btn1);
 
                     }

@@ -59,7 +59,7 @@ public class activity_respuesta_trivia extends AppCompatActivity
         Typeface tfm = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
         TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
         txtGhost4.setTypeface(tfm);
-        txtGhost4.setText("TRIVIAOK");
+        txtGhost4.setText("TRIVIA");
         //boton ayuda
 
         //Toolbar Menu
