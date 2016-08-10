@@ -154,7 +154,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                     {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto.substring(0,42)+"...",fecha));
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
                 }
             }
 
@@ -206,7 +206,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                         TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descUN);
 
                         if (noticiaDescripcion != null) {
-                            String desc = ((Lista_Entrada) entrada).get_textoDebajo();
+                            String desc = ((Lista_Entrada) entrada).get_textoDebajo().substring(0,42)+"...";
                             // desc = desc.substring(0,200);
                             noticiaDescripcion.setText(Html.fromHtml(desc));
                         }
@@ -248,7 +248,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
                             imagenGrupo.setImageBitmap(Entrada.get_img_previa());
                             fechaGrupo.setText(Entrada.get_fecha());
                             titGrupo.setText(Entrada.get_titulo());
-                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo().substring(0,42)+"..."));
                             principal.setTag(Entrada);
 
                         }
