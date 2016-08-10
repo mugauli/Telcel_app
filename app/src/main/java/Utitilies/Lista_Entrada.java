@@ -51,6 +51,15 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
     }
 
+    //Sitios de interes
+
+    public Lista_Entrada (int idImagenA, int idImagenDetalle,int idImagen, String textoDebajo) {
+        this.idImagen = idImagen;
+        this.idImagenA = idImagenA;
+        this.idImagenDetalle = idImagenDetalle;
+        this.textoDebajo = textoDebajo;
+    }
+
     public Lista_Entrada (String textoEncima, String textoDebajo) {
 
         this.textoEncima =  textoEncima;

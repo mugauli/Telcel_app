@@ -2,37 +2,49 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
+import Utitilies.Comunication;
 import Utitilies.SessionManagement;
 
-public class triviasActivity extends AppCompatActivity
+public class activity_respuesta_trivia extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    String styledText = "This is <font color='red'>simple</font>.";
-    public String tokenCTE = "";
+    JSONArray responseArray2;
     SessionManagement session;
-
+    public String tokenCTE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trivias);
+        setContentView(R.layout.activity_respuesta_trivia);
+        tokenCTE = getText(R.string.tokenXM).toString();
+
+
         session = new SessionManagement(getApplicationContext());
+        final HashMap<String, String> user = session.getUserDetails();
+
 
         //boton ayuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -40,14 +52,14 @@ public class triviasActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(triviasActivity.this,ayuda.class);
+                Intent intent = new Intent(activity_respuesta_trivia.this,ayuda.class);
                 startActivity(intent);
             }
         });
         Typeface tfm = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
         TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
         txtGhost4.setTypeface(tfm);
-        txtGhost4.setText("PREGUNTA DEL DIA");
+        txtGhost4.setText("TRIVIAOK");
         //boton ayuda
 
         //Toolbar Menu
@@ -62,7 +74,7 @@ public class triviasActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(triviasActivity.this, MainActivity.class);
+                    Intent i = new Intent(activity_respuesta_trivia.this, MainActivity.class);
                     i.putExtra("direccion","0");
                     startActivity(i);
                 }
@@ -92,7 +104,7 @@ public class triviasActivity extends AppCompatActivity
             imgButton2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(triviasActivity.this, triviasActivity.class);
+                    Intent i = new Intent(activity_respuesta_trivia.this, triviasActivity.class);
                     startActivity(i);
                 }
             });
@@ -103,19 +115,44 @@ public class triviasActivity extends AppCompatActivity
             navigationView.setNavigationItemSelectedListener(this);
         }
 
-        tokenCTE = getText(R.string.tokenXM).toString();
+        String puntos = getIntent().getExtras().getString("puntos", "0");
+        String trivia = getIntent().getExtras().getString("trivia", "0");
+
+
         ArrayList<String> params = new ArrayList<String>();
 
-        final HashMap<String, String> user = session.getUserDetails();
-        String region = user.get(SessionManagement.KEY_PD_REGION);
-
-        params.add("GetQuestion.php");
-        params.add("GetTrivia.php");
+        params.add("9");
+        params.add("SaveWinner.php");
         params.add(tokenCTE);
-        params.add(region);
+        params.add(trivia);
+        params.add(user.get(SessionManagement.KEY_PD_ID));
+        params.add(user.get(SessionManagement.KEY_PD_REGION));
+        params.add(puntos);
 
-        new triviasActivityAsync(triviasActivity.this).execute(params);
+        TextView tyxtErrorTrivias = (TextView) findViewById(R.id.tyxtErrorTrivias);
 
+        tyxtErrorTrivias.setText("");
+
+        try {
+            JSONArray response = new Comunication(activity_respuesta_trivia.this).execute(params).get();
+
+            if(response.getJSONObject(0).has("error")) {
+                Log.e("Response Actualizar: ", "ERROR");
+                //Toast toast = Toast.makeText(activity_respuesta_trivia.this, "Error al actualizar la información de trivia", Toast.LENGTH_LONG);
+                //toast.show();
+                tyxtErrorTrivias.setText("Error al actualizar la información de trivia");
+            }
+
+        } catch (InterruptedException e) {
+            tyxtErrorTrivias.setText("Error al actualizar la información de trivia");
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            tyxtErrorTrivias.setText("Error al actualizar la información de trivia");
+            e.printStackTrace();
+        } catch (JSONException e) {
+            tyxtErrorTrivias.setText("Error al actualizar la información de trivia");
+            e.printStackTrace();
+        }
 
     }
 
@@ -160,17 +197,17 @@ public class triviasActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(triviasActivity.this, ActualizarActivity.class);
+            Intent i = new Intent(activity_respuesta_trivia.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(triviasActivity.this, pin.class);
+            Intent i = new Intent(activity_respuesta_trivia.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(triviasActivity.this, preferencias.class);
+           /* Intent i = new Intent(activity_respuesta.this, preferencias.class);
             startActivity(i);*/
 
         } else if (id == R.id.nav_send) {
@@ -186,5 +223,4 @@ public class triviasActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 }

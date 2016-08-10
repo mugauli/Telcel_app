@@ -211,6 +211,10 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+        Intent intent = new Intent(getApplicationContext(), login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
     }
 
     @Override
@@ -253,8 +257,8 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(MainActivity.this, preferencias.class);
-            startActivity(i);*/
+            Intent i = new Intent(MainActivity.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             /*session.logoutUser();

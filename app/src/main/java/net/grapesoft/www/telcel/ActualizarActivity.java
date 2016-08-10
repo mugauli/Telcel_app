@@ -395,8 +395,11 @@ public class ActualizarActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
-            finish();
-            System.exit(0);
+            Intent intent = new Intent(getApplicationContext(), login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
 
         }
 

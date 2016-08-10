@@ -1,6 +1,7 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.graphics.Interpolator;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -32,6 +33,12 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
 
     JSONArray responseArray2;
     SessionManagement session;
+    Boolean ultimo = false;
+    String preguntasJSON;
+    String siguiente;
+    String puntos;
+    String trivia;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,9 +112,10 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
         //i.putExtra("puntos","0");
       //  final String pregunta = getIntent().getExtras().getString("pregunta","No hay pregunta del día");
 
-        String preguntasJSON = getIntent().getExtras().getString("preguntas","0");
-        String preguntasPosicion = getIntent().getExtras().getString("preguntasPosicion","0");
-        String puntos = getIntent().getExtras().getString("puntos","0");
+        preguntasJSON = getIntent().getExtras().getString("preguntas","0");
+        siguiente = getIntent().getExtras().getString("siguiente","0");
+        puntos = getIntent().getExtras().getString("puntos","0");
+        trivia = getIntent().getExtras().getString("trivia","0");
 
         try {
             //Log.e("Response: ", "JSON");
@@ -124,80 +132,98 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             } else {
                 if (responseArray2.length() > 0) {
 
-                    Log.e("Response Item: ", responseArray2.getJSONObject(0).toString());
 
-                    String idPreg = responseArray2.getJSONObject(0).get("id").toString();
-                    String preguntaPreg = responseArray2.getJSONObject(0).get("pregunta").toString();
-                    String img_previa = responseArray2.getJSONObject(0).get("img_previa").toString();
-                    JSONArray respuestas = responseArray2.getJSONObject(0).getJSONArray("respuestas");
-                    String RespuestaCorrecta = "";
+                    for (int a = 0; a < responseArray2.length(); a++) {
+                        Log.e("IF: ", ""+a + "--" +siguiente);
 
-                    final RadioGroup group = new RadioGroup(this);
-                    group.setOrientation(RadioGroup.VERTICAL);
-                    LinearLayout lytRespuestas = (LinearLayout) findViewById(R.id.lytRespuestas);
+                        if (a == Integer.parseInt(siguiente)) {
 
-                    lytRespuestas.addView(group);
+                            Log.e("Response Item: ", responseArray2.getJSONObject(a).toString());
 
-                    ArrayList<PreguntaElement> preguntas = new ArrayList<PreguntaElement>();
+                            String idPreg = responseArray2.getJSONObject(a).get("idPreg").toString();
+                            String txtPregunta = responseArray2.getJSONObject(a).get("txtPregunta").toString();
 
-                    for (int i = 0; i < respuestas.length(); i++) {
+                            TextView pregunta = (TextView) findViewById(R.id.txtPreguntaTrivia);
+                            pregunta.setText(txtPregunta);
 
-                        String idResp = respuestas.getJSONObject(i).get("idResp").toString();
-                        String txtRespuesta = respuestas.getJSONObject(i).get("txtRespuesta").toString();
-                        String valRespuesta = respuestas.getJSONObject(i).get("valRespuesta").toString();
-                        // preguntas.add(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
+                            JSONArray respuestas = responseArray2.getJSONObject(a).getJSONArray("respuestas");
 
-                        if (valRespuesta.equals("1")) {
+                            final RadioGroup group = new RadioGroup(this);
+                            group.setOrientation(RadioGroup.VERTICAL);
+                            LinearLayout lytRespuestas = (LinearLayout) findViewById(R.id.lytRespuestas);
 
-                            RespuestaCorrecta = txtRespuesta;
-                            Log.e("RespuestaCorrecta", RespuestaCorrecta);
-                        }
+                            lytRespuestas.addView(group);
 
-                        RadioButton btn1 = new RadioButton(this);
-                        btn1.setText(txtRespuesta);
-                        btn1.setTag(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
-                        group.addView(btn1);
+                            for (int i = 0; i < respuestas.length(); i++) {
 
-                    }
+                                String idResp = respuestas.getJSONObject(i).get("idResp").toString();
+                                String txtRespuesta = respuestas.getJSONObject(i).get("txtRespuesta").toString();
+                                String valRespuesta = respuestas.getJSONObject(i).get("valRespuesta").toString();
 
-                    TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
-                    if (btnEnviar != null) {
-                        final String finalRespuestaCorrecta = RespuestaCorrecta;
-
-
-                        btnEnviar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                TextView txtError = (TextView) findViewById(R.id.txtError);
-                                int radioButtonID = group.getCheckedRadioButtonId();
-                                Log.e("elegido", "" + radioButtonID);
-                                if (radioButtonID != -1) {
-                                    txtError.setText("");
-                                    View radioButton = group.findViewById(radioButtonID);
-                                    RadioButton rb = (RadioButton) radioButton;
-
-                                    PreguntaElement element = (PreguntaElement) rb.getTag();
-
-                                    Log.e("elegido", element.get_valRespuesta());
-
-                                    Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_respuesta.class);
-                                    i.putExtra("val", element.get_valRespuesta());
-                                    i.putExtra("respuesta", finalRespuestaCorrecta.toString());
-                                    //i.putExtra("preguntas", entrada.get_preguntas());
-                                    //i.putExtra("preguntasPosicion", "0");
-                                    //i.putExtra("puntos","0");
-                                    startActivity(i);
-                                    finish();
-
-                                } else {
-                                    txtError.setText("Debe seleccionar una respuesta.");
-                                }
-
+                                RadioButton btn1 = new RadioButton(this);
+                                btn1.setText(txtRespuesta);
+                                btn1.setTag(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
+                                group.addView(btn1);
                             }
-                        });
-                    }
 
+
+
+                            TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
+                            if (btnEnviar != null) {
+                                if(Integer.parseInt(siguiente)+1 == respuestas.length())
+                                {
+                                    ultimo= true;
+                                    btnEnviar.setText("ENVIAR >");
+                                }
+                                btnEnviar.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        TextView txtError = (TextView) findViewById(R.id.txtError);
+                                        int radioButtonID = group.getCheckedRadioButtonId();
+                                        Log.e("elegido", "" + radioButtonID);
+                                        if (radioButtonID != -1) {
+                                            txtError.setText("");
+                                            View radioButton = group.findViewById(radioButtonID);
+                                            RadioButton rb = (RadioButton) radioButton;
+
+                                            PreguntaElement element = (PreguntaElement) rb.getTag();
+
+                                            Log.e("elegido", element.get_valRespuesta());
+                                            puntos = String.valueOf (Integer.parseInt(puntos) + Integer.parseInt(element.get_valRespuesta()));
+
+                                            if(ultimo) {
+
+                                                Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_respuesta_trivia.class);
+                                                i.putExtra("puntos",""+puntos);
+                                                i.putExtra("trivia", trivia);
+                                                startActivity(i);
+                                                finish();
+                                            }else
+                                            {
+                                                Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_pregunta_respuesta_trivia.class);
+                                                i.putExtra("preguntas", preguntasJSON);
+                                                i.putExtra("puntos",""+puntos);
+                                                i.putExtra("trivia", trivia);
+                                                i.putExtra("siguiente",""+(Integer.parseInt(siguiente)+1));
+                                                startActivity(i);
+                                                finish();
+
+                                            }
+
+                                            Log.e("preguntas", preguntasJSON);
+                                            Log.e("puntos",""+puntos);
+                                            Log.e("siguiente",""+(Integer.parseInt(siguiente)+1));
+
+                                        } else {
+                                            txtError.setText("Debe seleccionar una respuesta.");
+                                        }
+
+                                    }
+                                });
+                            }
+                        }
+                    }
                 }
 
 
@@ -266,8 +292,11 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
-            finish();
-            System.exit(0);
+            Intent intent = new Intent(getApplicationContext(), login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
