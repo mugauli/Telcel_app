@@ -5,7 +5,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_trivias"
+        android:background="@drawable/border"
         android:orientation="horizontal"
         android:weightSum="100"
         android:layout_marginTop="10dp"
@@ -56,12 +56,13 @@
                 android:id="@+id/triviatitulo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Small Text"
+                android:text="Trivia"
                 android:textColor="@color/ColorPrimary"
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/triviadetalle"
@@ -69,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:text="Small Text"
                 android:layout_centerHorizontal="true"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="12dp" />
             <TextView
                 android:id="@+id/json"
                 android:layout_width="fill_parent"
