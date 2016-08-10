@@ -210,7 +210,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
-                    String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
+                    String img_detalle = responseArray.getJSONObject(i).get("img_previa").toString();
                     String tipo = responseArray.getJSONObject(i).get("tipo").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
                     String preguntas = "0";
@@ -219,7 +219,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                         preguntas = responseArray.getJSONObject(i).getJSONArray("elementos").toString();
                     }
 
-                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_previa,preguntas));
+                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_detalle,preguntas));
                 }
             }
 
@@ -300,8 +300,11 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                                 i.putExtra("puntos","0");
                                 i.putExtra("siguiente","0");
                                 i.putExtra("trivia", entrada.get_id());
+                                i.putExtra("imagen", entrada.get_img_detalle());
+
                                 activity.startActivity(i);
                             }
+                            Log.e("imagen",""+ entrada.get_img_detalle());
                         }
                     });
 

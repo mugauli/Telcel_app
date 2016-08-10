@@ -75,46 +75,68 @@
                             android:weightSum="100"
                             android:layout_height="match_parent">
 
-                            <TextView
-                                android:id="@+id/titulo"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="La trivia ha sido enviada."
-                                android:textColor="@color/ColorPrimary"
-                                android:textStyle="bold"
-                                android:gravity="center"
-                                android:layout_alignParentTop="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                android:textSize="16dp"
-                                android:textAlignment="textStart" />
-                            <TextView
-                                android:id="@+id/pregunta"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Los ganadores recibirán un mensaje en su teléfono. Ninguna persona ajena &lt;a Telcel bajo ninguna circunstacia podrá participar o recoger el premio de los ganadores. Un sólo pase doble por empleado. El premio únicamente se podrá recoger en el lugar, fecha y hora indicada."
-                                android:gravity="center"
-                                android:layout_centerHorizontal="true"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginRight="5dp"
-                                android:textAlignment="textStart" />
-                            <TextView
-                                android:id="@+id/respuesta"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="No haber ganado en dos trivias anteriores."
-                                android:gravity="center"
-                                android:layout_centerHorizontal="true"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                android:textAlignment="viewStart" />
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="60">
+
+                                <ImageView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:id="@+id/imagenTriviaRespuesta" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="40">
+
+                                <TextView
+                                    android:id="@+id/titulo"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="La trivia ha sido enviada."
+                                    android:textColor="@color/ColorPrimary"
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:textSize="16dp"
+                                    android:textAlignment="textStart" />
+
+                                <TextView
+                                    android:id="@+id/pregunta"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Los ganadores recibirán un mensaje en su teléfono. Ninguna persona ajena &lt;a Telcel bajo ninguna circunstacia podrá participar o recoger el premio de los ganadores. Un sólo pase doble por empleado. El premio únicamente se podrá recoger en el lugar, fecha y hora indicada."
+                                    android:gravity="center"
+                                    android:layout_centerHorizontal="true"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginRight="5dp"
+                                    android:textAlignment="textStart" />
+
+                                <TextView
+                                    android:id="@+id/respuesta"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="No haber ganado en dos trivias anteriores."
+                                    android:gravity="center"
+                                    android:layout_centerHorizontal="true"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:textAlignment="viewStart" />
+                            </LinearLayout>
+
                         </LinearLayout>
 
 

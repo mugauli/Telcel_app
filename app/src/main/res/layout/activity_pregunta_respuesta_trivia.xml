@@ -133,13 +133,13 @@
                                 android:orientation="horizontal"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:layout_weight="32" />
+                                android:layout_weight="33" />
 
                             <LinearLayout
                                 android:orientation="vertical"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:layout_weight="36">
+                                android:layout_weight="34">
 
                                 <LinearLayout
                                     android:orientation="horizontal"
@@ -150,7 +150,7 @@
                                 <TextView
                                     android:layout_width="fill_parent"
                                     android:layout_height="fill_parent"
-                                    android:text="ENVIAR >"
+                                    android:text="SIGUIENTE >"
                                     android:textColor="@color/bordes"
                                     android:id="@+id/btnEnviar"
                                     android:textAlignment="center"
@@ -169,7 +169,7 @@
                                 android:orientation="horizontal"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:layout_weight="32" />
+                                android:layout_weight="33" />
                         </LinearLayout>
 
 

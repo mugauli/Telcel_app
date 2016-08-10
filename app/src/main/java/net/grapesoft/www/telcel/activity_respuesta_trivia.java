@@ -1,6 +1,7 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.Comunication;
+import Utitilies.GetNetImage;
 import Utitilies.SessionManagement;
 
 public class activity_respuesta_trivia extends AppCompatActivity
@@ -117,6 +119,21 @@ public class activity_respuesta_trivia extends AppCompatActivity
 
         String puntos = getIntent().getExtras().getString("puntos", "0");
         String trivia = getIntent().getExtras().getString("trivia", "0");
+        String imagen = getIntent().getExtras().getString("imagen", "0");
+
+        ImageView imagenTriviaRespuesta = (ImageView) findViewById(R.id.imagenTriviaRespuesta);
+        Log.e("imagen",imagen);
+
+       try {
+            Bitmap img = new GetNetImage().execute(imagen).get();
+            if(img != null)
+                imagenTriviaRespuesta.setImageBitmap(img);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
 
         ArrayList<String> params = new ArrayList<String>();

@@ -38,6 +38,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
     String siguiente;
     String puntos;
     String trivia;
+    String imagen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,16 +107,11 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             });
         }
 
-
-        //i.putExtra("preguntas", entrada.get_preguntas());
-        //i.putExtra("preguntasPosicion", "0");
-        //i.putExtra("puntos","0");
-      //  final String pregunta = getIntent().getExtras().getString("pregunta","No hay pregunta del día");
-
         preguntasJSON = getIntent().getExtras().getString("preguntas","0");
         siguiente = getIntent().getExtras().getString("siguiente","0");
         puntos = getIntent().getExtras().getString("puntos","0");
         trivia = getIntent().getExtras().getString("trivia","0");
+        imagen = getIntent().getExtras().getString("imagen","0");
 
         try {
             //Log.e("Response: ", "JSON");
@@ -202,6 +198,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                                                 Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_respuesta_trivia.class);
                                                 i.putExtra("puntos",""+puntos);
                                                 i.putExtra("trivia", trivia);
+                                                i.putExtra("imagen", imagen);
                                                 startActivity(i);
                                                 finish();
                                             }else
@@ -210,15 +207,14 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                                                 i.putExtra("preguntas", preguntasJSON);
                                                 i.putExtra("puntos",""+puntos);
                                                 i.putExtra("trivia", trivia);
+                                                i.putExtra("imagen", imagen);
                                                 i.putExtra("siguiente",""+(Integer.parseInt(siguiente)+1));
                                                 startActivity(i);
                                                 finish();
 
                                             }
+Log.e("imagenbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", imagen);
 
-                                            Log.e("preguntas", preguntasJSON);
-                                            Log.e("puntos",""+puntos);
-                                            Log.e("siguiente",""+(Integer.parseInt(siguiente)+1));
 
                                         } else {
                                             txtError.setText("Debe seleccionar una respuesta.");
