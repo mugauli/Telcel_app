@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -184,6 +185,8 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
                     if (primer) {
                         primer = false;
+                        Integer conteo = 0;
+                        conteo = ((Lista_Entrada) entrada).get_titulo().length();
 
                         ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenGrupo);
                         if (imagen_noticias != null) {
@@ -196,17 +199,26 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
                         TextView noticiatitulo = (TextView) activity.findViewById(R.id.titGrupo);
-
-                        if (noticiatitulo != null)
+                        if (noticiatitulo != null && conteo <=40){
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                            noticiatitulo.setTypeface(tf);
+                        }else{
+                            noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30)+ "...");
+                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                            noticiatitulo.setTypeface(tf);
+                        }
 
-                        TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descGrupo);
 
-                        if (noticiaDescripcion != null) {
+                       // TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descGrupo);
+
+                        /*if (noticiaDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo().substring(0,42)+"...";
                             // desc = desc.substring(0,200);
                             noticiaDescripcion.setText(Html.fromHtml(desc));
-                        }
+                        }*/
 
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipal);
                         principal.setTag(entrada);
@@ -223,8 +235,19 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
                     TextView noticiatitulo = (TextView) view.findViewById(R.id.grupotitulol);
 
-                    if (noticiatitulo != null)
+                    Integer conteo = 0;
+                    conteo = ((Lista_Entrada) entrada).get_titulo().length();
+                    if (noticiatitulo != null && conteo <=40){
                         noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        noticiatitulo.setTypeface(tf);
+                    }else{
+                        noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30)+ "...");
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        noticiatitulo.setTypeface(tf);
+                    }
 
                     view.setTag(entrada);
 
@@ -238,7 +261,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenGrupo);
                             TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaGrupo);
                             TextView titGrupo = (TextView) activity.findViewById(R.id.titGrupo);
-                            TextView descGrupo = (TextView) activity.findViewById(R.id.descGrupo);
+                            //TextView descGrupo = (TextView) activity.findViewById(R.id.descGrupo);
                             LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipal);
 
                             Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
@@ -246,7 +269,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             imagenGrupo.setImageBitmap(Entrada.get_img_previa());
                             fechaGrupo.setText(Entrada.get_fecha());
                             titGrupo.setText(Entrada.get_titulo());
-                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo().substring(0,42)+"..."));
+                           // descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo().substring(0,42)+"..."));
                             principal.setTag(Entrada);
 
                        }

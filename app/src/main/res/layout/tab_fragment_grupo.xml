@@ -71,7 +71,7 @@
                         >
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_weight="40"
+                            android:layout_weight="55"
                             android:layout_height="match_parent"
                             android:gravity="right"
                             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -82,16 +82,16 @@
                             android:textColor="@color/ColorPrimary"
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="30"
+                            android:layout_weight="45"
                             android:layout_height="match_parent"
                             android:id="@+id/titGrupo"/>
-                        <TextView
+                       <!-- <TextView
                             android:layout_width="match_parent"
                             android:layout_weight="30"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:text=""
                             android:layout_height="match_parent"
-                            android:id="@+id/descGrupo"/>
+                            android:id="@+id/descGrupo"/>-->
                     </LinearLayout>
 
                 </LinearLayout>

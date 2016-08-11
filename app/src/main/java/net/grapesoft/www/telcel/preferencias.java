@@ -1,6 +1,7 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,22 +21,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
+
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
+import Utitilies.List_adapted;
+import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 public class preferencias extends AppCompatActivity
@@ -43,20 +47,81 @@ public class preferencias extends AppCompatActivity
 
     SessionManagement session;
     public String tokenCTE = "";
+    private ListView listaAccesorio,listaAutos;
+    private String ch="nada";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ayuda);
+        setContentView(R.layout.activity_preferencias);
 
         TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
         Typeface tfi = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
         txtGhost4.setTypeface(tfi);
         txtGhost4.setText("TEMAS DE INTERÉS");
 
+        session = new SessionManagement(getApplicationContext());
+        ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
+        datos.add(new Lista_Entrada(ch));
+
         //FUncionalidad Expandable
+       final ExpandableRelativeLayout listOne =
+                (ExpandableRelativeLayout) findViewById(R.id.list_one);
+
+        final ExpandableRelativeLayout list_autos =
+                (ExpandableRelativeLayout) findViewById(R.id.list_autos);
 
 
+       View listOneToggler = findViewById(R.id.list_one_toggler);
+       listOneToggler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listOne.toggle();
+                list_autos.collapse();
+
+            }
+        });
+        listaAccesorio = (ListView) findViewById(R.id.mobile_list);
+        listaAccesorio.setAdapter(new List_adapted(this, R.layout.entrada_preferencias, datos){
+            @Override
+            public void onEntrada(Object entrada, View view) {
+                if (entrada != null) {
+                    // Applying font
+
+                    CheckBox imagen_entrada = (CheckBox) view.findViewById(R.id.list_one_a);
+                    if (imagen_entrada != null)
+                       // imagen_entrada.setImageResource(((Lista_Entrada) entrada).get_idImagen());
+                        imagen_entrada.setText(((Lista_Entrada) entrada).get_CheckBox());
+                }
+            }
+        });
+
+        //auto
+
+        View listOneTogglerAutos = findViewById(R.id.autos);
+        listOneTogglerAutos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listOne.collapse();
+                list_autos.toggle();
+
+            }
+        });
+        listaAccesorio = (ListView) findViewById(R.id.mobile_list_autos);
+        listaAccesorio.setAdapter(new List_adapted(this, R.layout.entrada_preferencias, datos){
+            @Override
+            public void onEntrada(Object entrada, View view) {
+                if (entrada != null) {
+                    // Applying font
+
+                    CheckBox imagen_entrada = (CheckBox) view.findViewById(R.id.list_one_a);
+                    if (imagen_entrada != null)
+                        // imagen_entrada.setImageResource(((Lista_Entrada) entrada).get_idImagen());
+                        imagen_entrada.setText(((Lista_Entrada) entrada).get_CheckBox());
+                }
+            }
+        });
 
         //expandable
 
@@ -108,6 +173,8 @@ public class preferencias extends AppCompatActivity
         //ToolBar Menu
 
     }
+
+
     @Override
     public void onBackPressed() {
 
@@ -178,6 +245,7 @@ public class preferencias extends AppCompatActivity
 
 
     }
+
 
 
 

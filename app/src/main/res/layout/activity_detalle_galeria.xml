@@ -164,7 +164,7 @@
                         <TextView
                             android:layout_width="fill_parent"
                             android:layout_height="35dp"
-                            android:text="Siguiente Video"
+                            android:text="Siguiente galería"
                             android:background="@drawable/border_siguiente_video"
                             android:id="@+id/textView16"
                             android:layout_margin="5dp"

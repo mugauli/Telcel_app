@@ -28,28 +28,79 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@color/ColorFondo">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical"
                 android:background="#f4f4f4" >
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
 
-                <ExpandableListView
-                    android:id="@+id/lvExp"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"/>
+                 android:id="@+id/list_one_toggler"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Accesorios y Servicios"
+                 android:textColor="@android:color/white" />
+
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_one"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
+
+                 <ListView
+                     android:id="@+id/mobile_list"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+           </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
+
+                 android:id="@+id/autos"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Accesorios y Servicios"
+                 android:textColor="@android:color/white" />
+
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_autos"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
+
+                 <ListView
+                     android:id="@+id/mobile_list_autos"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
 
             </LinearLayout>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="GUARDARA"
-                android:id="@+id/btnGenerar"
-                android:background="@drawable/btnshape"
-                android:textColor="@android:color/white"
-                android:layout_gravity="center_horizontal"
-                android:width="200dp"
-                android:layout_marginTop="60dp" />
+
+
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
@@ -65,6 +116,16 @@
                 android:layout_marginEnd="42dp"
                 android:layout_marginBottom="20dp" />
         </RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GUARDARA"
+            android:id="@+id/btnGenerar"
+            android:background="@drawable/btnshape"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:width="200dp"
+            android:layout_marginTop="60dp" />
     </android.support.design.widget.CoordinatorLayout>
     <include layout="@layout/navigation"/>
 </android.support.v4.widget.DrawerLayout>

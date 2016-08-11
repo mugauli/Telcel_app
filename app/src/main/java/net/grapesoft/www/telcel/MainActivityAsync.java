@@ -561,7 +561,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ProductosActivity.class);
-                                i.putExtra("direccion","4");
+                                i.putExtra("direccion","1");
                                 activity.startActivity(i);
                             }
                         });

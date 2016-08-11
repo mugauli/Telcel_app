@@ -268,7 +268,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                         //Toast.makeText(view.getContext(), todos , Toast.LENGTH_SHORT).show();
                         if(todos.compareTo(tp)==0 ){
-                            texto_tipo.setText("TIPS");
+                            texto_tipo.setText("TIPS SALUD");
                             texto_tipo.setTypeface(tfl);
 
                         }
@@ -278,7 +278,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                         }
                         if(todos.compareTo(ix)==0 ){
-                            texto_tipo.setText("INFORMACION");
+                            texto_tipo.setText("INFORMATE");
                             texto_tipo.setTypeface(tfl);
 
                         }
