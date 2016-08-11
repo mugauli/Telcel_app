@@ -66,7 +66,7 @@ public class FragmentPublicitaria extends Fragment {
 
                 //TextView idVideo = (TextView) rootview.findViewById(R.id.idVideo);
                 String id_video = arg0.getTag().toString();
-                Intent i = new Intent(getActivity(), PublicitariaDetalleActivity.class);
+                Intent i = new Intent(getActivity(), activity_detalle_publicitaria.class);
                 i.putExtra("video_id",id_video);
                 startActivity(i);
                 //Log.e("ID Video", "ID: "+ id_video);

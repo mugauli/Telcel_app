@@ -54,6 +54,7 @@ public class ActualizarActivity extends AppCompatActivity
 
         //Fuentes
         TextView tvCelular = (TextView) findViewById(R.id.tvCelular);
+
         TextView tvRegion = (TextView) findViewById(R.id.tvRegion);
         TextView tvDireccion = (TextView) findViewById(R.id.tvDireccion);
         RadioButton rbAsignado = (RadioButton) findViewById(R.id.rbAsignado);
@@ -63,6 +64,7 @@ public class ActualizarActivity extends AppCompatActivity
         TextView tvMaterno = (TextView) findViewById(R.id.tvMaterno);
         TextView tvCorreo = (TextView) findViewById(R.id.tvCorreo);
         TextView txt1 = (TextView) findViewById(R.id.txtCelular);
+
         TextView txt2 = (TextView) findViewById(R.id.txtNombre);
         TextView txt3 = (TextView) findViewById(R.id.txtPaterno);
         TextView txt4 = (TextView) findViewById(R.id.txtMaterno);
@@ -119,6 +121,8 @@ public class ActualizarActivity extends AppCompatActivity
 
             EditText txtCelular = (EditText) findViewById(R.id.txtCelular);
             txtCelular.setText(user.get(SessionManagement.KEY_PD_NUM_CELULAR));
+            txtCelular.setKeyListener(null);
+            txtCelular.setEnabled(false);
 
             EditText txtNombre = (EditText) findViewById(R.id.txtNombre);
             txtNombre.setText(user.get(SessionManagement.KEY_PD_NOMBRE));
@@ -351,6 +355,7 @@ public class ActualizarActivity extends AppCompatActivity
         });
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         TextView titulo = (TextView) findViewById(R.id.TitleSeccion);

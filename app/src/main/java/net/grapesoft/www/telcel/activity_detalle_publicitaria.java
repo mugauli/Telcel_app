@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -35,7 +36,7 @@ import Utitilies.Comunication;
 import Utitilies.GetNetImage;
 import Utitilies.SessionManagement;
 
-public class PublicitariaDetalleActivity extends AppCompatActivity
+public class activity_detalle_publicitaria extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     // Declare variables
@@ -62,6 +63,26 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
         setContentView(R.layout.activity_publicitaria_view);
 
         session = new SessionManagement(getApplicationContext());
+
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null) {
+            breadcrumComunicado.setText(" PRODUCTOS Y SERVICIOS > CAMPAÑAS PUBLICITARIAS");
+            Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
+            Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
+            breadcrumComunicado.setTypeface(tfl);
+
+            breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
+
+            breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(activity_detalle_publicitaria.this, ProductosActivity.class);
+                    i.putExtra("direccion","3");
+                    startActivity(i);
+                }
+            });
+        }
+
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
 
@@ -101,7 +122,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
                 params.add(tokenCTE);
                 params.add(region);
 
-                responseArray = new Comunication(PublicitariaDetalleActivity.this).execute(params).get();
+                responseArray = new Comunication(activity_detalle_publicitaria.this).execute(params).get();
                 if (pBar != null) pBar.setVisibility(View.GONE);
 
             } else {
@@ -185,7 +206,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
         VideoURL = VideoURL.replace(" ","%20");
 
         // Create a progressbar
-        pDialog = new ProgressDialog(PublicitariaDetalleActivity.this);
+        pDialog = new ProgressDialog(activity_detalle_publicitaria.this);
         // Set progressbar title
 
         // Set progressbar message
@@ -225,7 +246,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
         try {
             // Start the MediaController
             MediaController mediacontroller = new MediaController(
-                    PublicitariaDetalleActivity.this);
+                    activity_detalle_publicitaria.this);
             mediacontroller.setAnchorView(videoview);
             // Get the URL from String VideoURL
             videoview.setMediaController(mediacontroller);
@@ -254,7 +275,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
                 public void onClick(View v) {
                     String id_video = v.getTag().toString();
                     Log.e("Id_videpo_clic aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", id_video);
-                    Intent i = new Intent(PublicitariaDetalleActivity.this, PublicitariaDetalleActivity.class);
+                    Intent i = new Intent(activity_detalle_publicitaria.this, activity_detalle_publicitaria.class);
                     i.putExtra("video_id",id_video);
                     startActivity(i);
                 }
@@ -292,7 +313,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(PublicitariaDetalleActivity.this, MainActivity.class);
+                Intent i = new Intent(activity_detalle_publicitaria.this, MainActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
@@ -317,7 +338,7 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PublicitariaDetalleActivity.this, triviasActivity.class);
+                Intent i = new Intent(activity_detalle_publicitaria.this, triviasActivity.class);
                 startActivity(i);
             }
         });
@@ -369,17 +390,17 @@ public class PublicitariaDetalleActivity extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(PublicitariaDetalleActivity.this, ActualizarActivity.class);
+            Intent i = new Intent(activity_detalle_publicitaria.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(PublicitariaDetalleActivity.this, pin.class);
+            Intent i = new Intent(activity_detalle_publicitaria.this, pin.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(PublicitariaDetalleActivity.this, preferencias.class);
+            /*Intent i = new Intent(activity_detalle_publicitaria.this, preferencias.class);
             startActivity(i);*/
 
         } else if (id == R.id.nav_send) {

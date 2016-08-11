@@ -84,6 +84,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                 HttpPost httppost2 = new HttpPost(IP + params[0].get(0));
                 nameValuePair2.add(new BasicNameValuePair("token", params[0].get(2)));
                 nameValuePair2.add(new BasicNameValuePair("reg", params[0].get(3)));
+
                 httppost2.setEntity(new UrlEncodedFormEntity(nameValuePair2));
                 Log.e("IP", IP + params[0].get(1));
                 // Execute HTTP Post Request

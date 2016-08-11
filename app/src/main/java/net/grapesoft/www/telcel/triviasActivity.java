@@ -27,7 +27,6 @@ public class triviasActivity extends AppCompatActivity
     public String tokenCTE = "";
     SessionManagement session;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,16 +108,14 @@ public class triviasActivity extends AppCompatActivity
         final HashMap<String, String> user = session.getUserDetails();
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
-        params.add("GetQuestion.php");
+
         params.add("GetTrivia.php");
+        params.add("GetQuestion.php");
         params.add(tokenCTE);
         params.add(region);
 
         new triviasActivityAsync(triviasActivity.this).execute(params);
-
-
     }
-
     @Override
     public void onBackPressed() {
 
@@ -129,14 +126,12 @@ public class triviasActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -151,7 +146,6 @@ public class triviasActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

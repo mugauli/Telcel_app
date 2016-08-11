@@ -216,7 +216,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PublicitariaDetalleActivity"
+            android:name=".activity_detalle_publicitaria"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
