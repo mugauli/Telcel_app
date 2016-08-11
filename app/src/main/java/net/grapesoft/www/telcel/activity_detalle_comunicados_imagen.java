@@ -59,9 +59,9 @@ public class activity_detalle_comunicados_imagen extends AppCompatActivity
         TouchImageView vista;
 
         TouchImageView img2 = (TouchImageView) findViewById(R.id.img);
-        TextView textView2=(TextView) findViewById(R.id.textView2);
+        /*TextView textView2=(TextView) findViewById(R.id.textView2);
 
-        textView2.setTypeface(tfl);
+        textView2.setTypeface(tfl);*/
 
 
         try {

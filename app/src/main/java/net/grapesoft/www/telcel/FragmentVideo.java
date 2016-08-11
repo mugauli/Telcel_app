@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.VideoView;
 
 import java.io.File;
@@ -58,6 +59,21 @@ public class FragmentVideo extends Fragment {
 
         new FragmentVideoAsync(getActivity()).execute(params);
 
+       LinearLayout RelRevistas = (LinearLayout) rootview.findViewById(R.id.videotodo);
+       RelRevistas.setOnClickListener(new View.OnClickListener() {
+
+           @Override
+           public void onClick(View arg0) {
+
+               //TextView idVideo = (TextView) rootview.findViewById(R.id.idVideo);
+               String id_video = arg0.getTag().toString();
+               Intent i = new Intent(getActivity(), activity_detalle_video.class);
+               i.putExtra("video_id",id_video);
+               startActivity(i);
+               //Log.e("ID Video", "ID: "+ id_video);
+           }
+
+       });
         ImageView imagen_play = (ImageView) rootview.findViewById(R.id.play);
 
        imagen_play.setOnClickListener(new View.OnClickListener() {

@@ -70,10 +70,11 @@
                         android:weightSum="100"
                         >
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_weight="55"
-                            android:layout_height="match_parent"
+
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
                             android:gravity="right"
+                            android:layout_centerHorizontal="true"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:id="@+id/fechaGrupo"/>
                         <TextView

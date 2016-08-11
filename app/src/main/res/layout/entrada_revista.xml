@@ -71,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="45"
+                    android:id="@+id/revistatodo"
                     android:background="@drawable/border_bottom_revista_">
                     <TextView
                         android:layout_width="wrap_content"

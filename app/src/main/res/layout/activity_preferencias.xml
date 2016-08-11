@@ -34,7 +34,7 @@
                 android:orientation="vertical"
                 android:background="#f4f4f4" >
              <TextView
-                 android:background="@color/positivoclaro"
+                 android:background="@color/bordeRevista"
                  android:drawableRight="@android:drawable/arrow_down_float"
 
                  android:id="@+id/list_one_toggler"
@@ -57,11 +57,61 @@
                  app:ael_interpolator="accelerateDecelerate"
                  app:ael_orientation="vertical">
 
-                 <ListView
+                 <!--<ListView
                      android:id="@+id/mobile_list"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content" >
-                 </ListView>
+                 </ListView>-->
+                 <CheckBox
+                     android:id="@+id/Abogado"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Abogado" />
+                 <CheckBox
+                     android:id="@+id/apa"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Aparatos eléctricos" />
+                 <CheckBox
+                     android:id="@+id/Baterías"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Baterías" />
+                 <CheckBox
+                     android:id="@+id/Bicicletas"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Bicicletas" />
+                 <CheckBox
+                     android:id="@+id/Calentadoressolares"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Calentadores solares" />
+                 <CheckBox
+                     android:id="@+id/Floreria "
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Florería " />
+                 <CheckBox
+                     android:id="@+id/Funerarias "
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Funerarias " />
+                 <CheckBox
+                     android:id="@+id/Libros"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Libros" />
+                 <CheckBox
+                     android:id="@+id/Panteón"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Panteón" />
+                 <CheckBox
+                     android:id="@+id/Toallas"
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:text="Toallas" />
 
            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
@@ -77,7 +127,7 @@
                  android:paddingLeft="16dp"
                  android:paddingRight="16dp"
                  android:paddingTop="8dp"
-                 android:text="Accesorios y Servicios"
+                 android:text="Autos"
                  android:textColor="@android:color/white" />
 
              <com.github.aakira.expandablelayout.ExpandableRelativeLayout
@@ -97,10 +147,242 @@
 
              </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
 
-            </LinearLayout>
+                 android:id="@+id/cyv"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Construcción y Vivienda"
+                 android:textColor="@android:color/white" />
 
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_cyv"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
 
+                 <ListView
+                     android:id="@+id/mobile_list_cyv"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
+
+                 android:id="@+id/edu"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Educación "
+                 android:textColor="@android:color/white" />
+
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_edu"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
+
+                 <ListView
+                     android:id="@+id/mobile_list_edu"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
+
+                 android:id="@+id/ent"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Entretenimiento"
+                 android:textColor="@android:color/white" />
+
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_ent"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
+
+                 <ListView
+                     android:id="@+id/mobile_list_ent"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
+
+                 android:id="@+id/rest"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Restaurantes"
+                 android:textColor="@android:color/white" />
+
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_rest"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
+
+                 <ListView
+                     android:id="@+id/mobile_list_rest"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
+
+                 android:id="@+id/syb"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Salud y Belleza"
+                 android:textColor="@android:color/white" />
+
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_syb"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
+
+                 <ListView
+                     android:id="@+id/mobile_list_syb"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
+
+                 android:id="@+id/tc"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Tiendas Comerciales"
+                 android:textColor="@android:color/white" />
+
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_tc"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
+
+                 <ListView
+                     android:id="@+id/mobile_list_tc"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+             <TextView
+                 android:background="@color/positivoclaro"
+                 android:drawableRight="@android:drawable/arrow_down_float"
+
+                 android:id="@+id/viajes"
+                 android:gravity="center_vertical"
+                 android:layout_height="40dp"
+                 android:layout_width="match_parent"
+                 android:paddingBottom="8dp"
+                 android:paddingLeft="16dp"
+                 android:paddingRight="16dp"
+                 android:paddingTop="8dp"
+                 android:text="Viajes"
+                 android:textColor="@android:color/white" />
+
+             <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                 android:id="@+id/list_viajes"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 app:ael_expanded="false"
+                 app:ael_duration="250"
+                 app:ael_interpolator="accelerateDecelerate"
+                 app:ael_orientation="vertical">
+
+                 <ListView
+                     android:id="@+id/mobile_list_viajes"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" >
+                 </ListView>
+
+             </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+         </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GUARDAR"
+                android:id="@+id/btnGenerar"
+                android:background="@drawable/btnshape"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center_horizontal"
+                android:width="150dp"
+                android:layout_marginTop="400dp" />
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
@@ -116,16 +398,7 @@
                 android:layout_marginEnd="42dp"
                 android:layout_marginBottom="20dp" />
         </RelativeLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GUARDARA"
-            android:id="@+id/btnGenerar"
-            android:background="@drawable/btnshape"
-            android:textColor="@android:color/white"
-            android:layout_gravity="center_horizontal"
-            android:width="200dp"
-            android:layout_marginTop="60dp" />
+
     </android.support.design.widget.CoordinatorLayout>
     <include layout="@layout/navigation"/>
 </android.support.v4.widget.DrawerLayout>

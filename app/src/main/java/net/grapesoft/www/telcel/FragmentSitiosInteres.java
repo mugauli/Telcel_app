@@ -70,8 +70,13 @@ public class FragmentSitiosInteres extends Fragment {
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
                     Typeface tfi = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/ligera.otf");
                     texto_inferior_entrada.setTypeface(tfi);
-                    if (texto_inferior_entrada != null)
+                   texto_inferior_entrada.setTextSize(12);
+
+                    if (texto_inferior_entrada != null) {
                         texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
+
+                    }
+
 
                     ImageView imagen_entrada = (ImageView) view.findViewById(R.id.sitios);
                     if (imagen_entrada != null)

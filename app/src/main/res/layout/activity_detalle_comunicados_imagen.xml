@@ -83,7 +83,7 @@
                         android:weightSum="100"
                         android:background="@drawable/border">
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:text="Haz zoom en la imagen"
@@ -91,14 +91,14 @@
                             android:layout_weight="91"
                             android:background="@drawable/border_top_revista"
                             android:textColor="@android:color/white"
-                            />
+                            />-->
 
                         <net.grapesoft.www.telcel.TouchImageView
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:id="@+id/img"
 
-                            android:layout_weight="9"
+                            android:layout_weight="100"
                             android:layout_margin="15dp" />
 
 

@@ -111,6 +111,7 @@ public class falla extends AppCompatActivity
         rb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 unCheckedAll();
                 rb1.setChecked(true);
             }

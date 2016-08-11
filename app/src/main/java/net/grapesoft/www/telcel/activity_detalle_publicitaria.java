@@ -70,7 +70,7 @@ public class activity_detalle_publicitaria extends AppCompatActivity
             Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
             Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
             breadcrumComunicado.setTypeface(tfl);
-
+            breadcrumComunicado.setTextSize(10);
             breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
 
             breadcrumComunicado.setOnClickListener(new View.OnClickListener() {

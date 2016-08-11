@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ public class activity_detalle_grupo extends AppCompatActivity
             Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
             Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
             breadcrumComunicado.setTypeface(tfl);
+            breadcrumComunicado.setTextSize(10);
 
             breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.breadci, 0, 0, 0);
             breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +79,7 @@ public class activity_detalle_grupo extends AppCompatActivity
 
 
         titUG.setText(titulo);
+        descUG.setMovementMethod(LinkMovementMethod.getInstance());
         descUG.setText(Html.fromHtml(descripcion));
 
 

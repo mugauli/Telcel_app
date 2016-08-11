@@ -173,9 +173,12 @@ public class pin extends AppCompatActivity
                                 Log.e("Response Falla: ", resp);
 
                                 if (resp.equals("true")) {
-                                    Intent i = new Intent(pin.this, ActualizadosActivity.class);
-                                    startActivity(i);
-                                    finish();
+                                    session.logoutUser();
+                                    Intent intent = new Intent(getApplicationContext(), login.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
                                 } else {
                                     tvErrorPin.setText("Error al enviar reporte.");
                                     //Toast toast = Toast.makeText(falla.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);

@@ -56,6 +56,7 @@
                 android:layout_weight="34"
                 android:orientation="vertical"
                 android:weightSum="100"
+                android:id="@+id/videotodo"
                 android:background="@drawable/border"
                 >
 

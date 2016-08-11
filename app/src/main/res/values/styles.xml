@@ -53,5 +53,10 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="NavigationDrawerStyle">
+        <item name="android:textSize">10sp</item><!-- text size in menu-->
+        <!-- item size in menu-->
+    </style>
+
 </resources>
 

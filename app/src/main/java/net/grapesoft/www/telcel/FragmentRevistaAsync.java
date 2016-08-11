@@ -234,7 +234,6 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
                         }
                     });
 
-
                 }
             }
         };

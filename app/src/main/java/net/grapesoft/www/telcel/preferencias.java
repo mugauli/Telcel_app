@@ -82,7 +82,7 @@ public class preferencias extends AppCompatActivity
 
             }
         });
-        listaAccesorio = (ListView) findViewById(R.id.mobile_list);
+       /* listaAccesorio = (ListView) findViewById(R.id.mobile_list);
         listaAccesorio.setAdapter(new List_adapted(this, R.layout.entrada_preferencias, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
@@ -95,7 +95,7 @@ public class preferencias extends AppCompatActivity
                         imagen_entrada.setText(((Lista_Entrada) entrada).get_CheckBox());
                 }
             }
-        });
+        });*/
 
         //auto
 
