@@ -323,6 +323,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
         lista = (ListView) activity.findViewById(R.id.lstTrivias);
         if(result != null && lista != null) {
             lista.setAdapter(result);
+            lista.setDivider(null);
             Log.e("Llego", ""+result.getCount());
         }
 
