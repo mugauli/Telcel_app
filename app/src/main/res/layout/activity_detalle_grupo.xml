@@ -47,8 +47,7 @@
                         android:layout_width="fill_parent"
                         android:layout_weight="50"
                         android:layout_height="fill_parent"
-                        android:id="@+id/imagenUG"
-                        android:src="@drawable/videoretro" />
+                        android:id="@+id/imagenUG" />
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"

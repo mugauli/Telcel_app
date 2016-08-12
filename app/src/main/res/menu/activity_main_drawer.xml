@@ -7,7 +7,8 @@
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_perm_identity_black_24dp"
             android:theme="@style/NavigationDrawerStyle"
-            android:title="Modificar o actualizar mis datos" />
+            android:title="Modificar o actualizar mis datos"
+            android:textSize="8sp"/>
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_vpn_key_black_24dp"

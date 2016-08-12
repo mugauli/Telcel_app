@@ -37,7 +37,6 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
     SessionManagement session;
     //Slider
     private ImageSwitcher imageSwitcher;
-    private int[] gallery = { R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f };
     private ArrayList<String> imagenes_slider = new ArrayList<String>();
 
     private ArrayList<Drawable> imagenes_slider_drawable = new ArrayList<Drawable>();

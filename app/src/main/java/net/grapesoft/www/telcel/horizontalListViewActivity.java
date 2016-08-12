@@ -20,7 +20,7 @@ public class horizontalListViewActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.listviewHorizontal);
+		setContentView(R.layout.horizontallistview);
 		
 		HorizontalListView listview = (HorizontalListView) findViewById(R.id.listview);
 		listview.setAdapter(new HAdapter());

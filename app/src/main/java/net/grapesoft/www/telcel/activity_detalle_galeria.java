@@ -44,7 +44,6 @@ public class activity_detalle_galeria extends AppCompatActivity
     //Slider
 
     private ImageSwitcher imageSwitcher;
-    private int[] gallery = { R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e, R.drawable.f };
     private ArrayList<String> imagenes_slider = new ArrayList<String>();
     private ArrayList<Drawable> imagenes_slider_drawable = new ArrayList<Drawable>();
     private int position = 0,descargado=0;
