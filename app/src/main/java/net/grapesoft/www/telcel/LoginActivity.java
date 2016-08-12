@@ -220,6 +220,11 @@ public class LoginActivity extends Activity  {
 
             @Override
         public void onClick(View arg0) {
+
+                Intent p = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(p);
+                finish();
+
                 JSONArray response;
                 String dato="",password="";
                 String campo = "";

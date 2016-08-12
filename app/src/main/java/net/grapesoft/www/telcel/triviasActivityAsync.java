@@ -76,12 +76,12 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
             if(preguntaDiaDetails == null || preguntaDiaDetails == "") {
 
-                Log.e("Se obtiene Trivias","Procesando...");
+                Log.e("Se obtiene Pregunta","Procesando...");
 
                 List<NameValuePair> nameValuePair2 = new ArrayList<NameValuePair>(2);
                 HttpClient httpclient2 = new DefaultHttpClient();
 
-                HttpPost httppost2 = new HttpPost(IP + params[0].get(0));
+                HttpPost httppost2 = new HttpPost(IP + params[0].get(1));
                 nameValuePair2.add(new BasicNameValuePair("token", params[0].get(2)));
                 nameValuePair2.add(new BasicNameValuePair("reg", params[0].get(3)));
 
@@ -101,7 +101,8 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                 result2 = sb2.toString();
 
 
-                session.createPreguntaSession(result11);
+                session.createPreguntaSession(result2);
+                Log.e("Sin session Preguntas",result2);
             }
             else
             {
@@ -267,13 +268,13 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                     TextView titulo_trivias = (TextView) view.findViewById(R.id.triviatitulo);
 
                     if (titulo_trivias != null)
-                        titulo_trivias.setText(((Lista_Entrada) entrada).get_titulo());
+                        titulo_trivias.setText("Trivias");
 
                     final TextView Descripcion_trivias = (TextView) view.findViewById(R.id.triviadetalle);
 
                     if (Descripcion_trivias != null) {
                         String desc = ((Lista_Entrada) entrada).get_textoDebajo();
-                        Descripcion_trivias.setText(Html.fromHtml(desc));
+                        Descripcion_trivias.setText(Html.fromHtml(((Lista_Entrada) entrada).get_titulo()));
                     }
 
                     view.setTag(entrada);

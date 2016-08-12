@@ -116,7 +116,7 @@ public class ActualizarActivity extends AppCompatActivity
             Spinner spinner_Region1 = (Spinner) findViewById(R.id.spnRegion);
             Spinner spinner_Direccion1 = (Spinner) findViewById(R.id.spnDireccion);
 
-            spinner_Region1.setSelection(Integer.parseInt(user.get(SessionManagement.KEY_PD_REGION)));
+            spinner_Region1.setSelection(Integer.parseInt(user.get(SessionManagement.KEY_PD_REGION))-1);
 
             EditText txtCelular = (EditText) findViewById(R.id.txtCelular);
             txtCelular.setText(user.get(SessionManagement.KEY_PD_NUM_CELULAR));
@@ -432,8 +432,8 @@ public class ActualizarActivity extends AppCompatActivity
                 }
                     break;
         }
-        Toast toast = Toast.makeText(ActualizarActivity.this, "Radio: " + Radio , Toast.LENGTH_LONG);
-        toast.show();
+      //  Toast toast = Toast.makeText(ActualizarActivity.this, "Radio: " + Radio , Toast.LENGTH_LONG);
+        // toast.show();
     }
 
     @Override
