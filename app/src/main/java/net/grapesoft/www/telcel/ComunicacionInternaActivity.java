@@ -199,7 +199,7 @@ public class ComunicacionInternaActivity extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(ComunicacionInternaActivity.this, pin.class);
+            Intent i = new Intent(ComunicacionInternaActivity.this, pinActivity.class);
             startActivity(i);
 
 

@@ -363,7 +363,7 @@ public class falla extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(falla.this, pin.class);
+            Intent i = new Intent(falla.this, pinActivity.class);
             startActivity(i);
 
 

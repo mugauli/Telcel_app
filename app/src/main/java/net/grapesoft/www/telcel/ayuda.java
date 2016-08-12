@@ -188,7 +188,7 @@ public class ayuda  extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(ayuda.this, pin.class);
+            Intent i = new Intent(ayuda.this, pinActivity.class);
             startActivity(i);
 
 

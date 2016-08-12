@@ -280,7 +280,7 @@ Log.e("imagenbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", imagen);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_pregunta_respuesta_trivia.this, pin.class);
+            Intent i = new Intent(activity_pregunta_respuesta_trivia.this, pinActivity.class);
             startActivity(i);
 
 

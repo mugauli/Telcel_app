@@ -173,7 +173,7 @@ public class activity_detalle_campana extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_detalle_campana.this, pin.class);
+            Intent i = new Intent(activity_detalle_campana.this, pinActivity.class);
             startActivity(i);
 
 

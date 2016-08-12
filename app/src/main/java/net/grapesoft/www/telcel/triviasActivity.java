@@ -159,7 +159,7 @@ public class triviasActivity extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(triviasActivity.this, pin.class);
+            Intent i = new Intent(triviasActivity.this, pinActivity.class);
             startActivity(i);
 
 

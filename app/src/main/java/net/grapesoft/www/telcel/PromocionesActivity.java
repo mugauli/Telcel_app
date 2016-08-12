@@ -201,7 +201,7 @@ public class PromocionesActivity extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(PromocionesActivity.this, pin.class);
+            Intent i = new Intent(PromocionesActivity.this, pinActivity.class);
             startActivity(i);
 
 

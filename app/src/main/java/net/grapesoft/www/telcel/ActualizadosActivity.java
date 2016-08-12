@@ -132,7 +132,7 @@ public class ActualizadosActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(ActualizadosActivity.this, pin.class);
+            Intent i = new Intent(ActualizadosActivity.this, pinActivity.class);
             startActivity(i);
 
 

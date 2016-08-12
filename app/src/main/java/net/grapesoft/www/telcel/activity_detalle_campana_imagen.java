@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 import Utitilies.GetNetImage;
 import Utitilies.SessionManagement;
+import Utitilies.TouchImageView;
 
 public class activity_detalle_campana_imagen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -163,7 +164,7 @@ public class activity_detalle_campana_imagen extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_detalle_campana_imagen.this, pin.class);
+            Intent i = new Intent(activity_detalle_campana_imagen.this, pinActivity.class);
             startActivity(i);
 
 

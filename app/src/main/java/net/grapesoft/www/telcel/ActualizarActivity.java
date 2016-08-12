@@ -387,7 +387,7 @@ public class ActualizarActivity extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(ActualizarActivity.this, pin.class);
+            Intent i = new Intent(ActualizarActivity.this, pinActivity.class);
             startActivity(i);
 
 

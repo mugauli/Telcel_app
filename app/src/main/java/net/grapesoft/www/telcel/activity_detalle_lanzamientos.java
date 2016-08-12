@@ -375,7 +375,7 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_detalle_lanzamientos.this, pin.class);
+            Intent i = new Intent(activity_detalle_lanzamientos.this, pinActivity.class);
             startActivity(i);
 
 

@@ -188,7 +188,7 @@ public class SitiosInteresActivity extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(SitiosInteresActivity.this, pin.class);
+            Intent i = new Intent(SitiosInteresActivity.this, pinActivity.class);
             startActivity(i);
 
 

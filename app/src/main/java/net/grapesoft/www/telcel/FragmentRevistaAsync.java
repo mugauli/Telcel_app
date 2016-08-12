@@ -41,10 +41,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import Utitilies.DownloadTask;
-import Utitilies.List_adapted;
+import Utitilies.FileDownloader;
 import Utitilies.List_adapted_Revista;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;

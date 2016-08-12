@@ -219,7 +219,7 @@ public class recuperar extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(recuperar.this, pin.class);
+            Intent i = new Intent(recuperar.this, pinActivity.class);
             startActivity(i);
 
 

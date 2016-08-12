@@ -268,7 +268,7 @@ public class activity_pregunta_respuesta extends AppCompatActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(activity_pregunta_respuesta.this, pin.class);
+            Intent i = new Intent(activity_pregunta_respuesta.this, pinActivity.class);
             startActivity(i);
 
 

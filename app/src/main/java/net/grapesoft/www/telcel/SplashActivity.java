@@ -7,7 +7,7 @@ import android.os.Bundle;
 /**
  * Created by Mugauli on 01/06/2016.
  */
-public class SplashTelcel extends Activity {
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class SplashTelcel extends Activity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    Intent intent = new Intent(SplashTelcel.this,LoginActivity.class);
+                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
                     startActivity(intent);
                 }
             }

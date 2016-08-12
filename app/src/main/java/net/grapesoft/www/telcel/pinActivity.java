@@ -27,7 +27,7 @@ import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
-public class pin extends AppCompatActivity
+public class pinActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
         SessionManagement session;
@@ -72,7 +72,7 @@ public class pin extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(pin.this,ayuda.class);
+                Intent intent = new Intent(pinActivity.this,ayuda.class);
                 startActivity(intent);
             }
         });
@@ -90,7 +90,7 @@ public class pin extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(pin.this, MainActivity.class);
+                Intent i = new Intent(pinActivity.this, MainActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
@@ -118,7 +118,7 @@ public class pin extends AppCompatActivity
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(pin.this, triviasActivity.class);
+                Intent i = new Intent(pinActivity.this, triviasActivity.class);
                 startActivity(i);
             }
         });
@@ -160,7 +160,7 @@ public class pin extends AppCompatActivity
                             params.add(idUsuario);
 
 
-                            response = new Comunication(pin.this).execute(params).get();
+                            response = new Comunication(pinActivity.this).execute(params).get();
 
                             Log.e("Response", "PIN: " + response);
                             if (response.getJSONObject(0).has("error")) {
@@ -224,12 +224,12 @@ public class pin extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(pin.this, ActualizarActivity.class);
+            Intent i = new Intent(pinActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(pin.this, pin.class);
+            Intent i = new Intent(pinActivity.this, pinActivity.class);
             startActivity(i);
 
 

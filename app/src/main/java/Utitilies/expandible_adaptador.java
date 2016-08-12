@@ -1,4 +1,4 @@
-package net.grapesoft.www.telcel;
+package Utitilies;
 
 /**
  * Created by memoHack on 07/06/2016.
@@ -18,6 +18,8 @@ import java.util.List;
         import android.view.ViewGroup;
         import android.widget.BaseExpandableListAdapter;
         import android.widget.TextView;
+
+import net.grapesoft.www.telcel.R;
 
 public class expandible_adaptador extends BaseExpandableListAdapter {
 

@@ -143,7 +143,7 @@ public class faq extends ActionBarActivity
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(faq.this, pin.class);
+            Intent i = new Intent(faq.this, pinActivity.class);
             startActivity(i);
 
 
