@@ -17,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -138,7 +137,7 @@ public class ActualizarActivity extends AppCompatActivity
         }
         else
         {
-            Intent i = new Intent(ActualizarActivity.this, login.class);
+            Intent i = new Intent(ActualizarActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         }
@@ -146,7 +145,6 @@ public class ActualizarActivity extends AppCompatActivity
 
 
         //and Asignacion de valores
-
 
         Button btnEnviar = (Button) findViewById(R.id.btnEnviar);
 
@@ -177,7 +175,6 @@ public class ActualizarActivity extends AppCompatActivity
                         // paterno=Rodriguez&
                         // materno=Garibay&
                         // email=guillermo@telcel.com
-
 
                         Spinner spinner_Region = (Spinner) findViewById(R.id.spnRegion);
                         Spinner spinner_Direccion = (Spinner) findViewById(R.id.spnDireccion);
@@ -400,7 +397,7 @@ public class ActualizarActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
-            Intent intent = new Intent(getApplicationContext(), login.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

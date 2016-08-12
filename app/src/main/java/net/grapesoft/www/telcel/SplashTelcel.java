@@ -22,7 +22,7 @@ public class SplashTelcel extends Activity {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
-                    Intent intent = new Intent(SplashTelcel.this,login.class);
+                    Intent intent = new Intent(SplashTelcel.this,LoginActivity.class);
                     startActivity(intent);
                 }
             }

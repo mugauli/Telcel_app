@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import net.grapesoft.www.telcel.login;
+import net.grapesoft.www.telcel.LoginActivity;
 
 import java.util.HashMap;
 
@@ -171,7 +171,7 @@ public class SessionManagement {
         // Check login status
         if(!this.isLoggedIn()){
             // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(_context, login.class);
+            Intent i = new Intent(_context, LoginActivity.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -255,7 +255,7 @@ public class SessionManagement {
         editor.commit();
 
         // After logout redirect user to Loing Activity
-        Intent i = new Intent(_context, login.class);
+        Intent i = new Intent(_context, LoginActivity.class);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

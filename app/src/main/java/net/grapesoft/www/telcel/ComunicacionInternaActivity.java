@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import Utitilies.SessionManagement;
 
@@ -210,7 +209,7 @@ public class ComunicacionInternaActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
-            Intent intent = new Intent(getApplicationContext(), login.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -16,13 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
 import Utitilies.GetNetImage;
-import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 public class activity_detalle_comunicado extends AppCompatActivity
@@ -187,7 +185,7 @@ public class activity_detalle_comunicado extends AppCompatActivity
             startActivity(i);*/
 
         } else if (id == R.id.nav_send) {
-            Intent intent = new Intent(getApplicationContext(), login.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,27 +1,16 @@
 package net.grapesoft.www.telcel;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
-import android.text.method.DialerKeyListener;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +35,7 @@ import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
-public class login extends Activity  {
+public class LoginActivity extends Activity  {
 
     public String tokenCTE = "";
     final Context context = this;
@@ -299,7 +287,7 @@ public class login extends Activity  {
                             params.add(password);
                             params.add(tokenCTE);
                             params.add(campo);
-                            response = new Comunication(login.this).execute(params).get();
+                            response = new Comunication(LoginActivity.this).execute(params).get();
 
                             //{"id":"5","num_empleado":"ANDROID","num_celular":"ANDROID","region":"1","nombre":"ANDROID","paterno":"ANDROID","materno":"ANDROID","interes_1":null,"interes_2":null}
 
@@ -317,7 +305,7 @@ public class login extends Activity  {
 
                                 session.createLoginSession(tokenCTE, dato, campo, password, id, num_empleado, num_celular,
                                         region, nombre, paterno, materno, interes_1, interes_2,correo);
-                                Intent i = new Intent(login.this, MainActivity.class);
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
                                 finish();
 
@@ -372,7 +360,7 @@ public class login extends Activity  {
 
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(login.this,ayuda.class);
+                Intent intent = new Intent(LoginActivity.this,ayuda.class);
                 startActivity(intent);
             }
         });
@@ -382,7 +370,7 @@ public class login extends Activity  {
 
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(login.this,recuperar.class);
+                Intent intent = new Intent(LoginActivity.this,recuperar.class);
                 startActivity(intent);
             }
         });

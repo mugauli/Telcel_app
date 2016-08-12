@@ -14,7 +14,7 @@ import android.widget.Toast;
 import Utitilies.HorizontalListView;
 
 
-public class Android_HorizontalListViewActivity extends Activity {
+public class horizontalListViewActivity extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {

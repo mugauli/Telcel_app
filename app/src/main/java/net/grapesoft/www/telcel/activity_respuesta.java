@@ -9,23 +9,15 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
-import java.util.ArrayList;
-
-import Utitilies.PreguntaElement;
 import Utitilies.SessionManagement;
 
 public class activity_respuesta extends AppCompatActivity
@@ -198,7 +190,7 @@ public class activity_respuesta extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
-            Intent intent = new Intent(getApplicationContext(), login.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

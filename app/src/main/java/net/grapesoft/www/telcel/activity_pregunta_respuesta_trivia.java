@@ -1,7 +1,6 @@
 package net.grapesoft.www.telcel;
 
 import android.content.Intent;
-import android.graphics.Interpolator;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,8 +21,6 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.util.ArrayList;
 
 import Utitilies.PreguntaElement;
 import Utitilies.SessionManagement;
@@ -293,7 +290,7 @@ Log.e("imagenbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", imagen);
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();
-            Intent intent = new Intent(getApplicationContext(), login.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
