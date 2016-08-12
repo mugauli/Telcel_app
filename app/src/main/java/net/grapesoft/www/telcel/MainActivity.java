@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
