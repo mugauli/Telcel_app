@@ -93,11 +93,11 @@ public class ayuda  extends AppCompatActivity
                 CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
 
                 if(elegido.get_textoEncima() == getString(R.string.preguntas) ) {
-                    Intent i = new Intent(ayuda.this, faq.class);
+                    Intent i = new Intent(ayuda.this, FaqActivity.class);
                     startActivity(i);
                 }else if(elegido.get_textoEncima() == getString(R.string.fallas))
                 {
-                    Intent i = new Intent(ayuda.this, falla.class);
+                    Intent i = new Intent(ayuda.this, FallaActivity.class);
                     startActivity(i);
 
                 }else if(elegido.get_textoEncima() == getString(R.string.sugerencias))

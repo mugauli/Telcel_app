@@ -172,7 +172,6 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                             Boolean valRespuesta = respuestas.getJSONObject(i).get("valRespuesta").toString().equals("1");
                             respuestaslts.add(new Respuestas(idResp,txtRespuesta,valRespuesta));
                         }
-                        //Pregunta (int idPreg, String txtPregunta, ArrayList<Respuestas> respuestasLts)
                         preguntas.add(new Pregunta(idPreg,txtPregunta,respuestaslts));
                     }
                 }
@@ -196,12 +195,10 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                     @Override
                     public void onClick(View v) {
 
-
-
-                        Log.e("Enviar Siguiente",""+siguiente);
-                        Log.e("Enviar Aciertos",""+puntos);
-                        Log.e("Enviar Preguntas",""+preguntas.size());
-                        Log.e("Enviar Ulitimo",""+ultimo);
+                     //   Log.e("Enviar Siguiente",""+siguiente);
+                     //   Log.e("Enviar Aciertos",""+puntos);
+                     //   Log.e("Enviar Preguntas",""+preguntas.size());
+                     //   Log.e("Enviar Ultimo",""+ultimo);
 
                         ultimo = (siguiente == preguntas.size());
 
@@ -228,9 +225,10 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                                 i.putExtra("puntos",""+puntos);
                                 i.putExtra("trivia", trivia);
                                 i.putExtra("imagen", imagen);
-                                i.putExtra("tipo", 1);
+                                i.putExtra("tipo", "1");
                                 startActivity(i);
                                 finish();
+
                             }else
                             {
 
@@ -250,9 +248,6 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                                 }
                             }
 
-                            Log.e("imagenbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", imagen);
-
-
                         } else {
                             txtError.setText("Debe seleccionar una respuesta.");
                         }
@@ -264,7 +259,25 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
         }
         else
         {
+            ImageView imagenTriviaRespuesta = (ImageView) findViewById(R.id.imagenTrivia);
+            Log.e("imagen cargaPregunta",imagen);
 
+
+            try {
+                Bitmap img = new GetNetImage().execute(imagen).get();
+                if (img != null)
+                    imagenTriviaRespuesta.setImageBitmap(img);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            TextView preg = (TextView) findViewById(R.id.txtPreguntaTrivia);
+            if (preg != null) {
+                preg.setText("No se encontraron preguntas para esta trivia.");
+            }
         }
         startTimer();
     }
@@ -355,13 +368,18 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                             TextView tiempo = (TextView)findViewById(R.id.txtTiempo);
                             tiempo.setText((tTotal-tTranscurrido)+"''");
 
-                        }else
+                        }
+                        else
                         {
+                            tTranscurrido +=1;
+
+                            timer.cancel();
+
                             Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_respuesta_trivia.class);
                             i.putExtra("puntos",""+puntos);
                             i.putExtra("trivia", trivia);
                             i.putExtra("imagen", imagen);
-                            i.putExtra("tipo", 0);
+                            i.putExtra("tipo", "0");
                             startActivity(i);
                             finish();
                         }

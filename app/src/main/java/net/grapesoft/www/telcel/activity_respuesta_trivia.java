@@ -81,7 +81,6 @@ public class activity_respuesta_trivia extends AppCompatActivity
                 }
             });
         }
-// Find logo
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
         ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
@@ -135,7 +134,6 @@ public class activity_respuesta_trivia extends AppCompatActivity
             Bitmap img = new GetNetImage().execute(imagen).get();
             if(img != null)
                 imagenTriviaRespuesta.setImageBitmap(img);
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -163,7 +161,7 @@ public class activity_respuesta_trivia extends AppCompatActivity
 
             if(response.getJSONObject(0).has("error")) {
 
-                int errorcode = Integer.parseInt(responseArray2.getJSONObject(0).get("error").toString());
+                int errorcode = Integer.parseInt(response.getJSONObject(0).get("error").toString());
 
               // 1	Acceso denegado
               // 2	No se recibieron parametros

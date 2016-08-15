@@ -36,7 +36,7 @@ import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
 
-public class falla extends AppCompatActivity
+public class FallaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
@@ -218,7 +218,7 @@ public class falla extends AppCompatActivity
                               params.add(opcion);
                               params.add(comentario);
 
-                              response = new Comunication(falla.this).execute(params).get();
+                              response = new Comunication(FallaActivity.this).execute(params).get();
 
                               Log.e("Response", "Falla: " + response);
                               if(response.getJSONObject(0).has("error")) {
@@ -232,7 +232,7 @@ public class falla extends AppCompatActivity
                                   Log.e("Response Falla: ", resp);
 
                                   if(resp.equals("true")) {
-                                      Intent i = new Intent(falla.this, ActualizadosActivity.class);
+                                      Intent i = new Intent(FallaActivity.this, ActualizadosActivity.class);
                                       i.putExtra("titulo","MENSAJE ENVIADO");
                                       i.putExtra("mensaje","Gracias, Tu mensaje ha sido enviado.");
                                       startActivity(i);
@@ -279,7 +279,7 @@ public class falla extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(falla.this, MainActivity.class);
+                    Intent i = new Intent(FallaActivity.this, MainActivity.class);
                     i.putExtra("direccion","0");
                     startActivity(i);
                 }
@@ -305,7 +305,7 @@ public class falla extends AppCompatActivity
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(falla.this, triviasActivity.class);
+                Intent i = new Intent(FallaActivity.this, triviasActivity.class);
                 startActivity(i);
             }
         });
@@ -358,12 +358,12 @@ public class falla extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(falla.this, ActualizarActivity.class);
+            Intent i = new Intent(FallaActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(falla.this, pinActivity.class);
+            Intent i = new Intent(FallaActivity.this, pinActivity.class);
             startActivity(i);
 
 

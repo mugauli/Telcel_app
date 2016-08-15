@@ -22,7 +22,7 @@ import Utitilies.List_adapted;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
 
-public class faq extends ActionBarActivity
+public class FaqActivity extends ActionBarActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
@@ -83,7 +83,7 @@ public class faq extends ActionBarActivity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(faq.this, MainActivity.class);
+                Intent i = new Intent(FaqActivity.this, MainActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
@@ -108,7 +108,7 @@ public class faq extends ActionBarActivity
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(faq.this, triviasActivity.class);
+                Intent i = new Intent(FaqActivity.this, triviasActivity.class);
                 startActivity(i);
             }
         });
@@ -138,12 +138,12 @@ public class faq extends ActionBarActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(faq.this, ActualizarActivity.class);
+            Intent i = new Intent(FaqActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(faq.this, pinActivity.class);
+            Intent i = new Intent(FaqActivity.this, pinActivity.class);
             startActivity(i);
 
 

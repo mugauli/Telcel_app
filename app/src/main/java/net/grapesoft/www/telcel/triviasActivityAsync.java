@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -151,26 +152,31 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                 Log.e("Se obtiene Trivias","Procesando...");
 
-            //    List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-            //    HttpClient httpclient = new DefaultHttpClient();
-//
-            //    HttpPost httppost = new HttpPost(IP + params[0].get(1));
-            //    nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
-            //    nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
-            //    httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-            //    Log.e("IP", IP + params[0].get(1));
-            //    // Execute HTTP Post Request
-            //    HttpResponse response = httpclient.execute(httppost);
-//
-            //    BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
-            //    StringBuilder sb = new StringBuilder();
-            //    sb.append(reader.readLine() + "\n");
-            //    String line = "0";
-            //    while ((line = reader.readLine()) != null) {
-            //        sb.append(line + "\n");
-            //    }
-            //    reader.close();
-            //    result11 = sb.toString();
+                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+                HttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = new HttpPost(IP + params[0].get(0));
+
+                nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
+                nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
+
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+                Log.e("IP", IP + params[0].get(0));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+                StringBuilder sb = new StringBuilder();
+                sb.append(reader.readLine() + "\n");
+                String line = "0";
+
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                reader.close();
+                result11 = sb.toString();
+
                 result11= "[{\"id\":\"1\",\"texto\":\"\",\"tipo\":\"C\",\"titulo\":\"Cruz Azul vs. Pumas\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\"},{\"id\":\"2\",\"texto\":\"\",\"tipo\":\"T\",\"titulo\":\"Trivia de prueba\",\"duracion\":\"1\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/videos\\/video-Retroalimentacion.png\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 1\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 1\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 1\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 2\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 2\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 2\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 3\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 3\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 3\",\"valRespuesta\":\"0\"}]}]}]\n";
 
 
@@ -296,19 +302,30 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                                 i.putExtra("descripcion", entrada.get_textoDebajo());
 
                                 activity.startActivity(i);
-                            }else
+                            }
+                            else
                             {
-                                Intent i = new Intent(activity, activity_pregunta_respuesta_trivia.class);
+                                String trivias = session.getTriviasContestadoDetails();
+                                if(trivias == null)
+                                    trivias = "0";
+                                if(trivias.contains("["+entrada.get_id().trim()+"]"))
+                                {
+                                    Toast toast = Toast.makeText(activity, "Trivia ya contestada.", Toast.LENGTH_LONG);
+                                    toast.show();
+                                }
+                                else
+                                {
+                                    session.createTriviasContestadoSession(trivias+"["+ entrada.get_id().trim()+"],");
+                                    Intent i = new Intent(activity, activity_pregunta_respuesta_trivia.class);
+                                    i.putExtra("preguntas", entrada.get_preguntas());
+                                    i.putExtra("puntos","0");
+                                    i.putExtra("siguiente","0");
+                                    i.putExtra("trivia", entrada.get_id());
+                                    i.putExtra("imagen", entrada.get_img_detalle());
+                                    i.putExtra("duracion", entrada.get_duracion());
+                                    activity.startActivity(i);
+                                }
 
-                                i.putExtra("preguntas", entrada.get_preguntas());
-                                i.putExtra("puntos","0");
-                                i.putExtra("siguiente","0");
-                                i.putExtra("trivia", entrada.get_id());
-                                i.putExtra("imagen", entrada.get_img_detalle());
-                                i.putExtra("duracion", entrada.get_duracion());
-
-
-                                activity.startActivity(i);
                             }
                             Log.e("imagen",""+ entrada.get_img_detalle());
                         }

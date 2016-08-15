@@ -55,7 +55,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".faq"
+            android:name=".FaqActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -75,7 +75,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".falla"
+            android:name=".FallaActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
