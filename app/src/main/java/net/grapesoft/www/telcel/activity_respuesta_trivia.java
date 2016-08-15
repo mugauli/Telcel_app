@@ -164,14 +164,14 @@ public class activity_respuesta_trivia extends AppCompatActivity
             if(response.getJSONObject(0).has("error")) {
 
                 int errorcode = Integer.parseInt(responseArray2.getJSONObject(0).get("error").toString());
-                //Toast toast = Toast.makeText(activity_respuesta_trivia.this, "Error al actualizar la información de trivia", Toast.LENGTH_LONG);
-                //toast.show();
-              // 1	Acceso denegado'
+
+              // 1	Acceso denegado
               // 2	No se recibieron parametros
               // 3	Error MySQL
               // 4	No existe la trivia
               // 5	Trivia contestada anteriormente
               // 0	Trivia guardada
+
                      if(errorcode == 0){
                          Log.e("Response SaveWinner: ",errorcode + " Trivia Guardada");
                          tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
@@ -181,7 +181,7 @@ public class activity_respuesta_trivia extends AppCompatActivity
                          tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
                      }
                 else if(errorcode == 2){
-                         Log.e("Response SaveWinner: ",errorcode + " Nose recibieron parametros");
+                         Log.e("Response SaveWinner: ",errorcode + " No se recibieron parametros");
                          tyxtErrorTrivias.setText("Error al actualizar la información de trivia  : "+errorcode);
                      }
                 else if(errorcode == 3){
@@ -193,7 +193,7 @@ public class activity_respuesta_trivia extends AppCompatActivity
                          tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
                      }
                 else if(errorcode == 5){
-                         Log.e("Response SaveWinner: ",errorcode + " Trivia contestada Anteriormente");
+                         Log.e("Response SaveWinner: ",errorcode + " Trivia contestada anteriormente");
                          tyxtErrorTrivias.setText("Trivia contestada anteriormente.");
                      }
                 else tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
