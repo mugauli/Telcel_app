@@ -119,6 +119,14 @@ public class activity_respuesta_trivia extends AppCompatActivity
         String puntos = getIntent().getExtras().getString("puntos", "0");
         String trivia = getIntent().getExtras().getString("trivia", "0");
         String imagen = getIntent().getExtras().getString("imagen", "0");
+        String tipo = getIntent().getExtras().getString("tipo", "0");
+
+        if(tipo.equals("0"))
+        {
+            TextView error = (TextView) findViewById(R.id.tyxtErrorTrivias);
+            error.setText("El tiempo de la trivia se ha agotado.");
+        }
+
 
         ImageView imagenTriviaRespuesta = (ImageView) findViewById(R.id.imagenTriviaRespuesta);
         Log.e("imagen",imagen);
@@ -144,6 +152,7 @@ public class activity_respuesta_trivia extends AppCompatActivity
         params.add(user.get(SessionManagement.KEY_PD_ID));
         params.add(user.get(SessionManagement.KEY_PD_REGION));
         params.add(puntos);
+        params.add("1");
 
         TextView tyxtErrorTrivias = (TextView) findViewById(R.id.tyxtErrorTrivias);
 
@@ -153,10 +162,41 @@ public class activity_respuesta_trivia extends AppCompatActivity
             JSONArray response = new Comunication(activity_respuesta_trivia.this).execute(params).get();
 
             if(response.getJSONObject(0).has("error")) {
-                Log.e("Response Actualizar: ", "ERROR");
+
+                int errorcode = Integer.parseInt(responseArray2.getJSONObject(0).get("error").toString());
                 //Toast toast = Toast.makeText(activity_respuesta_trivia.this, "Error al actualizar la información de trivia", Toast.LENGTH_LONG);
                 //toast.show();
-                tyxtErrorTrivias.setText("Error al actualizar la información de trivia");
+              // 1	Acceso denegado'
+              // 2	No se recibieron parametros
+              // 3	Error MySQL
+              // 4	No existe la trivia
+              // 5	Trivia contestada anteriormente
+              // 0	Trivia guardada
+                     if(errorcode == 0){
+                         Log.e("Response SaveWinner: ",errorcode + " Trivia Guardada");
+                         tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
+                     }
+                else if(errorcode == 1){
+                         Log.e("Response SaveWinner: ",errorcode + " Acceso denegado");
+                         tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
+                     }
+                else if(errorcode == 2){
+                         Log.e("Response SaveWinner: ",errorcode + " Nose recibieron parametros");
+                         tyxtErrorTrivias.setText("Error al actualizar la información de trivia  : "+errorcode);
+                     }
+                else if(errorcode == 3){
+                         Log.e("Response SaveWinner: ",errorcode + " Error MySQL");
+                         tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
+                     }
+                else if(errorcode == 4){
+                         Log.e("Response SaveWinner: ",errorcode + " No existe la trivia");
+                         tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
+                     }
+                else if(errorcode == 5){
+                         Log.e("Response SaveWinner: ",errorcode + " Trivia contestada Anteriormente");
+                         tyxtErrorTrivias.setText("Trivia contestada anteriormente.");
+                     }
+                else tyxtErrorTrivias.setText("Error al actualizar la información de trivia : "+errorcode);
             }
 
         } catch (InterruptedException e) {

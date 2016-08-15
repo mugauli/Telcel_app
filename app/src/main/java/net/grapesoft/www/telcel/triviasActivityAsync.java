@@ -171,7 +171,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
             //    }
             //    reader.close();
             //    result11 = sb.toString();
-                result11= "[{\"id\":\"1\",\"texto\":\"\",\"tipo\":\"C\",\"titulo\":\"Cruz Azul vs. Pumas\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\"},{\"id\":\"2\",\"texto\":\"\",\"tipo\":\"T\",\"titulo\":\"Trivia de prueba\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 1\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 1\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 1\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 2\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 2\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 2\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 3\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 3\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 3\",\"valRespuesta\":\"0\"}]}]}]\n";
+                result11= "[{\"id\":\"1\",\"texto\":\"\",\"tipo\":\"C\",\"titulo\":\"Cruz Azul vs. Pumas\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\"},{\"id\":\"2\",\"texto\":\"\",\"tipo\":\"T\",\"titulo\":\"Trivia de prueba\",\"duracion\":\"1\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/videos\\/video-Retroalimentacion.png\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 1\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 1\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 1\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 2\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 2\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 2\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 3\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 3\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 3\",\"valRespuesta\":\"0\"}]}]}]\n";
 
 
                 session.createTriviasSession(result11);
@@ -215,13 +215,15 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                     String img_detalle = responseArray.getJSONObject(i).get("img_previa").toString();
                     String tipo = responseArray.getJSONObject(i).get("tipo").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
+                    String duracion = "1";
                     String preguntas = "0";
                     if(tipo.equals("T"))
                     {
                         preguntas = responseArray.getJSONObject(i).getJSONArray("elementos").toString();
+                        duracion = responseArray.getJSONObject(i).get("duracion").toString();
                     }
 
-                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_detalle,preguntas));
+                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_detalle,preguntas,duracion));
                 }
             }
 
@@ -303,6 +305,8 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                                 i.putExtra("siguiente","0");
                                 i.putExtra("trivia", entrada.get_id());
                                 i.putExtra("imagen", entrada.get_img_detalle());
+                                i.putExtra("duracion", entrada.get_duracion());
+
 
                                 activity.startActivity(i);
                             }

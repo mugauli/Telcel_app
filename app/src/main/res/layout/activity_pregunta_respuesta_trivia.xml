@@ -18,7 +18,7 @@
         android:fitsSystemWindows="true"
         tools:context="net.grapesoft.menu.MainActivity">
 
-        <include layout="@layout/toolbar"/>
+        <include layout="@layout/toolbar_trivia"/>
 
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,7 +32,7 @@
 
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_alignParentTop="true"
@@ -43,151 +43,174 @@
                 android:id="@+id/RelRevista">
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="48"></LinearLayout>
-
-                <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="4"
-                    android:weightSum="100">
+                    android:layout_weight="70">
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="48"></LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
+                    <ImageView
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="7"
-                        android:weightSum="100"
-                        android:background="@drawable/border">
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="fill_parent"
-                            android:weightSum="100"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="15">
-
-                            <TextView
-
-                                android:id="@+id/txtPreguntaTrivia"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Small Text"
-                                android:textColor="@color/ColorPrimary"
-                                android:textStyle="bold"
-                                android:gravity="center"
-                                android:layout_alignParentTop="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:padding="15dp"
-                                android:textSize="16dp" />
-
-                            <LinearLayout
-                                android:orientation="vertical"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/lytRespuestas"
-                                android:paddingLeft="20dp"
-                                android:paddingTop="15dp"
-                                android:paddingRight="20dp"
-                                android:paddingBottom="15dp"></LinearLayout>
-
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="45">
-                            <TextView
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:textColor="@color/error"
-                                android:id="@+id/txtError"
-                                android:textAlignment="center"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="15dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_weight="40"
-                            android:weightSum="100"
-                            android:background="@drawable/border_preguntas">
-
-
-                            <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:layout_weight="33" />
-
-                            <LinearLayout
-                                android:orientation="vertical"
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:layout_weight="34">
-
-                                <LinearLayout
-                                    android:orientation="horizontal"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent"
-                                    android:layout_weight="33"></LinearLayout>
-
-                                <TextView
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent"
-                                    android:text="SIGUIENTE >"
-                                    android:textColor="@color/bordes"
-                                    android:id="@+id/btnEnviar"
-                                    android:textAlignment="center"
-                                    android:layout_weight="34"
-                                    android:textStyle="bold"
-                                    android:textSize="17dp" />
-
-                                <LinearLayout
-                                    android:orientation="horizontal"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent"
-                                    android:layout_weight="33"></LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:layout_weight="33" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="45"></LinearLayout>
-
+                        android:id="@+id/imagenTrivia" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="48"></LinearLayout>
+                    android:layout_weight="30"
+                    android:weightSum="100">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="49"></LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:weightSum="100"
+                        android:layout_weight="2">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="49"></LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="2"
+                            android:weightSum="100"
+                            android:background="@drawable/border">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:weightSum="100"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="12">
+
+                                <TextView
+
+                                    android:id="@+id/txtPreguntaTrivia"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Small Text"
+                                    android:textColor="@color/ColorPrimary"
+                                    android:textStyle="bold"
+                                    android:gravity="left"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:textSize="16dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="10dp"
+                                    android:paddingRight="15dp"
+                                    android:paddingBottom="5dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/lytRespuestas"
+                                    android:paddingLeft="15dp"
+                                    android:paddingTop="8dp"
+                                    android:paddingRight="15dp"
+                                    android:paddingBottom="8dp"></LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="47">
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:textColor="@color/error"
+                                    android:id="@+id/txtError"
+                                    android:textAlignment="center"
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginRight="15dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:layout_weight="41"
+                                android:weightSum="100"
+                                android:background="@drawable/border_preguntas">
+
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_weight="33" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_weight="34">
+
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:layout_weight="33"></LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:text="SIGUIENTE >"
+                                        android:textColor="@color/bordes"
+                                        android:id="@+id/btnEnviar"
+                                        android:textAlignment="center"
+                                        android:layout_weight="34"
+                                        android:textStyle="bold"
+                                        android:textSize="17dp" />
+
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:layout_weight="33"></LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_weight="33" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="49"></LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="49"></LinearLayout>
+
+                </LinearLayout>
 
 
             </LinearLayout>

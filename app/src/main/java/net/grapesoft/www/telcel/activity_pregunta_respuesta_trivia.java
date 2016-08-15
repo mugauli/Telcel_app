@@ -1,7 +1,12 @@
 package net.grapesoft.www.telcel;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Interpolator;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -9,11 +14,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,7 +29,15 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutionException;
+
+import Utitilies.GetNetImage;
+import Utitilies.Pregunta;
 import Utitilies.PreguntaElement;
+import Utitilies.Respuestas;
 import Utitilies.SessionManagement;
 
 public class activity_pregunta_respuesta_trivia extends AppCompatActivity
@@ -32,10 +47,15 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
     SessionManagement session;
     Boolean ultimo = false;
     String preguntasJSON;
-    String siguiente;
-    String puntos;
+    int siguiente=0;
+    int puntos=0;
     String trivia;
     String imagen;
+    ArrayList<Pregunta> preguntas = new ArrayList<>();
+    RadioGroup group;
+    ProgressDialog pDialog;
+    private Timer timer = null;
+    int DURATION=1000,tTranscurrido=0,tTotal=60;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +124,25 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             });
         }
 
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+
+        int height = metrics.heightPixels; // alto absoluto en pixels
+
+        Log.e("Alto",""+height);
+        if(height<1000) {
+            TextView tiempo = (TextView) findViewById(R.id.txtTiempo);
+            tiempo.setTextSize(17);
+        }
+
+
         preguntasJSON = getIntent().getExtras().getString("preguntas","0");
-        siguiente = getIntent().getExtras().getString("siguiente","0");
-        puntos = getIntent().getExtras().getString("puntos","0");
         trivia = getIntent().getExtras().getString("trivia","0");
         imagen = getIntent().getExtras().getString("imagen","0");
+        tTotal = Integer.parseInt(getIntent().getExtras().getString("duracion","0"))*60;
+        group =  new RadioGroup(this);
+
 
         try {
             //Log.e("Response: ", "JSON");
@@ -117,122 +151,228 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             else
                 responseArray2 = new JSONArray("[" + preguntasJSON + "]");
 
-            if (responseArray2.getJSONObject(0).has("resp")) {
-                Log.e("Item Preguntas_Trivias", "Error");
-
-            } else if (responseArray2.getJSONObject(0).has("error")) {
+            if (responseArray2.getJSONObject(0).has("error")) {
                 Log.e("Item Preguntas_Trivias", "Error");
             } else {
                 if (responseArray2.length() > 0) {
 
 
                     for (int a = 0; a < responseArray2.length(); a++) {
-                        Log.e("IF: ", ""+a + "--" +siguiente);
 
-                        if (a == Integer.parseInt(siguiente)) {
+                        int idPreg = Integer.parseInt(responseArray2.getJSONObject(a).get("idPreg").toString());
+                        String txtPregunta = responseArray2.getJSONObject(a).get("txtPregunta").toString();
+                        JSONArray respuestas = responseArray2.getJSONObject(a).getJSONArray("respuestas");
 
-                            Log.e("Response Item: ", responseArray2.getJSONObject(a).toString());
+                        ArrayList<Respuestas> respuestaslts = new ArrayList<>();
 
-                            String idPreg = responseArray2.getJSONObject(a).get("idPreg").toString();
-                            String txtPregunta = responseArray2.getJSONObject(a).get("txtPregunta").toString();
+                        for (int i = 0; i < respuestas.length(); i++) {
 
-                            TextView pregunta = (TextView) findViewById(R.id.txtPreguntaTrivia);
-                            if (pregunta != null) {
-                                pregunta.setText(txtPregunta);
-                            }
-
-                            JSONArray respuestas = responseArray2.getJSONObject(a).getJSONArray("respuestas");
-
-                            final RadioGroup group = new RadioGroup(this);
-                            group.setOrientation(RadioGroup.VERTICAL);
-                            LinearLayout lytRespuestas = (LinearLayout) findViewById(R.id.lytRespuestas);
-
-                            lytRespuestas.addView(group);
-
-                            for (int i = 0; i < respuestas.length(); i++) {
-
-                                String idResp = respuestas.getJSONObject(i).get("idResp").toString();
-                                String txtRespuesta = respuestas.getJSONObject(i).get("txtRespuesta").toString();
-                                String valRespuesta = respuestas.getJSONObject(i).get("valRespuesta").toString();
-
-                                RadioButton btn1 = new RadioButton(this);
-                                btn1.setText(txtRespuesta);
-                                btn1.setTag(new PreguntaElement(idResp, txtRespuesta, valRespuesta));
-                                btn1.setPadding(80,50,80,50);
-                                btn1.setTextSize(15);
-                                btn1.setTextColor(R.color.ColorPrimary);
-                                group.addView(btn1);
-                            }
-
-
-
-                            TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
-                            if (btnEnviar != null) {
-                                if(Integer.parseInt(siguiente)+1 == respuestas.length())
-                                {
-                                    ultimo= true;
-                                    btnEnviar.setText("ENVIAR >");
-                                }
-                                btnEnviar.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                        TextView txtError = (TextView) findViewById(R.id.txtError);
-                                        int radioButtonID = group.getCheckedRadioButtonId();
-                                        Log.e("elegido", "" + radioButtonID);
-                                        if (radioButtonID != -1) {
-                                            txtError.setText("");
-                                            View radioButton = group.findViewById(radioButtonID);
-                                            RadioButton rb = (RadioButton) radioButton;
-
-                                            PreguntaElement element = (PreguntaElement) rb.getTag();
-
-                                            Log.e("elegido", element.get_valRespuesta());
-                                            puntos = String.valueOf (Integer.parseInt(puntos) + Integer.parseInt(element.get_valRespuesta()));
-
-                                            if(ultimo) {
-
-                                                Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_respuesta_trivia.class);
-                                                i.putExtra("puntos",""+puntos);
-                                                i.putExtra("trivia", trivia);
-                                                i.putExtra("imagen", imagen);
-                                                startActivity(i);
-                                                finish();
-                                            }else
-                                            {
-                                                Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_pregunta_respuesta_trivia.class);
-                                                i.putExtra("preguntas", preguntasJSON);
-                                                i.putExtra("puntos",""+puntos);
-                                                i.putExtra("trivia", trivia);
-                                                i.putExtra("imagen", imagen);
-                                                i.putExtra("siguiente",""+(Integer.parseInt(siguiente)+1));
-                                                startActivity(i);
-                                                finish();
-
-                                            }
-Log.e("imagenbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", imagen);
-
-
-                                        } else {
-                                            txtError.setText("Debe seleccionar una respuesta.");
-                                        }
-
-                                    }
-                                });
-                            }
+                            int idResp = Integer.parseInt(respuestas.getJSONObject(i).get("idResp").toString());
+                            String txtRespuesta = respuestas.getJSONObject(i).get("txtRespuesta").toString();
+                            Boolean valRespuesta = respuestas.getJSONObject(i).get("valRespuesta").toString().equals("1");
+                            respuestaslts.add(new Respuestas(idResp,txtRespuesta,valRespuesta));
                         }
+                        //Pregunta (int idPreg, String txtPregunta, ArrayList<Respuestas> respuestasLts)
+                        preguntas.add(new Pregunta(idPreg,txtPregunta,respuestaslts));
                     }
                 }
-
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        if(preguntas.size() > 0)
+        {
+            group = cargaPregunta(preguntas.get(siguiente),imagen,activity_pregunta_respuesta_trivia.this);
+            group.setOrientation(RadioGroup.VERTICAL);
+            LinearLayout lytRespuestas = (LinearLayout) findViewById(R.id.lytRespuestas);
+            lytRespuestas.removeAllViews();
+            lytRespuestas.addView(group);
 
+            final TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
+            if (btnEnviar != null) {
+
+                btnEnviar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+
+                        Log.e("Enviar Siguiente",""+siguiente);
+                        Log.e("Enviar Aciertos",""+puntos);
+                        Log.e("Enviar Preguntas",""+preguntas.size());
+                        Log.e("Enviar Ulitimo",""+ultimo);
+
+                        ultimo = (siguiente == preguntas.size());
+
+                        TextView txtError = (TextView) findViewById(R.id.txtError);
+
+                        int radioButtonID = group.getCheckedRadioButtonId();
+
+                        Log.e("elegido", "" + radioButtonID);
+                        if (radioButtonID != -1) {
+                            txtError.setText("");
+                            View radioButton = group.findViewById(radioButtonID);
+                            RadioButton rb = (RadioButton) radioButton;
+
+                            Boolean acierto = (Boolean) rb.getTag();
+
+                            if(acierto)
+                            {
+                                puntos = puntos +1;
+                            }
+
+                            if(ultimo) {
+
+                                Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_respuesta_trivia.class);
+                                i.putExtra("puntos",""+puntos);
+                                i.putExtra("trivia", trivia);
+                                i.putExtra("imagen", imagen);
+                                i.putExtra("tipo", 1);
+                                startActivity(i);
+                                finish();
+                            }else
+                            {
+
+                                group = cargaPregunta(preguntas.get(siguiente),imagen,activity_pregunta_respuesta_trivia.this);
+                                LinearLayout lytRespuestas = (LinearLayout) findViewById(R.id.lytRespuestas);
+                                lytRespuestas.removeAllViews();
+                                lytRespuestas.addView(group);
+
+                                if(siguiente == preguntas.size())
+                                {
+                                    ultimo= true;
+                                    btnEnviar.setText("ENVIAR >");
+                                }
+                                else
+                                {
+                                    ultimo= false;
+                                }
+                            }
+
+                            Log.e("imagenbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", imagen);
+
+
+                        } else {
+                            txtError.setText("Debe seleccionar una respuesta.");
+                        }
+
+                    }
+                });
+            }
+
+        }
+        else
+        {
+
+        }
+        startTimer();
+    }
+
+    public RadioGroup cargaPregunta(Pregunta pregunta,String img_previa, Activity activity)
+    {
+        RadioGroup response = new RadioGroup(this);
+        siguiente = siguiente + 1;
+        ImageView imagenTriviaRespuesta = (ImageView) activity.findViewById(R.id.imagenTrivia);
+        Log.e("imagen cargaPregunta",img_previa);
+
+
+            try {
+                Bitmap img = new GetNetImage().execute(img_previa).get();
+                if (img != null)
+                    imagenTriviaRespuesta.setImageBitmap(img);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+        TextView preg = (TextView) activity.findViewById(R.id.txtPreguntaTrivia);
+        if (preg != null) {
+            preg.setText(pregunta.get_txtPregunta());
+        }
+
+        ArrayList<Respuestas> respuestas = pregunta.get_respuestasLts();
+        for (int i = 0; i < respuestas.size(); i++) {
+
+            String idResp = respuestas.get(i).get_idResp()+"";
+            String txtRespuesta = respuestas.get(i).get_txtrespuesta();
+            Boolean valRespuesta = respuestas.get(i).get_valRespuesta();
+
+            RadioButton btn1 = new RadioButton(this);
+            btn1.setText(txtRespuesta);
+            btn1.setTag(valRespuesta);
+
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+
+            int height = metrics.heightPixels; // alto absoluto en pixels
+
+            Log.e("Alto",""+height);
+            if(height<1000) {
+                btn1.setPadding(50, 20, 50, 20);
+                btn1.setTextSize(12);
+                preg.setTextSize(13);
+                TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
+                if (btnEnviar != null) {
+                        ultimo = true;
+                        btnEnviar.setTextSize(13);
+                }
+            }
+            else
+            {
+                btn1.setPadding(70, 50, 70, 50);
+                btn1.setTextSize(15);
+            }
+
+            btn1.setTextColor(R.color.ColorPrimary);
+            response.addView(btn1);
+        }
+
+        return response;
 
     }
+
+    public void startTimer() {
+
+
+        Log.e("inicio", "Start");
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+            public void run() {
+                // avoid exception:
+                // "Only the original thread that created a view hierarchy can touch its views"
+                runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        if(tTranscurrido < tTotal)
+                        {
+                            tTranscurrido +=1;
+
+                            TextView tiempo = (TextView)findViewById(R.id.txtTiempo);
+                            tiempo.setText((tTotal-tTranscurrido)+"''");
+
+                        }else
+                        {
+                            Intent i = new Intent(activity_pregunta_respuesta_trivia.this, activity_respuesta_trivia.class);
+                            i.putExtra("puntos",""+puntos);
+                            i.putExtra("trivia", trivia);
+                            i.putExtra("imagen", imagen);
+                            i.putExtra("tipo", 0);
+                            startActivity(i);
+                            finish();
+                        }
+
+                    }
+                });
+            }
+
+        }, 0, DURATION);
+    }
+
 
     @Override
     public void onBackPressed() {

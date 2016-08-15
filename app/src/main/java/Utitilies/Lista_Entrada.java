@@ -209,7 +209,7 @@ public class Lista_Entrada {
         this.img_detalle = img_detalle;
     }
 
-    public Lista_Entrada (String id,String titulo, String tipo,String textoDebajo,String img_detalle,String preguntas) {
+    public Lista_Entrada (String id,String titulo, String tipo,String textoDebajo,String img_detalle,String preguntas,String duracion) {
 
         this.id = id;
         this.titulo = titulo;
@@ -217,6 +217,7 @@ public class Lista_Entrada {
         this.textoDebajo = textoDebajo;
         this.img_detalle = img_detalle;
         this.preguntas = preguntas;
+        this.duracion = duracion;
     }
     //Home
     public Lista_Entrada (String seccion,String id,Bitmap img_previa,String titulo, String url,String duracion, int idImagen2) {

@@ -131,7 +131,7 @@ public class activity_detalle_video extends AppCompatActivity
                } else if (result11.equals("false" + "\n")) {
                    responseArray = new JSONArray("[{'resp':'false'}]");
                } else {
-                   if (result11.contains("["))
+                   if (result11.substring(0,3).contains("["))
                        responseArray = new JSONArray(result11);
                    else
                        responseArray = new JSONArray("[" + result11 + "]");
