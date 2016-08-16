@@ -53,6 +53,7 @@ public class activity_pregunta_respuesta extends AppCompatActivity
         txtGhost4.setText("PREGUNTA DEL DIA");
 
         //Toolbar Menu
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
