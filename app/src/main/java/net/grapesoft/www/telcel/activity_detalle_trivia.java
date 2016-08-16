@@ -167,7 +167,8 @@ public class activity_detalle_trivia extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-
+            Intent i = new Intent(activity_detalle_trivia.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

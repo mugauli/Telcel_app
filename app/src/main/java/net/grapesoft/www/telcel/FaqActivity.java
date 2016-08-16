@@ -148,8 +148,8 @@ public class FaqActivity extends ActionBarActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-           /* Intent i = new Intent(faq.this, preferencias.class);
-            startActivity(i);*/
+           Intent i = new Intent(FaqActivity.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

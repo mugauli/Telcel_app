@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:background="#f4f4f4">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-    <CheckBox
-        android:id="@+id/list_one_a"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Aparatos eléctricos" />
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:weightSum="100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+
+
+            <TextView
+                android:id="@+id/list_one_toggler"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="90"
+                android:clickable="true" />
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:text="" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

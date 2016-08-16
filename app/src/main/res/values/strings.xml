@@ -80,7 +80,7 @@
     <!-- -->
 
     <!--Strings REPORTAR FALLA -->
-    <string name="rfdescuno">Reporta tu falla para brindarte un mejor servicion </string>
+    <string name="rfdescuno">Reporta tu falla para brindarte un mejor servicio</string>
     <string name="rfdescdos">Elige la categoría más adecuada.</string>
 
     <string name="rfuno">La aplicación no siempre me permite ingresar</string>
@@ -144,5 +144,109 @@
     <string name="racing">telcelracing.com</string>
     <string name="prox">¡Próximamente!</string>
 
+    //Intereses
+
+    <string-array name="Accesorios">
+        <item>Abogado</item>
+        <item>Aparatos eléctricos</item>
+        <item>Baterías</item>
+        <item>Bicicletas</item>
+        <item>Calentadores solares</item>
+        <item>Florería</item>
+        <item>Funerarias</item>
+        <item>Libros</item>
+        <item>Panteón</item>
+        <item>Toallas</item>
+    </string-array>
+
+    <string-array name="Autos">
+        <item>Agencias</item>
+        <item>Amortiguadores</item>
+        <item>Autos nuevos</item>
+        <item>Autos renta</item>
+        <item>Autobuses</item>
+        <item>Auxilio vial</item>
+        <item>Seguros</item>
+        <item>Talleres</item>
+    </string-array>
+
+    <string-array name="Vivienda">
+        <item>Bienes raíces</item>
+        <item>Interfon</item>
+        <item>Material de construcción</item>
+        <item>Muebles</item>
+        <item>Persianas</item>
+        <item>Purificadores de agua</item>
+        <item>Soporte de televisores</item>
+        <item>Tienda</item>
+    </string-array>
+
+    <string-array name="Educacion">
+        <item>Colegios</item>
+        <item>Educación</item>
+        <item>Escuelas</item>
+        <item>Escuela de idiomas</item>
+        <item>Institutos</item>
+        <item>Jardín de niños</item>
+        <item>Maestrías</item>
+        <item>Universidades</item>
+
+    </string-array>
+    <string-array name="Entretenimiento">
+        <item>Actividades deportivas</item>
+        <item>Boliche</item>
+        <item>Centros culturales</item>
+        <item>Circo</item>
+        <item>Eventos</item>
+        <item>Granja</item>
+        <item>Museos</item>
+        <item>Parques acuáticos</item>
+        <item>Parque de diversión</item>
+        <item>Patinaje sobre hielo</item>
+        <item>Salones</item>
+    </string-array>
+    <string-array name="Restaurantes">
+        <item>Restaurante - Bar</item>
+        <item>Restaurante de mariscos</item>
+    </string-array>
+    <string-array name="Salud">
+        <item>Aparatos auditivos</item>
+        <item>Centro médico</item>
+        <item>Cirugía estética</item>
+        <item>Clínicas</item>
+        <item>Estudios genéticos</item>
+        <item>Hospitales</item>
+        <item>Laboratorios</item>
+        <item>Médicos especialistas</item>
+        <item>Oftalmólogos</item>
+        <item>Oftalmología y ortopedia</item>
+        <item>Ortopedia y trauma</item>
+        <item>Odontólogos</item>
+        <item>Pedicure y manicure</item>
+        <item>Psicología</item>
+        <item>Quiropráctico</item>
+        <item>Terapias deportivas y funcionales</item>
+        <item>Terapias de voz, audición y lenguaje</item>
+    </string-array>
+    <string-array name="Tiendas">
+        <item>Discos</item>
+        <item>Ropa</item>
+        <item>Tiendas</item>
+    </string-array>
+    <string-array name="Viajes">
+        <item>Agencia de viajes</item>
+        <item>Hoteles</item>
+
+    </string-array>
+
+    <string name="Accesorios">Accesorios y servicios</string>
+    <string name="Autos">Autos</string>
+    <string name="Vivienda">Construcción y Vivienda</string>
+    <string name="Educacion">Educación</string>
+    <string name="Entretenimiento">Entretenimiento</string>
+    <string name="Restaurantes">Restaurantes</string>
+    <string name="Salud">Salud y Belleza</string>
+    <string name="Tiendas">Tiendas Comerciales</string>
+    <string name="Viajes">Viajes</string>
 
 </resources>

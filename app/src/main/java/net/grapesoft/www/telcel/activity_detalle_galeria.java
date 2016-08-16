@@ -505,8 +505,8 @@ public class activity_detalle_galeria extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-           /* Intent i = new Intent(activity_detalle_galeria.this, preferencias.class);
-            startActivity(i);*/
+            Intent i = new Intent(activity_detalle_galeria.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

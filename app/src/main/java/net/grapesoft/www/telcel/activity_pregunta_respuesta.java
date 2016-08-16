@@ -273,8 +273,8 @@ public class activity_pregunta_respuesta extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(activity_pregunta_respuesta.this, preferencias.class);
-            startActivity(i);*/
+            Intent i = new Intent(activity_pregunta_respuesta.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

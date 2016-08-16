@@ -137,8 +137,8 @@ public class ActualizadosActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(ActualizadosActivity.this, preferencias.class);
-            startActivity(i);*/
+            Intent i = new Intent(ActualizadosActivity.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

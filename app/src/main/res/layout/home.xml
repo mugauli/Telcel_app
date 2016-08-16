@@ -13,60 +13,54 @@
         android:background="@color/ColorFondo">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:padding="25dp"
-            android:layout_marginTop="0dp">
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/acceso1"
-                android:id="@+id/tit1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp" />
+            android:weightSum="100">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/acceso2"
-                android:id="@+id/tit2"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp" />
-
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/tvErrorPin"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/error_color"
-                />
+                android:layout_height="fill_parent"
+                android:layout_weight="48"></LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="GENERAR NUEVA CONTRASEÑA"
-                android:id="@+id/btnGenerar"
-                android:background="@drawable/btnshape"
-                android:textColor="@android:color/white"
-                android:layout_gravity="center_horizontal"
-                android:width="300dp"
-                android:layout_marginTop="60dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="4">
+                <ListView
+                    android:id="@+id/sitioslista"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+                </ListView>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ayudaint"
-                android:layout_marginTop="60dp"
-                android:src="@drawable/ayudac"
-                android:layout_marginLeft="280dp"
-                />
+            </LinearLayout>
 
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="48"></LinearLayout>
         </LinearLayout>
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR"
+            android:id="@+id/btnGuardar"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btnshape"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:width="50dp"
+            android:layout_marginTop="10dp" />
     </RelativeLayout>
 </LinearLayout>

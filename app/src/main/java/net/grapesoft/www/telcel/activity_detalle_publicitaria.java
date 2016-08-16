@@ -400,8 +400,8 @@ public class activity_detalle_publicitaria extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(activity_detalle_publicitaria.this, preferencias.class);
-            startActivity(i);*/
+            Intent i = new Intent(activity_detalle_publicitaria.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

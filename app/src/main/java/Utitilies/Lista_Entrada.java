@@ -38,15 +38,10 @@ public class Lista_Entrada {
             imagenSig,
             textoSig,
             preguntas;
-    private String checkBox;
+
 
     private JSONArray  json;
 
-    //Preferencias
-    public Lista_Entrada (String checkBox) {
-        this.checkBox = checkBox;
-
-    }
 
     public Lista_Entrada (int idImagen, String textoEncima, String textoDebajo) {
         this.idImagen = idImagen;
@@ -361,9 +356,10 @@ public class Lista_Entrada {
     }
     public int get_idImagenDetalle(){return idImagenDetalle; }
     public int get_idImagenA(){return idImagenA;}
+    public int get_idradio(){return  idradio;}
     public String get_preguntas() {
         return preguntas;
     }
-    public String get_CheckBox(){return  checkBox;}
+
 
 }

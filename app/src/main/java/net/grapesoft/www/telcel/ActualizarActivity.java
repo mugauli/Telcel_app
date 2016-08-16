@@ -392,8 +392,8 @@ public class ActualizarActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(ActualizarActivity.this, preferencias.class);
-            startActivity(i);*/
+            Intent i = new Intent(ActualizarActivity.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

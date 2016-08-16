@@ -242,10 +242,10 @@ public class LoginActivity extends Activity  {
                 dato = txtDato.getText().toString();
                 password = txtPass.getText().toString();
 
-               //Log.e("Datos",dato);
-               //Log.e("tokenCTE",tokenCTE);
-               //Log.e("Campo",campo);
-               //Log.e("PASS",password);
+               Log.e("Datos",dato);
+               Log.e("tokenCTE",tokenCTE);
+               Log.e("Campo",campo);
+               Log.e("PASS",password);
                 txtErrorDato.setText("");
                 txtErrorPass.setText("");
                 //-------//
@@ -304,13 +304,15 @@ public class LoginActivity extends Activity  {
                                 String nombre = response.getJSONObject(0).get("nombre").toString();
                                 String paterno = response.getJSONObject(0).get("paterno").toString();
                                 String materno = response.getJSONObject(0).get("materno").toString();
-                                String interes_1 = response.getJSONObject(0).get("materno").toString();
-                                String interes_2 = response.getJSONObject(0).get("materno").toString();
+                                String interes_1 = response.getJSONObject(0).get("interes_1").toString();
+                                String interes_2 = response.getJSONObject(0).get("interes_2").toString();
                                 String correo = response.getJSONObject(0).get("correo").toString();
 
                                 session.createLoginSession(tokenCTE, dato, campo, password, id, num_empleado, num_celular,
                                         region, nombre, paterno, materno, interes_1, interes_2,correo);
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                i.putExtra("interes_1", interes_1.toString()+"");
+                                i.putExtra("interes_2", interes_2.toString()+"");
                                 startActivity(i);
                                 finish();
 

@@ -193,8 +193,8 @@ public class SitiosInteresActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            /*Intent i = new Intent(ComunicacionInternaActivity.this, preferencias.class);
-            startActivity(i);*/
+            Intent i = new Intent(SitiosInteresActivity.this, preferencias.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_send) {
             session.logoutUser();

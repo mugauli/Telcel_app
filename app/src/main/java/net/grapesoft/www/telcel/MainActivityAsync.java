@@ -449,7 +449,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
 
-                    view.setOnClickListener(new View.OnClickListener() {
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
 
                        @Override
                        public void onClick(View arg0) {
@@ -460,6 +460,28 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         }
                     });
+
+                        view.setTag(entrada);
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                LinearLayout vs = (LinearLayout) activity.findViewById(R.id.vista);
+
+                                Intent i = new Intent(activity, activity_detalle_promociones.class);
+
+                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+                                if(Entrada != null) {
+                                    i.putExtra("imagen", Entrada.get_img_detalle());
+                                    activity.startActivity(i);
+                                }
+
+
+
+                            }
+                        });
+
 
 
 
@@ -498,7 +520,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
 
-                        view.setOnClickListener(new View.OnClickListener() {
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
 
                             @Override
                             public void onClick(View arg0) {
@@ -506,6 +528,26 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                                 Intent i = new Intent(activity, ProductosActivity.class);
                                 i.putExtra("direccion","4");
                                 activity.startActivity(i);
+                            }
+                        });
+                        view.setTag(entrada);
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                LinearLayout vs = (LinearLayout) activity.findViewById(R.id.vista);
+
+                                Intent i = new Intent(activity, activity_detalle_sva.class);
+
+                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+                                if(Entrada != null) {
+                                    i.putExtra("imagen", Entrada.get_img_detalle());
+                                    activity.startActivity(i);
+                                }
+
+
+
                             }
                         });
 
@@ -520,7 +562,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
 
-                        view.setOnClickListener(new View.OnClickListener() {
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
 
                             @Override
                             public void onClick(View arg0) {
@@ -528,6 +570,29 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
                                 i.putExtra("direccion","8");
                                 activity.startActivity(i);
+                            }
+                        });
+                        view.setTag(entrada);
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                LinearLayout vs = (LinearLayout) activity.findViewById(R.id.vista);
+
+                                Intent i = new Intent(activity, activity_detalle_grupo.class);
+
+                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+                                if(Entrada != null) {
+                                    i.putExtra("imagen",Entrada.get_img_detalle());
+                                    i.putExtra("titulo",Entrada.get_titulo());
+                                    i.putExtra("fecha",Entrada.get_fecha());
+                                    i.putExtra("descripcion",Entrada.get_textoDebajo());
+                                    activity.startActivity(i);
+                                }
+
+
+
                             }
                         });
 
@@ -539,12 +604,32 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
-                        view.setOnClickListener(new View.OnClickListener() {
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
                                 i.putExtra("direccion","2");
                                 activity.startActivity(i);
+                            }
+                        });
+                        view.setTag(entrada);
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                LinearLayout vs = (LinearLayout) activity.findViewById(R.id.vista);
+
+                                Intent i = new Intent(activity, activity_detalle_campana_imagen.class);
+
+                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+                                if(Entrada != null) {
+                                    i.putExtra("imagen", Entrada.get_img_detalle());
+                                    activity.startActivity(i);
+                                }
+
+
+
                             }
                         });
 
@@ -574,12 +659,35 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
-                        view.setOnClickListener(new View.OnClickListener() {
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
                                 i.putExtra("direccion","3");
                                 activity.startActivity(i);
+                            }
+                        });
+                        view.setTag(entrada);
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                LinearLayout vs = (LinearLayout) activity.findViewById(R.id.vista);
+
+                                Intent i = new Intent(activity, activity_detalle_noticia.class);
+
+                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+                                if(Entrada != null) {
+                                    i.putExtra("imagen", Entrada.get_img_detalle());
+                                    i.putExtra("titulo", Entrada.get_titulo());
+                                    i.putExtra("fecha", Entrada.get_fecha());
+                                    i.putExtra("descripcion", Entrada.get_textoDebajo());
+                                    activity.startActivity(i);
+                                }
+
+
+
                             }
                         });
 
@@ -592,12 +700,32 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
-                        view.setOnClickListener(new View.OnClickListener() {
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ComunicacionInternaActivity.class);
                                 i.putExtra("direccion","1");
                                 activity.startActivity(i);
+                            }
+                        });
+                        view.setTag(entrada);
+                        view.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                LinearLayout vs = (LinearLayout) activity.findViewById(R.id.vista);
+
+                                Intent i = new Intent(activity, activity_detalle_comunicados_imagen.class);
+
+                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+                                if(Entrada != null) {
+                                    i.putExtra("imagen", Entrada.get_img_detalle());
+                                    activity.startActivity(i);
+                                }
+
+
+
                             }
                         });
 
