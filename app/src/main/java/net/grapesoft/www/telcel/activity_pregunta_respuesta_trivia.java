@@ -330,7 +330,6 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                 preg.setTextSize(13);
                 TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
                 if (btnEnviar != null) {
-                        ultimo = true;
                         btnEnviar.setTextSize(13);
                 }
             }

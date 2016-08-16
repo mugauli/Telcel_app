@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,6 +104,8 @@ public class activity_pregunta_respuesta extends AppCompatActivity
         final String pregunta = getIntent().getExtras().getString("pregunta","No hay pregunta del día");
         String result2 = getIntent().getExtras().getString("json","0");
 
+
+
         final TextView txtPreguntaTrivia = (TextView)findViewById(R.id.txtPregunta);
         if(txtPreguntaTrivia!= null )
         {
@@ -160,12 +163,31 @@ public class activity_pregunta_respuesta extends AppCompatActivity
                             RespuestaCorrecta = txtRespuesta;
                             Log.e("RespuestaCorrecta",RespuestaCorrecta);
                         }
+                        DisplayMetrics metrics = new DisplayMetrics();
+                        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+
+                        int height = metrics.heightPixels; // alto absoluto en pixels
 
                         RadioButton btn1 = new RadioButton(this);
                         btn1.setText(txtRespuesta);
                         btn1.setTag(new PreguntaElement(idResp,txtRespuesta,valRespuesta));
-                        btn1.setPadding(80,80,80,80);
-                        btn1.setTextSize(15);
+
+                        if(height<1000) {
+                            btn1.setPadding(50, 20, 50, 20);
+                            btn1.setTextSize(12);
+                            txtPreguntaTrivia.setTextSize(13);
+                            TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
+                            if (btnEnviar != null) {
+                                btnEnviar.setTextSize(13);
+                            }
+                        }
+                        else
+                        {
+                            btn1.setPadding(70, 50, 70, 50);
+                            btn1.setTextSize(15);
+                        }
+
                         btn1.setTextColor(R.color.ColorPrimary);
                        // btn1.setHeight(150);
                         group.addView(btn1);
