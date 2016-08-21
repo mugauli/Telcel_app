@@ -642,11 +642,20 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
+
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0) {
+                                Intent i = new Intent(activity, ProductosActivity.class);
+                                i.putExtra("direccion","2");
+                                activity.startActivity(i);
+                            }
+                        });
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
                                 Intent i = new Intent(activity, ProductosActivity.class);
-                                i.putExtra("direccion","1");
+                                i.putExtra("direccion","2");
                                 activity.startActivity(i);
                             }
                         });
@@ -738,6 +747,15 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View arg0) {
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","5");
+                                activity.startActivity(i);
+                            }
+                        });
+
                         view.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
@@ -759,7 +777,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                             TextView homeDescripcion = (TextView) view.findViewById(R.id.txtDescripcion);
                             if (homeDescripcion != null)
-                                homeDescripcion.setText(((Lista_Entrada) entrada).get_duracion());
+                                homeDescripcion.setText(((Lista_Entrada) entrada).get_titulo());
                             Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                             Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                             homeDescripcion.setTypeface(tf);
@@ -817,11 +835,16 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
         if (noticiafecha != null)
             noticiafecha.setText(tituloP);
+        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+        noticiafecha.setTypeface(tf);
 
         TextView noticiatitulo = (TextView) activity.findViewById(R.id.textView_inferior);
 
         if (noticiatitulo != null)
             noticiatitulo.setText(duracionP);
+
+        noticiatitulo.setTypeface(tfl);
 
         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.lnPodcast);
         principal.setOnClickListener(new View.OnClickListener() {

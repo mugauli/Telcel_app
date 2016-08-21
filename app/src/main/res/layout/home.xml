@@ -16,51 +16,159 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-
-            android:weightSum="100">
+            android:weightSum="100"
+            >
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="48"></LinearLayout>
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:weightSum="100" >
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="4">
-                <ListView
-                    android:id="@+id/sitioslista"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp">
-                </ListView>
+                    android:layout_height="fill_parent"
+                    android:layout_weight="48" />
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="4"
+                    android:weightSum="100" >
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="49" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="39"
+                        android:orientation="vertical"
+                        android:weightSum="100"
+                        android:padding="3dp"
+                        android:id="@+id/btnPreguntaDia"
+                        android:background="@drawable/border">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop="0dp"
+                            android:padding="10dp"
+                            android:layout_weight="70">
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="80" >
+
+                                <ImageView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:id="@+id/imageView16"
+                                    android:src="@drawable/pregunta"
+                                    android:padding="4dp"
+                                    android:layout_weight="100" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="20"
+                                android:weightSum="100"
+                                android:padding="10dp" >
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceLarge"
+                                    android:text="@string/tituloPregunta"
+                                    android:id="@+id/txtTituloPregunta"
+                                    android:textColor="@color/ColorPrimary"
+                                    android:paddingLeft="0dp"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/txtPreguntaTrivia"
+                                    android:textSize="12dp"
+                                    android:padding="0dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="14"
+                        android:background="@drawable/border"
+                        android:layout_marginTop="10dp"
+                        android:weightSum="10">
+
+                        <RelativeLayout
+                            android:id="@+id/loadingTrivias"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:gravity="center"
+                            android:visibility="visible" >
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:indeterminate="true" />
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:weightSum="10">
+
+                            <ListView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/lstTrivias"
+                                android:layout_weight="3" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:text="@string/textoTrivias"
+                                android:id="@+id/textView25"
+                                android:textSize="16dp"
+                                android:padding="4dp"
+                                android:textColor="@color/tituloRevista"
+                                android:layout_weight="7" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="48" />
             </LinearLayout>
 
-
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="48"></LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:text="GUARDAR"
-            android:id="@+id/btnGuardar"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/btnshape"
-            android:textColor="@android:color/white"
-            android:layout_gravity="center_horizontal"
-            android:width="50dp"
-            android:layout_marginTop="10dp" />
     </RelativeLayout>
 </LinearLayout>

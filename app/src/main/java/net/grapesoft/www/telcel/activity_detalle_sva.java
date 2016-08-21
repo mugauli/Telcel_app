@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -129,6 +130,17 @@ public class activity_detalle_sva extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //ToolBar Menu
+        //boton ayuda
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity_detalle_sva.this,ayuda.class);
+                startActivity(intent);
+            }
+        });
+        //boton ayuda
     }
 
     @Override

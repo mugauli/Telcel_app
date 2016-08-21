@@ -102,9 +102,9 @@ public class ComunicacionInternaActivity extends AppCompatActivity
         tabs.addTab(tabs.newTab().setText("NOTICIAS"));
         tabs.addTab(tabs.newTab().setText("REVISTA"));
 
-        tabs.addTab(tabs.newTab().setText("VIDEO"));
+        tabs.addTab(tabs.newTab().setText("VIDEOS"));
         tabs.addTab(tabs.newTab().setText("PODCAST"));
-        tabs.addTab(tabs.newTab().setText("GALERIA"));
+        tabs.addTab(tabs.newTab().setText("GALERÍA"));
 
         tabs.addTab(tabs.newTab().setText("GRUPO CARSO INFORMA"));
 

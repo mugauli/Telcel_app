@@ -115,7 +115,7 @@
 
                                 <TextView
                                     android:layout_width="fill_parent"
-                                    android:textColor="@color/ColorPrimary"
+                                    android:textColor="@color/ColorPrimaryDark"
                                     android:textStyle="bold"
                                     android:textAppearance="?android:attr/textAppearanceSmall"
                                     android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                             android:background="@drawable/border_siguiente_video"
                             android:id="@+id/textView16"
                             android:layout_margin="5dp"
-                            android:textColor="@color/ColorPrimaryDark"
+                            android:textColor="@color/white"
                             android:textStyle="bold"
                             android:paddingTop="5dp"
                             android:paddingLeft="5dp" />
@@ -209,20 +209,34 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/txtTituloSiguiente"
                                     android:text="Siguiente Video"
+                                    android:textColor="@color/ColorPrimaryDark"
                                     android:padding="10dp" />
 
                                 <TextView
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/txtDuracionSiguente"
-                                    android:text="Siguiente Video"
+                                    android:text=""
                                     android:padding="10dp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                app:rippleColor="@color/ColorPrimary"
+                app:backgroundTint="@color/ColorPrimary"
+                android:src="@drawable/asc"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginBottom="20dp" />
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/derecha"
                 android:layout_width="50dp"

@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -104,6 +105,8 @@ public class MainActivity extends AppCompatActivity
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
+        Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
+        Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
 
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab6).toString()));
         tabs.addTab(tabs.newTab().setText(getString(R.string.tab1).toString()));

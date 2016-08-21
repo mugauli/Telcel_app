@@ -62,37 +62,12 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/imgSVA"
-                    android:layout_weight="50"
+                    android:layout_weight="100"
                     android:adjustViewBounds="false"
                     android:padding="0dp"
                     android:layout_gravity="left|top" />
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="50"
-                    android:weightSum="100"
-                    android:padding="0dp" >
 
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="50"
-                        android:padding="10dp"
-                        android:id="@+id/tituloSVA"
-                        android:textAlignment="center"
-                        android:textColor="@color/ColorPrimaryDark" />
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="50"
-                        android:padding="10dp"
-                        android:id="@+id/descSVA"
-                        android:textAlignment="center" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

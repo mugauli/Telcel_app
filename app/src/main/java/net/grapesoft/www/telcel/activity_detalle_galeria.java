@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -171,7 +172,7 @@ public class activity_detalle_galeria extends AppCompatActivity
                             TextView txtTituloSiguiente =  (TextView) findViewById(R.id.txtTituloSiguiente);
                             txtTituloSiguiente.setText(Html.fromHtml(tituloSig));
                             TextView  txtDuracionSiguente  = (TextView) findViewById(R.id.txtDuracionSiguente);
-                            txtDuracionSiguente.setText(Html.fromHtml(textoSig));
+                            //txtDuracionSiguente.setText(Html.fromHtml(textoSig));
                             ImageView imagenGaleriaSiguiente = (ImageView) findViewById(R.id.imagenGaleriaSiguiente);
 
                             idSiguienteR = idSiguiente;
@@ -206,7 +207,17 @@ public class activity_detalle_galeria extends AppCompatActivity
         }
 
         // Log.e("Numero de Imagenes Galeria detalle", ": " + imagenes_slider.size());
-
+        //boton ayuda
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity_detalle_galeria.this,ayuda.class);
+                startActivity(intent);
+            }
+        });
+        //boton ayuda
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

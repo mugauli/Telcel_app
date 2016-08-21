@@ -3,6 +3,7 @@ package net.grapesoft.www.telcel;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -70,6 +71,7 @@ public class activity_detalle_grupo extends AppCompatActivity
             Bitmap img = new GetNetImage().execute(imagen).get();
             if(img != null)
                 imagenUG.setImageBitmap(img);
+            imagenUG.setScaleType(ImageView.ScaleType.FIT_XY);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -84,6 +86,17 @@ public class activity_detalle_grupo extends AppCompatActivity
 
 
         Log.e("Imagen", imagen);
+        //boton ayuda
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity_detalle_grupo.this,ayuda.class);
+                startActivity(intent);
+            }
+        });
+        //boton ayuda
 
 //Toolbar Menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

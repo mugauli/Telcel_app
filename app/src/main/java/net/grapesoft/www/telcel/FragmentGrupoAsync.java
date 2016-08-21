@@ -192,22 +192,24 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                         if (imagen_noticias != null) {
                             Log.e("imagen","pricipal");
                             imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                            imagen_noticias.setScaleType(ImageView.ScaleType.FIT_XY);
                         }
 
                         TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaGrupo);
                         if (noticiafecha != null)
                             noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        noticiafecha.setTypeface(tf);
 
                         TextView noticiatitulo = (TextView) activity.findViewById(R.id.titGrupo);
                         if (noticiatitulo != null && conteo <=40){
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
-                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
-                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+
                             noticiatitulo.setTypeface(tf);
                         }else{
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30)+ "...");
-                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
-                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+
                             noticiatitulo.setTypeface(tf);
                         }
 
@@ -229,7 +231,11 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     if (imagen_noticias != null)
                         imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
 
+
                     TextView noticiafecha = (TextView) view.findViewById(R.id.grupofechal);
+                    Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                    Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                    noticiafecha.setTypeface(tf);
                     if (noticiafecha != null)
                         noticiafecha.setText(((Lista_Entrada) entrada).get_fecha());
 
@@ -239,13 +245,11 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     conteo = ((Lista_Entrada) entrada).get_titulo().length();
                     if (noticiatitulo != null && conteo <=40){
                         noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
-                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
-                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+
                         noticiatitulo.setTypeface(tf);
                     }else{
                         noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30)+ "...");
-                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
-                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+
                         noticiatitulo.setTypeface(tf);
                     }
 

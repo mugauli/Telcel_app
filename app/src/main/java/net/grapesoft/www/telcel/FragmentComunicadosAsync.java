@@ -240,7 +240,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                     Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
                     Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                     if (texto_superior_entrada != null)
-                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_textoEncima());
+                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_fecha());
 
                     texto_superior_entrada.setTypeface(tfl);
 
@@ -250,7 +250,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                     if (texto_inferior_entrada != null)
                         texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
-                    texto_inferior_entrada.setTypeface(tfl);
+                    texto_inferior_entrada.setTypeface(tf);
 
 
 

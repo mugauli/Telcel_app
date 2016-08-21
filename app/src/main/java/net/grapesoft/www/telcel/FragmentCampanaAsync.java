@@ -187,24 +187,26 @@ public class FragmentCampanaAsync  extends AsyncTask<ArrayList<String>, Integer,
                                 imagen_campana.setImageResource(R.drawable.noimage);
                             }else
                                 imagen_campana.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                            imagen_campana.setScaleType(ImageView.ScaleType.FIT_XY);
                         }
 
                         TextView fecha_campana = (TextView) activity.findViewById(R.id.fechaCM);
                         if (fecha_campana != null)
                             fecha_campana.setText(((Lista_Entrada) entrada).get_fecha());
+                        Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                        Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                        fecha_campana.setTypeface(tf);
 
                         TextView titulo_campana = (TextView) activity.findViewById(R.id.titCM);
                         Integer conteo = 0;
                         conteo = ((Lista_Entrada) entrada).get_titulo().length();
                         if (titulo_campana != null && conteo <=40){
                             titulo_campana.setText(((Lista_Entrada) entrada).get_titulo());
-                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
-                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+
                             titulo_campana.setTypeface(tf);
                         }else{
                             titulo_campana.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30)+ "...");
-                            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
-                            Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+
                             titulo_campana.setTypeface(tf);
                         }
 

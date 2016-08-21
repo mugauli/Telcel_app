@@ -192,6 +192,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                         ImageView imagen_galeria = (ImageView) activity.findViewById(R.id.imagenUNT);
                         if (imagen_galeria != null) {
                             imagen_galeria.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                            imagen_galeria.setScaleType(ImageView.ScaleType.FIT_XY);
                         }
 
                         TextView galeriaFecha = (TextView) activity.findViewById(R.id.fechaUN);
@@ -204,10 +205,10 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                             galeriaTitulo.setText(Html.fromHtml(((Lista_Entrada) entrada).get_titulo()));
 
                         TextView galeriaDescripcion = (TextView) activity.findViewById(R.id.descUN);
-                        if (galeriaDescripcion != null) {
+                       /* if (galeriaDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                             galeriaDescripcion.setText(Html.fromHtml(desc));
-                        }
+                        }*/
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
                         principal.setTag(entrada);
                     }

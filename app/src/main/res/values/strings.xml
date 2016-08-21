@@ -58,14 +58,14 @@
 
     <!--Strings FAQ -->
 
-    <string name="uno">¿Qué es App COMUNICACIÓN INTERNA?</string>
+    <string name="uno">¿Qué es Telcel #NosUne?</string>
     <string name="unodesc">Es la aplicación que te ayudará a estar informado de todas las novedades de Telcel y Grupo Carso.</string>
 
-    <string name="dos">¿Qué debo hacer para utilizar APP COMUNICACIÓN INTERNA?</string>
+    <string name="dos">¿Qué debo hacer para utilizar Telcel #NosUne?</string>
     <string name="dosdesc">Debes registrarte proporcionando tu nombre completo, número de empleado, celular, correo electrónico corporativo y se te hará llegar un vínculo con la descarga de la aplicación así como una contraseña con la que podrás ingresar a la aplicación.</string>
 
     <string name="tres">¿La navegación dentro de la aplicación tiene algún costo?</string>
-    <string name="tresdesc">No la navegación dentro de la APP COMUNICACIÓN INTERNA es gratuita, pero sólo puedes acceder a ella siendo empleado de Telcel.</string>
+    <string name="tresdesc">No la navegación dentro de la Telcel #NosUne es gratuita, pero sólo puedes acceder a ella siendo empleado de Telcel.</string>
 
     <string name="cuatro">¿Cada cuando se actualiza el contenido?</string>
     <string name="cuatrodesc">El contenido se actualiza automáticamente al abrirlo.</string>
@@ -80,15 +80,15 @@
     <!-- -->
 
     <!--Strings REPORTAR FALLA -->
-    <string name="rfdescuno">Reporta tu falla para brindarte un mejor servicio</string>
+    <string name="rfdescuno">Reporta tu falla para brindarte un mejor servicio.</string>
     <string name="rfdescdos">Elige la categoría más adecuada.</string>
 
-    <string name="rfuno">La aplicación no siempre me permite ingresar</string>
-    <string name="rfdos">La aplicación no actualiza correctamente</string>
-    <string name="rftres">La aplicación no funciona en el teléfono</string>
-    <string name="rfcuatro">La aplicación se cierra inesperadamente</string>
-    <string name="rfcinco">La aplicación se traba</string>
-    <string name="rfseis">Detalla tu comentario</string>
+    <string name="rfuno">La aplicación no siempre me permite ingresar.</string>
+    <string name="rfdos">La aplicación no actualiza correctamente.</string>
+    <string name="rftres">La aplicación no funciona en el teléfono.</string>
+    <string name="rfcuatro">La aplicación se cierra inesperadamente.</string>
+    <string name="rfcinco">La aplicación se traba.</string>
+    <string name="rfseis">Detalla tu comentario.</string>
     <!-- -->
 
     <!--SUGERENCIAS -->
@@ -109,9 +109,9 @@
     <!-- -->
 
     <!--Strings PIN DE ACCESO -->
-    <string name="acceso1">Al generar un nuevo pin o contraseña este te llegará a tu correo corporativo. </string>
+    <string name="acceso1">Al generar un nuevo pin o contraseña este te llegará a tu </string>
     <string name="acceso2">Se cerrará la sesión de la aplicación y deberás volver a ingresar con la nueva contraseña</string>
-
+    <string name="acceso3"><b>correo electrónico corporativo.</b> </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

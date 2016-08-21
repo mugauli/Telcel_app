@@ -21,13 +21,13 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:layout_weight="90"
+                android:layout_weight="95"
                 android:clickable="true" />
             <CheckBox
                 android:id="@+id/checkBox1"
-                android:layout_width="70dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
+                android:layout_weight="5"
                 android:text="" />
 
         </LinearLayout>
