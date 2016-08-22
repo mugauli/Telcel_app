@@ -34,7 +34,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="500dp"
+                android:layout_height="550dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -65,7 +65,7 @@
                         android:orientation="vertical"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="7"
+                        android:layout_weight="4"
                         android:weightSum="100"
                         android:background="@drawable/border">
 
@@ -146,7 +146,7 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="45">
+                        android:layout_weight="48">
 
                         <TextView
                             android:layout_width="fill_parent"
@@ -183,6 +183,6 @@
             android:layout_marginEnd="42dp"
             android:layout_marginBottom="20dp" />
     </android.support.design.widget.CoordinatorLayout>
-    <include layout="@layout/navigation"/>
+    <include layout="@layout/navigation"/>-->
 </android.support.v4.widget.DrawerLayout>
 

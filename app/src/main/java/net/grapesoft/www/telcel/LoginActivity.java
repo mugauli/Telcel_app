@@ -166,8 +166,14 @@ public class LoginActivity extends Activity  {
                             Log.e("Email", "validacion de email: " + txtDato.getText().toString());
                             //message error
 
-                        } else {
+                        } else  if (!(txtDato.getText().toString().contains("telcel") || txtDato.getText().toString().contains("telcel") || txtDato.getText().toString().contains("telcel")))
+                        {
+                            Log.e("Response", "Ingrese un correo electrónico valido.");
+                            text.setText("Ingrese un correo electrónico valido.");
+                            txtDato.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                        }else  {
                             text.setText("");
+                            txtDato.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
                             //String[] correo =  txtDato.getText().toString().trim().split("@");
 
                             // String Email = correo[1].toString().trim();

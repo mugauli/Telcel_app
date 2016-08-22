@@ -30,7 +30,7 @@ import Utitilies.Comunication;
 import Utitilies.ConnectionDetector;
 import Utitilies.SessionManagement;
 
-public class sugerencias extends AppCompatActivity
+public class SugerenciasActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
@@ -73,7 +73,7 @@ public class sugerencias extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(sugerencias.this, MainActivity.class);
+                Intent i = new Intent(SugerenciasActivity.this, MainActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
@@ -101,7 +101,7 @@ public class sugerencias extends AppCompatActivity
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(sugerencias.this, triviasActivity.class);
+                Intent i = new Intent(SugerenciasActivity.this, triviasActivity.class);
                 startActivity(i);
             }
         });
@@ -159,7 +159,19 @@ public class sugerencias extends AppCompatActivity
                         tvErrorCorreoSugerencia.setText("Ingrese su correo electrónico.");
                         txtCorreoSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
-                    }else if (sugerencia.trim().length() == 0)
+                    }else if (!(txtCorreoSugerencia.getText().toString().matches("[a-zA-Z0-9._-]+@[A-Za-z]+.[a-z]+")))
+                    {
+                        Log.e("Response", "Ingrese un correo electrónico valido.");
+                        tvErrorCorreoSugerencia.setText("Ingrese un correo electrónico valido.");
+                        txtCorreoSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                    } else if (!(txtCorreoSugerencia.getText().toString().contains("telcel") || txtCorreoSugerencia.getText().toString().contains("telcel") || txtCorreoSugerencia.getText().toString().contains("telcel")))
+                            {
+                                Log.e("Response", "Ingrese un correo electrónico valido.");
+                                tvErrorCorreoSugerencia.setText("Ingrese un correo electrónico valido.");
+                                txtCorreoSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+                            }
+
+                    else if (sugerencia.trim().length() == 0)
                     {
                         tvErrorComentarioSugerencia.setText("Ingrese una sugerencia.");
                         txtSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
@@ -202,7 +214,7 @@ public class sugerencias extends AppCompatActivity
                                 params.add("");
                                 params.add(sugerencia);
 
-                                response = new Comunication(sugerencias.this).execute(params).get();
+                                response = new Comunication(SugerenciasActivity.this).execute(params).get();
 
                                 Log.e("Response", "Falla: " + response);
                                 if(response.getJSONObject(0).has("error")) {
@@ -216,7 +228,7 @@ public class sugerencias extends AppCompatActivity
                                     Log.e("Response Falla: ", resp);
 
                                     if(resp.equals("true")) {
-                                        Intent i = new Intent(sugerencias.this, enviado.class);
+                                        Intent i = new Intent(SugerenciasActivity.this, enviado.class);
                                         startActivity(i);
                                         finish();
                                     }else
@@ -268,17 +280,17 @@ public class sugerencias extends AppCompatActivity
 
 
         if (id == R.id.nav_camera) {
-            Intent i = new Intent(sugerencias.this, ActualizarActivity.class);
+            Intent i = new Intent(SugerenciasActivity.this, ActualizarActivity.class);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(sugerencias.this, pinActivity.class);
+            Intent i = new Intent(SugerenciasActivity.this, pinActivity.class);
             startActivity(i);
 
 
         } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(sugerencias.this, preferencias.class);
+            Intent i = new Intent(SugerenciasActivity.this, preferencias.class);
             startActivity(i);
 
         } else if (id == R.id.nav_send) {

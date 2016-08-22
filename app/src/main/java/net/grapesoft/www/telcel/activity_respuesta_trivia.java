@@ -1,5 +1,6 @@
 package net.grapesoft.www.telcel;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -8,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -81,6 +83,8 @@ public class activity_respuesta_trivia extends AppCompatActivity
                 }
             });
         }
+
+
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
         ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);

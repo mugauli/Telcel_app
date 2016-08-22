@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Interpolator;
@@ -12,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -19,6 +21,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,6 +65,8 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pregunta_respuesta_trivia);
 
+        session = new SessionManagement(getApplicationContext());
+
         //boton ayuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
@@ -95,6 +100,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                 }
             });
         }
+
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
         ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
@@ -131,7 +137,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
         int height = metrics.heightPixels; // alto absoluto en pixels
 
         Log.e("Alto",""+height);
-        if(height<1000) {
+        if(height<1400) {
             TextView tiempo = (TextView) findViewById(R.id.txtTiempo);
             tiempo.setTextSize(17);
         }
@@ -143,6 +149,36 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
         tTotal = Integer.parseInt(getIntent().getExtras().getString("duracion","0"))*60;
         group =  new RadioGroup(this);
 
+        TextView tiempo = (TextView)findViewById(R.id.txtTiempo);
+        tiempo.setText((tTotal)+"''");
+
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Telcel #Nosune")
+                .setMessage("Tienes " +(tTotal) +" segundos para contestar las preguntas.\n" + "Tu tiempo comienza a correr cuando cierres este mensaje con el botón “Iniciar”. ¡Suerte!.")
+                .setPositiveButton("Iniciar", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startTimer();
+                    }
+
+                })
+                .setNegativeButton("Cancelar",  new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                                    Intent i = new Intent(activity_pregunta_respuesta_trivia.this, triviasActivity.class);
+                                    startActivity(i);
+
+                        String trivias = session.getTriviasContestadoDetails();
+                        session.createTriviasContestadoSession(trivias.replace("["+ trivia +"],",""));
+
+                    }
+
+                })
+                .show();
 
         try {
             //Log.e("Response: ", "JSON");
@@ -279,7 +315,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
                 preg.setText("No se encontraron preguntas para esta trivia.");
             }
         }
-        startTimer();
+
     }
 
     public RadioGroup cargaPregunta(Pregunta pregunta,String img_previa, Activity activity)
@@ -324,11 +360,11 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             int height = metrics.heightPixels; // alto absoluto en pixels
 
             Log.e("Alto",""+height);
-            if(height<1000) {
-                btn1.setPadding(50, 20, 50, 20);
+            if(height<1500) {
+                btn1.setPadding(45, 20, 45, 20);
                 btn1.setTextSize(12);
                 preg.setTextSize(13);
-                TextView btnEnviar = (TextView) findViewById(R.id.btnEnviar);
+                Button btnEnviar = (Button) findViewById(R.id.btnEnviar);
                 if (btnEnviar != null) {
                         btnEnviar.setTextSize(13);
                 }

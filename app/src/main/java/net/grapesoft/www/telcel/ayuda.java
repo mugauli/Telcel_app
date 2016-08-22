@@ -102,7 +102,7 @@ public class ayuda  extends AppCompatActivity
 
                 }else if(elegido.get_textoEncima() == getString(R.string.sugerencias))
                 {
-                    Intent i = new Intent(ayuda.this, sugerencias.class);
+                    Intent i = new Intent(ayuda.this, SugerenciasActivity.class);
                     startActivity(i);
                 }else if(elegido.get_textoEncima() == getString(R.string.acercade))
                 {

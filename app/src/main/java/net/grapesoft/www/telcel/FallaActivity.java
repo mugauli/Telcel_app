@@ -82,63 +82,67 @@ public class FallaActivity extends AppCompatActivity
         rb4 = (RadioButton) findViewById(R.id.rfCuartoRB);
         rb5 = (RadioButton) findViewById(R.id.rfCincoRB);
 
-
-     //   lista = (ListView) findViewById(R.id.falla);
-     //  List_adapted adaptador = new List_adapted(this, R.layout.entrada_falla, datos){
-     //      @Override
-     //      public void onEntrada(Object entrada, View view) {
-     //          if (entrada != null) {
-
-
-     //              TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
-
-     //              Typeface tfi = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
-
-     //              texto_inferior_entrada.setTypeface(tfi);
-
-
-     //              if (texto_inferior_entrada != null)
-     //                  texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
-     //          }
-     //      }
-
-     //  };
-//        lista.setAdapter(adaptador);
+        unCheckedAll();
 
         rb1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                RadioButton rd = ((RadioButton)v);
+                Boolean bl =  (Boolean)rd.getTag();
+                Log.e("Cehe1",""+ bl);
                 unCheckedAll();
-                rb1.setChecked(true);
+                Log.e("Cehe",""+ bl);
+                rb1.setTag(!bl);
+                rb1.setChecked(!bl);
             }
         });
         rb2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                RadioButton rd = ((RadioButton)v);
+                Boolean bl =  (Boolean)rd.getTag();
+                Log.e("Cehe1",""+ bl);
                 unCheckedAll();
-                rb2.setChecked(true);
+                Log.e("Cehe",""+ bl);
+                rb2.setTag(!bl);
+                rb2.setChecked(!bl);
             }
         });
         rb3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RadioButton rd = ((RadioButton)v);
+                Boolean bl =  (Boolean)rd.getTag();
+                Log.e("Cehe1",""+ bl);
                 unCheckedAll();
-                rb3.setChecked(true);
+                Log.e("Cehe",""+ bl);
+                rb3.setTag(!bl);
+                rb3.setChecked(!bl);
             }
         });
         rb4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RadioButton rd = ((RadioButton)v);
+                Boolean bl =  (Boolean)rd.getTag();
+                Log.e("Cehe1",""+ bl);
                 unCheckedAll();
-                rb4.setChecked(true);
+                Log.e("Cehe",""+ bl);
+                rb4.setTag(!bl);
+                rb4.setChecked(!bl);
             }
         });
         rb5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RadioButton rd = ((RadioButton)v);
+                Boolean bl =  (Boolean)rd.getTag();
+                Log.e("Cehe1",""+ bl);
                 unCheckedAll();
-                rb5.setChecked(true);
+                Log.e("Cehe",""+ bl);
+                rb5.setTag(!bl);
+                rb5.setChecked(!bl);
             }
         });
 
@@ -169,14 +173,15 @@ public class FallaActivity extends AppCompatActivity
 
 
                     //-------//
-                  if(getChecked() == 0)
-                  {
-                      Log.e("Response", "Falla: no hay seleccionados");
-                      txtErrorFalla.setText("Seleccione un tipo de falla");
+               //  if(getChecked() == 0)
+               //  {
+               //      Log.e("Response", "Falla: no hay seleccionados");
+               //      txtErrorFalla.setText("Seleccione un tipo de falla");
+               //  }else
 
-                  }else if (comentario.trim().length() == 0)
+                  if (comentario.trim().length() == 0 && getChecked() == 0)
                   {
-                    txtErrorComentarioFalla.setText("Ingresa un comentario.");
+                    txtErrorComentarioFalla.setText("Ingresa un comentario o selecciona una opción");
                     txtComentario.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
                     //alert.showAlertDialog(login.this, "Aviso", "Ingresa tu " + item.toString()+ ".", false);
                  } else {
@@ -338,6 +343,12 @@ public class FallaActivity extends AppCompatActivity
         rb3.setChecked(false);
         rb4.setChecked(false);
         rb5.setChecked(false);
+
+        rb1.setTag(false);
+        rb2.setTag(false);
+        rb3.setTag(false);
+        rb4.setTag(false);
+        rb5.setTag(false);
     }
 
     @Override

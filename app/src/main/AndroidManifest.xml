@@ -135,7 +135,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".sugerencias"
+            android:name=".SugerenciasActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
