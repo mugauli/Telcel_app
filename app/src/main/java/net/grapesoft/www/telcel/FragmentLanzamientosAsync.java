@@ -139,13 +139,13 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                     String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
                     String img_mini = responseArray.getJSONObject(i).get("img_mini").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
-                    JSONArray imagenes_slide = responseArray.getJSONObject(0).getJSONArray("imagenes_slide");
+                    JSONArray imagenes_slide = responseArray.getJSONObject(i).getJSONArray("imagenes_slide");
                     // String imagenes_slide_Json = responseArray.getJSONObject(0).getJSONArray("imagenes_slide").toString();
                     ArrayList<String> imagenes_slider = new ArrayList<String>();
 
                     for (int ii = 0; ii < imagenes_slide.length(); ii++) {
 
-                        imagenes_slider.add(imagenes_slide.getJSONObject(i).get("url_img").toString());
+                        imagenes_slider.add(imagenes_slide.getJSONObject(ii).get("url_img").toString());
                     }
 
                     URL imageUrl = null;

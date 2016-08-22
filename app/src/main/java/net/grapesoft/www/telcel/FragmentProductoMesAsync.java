@@ -297,7 +297,9 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
         LinearLayout linearPrincipalProductos = (LinearLayout) activity.findViewById(R.id.linearPrincipalProductos);
         if(vacio) {
             Log.e("imagens","imagen");
+            if(imgFaltaInfo != null)
             imgFaltaInfo.setVisibility(View.VISIBLE);
+            if(linearPrincipalProductos != null)
             linearPrincipalProductos.setVisibility(View.GONE);
         }
 

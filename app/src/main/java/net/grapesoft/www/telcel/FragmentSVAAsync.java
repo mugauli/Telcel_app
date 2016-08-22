@@ -139,6 +139,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                 for (int i = 0; i < responseArray.length(); i++) {
 
                     if (par) {
+                        Log.e("TIPO","1");
                         par = false;
                         id = responseArray.getJSONObject(i).get("id").toString();
                         titulo = responseArray.getJSONObject(i).get("titulo").toString();
@@ -163,6 +164,8 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
 
 
                     } else {
+
+                        Log.e("TIPO","2");
                         par= true;
                         id2 = responseArray.getJSONObject(i).get("id").toString();
                         titulo2 = responseArray.getJSONObject(i).get("titulo").toString();
@@ -192,6 +195,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                     }
 
                     if (i == responseArray.length() - 1 && !par) {
+                        Log.e("TIPO1","1");
                         SvaElement svaElement1 = new SvaElement(id, loadedImage, titulo, img_detalle, texto, fecha, img_mini);
                         datos.add(new Lista_Entrada(id, loadedImage, titulo, img_detalle, texto, fecha, img_mini,svaElement1, 1));
                     }
@@ -227,6 +231,10 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                     int type =  ((Lista_Entrada)entrada).get_type();
 
                     if(type == 2) {
+
+                        LinearLayout linear = (LinearLayout) activity.findViewById(R.id.linearSva2);
+                        if(linear != null)
+                            linear.setVisibility(View.VISIBLE);
 
                         SvaElement sva1 = ((Lista_Entrada) entrada).get_svaelement1();
                         SvaElement sva2 = ((Lista_Entrada) entrada).get_svaelement2();
@@ -321,9 +329,10 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                     else
                     {
 
+
                         LinearLayout linear = (LinearLayout) activity.findViewById(R.id.linearSva2);
                         if(linear != null)
-                            linear.setVisibility(View.VISIBLE);
+                            linear.setVisibility(View.GONE);
 
                         if(primer){
                             primer = false;
