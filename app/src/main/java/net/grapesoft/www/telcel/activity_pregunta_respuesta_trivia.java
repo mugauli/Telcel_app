@@ -361,7 +361,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
 
             Log.e("Alto",""+height);
             if(height<1500) {
-                btn1.setPadding(45, 20, 45, 20);
+                btn1.setPadding(40, 20, 40, 20);
                 btn1.setTextSize(12);
                 preg.setTextSize(13);
                 Button btnEnviar = (Button) findViewById(R.id.btnEnviar);
