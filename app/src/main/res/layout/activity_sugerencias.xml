@@ -99,7 +99,7 @@
                 android:theme="@style/MyEditTextTheme"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:maxLines="5" />
+                android:maxLines="6" />
 
                 <TextView
                 android:layout_width="fill_parent"
@@ -120,7 +120,7 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@android:color/white"
                 android:width="250dp"
-                android:layout_marginTop="43dp"
+                android:layout_marginTop="20dp"
                 android:layout_below="@+id/txtSugerencia"
                 android:layout_centerHorizontal="true"
                 android:clickable="false" />
