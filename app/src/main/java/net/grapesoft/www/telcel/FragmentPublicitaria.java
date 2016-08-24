@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.VideoView;
 
 import java.io.File;
@@ -58,9 +59,10 @@ public class FragmentPublicitaria extends Fragment {
 
         new FragmentPublicitariaAsync(getActivity()).execute(params);
 
-        ImageView imagen_play = (ImageView) rootview.findViewById(R.id.play);
+        LinearLayout videoTodoPublicitaria = (LinearLayout) rootview.findViewById(R.id.videoTodoPublicitaria);
+        //ImageView imagen_play = (ImageView) rootview.findViewById(R.id.play);
 
-        imagen_play.setOnClickListener(new View.OnClickListener() {
+        videoTodoPublicitaria.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

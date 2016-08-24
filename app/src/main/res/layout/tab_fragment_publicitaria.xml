@@ -57,7 +57,7 @@
                 android:orientation="vertical"
                 android:weightSum="100"
                 android:background="@drawable/border"
-                >
+                android:id="@+id/videoTodoPublicitaria">
 
                 <TextView
                     android:layout_width="fill_parent"

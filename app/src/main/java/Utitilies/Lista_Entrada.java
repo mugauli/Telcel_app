@@ -17,6 +17,7 @@ public class Lista_Entrada {
     private Bitmap img_previa;
     private SvaElement svaElement1,svaElement2;
     private ArrayList<DescElement> pdf;
+    private Boolean estatus;
     private String
             contenido,
             contenidos,
@@ -204,7 +205,7 @@ public class Lista_Entrada {
         this.img_detalle = img_detalle;
     }
 
-    public Lista_Entrada (String id,String titulo, String tipo,String textoDebajo,String img_detalle,String preguntas,String duracion) {
+    public Lista_Entrada (String id,String titulo, String tipo,String textoDebajo,String img_detalle,String preguntas,String duracion,Boolean estatus) {
 
         this.id = id;
         this.titulo = titulo;
@@ -213,6 +214,7 @@ public class Lista_Entrada {
         this.img_detalle = img_detalle;
         this.preguntas = preguntas;
         this.duracion = duracion;
+        this.estatus = estatus;
     }
     //Home
     public Lista_Entrada (String seccion,String id,Bitmap img_previa,String titulo, String url,String duracion, int idImagen2) {
@@ -359,6 +361,9 @@ public class Lista_Entrada {
     public int get_idradio(){return  idradio;}
     public String get_preguntas() {
         return preguntas;
+    }
+    public Boolean get_estatus() {
+        return estatus;
     }
 
 

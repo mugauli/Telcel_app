@@ -9,6 +9,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -187,11 +188,15 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
                         ImageView imagenVideo = (ImageView) activity.findViewById(R.id.video);
                         ImageView imagenPlay = (ImageView) activity.findViewById(R.id.play);
+                        LinearLayout videotodo = (LinearLayout)activity.findViewById(R.id.videotodo);
+
                         //ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
                         TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
                         TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
                         imagenVideo.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                        imagenPlay.setTag(((Lista_Entrada) entrada).get_id());
+                       // imagenPlay.setTag(((Lista_Entrada) entrada).get_id());
+                        videotodo.setTag(((Lista_Entrada) entrada).get_id());
+
                         //imagenDescarga.setTag(((Lista_Entrada) entrada).get_url());
                         txtTiempo.setText(((Lista_Entrada) entrada).get_duracion());
                         txtTitulo.setText(((Lista_Entrada) entrada).get_titulo());
@@ -235,14 +240,15 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             //ImageView imagenDescarga = (ImageView) activity.findViewById(R.id.descarga);
                             TextView txtTiempo = (TextView) activity.findViewById(R.id.txtTiempo);
                             TextView txtTitulo = (TextView) activity.findViewById(R.id.txtTitulo);
-
+                            LinearLayout videotodo = (LinearLayout)activity.findViewById(R.id.videotodo);
 
                             Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
                             String id_video = ((TextView)arg0.findViewById(R.id.idVideo)).getText().toString();
 
                             imagenVideo.setImageBitmap(Entrada.get_img_previa());
-                            imagenPlay.setTag(Entrada.get_id());
+                            videotodo.setTag(id_video);
+                            //imagenPlay.setTag(Entrada.get_id());
                            //imagenDescarga.setTag(Entrada.get_url());
                             txtTiempo.setText(Entrada.get_duracion());
                             txtTitulo.setText(Entrada.get_titulo());

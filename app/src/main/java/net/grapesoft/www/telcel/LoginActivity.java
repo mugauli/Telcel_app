@@ -303,6 +303,7 @@ public class LoginActivity extends Activity  {
                             //{"id":"5","num_empleado":"ANDROID","num_celular":"ANDROID","region":"1","nombre":"ANDROID","paterno":"ANDROID","materno":"ANDROID","interes_1":null,"interes_2":null}
 
                             if(!response.getJSONObject(0).has("error")) {
+
                                 String id = response.getJSONObject(0).get("id").toString();
                                 String num_empleado = response.getJSONObject(0).get("num_empleado").toString();
                                 String num_celular = response.getJSONObject(0).get("num_celular").toString();

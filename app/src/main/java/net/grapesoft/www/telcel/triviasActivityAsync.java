@@ -159,6 +159,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                 nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
                 nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
+                nameValuePair.add(new BasicNameValuePair("idUsuario", params[0].get(4)));
 
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
 
@@ -178,9 +179,10 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                 result11 = sb.toString();
 
                // result11= "[{\"id\":\"1\",\"texto\":\"\",\"tipo\":\"C\",\"titulo\":\"Cruz Azul vs. Pumas\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\"},{\"id\":\"2\",\"texto\":\"\",\"tipo\":\"T\",\"titulo\":\"Trivia de prueba\",\"duracion\":\"1\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/videos\\/video-Retroalimentacion.png\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 1\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 1\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 1\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 2\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 2\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 2\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 3\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 3\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 3\",\"valRespuesta\":\"0\"}]}]}]\n";
-result11 = "[{\"id\":\"2\",\"tipo\":\"T\",\"texto\":\"<p>Telcel te invita al partido<\\/p>\",\"titulo\":\"Pumas vs. Leon\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/pumas-leon-preview.png\",\"duracion\":\"1\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"?En QUE periodo Francisco Palencia jugo con los Pumas? \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"2004 al 2010\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"2005 al 2009\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"2007 al 2011 \",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"?En que anio fue fundado el Club Leon?\",\"respuestas\":[{\"idResp\":\"4\",\"txtRespuesta\":\"1942 \",\"valRespuesta\":\"1\"},{\"idResp\":\"5\",\"txtRespuesta\":\"1944\",\"valRespuesta\":\"0\"},{\"idResp\":\"6\",\"txtRespuesta\":\"1952\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"?Que marca de celulares patrocina al Club Universidad Nacional? \",\"respuestas\":[{\"idResp\":\"7\",\"txtRespuesta\":\"Huawei\",\"valRespuesta\":\"1\"},{\"idResp\":\"8\",\"txtRespuesta\":\"Samsung\",\"valRespuesta\":\"0\"},{\"idResp\":\"9\",\"txtRespuesta\":\"ZTE\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"4\",\"txtPregunta\":\"?Como se llama la ultima plataforma digital de aprendizaje que lanzo la Fundacion Carlos Slim?\",\"respuestas\":[{\"idResp\":\"10\",\"txtRespuesta\":\"Capacitate para el empleo\",\"valRespuesta\":\"0\"},{\"idResp\":\"11\",\"txtRespuesta\":\"Aprende.org\",\"valRespuesta\":\"1\"},{\"idResp\":\"12\",\"txtRespuesta\":\"ClikiSalud\",\"valRespuesta\":\"0\"}]}]}]";
+//result11 = "[{\"id\":\"2\",\"tipo\":\"T\",\"texto\":\"<p>Telcel te invita al partido<\\/p>\",\"titulo\":\"Pumas vs. Leon\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/pumas-leon-preview.png\",\"duracion\":\"1\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"?En QUE periodo Francisco Palencia jugo con los Pumas? \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"2004 al 2010\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"2005 al 2009\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"2007 al 2011 \",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"?En que anio fue fundado el Club Leon?\",\"respuestas\":[{\"idResp\":\"4\",\"txtRespuesta\":\"1942 \",\"valRespuesta\":\"1\"},{\"idResp\":\"5\",\"txtRespuesta\":\"1944\",\"valRespuesta\":\"0\"},{\"idResp\":\"6\",\"txtRespuesta\":\"1952\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"?Que marca de celulares patrocina al Club Universidad Nacional? \",\"respuestas\":[{\"idResp\":\"7\",\"txtRespuesta\":\"Huawei\",\"valRespuesta\":\"1\"},{\"idResp\":\"8\",\"txtRespuesta\":\"Samsung\",\"valRespuesta\":\"0\"},{\"idResp\":\"9\",\"txtRespuesta\":\"ZTE\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"4\",\"txtPregunta\":\"?Como se llama la ultima plataforma digital de aprendizaje que lanzo la Fundacion Carlos Slim?\",\"respuestas\":[{\"idResp\":\"10\",\"txtRespuesta\":\"Capacitate para el empleo\",\"valRespuesta\":\"0\"},{\"idResp\":\"11\",\"txtRespuesta\":\"Aprende.org\",\"valRespuesta\":\"1\"},{\"idResp\":\"12\",\"txtRespuesta\":\"ClikiSalud\",\"valRespuesta\":\"0\"}]}]}]";
 
                 session.createTriviasSession(result11);
+                Log.e("Con create Trivias",result11);
             }
             else
             {
@@ -221,15 +223,19 @@ result11 = "[{\"id\":\"2\",\"tipo\":\"T\",\"texto\":\"<p>Telcel te invita al par
                     String img_detalle = responseArray.getJSONObject(i).get("img_previa").toString();
                     String tipo = responseArray.getJSONObject(i).get("tipo").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
+
+                    Boolean estatus = Boolean.TRUE;
                     String duracion = "1";
                     String preguntas = "0";
                     if(tipo.equals("T"))
                     {
                         preguntas = responseArray.getJSONObject(i).getJSONArray("elementos").toString();
                         duracion = responseArray.getJSONObject(i).get("duracion").toString();
+                        estatus = responseArray.getJSONObject(i).get("estatus").toString().equals("1");
+                        Log.e("estatus",""+estatus);
                     }
 
-                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_detalle,preguntas,duracion));
+                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_detalle,preguntas,duracion,estatus));
                 }
             }
 
@@ -309,6 +315,10 @@ result11 = "[{\"id\":\"2\",\"tipo\":\"T\",\"texto\":\"<p>Telcel te invita al par
                                 if(trivias == null)
                                     trivias = "0";
                                 if(trivias.contains("["+entrada.get_id().trim()+"]"))
+                                {
+                                    Toast toast = Toast.makeText(activity, "Trivia ya contestada.", Toast.LENGTH_LONG);
+                                    toast.show();
+                                }else if(entrada.get_estatus())
                                 {
                                     Toast toast = Toast.makeText(activity, "Trivia ya contestada.", Toast.LENGTH_LONG);
                                     toast.show();
