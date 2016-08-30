@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import Utitilies.CustomViewPager;
 import Utitilies.SessionManagement;
 
 public class ProductosActivity extends AppCompatActivity
@@ -112,21 +113,26 @@ public class ProductosActivity extends AppCompatActivity
 
         //tabs.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+       // final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         /*final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabs.getTabCount());
         viewPager.setAdapter(adapter);*/
+
+        final CustomViewPager mViewPager = (CustomViewPager) findViewById(R.id.pager);
+        mViewPager.setPagingEnabled(false);
+
         final PageAdapterProductos adapter = new PageAdapterProductos
                 (getSupportFragmentManager(), tabs.getTabCount());
-        viewPager.setAdapter(adapter);
+        mViewPager.setAdapter(adapter);
 
 
 
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+                mViewPager.setCurrentItem(tab.getPosition());
                 Log.e("Posicion",""+tab.getPosition());
             }
 

@@ -40,4 +40,5 @@ public class PageAdapterProductos extends FragmentStatePagerAdapter {
     public int getCount() {
         return mNumOfTabs;
     }
+
 }

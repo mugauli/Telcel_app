@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -279,7 +280,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         } catch (FileNotFoundException e) {
                             loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                         }
-                        datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha));
+                        datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha,tipo));
                     } else if (seccion.equals("publicitarias")) {
 
                         Log.e("Response Item Seccion Home: ", seccion);
@@ -333,7 +334,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         String imagen_detalle = elementos.getJSONObject(0).get("imagen_detalle").toString();
                         String texto = elementos.getJSONObject(0).get("texto").toString();
                         String fecha = elementos.getJSONObject(0).get("fecha").toString();
-
+                        String tipo = elementos.getJSONObject(0).get("tipo").toString();
                         URL imageUrl = null;
                         imageUrl = new URL(imageHttpAddress + img_previa);
                         HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
@@ -344,7 +345,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         } catch (FileNotFoundException e) {
                             loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                         }
-                        datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha));
+                        datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha, tipo));
                     } else if (seccion.equals("video")) {
 
 
@@ -621,12 +622,25 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                                 LinearLayout vs = (LinearLayout) activity.findViewById(R.id.vista);
 
                                 Intent i = new Intent(activity, activity_detalle_campana_imagen.class);
-
+                                Intent p = new Intent(activity, activity_detalle_campana.class);
                                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
-                                if(Entrada != null) {
-                                    i.putExtra("imagen", Entrada.get_img_detalle());
+                                String todo = Entrada.get_fecha();
+                                String prueba = Entrada.get_img_detalle();
+                                /*Toast toast2 = Toast.makeText(activity,todo + "112", Toast.LENGTH_SHORT);
+                                toast2.show();*/
+                                if( Entrada != null && todo.compareTo("I")==0 ) {
+                                    /*Toast toast5 = Toast.makeText(activity,prueba, Toast.LENGTH_SHORT);
+                                    toast5.show();*/
+                                    i.putExtra("imagen", Entrada.get_img_mini());
                                     activity.startActivity(i);
+                                }else{
+                                    p.putExtra("imagen",Entrada.get_img_mini());
+                                    p.putExtra("titulo",Entrada.get_titulo());
+                                    p.putExtra("descripcion",Entrada.get_img_detalle());
+
+                                    activity.startActivity(p);
                                 }
+
 
 
 
@@ -725,12 +739,31 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                                 LinearLayout vs = (LinearLayout) activity.findViewById(R.id.vista);
 
-                                Intent i = new Intent(activity, activity_detalle_comunicados_imagen.class);
+                                /*Intent i = new Intent(activity, activity_detalle_comunicados_imagen.class);
 
                                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
                                 if(Entrada != null) {
                                     i.putExtra("imagen", Entrada.get_img_detalle());
                                     activity.startActivity(i);
+                                }*/
+                                Intent i = new Intent(activity, activity_detalle_comunicados_imagen.class);
+                                Intent p = new Intent(activity, activity_detalle_comunicado.class);
+                                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
+                                String todo = Entrada.get_fecha();
+                                String prueba = Entrada.get_img_detalle();
+                                /*Toast toast2 = Toast.makeText(activity,todo + "112", Toast.LENGTH_SHORT);
+                                toast2.show();*/
+                                if( Entrada != null && todo.compareTo("I")==0 ) {
+                                    /*Toast toast5 = Toast.makeText(activity,prueba, Toast.LENGTH_SHORT);
+                                    toast5.show();*/
+                                    i.putExtra("imagen", Entrada.get_img_mini());
+                                    activity.startActivity(i);
+                                }else{
+                                    p.putExtra("imagen",Entrada.get_img_mini());
+                                    p.putExtra("titulo",Entrada.get_titulo());
+                                    p.putExtra("descripcion",Entrada.get_img_detalle());
+
+                                    activity.startActivity(p);
                                 }
 
 

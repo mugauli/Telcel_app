@@ -79,21 +79,21 @@ public class FaqActivity extends ActionBarActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        toolbar.setOnClickListener(new View.OnClickListener() {
+       /* toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(FaqActivity.this, MainActivity.class);
+                Intent i = new Intent(FaqActivity.this, LoginActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
-        });
+        });*/
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-        imgButton.setOnClickListener(new View.OnClickListener() {
+       /* imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -102,16 +102,16 @@ public class FaqActivity extends ActionBarActivity
                     drawer.openDrawer(GravityCompat.START);
                 }
             }
-        });
+        });*/
 
         ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
-        imgButton2.setOnClickListener(new View.OnClickListener() {
+       /* imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(FaqActivity.this, triviasActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

@@ -62,10 +62,13 @@ public class activity_detalle_grupo extends AppCompatActivity
         String imagen = getIntent().getStringExtra("imagen");
         String titulo = getIntent().getStringExtra("titulo");
         String descripcion = getIntent().getStringExtra("descripcion");
+        String url = getIntent().getStringExtra("url");
 
         ImageView imagenUG = (ImageView) findViewById(R.id.imagenUG);
         TextView titUG = (TextView) findViewById(R.id.titUG);
         TextView descUG = (TextView) findViewById(R.id.descUG);
+
+
 
         try {
             Bitmap img = new GetNetImage().execute(imagen).get();
@@ -82,7 +85,8 @@ public class activity_detalle_grupo extends AppCompatActivity
 
         titUG.setText(titulo);
         descUG.setMovementMethod(LinkMovementMethod.getInstance());
-        descUG.setText(Html.fromHtml(descripcion));
+        descUG.setText(Html.fromHtml(descripcion) + url);
+
 
 
         Log.e("Imagen", imagen);

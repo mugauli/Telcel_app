@@ -14,7 +14,7 @@ public class Lista_Entrada {
 
     private ArrayList<String> imagenesSlide;
     private int idImagen,idImagen2,idradio,type,idImagenDetalle, idImagenA,idSiguiente;
-    private Bitmap img_previa;
+    private Bitmap img_previa, img_previa2;
     private SvaElement svaElement1,svaElement2;
     private ArrayList<DescElement> pdf;
     private Boolean estatus;
@@ -64,6 +64,9 @@ public class Lista_Entrada {
         this.idImagenDetalle = idImagenDetalle;
         this.textoDebajo = textoDebajo;
     }
+    //Campañas internas
+
+    //
 
     public Lista_Entrada (String textoEncima, String textoDebajo) {
 
@@ -173,7 +176,22 @@ public class Lista_Entrada {
         this.imagenSig = imagenSig;
         this.textoSig = textoSig;
     }
+    //Mioooo
+    public Lista_Entrada(String id, Bitmap img_previa, Bitmap img_previa2, String titulo, String textoDebajo,  ArrayList<String> imagenesSlide,String jsonStr, int idSiguiente,String tituloSig,String imagenSig, String textoSig ) {
+        this.id = id;
+        this.img_previa = img_previa;
+        this.img_previa2 = img_previa2;
+        this.titulo = titulo;
 
+        this.textoDebajo = textoDebajo;
+        this.imagenesSlide = imagenesSlide;
+        this.jsonStr = jsonStr;
+        this.idSiguiente = idSiguiente;
+        this.tituloSig = tituloSig;
+        this.imagenSig = imagenSig;
+        this.textoSig = textoSig;
+    }
+    //
     public Lista_Entrada(String mes, String id, Bitmap img_previa, String titulo, String url, String textoDebajo,  ArrayList<String> imagenesSlide) {
 
         this.mes = mes;
@@ -237,7 +255,9 @@ public class Lista_Entrada {
         this.img_detalle = img_detalle;
         this.textoDebajo = textoDebajo;
     }
+//HOME INTERNAS
 
+//
     public Lista_Entrada(String seccion,String id, Bitmap img_previa, String titulo, String img_detalle, String textoDebajo, String fecha) {
         this.seccion = seccion;
         this.id = id;
@@ -365,6 +385,8 @@ public class Lista_Entrada {
     public Boolean get_estatus() {
         return estatus;
     }
-
+    public Bitmap get_img_previa2() {
+        return img_previa2;
+    }
 
 }

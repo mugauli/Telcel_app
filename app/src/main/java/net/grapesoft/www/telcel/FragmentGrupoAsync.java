@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -134,7 +136,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             else {
 
                 for (int i = 0; i < responseArray.length(); i++) {
-                    Log.e("Response Item: ", responseArray.getJSONObject(i).toString());
+                   // Log.e("Response Item: ", responseArray.getJSONObject(i).toString());
 
                     String id = responseArray.getJSONObject(i).get("id").toString();
                     String titulo = responseArray.getJSONObject(i).get("titulo").toString();
@@ -142,6 +144,8 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     String imagen_detalle = responseArray.getJSONObject(i).get("imagen_detalle").toString();
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
                     String fecha = responseArray.getJSONObject(i).get("fecha").toString();
+                    String url = responseArray.getJSONObject(i).get("url").toString();
+
 
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
@@ -155,7 +159,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha));
+                    datos.add(new Lista_Entrada(id,loadedImage, titulo,imagen_detalle,texto,fecha,url));
                 }
             }
 
@@ -179,7 +183,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
             @Override
             public void onEntrada(Object entrada, View view) {
 
-               // Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
+              // Log.e ("Entrada Noticia", ((Lista_Entrada) entrada).get_titulo());
 
                 if (entrada != null) {
 
@@ -207,12 +211,14 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo());
 
                             noticiatitulo.setTypeface(tf);
-                        }else{
+                       }else{
                             noticiatitulo.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30)+ "...");
 
                             noticiatitulo.setTypeface(tf);
                         }
-
+                        /*TextView url = (TextView) activity.findViewById(R.id.url);
+                        if (url != null)
+                            url.setText(((Lista_Entrada) entrada).get_url());*/
 
                        // TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descGrupo);
 
@@ -230,6 +236,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenGrupoL);
                     if (imagen_noticias != null)
                         imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                    imagen_noticias.setScaleType(ImageView.ScaleType.FIT_XY);
 
 
                     TextView noticiafecha = (TextView) view.findViewById(R.id.grupofechal);
@@ -274,6 +281,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                             fechaGrupo.setText(Entrada.get_fecha());
                             titGrupo.setText(Entrada.get_titulo());
                            // descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo().substring(0,42)+"..."));
+
                             principal.setTag(Entrada);
 
                        }

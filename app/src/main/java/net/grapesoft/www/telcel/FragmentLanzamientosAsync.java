@@ -54,7 +54,7 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
     private ListView lista;
     JSONArray responseArray;
     private String imageHttpAddress = "";
-    private Bitmap loadedImage;
+    private Bitmap loadedImage,loadedImage2;
     public String IP = "",tokenCTE = "";
     public boolean primer3 = true;
     SessionManagement session;
@@ -158,7 +158,17 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                     } catch (FileNotFoundException e) {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id, loadedImage, titulo, img_mini, texto, imagenes_slider,"",0,"","",""));
+                    URL imageUrlM = null;
+                    imageUrlM = new URL(imageHttpAddress + img_mini);
+                    HttpURLConnection connM = (HttpURLConnection) imageUrlM.openConnection();
+                    try {
+                        connM.connect();
+                        loadedImage2 = BitmapFactory.decodeStream(connM.getInputStream());
+                        connM.disconnect();
+                    } catch (FileNotFoundException e) {
+                        loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                    }
+                    datos.add(new Lista_Entrada(id, loadedImage,loadedImage2, titulo, texto, imagenes_slider,"",0,"","",""));
                     //Lista_Entrada( id,  img_previa,  titulo,  url,  textoDebajo,  ArrayList<String> imagenesSlide,String jsonStr, int idSiguiente,String tituloSig,String imagenSig, String textoSig ) {
                 }
             }
@@ -196,7 +206,8 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                         ImageView imagen_noticias = (ImageView) activity.findViewById(R.id.imagenLZ);
                         if (imagen_noticias != null) {
                             Log.e("imagen", "pricipal");
-                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                            imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa2());
+                            imagen_noticias.setScaleType(ImageView.ScaleType.FIT_XY);
                         }
 
                         TextView lanzamientosTitulo = (TextView) activity.findViewById(R.id.titLZ);
@@ -206,11 +217,11 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
 
                         TextView lanzamientosDescripcion = (TextView) activity.findViewById(R.id.descLZ);
 
-                        if (lanzamientosDescripcion != null) {
+                        /*if (lanzamientosDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                             // desc = desc.substring(0,200);
                             lanzamientosDescripcion.setText(Html.fromHtml(desc));
-                        }
+                        }*/
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalLZ);
                         principal.setTag(entrada);
 

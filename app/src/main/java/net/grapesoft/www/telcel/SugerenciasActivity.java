@@ -69,22 +69,22 @@ public class SugerenciasActivity extends AppCompatActivity
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        toolbar.setOnClickListener(new View.OnClickListener() {
+      /*  toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SugerenciasActivity.this, MainActivity.class);
+                Intent i = new Intent(SugerenciasActivity.this, LoginActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
-        });
+        });*/
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
         final DrawerLayout drawer;
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-        if (imgButton != null) {
+        /*if (imgButton != null) {
             imgButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -95,16 +95,16 @@ public class SugerenciasActivity extends AppCompatActivity
                     }
                 }
             });
-        }
+        }*/
 
-        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+        /*ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SugerenciasActivity.this, triviasActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 

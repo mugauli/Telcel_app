@@ -128,7 +128,7 @@ public class ayuda  extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(ayuda.this, MainActivity.class);
+                Intent i = new Intent(ayuda.this, LoginActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
@@ -139,7 +139,7 @@ public class ayuda  extends AppCompatActivity
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-        imgButton.setOnClickListener(new View.OnClickListener() {
+      /*  imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -148,15 +148,15 @@ public class ayuda  extends AppCompatActivity
                     drawer.openDrawer(GravityCompat.START);
                 }
             }
-        });
-        ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+        });*/
+       /* ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
         imgButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ayuda.this, triviasActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -204,8 +205,19 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
                     TextView texto_superior_entrada = (TextView) view.findViewById(R.id.videotitulo);
 
-                    if (texto_superior_entrada != null)
+                    Integer conteo = 0;
+                    conteo = ((Lista_Entrada) entrada).get_titulo().length();
+                    Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                    Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                    if (texto_superior_entrada != null && conteo <=40){
                         texto_superior_entrada.setText(((Lista_Entrada) entrada).get_titulo());
+
+                        texto_superior_entrada.setTypeface(tf);
+                    }else{
+                        texto_superior_entrada.setText(((Lista_Entrada) entrada).get_titulo().substring(0,30)+ "...");
+
+                        texto_superior_entrada.setTypeface(tf);
+                    }
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.videoduracion);
 
