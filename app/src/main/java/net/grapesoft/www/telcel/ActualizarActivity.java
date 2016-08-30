@@ -253,12 +253,12 @@ public class ActualizarActivity extends AppCompatActivity
                             Toast toast = Toast.makeText(ActualizarActivity.this, "Error al actualizar los datos", Toast.LENGTH_LONG);
                             toast.show();
                         }
-                        else if(response.getJSONObject(0).has("resp"))
+                        else if(response.getJSONObject(0).has("respuesta"))
                         {
-                            String resp = response.getJSONObject(0).get("resp").toString();
+                            String resp = response.getJSONObject(0).get("respuesta").toString();
                             Log.e("Response Actualizar: ", resp);
 
-                            if(resp.equals("true")) {
+                            if(resp.equals("1")) {
                                 Intent i = new Intent(ActualizarActivity.this, ActualizadosActivity.class);
                                 i.putExtra("titulo","MODIFICAR O ACTUALIZAR DATOS");
                                 i.putExtra("mensaje","Tus datos han sido actualizados.");

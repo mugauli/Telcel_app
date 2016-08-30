@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="fill_parent"
-android:layout_height="match_parent">
+android:layout_height="wrap_content">
 <LinearLayout
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="150dp"
     android:background="@android:color/transparent"
     android:orientation="horizontal"
     android:weightSum="100"
     android:layout_marginTop="10dp"
-    android:padding="0dp">
+    android:padding="0dp"
+    android:id="@+id/containerSVA">
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,22 +25,23 @@ android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="10dp"
+            android:layout_height="fill_parent"
             android:id="@+id/imagenSva1"
-            android:layout_weight="7" />
+            android:layout_weight="3" />
 
         <TextView
             android:id="@+id/tituloSva1"
             android:layout_width="fill_parent"
-            android:layout_height="10dp"
+            android:layout_height="fill_parent"
             android:text="Small Text"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_weight="3"
-            android:background="@drawable/border_breadscrum" />
+            android:layout_weight="7"
+            android:background="@drawable/border_breadscrum"
+            android:textSize="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,22 +58,22 @@ android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:id="@+id/imagenSva2"
-            android:layout_weight="7" />
+            android:layout_weight="3" />
 
         <TextView
 
             android:id="@+id/tituloSva2"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:text="Small Text"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_weight="3"
+            android:layout_weight="7"
             android:background="@drawable/border_breadscrum" />
 
 

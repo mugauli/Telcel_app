@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -228,6 +229,18 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                 //  Log.e ("Entrada Video", ((Lista_Entrada) entrada).get_id());
                 if (entrada != null) {
 
+                    DisplayMetrics metrics = new DisplayMetrics();
+                    activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+
+                    int height = metrics.heightPixels; // alto absoluto en pixels
+                    Double d = new Double(height * 0.3);
+                    int i = d.intValue();
+
+                    LinearLayout containerSVA = (LinearLayout) activity.findViewById(R.id.containerSVA);
+                    if(containerSVA != null)
+                    containerSVA.setMinimumHeight(i);
+
                     int type =  ((Lista_Entrada)entrada).get_type();
 
                     if(type == 2) {
@@ -260,8 +273,15 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                             imagenSva1.setScaleType(ImageView.ScaleType.FIT_XY);
                         }
                         TextView tituloSVA = (TextView) view.findViewById(R.id.tituloSva1);
-                        if (tituloSVA != null)
+                        if (tituloSVA != null) {
+
+                            if(sva1.get_tituloSva().length() > 20) {
+                              tituloSVA.setTextSize(10);
+                            }
+                            else
+                                tituloSVA.setTextSize(13);
                             tituloSVA.setText(sva1.get_tituloSva());
+                        }
                         LinearLayout linearSva1 =  (LinearLayout) view.findViewById(R.id.linearSva1);
                         if (linearSva1 != null) {
                             linearSva1.setTag(sva1);
@@ -295,8 +315,15 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                             ///imagenSva2.setImageBitmap();
                         }
                         TextView tituloSVA2 = (TextView) view.findViewById(R.id.tituloSva2);
-                        if (tituloSVA2 != null)
-                            tituloSVA2.setText(sva2.get_tituloSva());
+                        if (tituloSVA2 != null) {
+                            String tit = "";
+                            if(sva2.get_tituloSva().length() > 20) {
+                                tit = sva2.get_tituloSva().substring(0, 20);
+                            }
+                            else
+                                tit = sva2.get_tituloSva();
+                            tituloSVA2.setText(tit);
+                        }
 
 
                         LinearLayout linearSva2 =  (LinearLayout) view.findViewById(R.id.linearSva2);

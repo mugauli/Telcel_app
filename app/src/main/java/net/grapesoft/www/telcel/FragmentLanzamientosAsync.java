@@ -163,6 +163,7 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                     HttpURLConnection connM = (HttpURLConnection) imageUrlM.openConnection();
                     try {
                         connM.connect();
+                        if(loadedImage2 != null)
                         loadedImage2 = BitmapFactory.decodeStream(connM.getInputStream());
                         connM.disconnect();
                     } catch (FileNotFoundException e) {

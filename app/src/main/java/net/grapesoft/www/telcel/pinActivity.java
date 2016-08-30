@@ -1,11 +1,13 @@
 package net.grapesoft.www.telcel;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -176,17 +178,33 @@ public class pinActivity extends AppCompatActivity
                                 Log.e("Response Falla: ", "ERROR");
                                 tvErrorPin.setText("Error al recuperar contraseña.");
 
-                            } else if (response.getJSONObject(0).has("resp")) {
-                                String resp = response.getJSONObject(0).get("resp").toString();
+                            } else if (response.getJSONObject(0).has("respuesta")) {
+                                String resp = response.getJSONObject(0).get("respuesta").toString();
                                 Log.e("Response Falla: ", resp);
 
-                                if (resp.equals("true")) {
-                                    session.logoutUser();
-                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
+                                if (resp.equals("1")) {
+
+                                    new AlertDialog.Builder(pinActivity.this)
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .setTitle("Telcel #Nosune")
+                                            .setMessage("PIN de acceso cambiado correctamente")
+                                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
+                                            {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    finish();
+                                                    session.logoutUser();
+                                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                }
+
+                                            })
+                                            .show();
+
+
                                 } else {
                                     tvErrorPin.setText("Error al enviar reporte.");
                                     //Toast toast = Toast.makeText(falla.this, "Error al actualiar los datos.", Toast.LENGTH_LONG);
