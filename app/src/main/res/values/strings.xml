@@ -32,10 +32,49 @@
         <item>Región 7</item>
         <item>Región 8</item>
         <item>Región 9</item>
+        <item>AMX</item>
+        <item>Corporativo</item>
     </string-array>
 
     <string-array name="direccion">
-        <item>Marketing</item>
+        <item>DIR ADMINISTRACION DE PROYECTOS</item>
+        <item>DIR ADMON DE PRODUCTOS FIJOS</item>
+        <item>DIR ANUNCIOS EN DIRECTORIOS</item>
+        <item>DIR AREA AMX</item>
+        <item>DIR COMERCIAL OP FIJAS</item>
+        <item>DIR COMISION A OTROS PAISES</item>
+        <item>DIR COMPRAS</item>
+        <item>DIR CONTENIDOS CMI</item>
+        <item>DIR DESARROLLO CORPORATIVO</item>
+        <item>DIR EJECUTIVA DE UNIDADES REGIONALES</item>
+        <item>DIR FINANZAS Y ADMINISTRACION</item>
+        <item>DIR FINANZAS Y ADMON AM</item>
+        <item>DIR GENERAL</item>
+        <item>DIR IMPLANTACION CORPORATIVA</item>
+        <item>DIR INFORMATICA</item>
+        <item>DIR INGENIERIA Y CALIDAD DE RED</item>
+        <item>DIR JURIDICA AM</item>
+        <item>DIR MERCADOTECNIA</item>
+        <item>DIR MULTIMEDIA Y ALIANZAS ESTRATEGICAS</item>
+        <item>DIR OPERACION Y MANTENIMIENTO</item>
+        <item>DIR OPERACIONES FIJAS</item>
+        <item>DIR OPERACIONES MOVILES</item>
+        <item>DIR OPERACIONES REGION 9</item>
+        <item>DIR PLAN FINANCIERA Y OPERACION OP FIJAS</item>
+        <item>DIR RECURSOS HUMANOS</item>
+        <item>DIR REGIONAL BAJA CALIFORNIA</item>
+        <item>DIR REGIONAL CENTRO</item>
+        <item>DIR REGIONAL GOLFO SUR</item>
+        <item>DIR REGIONAL NORESTE</item>
+        <item>DIR REGIONAL NOROESTE</item>
+        <item>DIR REGIONAL NORTE</item>
+        <item>DIR REGIONAL OCCIDENTE</item>
+        <item>DIR REGIONAL SURESTE</item>
+        <item>DIR SERVICIOS DE VALOR AGREGADO</item>
+        <item>DIR SERVICIOS INTERNACIONALES Y MAYORISTAS</item>
+        <item>DIR TESORERIA Y ADMON DE RIESGOS AM</item>
+        <item>SUBDIR EJECUTIVA DE ASUNTOS CORPORATIVOS</item>
+        <item>SUBDIR EJECUTIVA DE ASUNTOS REGULATORIOS</item>
     </string-array>
 
     <string name="mensajeActualizado">Tus datos han sido actualizados</string>

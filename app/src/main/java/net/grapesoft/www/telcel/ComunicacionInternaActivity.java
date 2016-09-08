@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import Utitilies.SessionManagement;
 
@@ -155,12 +156,16 @@ public class ComunicacionInternaActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-
+       Toast toast5 = Toast.makeText(this,"NADA", Toast.LENGTH_SHORT);
+                                    toast5.show();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            Intent i = new Intent(ComunicacionInternaActivity.this, MainActivity.class);
+            i.putExtra("direccion","0");
+            startActivity(i);
         }
     }
 

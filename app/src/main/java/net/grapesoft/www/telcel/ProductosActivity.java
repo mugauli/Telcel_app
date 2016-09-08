@@ -167,6 +167,9 @@ public class ProductosActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            Intent i = new Intent(ProductosActivity.this, MainActivity.class);
+            i.putExtra("direccion","0");
+            startActivity(i);
         }
     }
 
