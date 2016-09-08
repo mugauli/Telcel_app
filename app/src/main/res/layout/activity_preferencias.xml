@@ -330,6 +330,14 @@
                          android:layout_gravity="center_horizontal"
                          android:width="200dp"
                          android:layout_marginTop="18dp" />
+
+                     <TextView
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/txtErrorInteres"
+                         android:linksClickable="false"
+                         android:textColor="@color/error_color"
+                         android:gravity="center|center_vertical|center_horizontal" />
                  </LinearLayout>
 
 

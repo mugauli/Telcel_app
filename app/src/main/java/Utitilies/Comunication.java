@@ -263,6 +263,18 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             nameValuePair.add(new BasicNameValuePair("aciertos", paramsPassed.get(6)));
             nameValuePair.add(new BasicNameValuePair("estatus", paramsPassed.get(7)));
 
+        }else if(paramsPassed.get(0)=="10")
+        {
+            //ChangeInterests.php
+            //token: siempre será 67d6b32e8d96b8542feda3df334c04f5
+            //idUsuario: es el id que les envio en el login
+            //interes_1: es el id de interes 1
+            //interes_2: es el id de interes 2
+
+            nameValuePair.add(new BasicNameValuePair("token", paramsPassed.get(2)));
+            nameValuePair.add(new BasicNameValuePair("idUsuario", paramsPassed.get(3)));
+            nameValuePair.add(new BasicNameValuePair("interes_1", paramsPassed.get(4)));
+            nameValuePair.add(new BasicNameValuePair("interes_2", paramsPassed.get(5)));
         }
 
         return nameValuePair;

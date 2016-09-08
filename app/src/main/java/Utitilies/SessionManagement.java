@@ -91,7 +91,7 @@ public class SessionManagement {
      * Create login session
      * */
     public void createLoginSession(String token, String dato, String campo, String pass, String id, String num_empelado, String num_celular,
-                                   String region, String nombre, String paterno, String materno, String interes_1, String interes_2,String correo) {
+                                        String region, String nombre, String paterno, String materno, String interes_1, String interes_2,String correo) {
         editor.clear();
         //SHARED
         editor.putBoolean(IS_LOGIN, true);
@@ -113,6 +113,16 @@ public class SessionManagement {
         editor.putString(KEY_PD_INTERES_1,interes_1);
         editor.putString(KEY_PD_INTERES_2,interes_2);
         editor.putString(KEY_PD_CORREO,correo);
+
+
+        // commit changes
+        editor.commit();
+    }
+
+    public void createInteresSession(String interes_1, String interes_2) {
+
+        editor.putString(KEY_PD_INTERES_1,interes_1);
+        editor.putString(KEY_PD_INTERES_2,interes_2);
 
 
         // commit changes

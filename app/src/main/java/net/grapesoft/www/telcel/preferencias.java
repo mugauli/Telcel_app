@@ -2,6 +2,8 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -11,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -29,7 +32,9 @@ import android.widget.Toast;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
+import Utitilies.Comunication;
 import Utitilies.List_adapted;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
@@ -41,11 +46,14 @@ public class preferencias extends AppCompatActivity
     public String tokenCTE = "";
     int rb1=0,rb2=0;
     private ListView lista;
+    String usuario = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferencias);
+
+        tokenCTE = getText(R.string.tokenXM).toString();
 
         TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
         Typeface tfi = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
@@ -54,8 +62,18 @@ public class preferencias extends AppCompatActivity
 
         session = new SessionManagement(getApplicationContext());
         final HashMap<String, String> user = session.getUserDetails();
-        final String int1 = user.get(SessionManagement.KEY_PD_INTERES_1);
-        final String int2 = user.get(SessionManagement.KEY_PD_INTERES_2);
+        usuario = user.get(SessionManagement.KEY_PD_ID);
+
+        if(user.get(SessionManagement.KEY_PD_INTERES_1) != null)
+        {
+            rb1 = Integer.parseInt(user.get(SessionManagement.KEY_PD_INTERES_1));
+        }
+        if(user.get(SessionManagement.KEY_PD_INTERES_2) != null)
+        {
+            rb2 = Integer.parseInt(user.get(SessionManagement.KEY_PD_INTERES_2));
+        }
+        checkedRadios();
+
         //boton ayuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
@@ -300,8 +318,57 @@ public class preferencias extends AppCompatActivity
 
                 @Override
                 public void onClick(View arg0) {
-                    JSONArray response;
+                    TextView txtErrorInteres = (TextView) findViewById(R.id.txtErrorInteres);
+                    txtErrorInteres.setText("");
+                    if (rb1 == 0 || rb2 == 0 || rb1 == rb2) {
+                        txtErrorInteres.setText("Debe selecciona al menos dos temas de interés.");
+                    } else {
 
+                        try {
+                            JSONArray response;
+
+                            ArrayList<String> params = new ArrayList<String>();
+
+                            //-- PARAMETROS PETICION LOGIN-----//
+                            params.add("10");
+                            params.add("ChangeInterests.php");
+                            params.add(tokenCTE);
+                            params.add(usuario);
+                            params.add(rb1 + "");
+                            params.add(rb2 + "");
+
+                            response = new Comunication(preferencias.this).execute(params).get();
+
+
+                            //{"id":"5","num_empleado":"ANDROID","num_celular":"ANDROID","region":"1","nombre":"ANDROID","paterno":"ANDROID","materno":"ANDROID","interes_1":null,"interes_2":null}
+
+                            if (!response.getJSONObject(0).has("error")) {
+
+                                session.createInteresSession(rb1 + "", rb2 + "");
+                                Intent i = new Intent(preferencias.this, ActualizadosActivity.class);
+                                i.putExtra("titulo", "TEMAS DE INTERÉS");
+                                i.putExtra("mensaje", "Tus temas de interés han sido actualizados.");
+                                startActivity(i);
+                                finish();
+
+                            } else {
+                                txtErrorInteres.setText("Hubo un error al actualizar los temas de interés.");
+
+
+                                // Toast toast = Toast.makeText(login.this, "Contraseña incorrecta", Toast.LENGTH_LONG);
+                                // toast.show();
+
+                            }
+
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             });
         }
