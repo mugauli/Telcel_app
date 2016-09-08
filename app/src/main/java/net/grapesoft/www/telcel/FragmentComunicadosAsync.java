@@ -202,6 +202,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
                         if (imagen_noticias != null) {
                             Log.e("imagen","pricipal");
                             imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
+                            imagen_noticias.setScaleType(ImageView.ScaleType.FIT_XY);
                         }
 
                         TextView noticiafecha = (TextView) activity.findViewById(R.id.fechaUC);

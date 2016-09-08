@@ -218,7 +218,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                         }
                         /*TextView url = (TextView) activity.findViewById(R.id.url);
                         if (url != null)
-                            url.setText(((Lista_Entrada) entrada).get_url());*/
+                            url.setText(((Lista_Entrada) entrada).get_tipo());*/
 
                        // TextView noticiaDescripcion = (TextView) activity.findViewById(R.id.descGrupo);
 
@@ -236,7 +236,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
                     ImageView imagen_noticias = (ImageView) view.findViewById(R.id.imagenGrupoL);
                     if (imagen_noticias != null)
                         imagen_noticias.setImageBitmap(((Lista_Entrada) entrada).get_img_previa());
-                    imagen_noticias.setScaleType(ImageView.ScaleType.FIT_XY);
+                    //imagen_noticias.setScaleType(ImageView.ScaleType.FIT_XY);
 
 
                     TextView noticiafecha = (TextView) view.findViewById(R.id.grupofechal);

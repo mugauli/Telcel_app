@@ -67,7 +67,7 @@
                         android:weightSum="100">
                         <TextView
                             android:layout_width="fill_parent"
-                            android:layout_weight="30"
+                            android:layout_weight="35"
                             android:layout_height="fill_parent"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:id="@+id/fechaUN"
@@ -79,12 +79,12 @@
                             android:textColor="@color/ColorPrimary"
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="35"
+                            android:layout_weight="10"
                             android:layout_height="match_parent"
                             android:id="@+id/titUN"/>
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_weight="35"
+                            android:layout_weight="45"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:layout_height="match_parent"
                             android:id="@+id/descUN"/>

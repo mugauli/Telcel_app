@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
@@ -61,8 +63,16 @@ public class activity_detalle_grupo extends AppCompatActivity
             breadcrumComunicado.setText("COMUNICACIÓN INTERNA > GRUPO CARSO INFORMA");*/
         String imagen = getIntent().getStringExtra("imagen");
         String titulo = getIntent().getStringExtra("titulo");
-        String descripcion = getIntent().getStringExtra("descripcion");
+
         String url = getIntent().getStringExtra("url");
+        String urlc = "<p><a href=" + url + ">" + url + "</a></p> ";
+
+
+        String descripcion = getIntent().getStringExtra("descripcion") + urlc.toString();
+
+
+        Toast toast5 = Toast.makeText(this,urlc, Toast.LENGTH_SHORT);
+        toast5.show();
 
         ImageView imagenUG = (ImageView) findViewById(R.id.imagenUG);
         TextView titUG = (TextView) findViewById(R.id.titUG);
@@ -85,7 +95,7 @@ public class activity_detalle_grupo extends AppCompatActivity
 
         titUG.setText(titulo);
         descUG.setMovementMethod(LinkMovementMethod.getInstance());
-        descUG.setText(Html.fromHtml(descripcion) + url);
+        descUG.setText(Html.fromHtml(descripcion));
 
 
 

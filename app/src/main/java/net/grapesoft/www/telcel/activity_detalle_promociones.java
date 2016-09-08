@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.concurrent.ExecutionException;
 
@@ -43,6 +45,26 @@ public class activity_detalle_promociones extends AppCompatActivity
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/media.otf");
+        Typeface tfl = Typeface.createFromAsset(this.getAssets(), "fonts/ligera.otf");
+        TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
+        if(breadcrumComunicado != null) {
+            breadcrumComunicado.setText("  PRESTACIONES > PROMOCIONES");
+
+            breadcrumComunicado.setTypeface(tfl);
+
+            breadcrumComunicado.setCompoundDrawablesWithIntrinsicBounds(R.drawable.beadcrumpres, 0, 0, 0);
+
+            breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(activity_detalle_promociones.this, ComunicacionInternaActivity.class);
+                    i.putExtra("direccion","3");
+                    startActivity(i);
+                }
+            });
+        }
+
 
         //boton ayuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

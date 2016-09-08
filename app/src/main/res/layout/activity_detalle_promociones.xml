@@ -18,7 +18,7 @@
         android:fitsSystemWindows="true"
         tools:context="net.grapesoft.menu.MainActivity">
 
-        <include layout="@layout/toolbar_sola"/>
+        <include layout="@layout/toolbar_tab_sub"/>
 
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
