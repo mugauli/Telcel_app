@@ -44,6 +44,7 @@ public class recuperar extends AppCompatActivity
 
         tokenCTE = getText(R.string.tokenXM).toString();
         session = new SessionManagement(getApplicationContext());
+        final HashMap<String, String> user = session.getUserDetails();
 
         TextView texto_superior_entrada = (TextView) findViewById(R.id.tvCabeceraRecuperar);
         TextView texto_superior = (TextView) findViewById(R.id.tvCabeceraCampoRecuperar);
@@ -83,7 +84,7 @@ public class recuperar extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(recuperar.this, MainActivity.class);
+                Intent i = new Intent(recuperar.this, LoginActivity.class);
                 i.putExtra("direccion","0");
                 startActivity(i);
             }
@@ -92,7 +93,7 @@ public class recuperar extends AppCompatActivity
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        imgButton.setOnClickListener(new View.OnClickListener() {
+      /*  imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -101,7 +102,7 @@ public class recuperar extends AppCompatActivity
                     drawer.openDrawer(GravityCompat.START);
                 }
             }
-        });
+        });*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -109,6 +110,32 @@ public class recuperar extends AppCompatActivity
         TextView titulo = (TextView) findViewById(R.id.TitleSeccion);
         titulo.setTypeface(tf);
         titulo.setText("RECUPERAR CONTRASEÑA");
+
+        if(user.get(SessionManagement.KEY_PD_ID) != null) {
+
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
+                }
+            });
+            ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+            imgButton2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(recuperar.this, triviasActivity.class);
+                    startActivity(i);
+                }
+            });
+
+        }else
+        {
+
+        }
 
         //ToolBar Menu
 
@@ -145,8 +172,6 @@ public class recuperar extends AppCompatActivity
                             ArrayList<String> params = new ArrayList<String>();
                             final HashMap<String, String> user = session.getUserDetails();
                             String idUsuario = user.get(SessionManagement.KEY_PD_ID);
-
-
                             params.add("5");
                             params.add("RecoveryPassword.php");
                             params.add(tokenCTE);

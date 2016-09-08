@@ -147,7 +147,7 @@
                                     android:layout_height="fill_parent"
                                     android:layout_weight="33"></LinearLayout>
 
-                                <TextView
+                                <!--<TextView
                                     android:layout_width="fill_parent"
                                     android:layout_height="fill_parent"
                                     android:text="ENVIAR >"
@@ -156,7 +156,16 @@
                                     android:textAlignment="center"
                                     android:layout_weight="34"
                                     android:textStyle="bold"
-                                    android:textSize="17dp" />
+                                    android:textSize="17dp" />-->
+                                <Button
+                                    style="?android:attr/buttonStyleSmall"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:layout_weight="34"
+                                    android:text="ENVIAR"
+                                    android:id="@+id/btnEnviar"
+                                    android:background="@drawable/btnshape"
+                                    android:textColor="@android:color/white" />
 
                                 <LinearLayout
                                     android:orientation="horizontal"

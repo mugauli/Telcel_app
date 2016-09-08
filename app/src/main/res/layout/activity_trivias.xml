@@ -117,7 +117,8 @@
                                         android:text="@string/tituloPregunta"
                                         android:id="@+id/txtTituloPregunta"
                                         android:textColor="@color/ColorPrimary"
-                                        android:paddingLeft="0dp"
+                                        android:paddingLeft="14dp"
+                                        android:textStyle="bold"
                                         android:textSize="16dp" />
 
                                     <TextView
@@ -125,7 +126,8 @@
                                         android:layout_height="wrap_content"
                                         android:id="@+id/txtPreguntaTrivia"
                                         android:textSize="12dp"
-                                        android:padding="0dp" />
+                                        android:paddingLeft="14dp"
+                                         />
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
@@ -157,6 +159,7 @@
                                 android:orientation="vertical"
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
+                                android:padding="3dp"
                                 android:weightSum="10">
 
                                 <ListView
@@ -171,7 +174,7 @@
                                     android:text="@string/textoTrivias"
                                     android:id="@+id/textView25"
                                     android:textSize="16dp"
-                                    android:padding="4dp"
+                                    android:padding="14dp"
                                     android:textColor="@color/tituloRevista"
                                     android:layout_weight="7" />
                             </LinearLayout>

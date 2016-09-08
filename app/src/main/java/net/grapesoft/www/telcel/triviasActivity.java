@@ -46,6 +46,8 @@ public class triviasActivity extends AppCompatActivity
         Typeface tfm = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
         TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
         txtGhost4.setTypeface(tfm);
+        TextView txtGhost5 = (TextView) findViewById(R.id.textView25);
+        txtGhost5.setTypeface(tfm);
         txtGhost4.setText("PREGUNTA DEL DIA");
         //boton ayuda
 

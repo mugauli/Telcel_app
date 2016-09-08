@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,8 @@ public class ayuda  extends AppCompatActivity
         setContentView(R.layout.activity_ayuda);
 
         session = new SessionManagement(getApplicationContext());
+        final HashMap<String, String> user = session.getUserDetails();
+
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
 
         datos.add(new Lista_Entrada(R.drawable.arrow, getString(R.string.preguntas), getString(R.string.preguntasdesc)));
@@ -137,8 +140,34 @@ public class ayuda  extends AppCompatActivity
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        String idUsuario = user.get(SessionManagement.KEY_PD_ID);
+        //Toast toast = Toast.makeText(ayuda.this, idUsuario, Toast.LENGTH_LONG);
+        //toast.show();
+        if(user.get(SessionManagement.KEY_PD_ID) != null) {
 
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
+                }
+            });
+            ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+            imgButton2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(ayuda.this, triviasActivity.class);
+                    startActivity(i);
+                }
+            });
 
+        }else
+        {
+
+        }
       /*  imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

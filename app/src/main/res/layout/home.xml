@@ -12,59 +12,163 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:background="@color/ColorFondo">
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:padding="25dp"
-            android:layout_marginTop="0dp">
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:weightSum="100"
+            >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/acceso1"
-                android:id="@+id/tit1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/acceso2"
-                android:id="@+id/tit2"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="40dp" />
-
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/tvErrorPin"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/error_color"
-                />
+                android:layout_height="fill_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:weightSum="100" >
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="GENERAR NUEVA CONTRASEÑA"
-                android:id="@+id/btnGenerar"
-                android:background="@drawable/btnshape"
-                android:textColor="@android:color/white"
-                android:layout_gravity="center_horizontal"
-                android:width="300dp"
-                android:layout_marginTop="60dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="48" />
 
-            <!-- <ImageView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/ayudaint"
-                 android:layout_marginTop="60dp"
-                 android:src="@drawable/ayudac"
-                 android:layout_marginLeft="280dp"
-                 />-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="4"
+                    android:weightSum="100" >
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="49" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="39"
+                        android:orientation="vertical"
+                        android:weightSum="100"
+                        android:padding="3dp"
+                        android:id="@+id/btnPreguntaDia"
+                        android:background="@drawable/border">
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop="0dp"
+                            android:padding="10dp"
+                            android:layout_weight="70">
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="80" >
+
+                                <ImageView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:id="@+id/imageView16"
+                                    android:src="@drawable/pregunta"
+                                    android:padding="4dp"
+                                    android:layout_weight="100" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="20"
+                                android:weightSum="100"
+                                android:padding="10dp" >
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAppearance="?android:attr/textAppearanceLarge"
+                                    android:text="@string/tituloPregunta"
+                                    android:id="@+id/txtTituloPregunta"
+                                    android:textColor="@color/ColorPrimary"
+                                    android:paddingLeft="14dp"
+                                    android:textStyle="bold"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/txtPreguntaTrivia"
+                                    android:textSize="12dp"
+                                    android:text="@string/tituloPregunta"
+                                    android:paddingLeft="14dp"
+                                     />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="14"
+                        android:background="@drawable/border"
+                        android:layout_marginTop="10dp"
+                        android:weightSum="10">
+
+                        <RelativeLayout
+                            android:id="@+id/loadingTrivias"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:gravity="center"
+                            android:visibility="visible" >
+
+                            <ProgressBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:indeterminate="true" />
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:weightSum="10">
+
+                            <ListView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/lstTrivias"
+                                android:layout_weight="3" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:text="@string/textoTrivias"
+                                android:id="@+id/textView25"
+                                android:textSize="16dp"
+                                android:padding="4dp"
+                                android:textColor="@color/tituloRevista"
+                                android:layout_weight="7" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="48" />
+            </LinearLayout>
 
         </LinearLayout>
     </RelativeLayout>

@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -11,7 +12,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.MenuItem;
@@ -47,11 +50,11 @@ public class pinActivity extends AppCompatActivity
 
         TextView texto_superior_entrada = (TextView) findViewById(R.id.tit1);
         TextView texto_superior = (TextView) findViewById(R.id.tit2);
-        String us = this.getResources().getString(R.string.acceso3);
+
         int colorBlue = getResources().getColor(R.color.ColorPrimaryDark);
-        SpannableString spannable = new SpannableString(us);
+
         // here we set the color
-        spannable.setSpan(new ForegroundColorSpan(colorBlue), 0, us.length(), 0);
+
         String uss = this.getResources().getString(R.string.acceso1);
                 Button btn=(Button) findViewById(R.id.btnGenerar);
         TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);
@@ -62,7 +65,20 @@ public class pinActivity extends AppCompatActivity
         Typeface tfm = Typeface.createFromAsset(getAssets(), "fonts/media.otf");
         texto_superior_entrada.setTypeface(tfl);
         texto_superior.setTypeface(tfl);
-        texto_superior_entrada.setText(uss + " " + spannable);
+
+
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        SpannableStringBuilder builderg = new SpannableStringBuilder();
+        String us = this.getResources().getString(R.string.acceso3);
+        /*SpannableString redSpannable= new SpannableString(us);
+        SpannableString gSpannable= new SpannableString(uss);
+        redSpannable.setSpan(new ForegroundColorSpan(colorBlue), 0, us.length(), 0);
+        builder.append(redSpannable);
+        builderg.append(gSpannable);
+        texto_superior_entrada.setText( builder,TextView.BufferType.SPANNABLE );*/
+        String text = "Al generar un nuevo pin o contraseña este te llegará a tu <font color=\"#3F51B5\"><bold>correo electrónico corporativo.</bold></font>";
+        texto_superior_entrada.setText(Html.fromHtml(text), TextView.BufferType.SPANNABLE);
+
         btn.setTypeface(tfm);
         txtGhost4.setTypeface(tfm);
         txtGhost4.setText("CAMBIAR PIN");

@@ -138,7 +138,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                     String img_previa = responseArray.getJSONObject(i).get("img_previa").toString();
                     String url_podcast = responseArray.getJSONObject(i).get("url_podcast").toString();
                     String duracion = responseArray.getJSONObject(i).get("duracion").toString();
-
+                    String fecha = responseArray.getJSONObject(i).get("fecha").toString();
                     URL imageUrl = null;
                     imageUrl = new URL(imageHttpAddress + img_previa);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
@@ -151,7 +151,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
                     {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-                    datos.add(new Lista_Entrada(id,loadedImage, titulo,url_podcast, duracion, R.drawable.play));
+                    datos.add(new Lista_Entrada(fecha,id,loadedImage, titulo,url_podcast, duracion, R.drawable.play));
 
 
                 }
@@ -189,8 +189,13 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                     TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior);
 
+
                     if (texto_inferior_entrada != null)
                         texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_duracion());
+
+                   TextView texto_inferior_entrada2 = (TextView) view.findViewById(R.id.textView_inferior2);
+                    if (texto_inferior_entrada2 != null)
+                        texto_inferior_entrada2.setText(((Lista_Entrada) entrada).get_seccion());
 
                     TextView idPodcast = (TextView) view.findViewById(R.id.idPodcast);
                     if (idPodcast != null)

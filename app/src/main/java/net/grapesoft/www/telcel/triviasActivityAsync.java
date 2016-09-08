@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -281,8 +282,12 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                     }
 
-                    TextView titulo_trivias = (TextView) view.findViewById(R.id.triviatitulo);
+                    Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                    Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
 
+
+                    TextView titulo_trivias = (TextView) view.findViewById(R.id.triviatitulo);
+                   // titulo_trivias.setTypeface(tf);
                     if (titulo_trivias != null)
                         titulo_trivias.setText("Trivias");
 
@@ -292,7 +297,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                         String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                         Descripcion_trivias.setText(Html.fromHtml(((Lista_Entrada) entrada).get_titulo()));
                     }
-
+                    //Descripcion_trivias.setTypeface(tf);
                     view.setTag(entrada);
                     view.setOnClickListener(new View.OnClickListener() {
 
