@@ -42,9 +42,10 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
 
     private ArrayList<Drawable> imagenes_slider_drawable = new ArrayList<Drawable>();
 
-    private int position,descargado=0;
-    private static final Integer DURATION = 2500;
+    private int position=0,descargado=0;
+    private static final Integer DURATION = 6000;
     private Timer timer = null;
+    private Boolean soloUna = true,soloUna2 = true;
     //Slider End
 
     @Override
@@ -207,111 +208,152 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
     }
 
     public void startSlider() {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
 
-            public void run() {
-                // avoid exception:
-                // "Only the original thread that created a view hierarchy can touch its views"
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        position++;
-                        if (position == imagenes_slider.size()) {
-                            position = 0;
-                        }
+        if (soloUna) {
 
-                        if(imagenes_slider_drawable.size() > position) {
-                            imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
-//                            Log.e("Imagenes Del Objeto",imagenes_slider.get(position));
-                        }
-                        else {
-                            try {
-                                //                        Log.e("Imagenes Galeria",imagenes_slider.get(position));
-                                Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
-                                if (img != null) {
-                                    BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
-                                    imagenes_slider_drawable.add(bmDraw);
-                                    imageSwitcher.setImageDrawable(bmDraw);
+            soloUna = false;
+
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+
+                public void run() {
+                    // avoid exception:
+                    // "Only the original thread that created a view hierarchy can touch its views"
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+
+                            if(soloUna2)
+                            {
+                                soloUna2 = false;
+
+                                if (imagenes_slider_drawable.size() > position) {
+                                    imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
+                                    Log.e("Imagenes Del Objeto", imagenes_slider.get(position));
+                                } else {
+                                    try {
+                                        Log.e("Galeria ps", position+"");
+                                        Log.e("Imagenes Galeria", imagenes_slider.get(position));
+                                        Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
+                                        if (img != null) {
+                                            BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
+                                            imagenes_slider_drawable.add(bmDraw);
+                                            imageSwitcher.setImageDrawable(bmDraw);
+
+                                        } else
+                                            imageSwitcher.setImageResource(R.drawable.noimage);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    }
 
                                 }
-                                else
-                                    imageSwitcher.setImageResource(R.drawable.noimage);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } catch (ExecutionException e) {
-                                e.printStackTrace();
+                            }else {
+                                position++;
+                                if (position == imagenes_slider.size()) {
+                                    position = 0;
+                                }
+
+                                if (imagenes_slider_drawable.size() > position) {
+                                    imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
+                                    Log.e("Imagenes Del Objeto", imagenes_slider.get(position));
+                                } else {
+                                    try {
+                                        Log.e("Imagenes Galeria", imagenes_slider.get(position));
+                                        Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
+                                        if (img != null) {
+                                            BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
+                                            imagenes_slider_drawable.add(bmDraw);
+                                            imageSwitcher.setImageDrawable(bmDraw);
+
+                                        } else
+                                            imageSwitcher.setImageResource(R.drawable.noimage);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    } catch (ExecutionException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
                             }
 
                         }
-                    }
 
-                });
-            }
+                    });
+                }
 
-        }, 0, DURATION);
+            }, 0, DURATION);
+        }
     }
 
     public void backSlider(View button) {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-        if (position == 0) {
-            position = imagenes_slider.size()-1;
-        }
-        else
+
+        if((imagenes_slider_drawable.size() == imagenes_slider_drawable.size()) || position > 1)
         {
             position--;
-        }
 
-        if(imagenes_slider_drawable.size() > position) {
-            imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
-            Log.e("Imagenes Del Objeto",imagenes_slider.get(position));
-        }
-        else {
-            try {
-                Log.e("Imagenes Galeria",imagenes_slider.get(position));
-                Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
-                if (img != null) {
-                    BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
-                    imagenes_slider_drawable.add(bmDraw);
-                    imageSwitcher.setImageDrawable(bmDraw);
-
-                }
-                else
-                    imageSwitcher.setImageResource(R.drawable.noimage);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
             }
 
+            if (position  < 0) {
+                position = imagenes_slider.size() - 1;
+            }
+
+            if (imagenes_slider_drawable.size() > position) {
+                try {
+                    imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
+                    Log.e("Imagenes Del Objeto", imagenes_slider.get(position));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    Log.e("Imagenes Galeria", imagenes_slider.get(position));
+                    Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
+                    if (img != null) {
+                        BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
+                        imagenes_slider_drawable.add(bmDraw);
+                        imageSwitcher.setImageDrawable(bmDraw);
+                    } else
+                        imageSwitcher.setImageResource(R.drawable.noimage);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
-
-
     }
 
     public void fwdSlider(View button) {
+
         position++;
-        if (position == imagenes_slider.size()) {
+        if (position >= imagenes_slider.size()) {
             position = 0;
         }
-        if(imagenes_slider_drawable.size() > position) {
+
+        if (imagenes_slider_drawable.size() > (position)) {
+
+            Log.e("Position", "" + position);
+            Log.e("Imagenes Del Objeto", imagenes_slider.get(position));
+            Log.e("Imagenes Del Objeto Drawable", imagenes_slider_drawable.get(position).toString());
             imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
-            Log.e("Imagenes Del Objeto",imagenes_slider.get(position));
-        }
-        else {
+
+        } else {
             try {
-                Log.e("Position",""+position);
+
                 Bitmap img = new GetNetImage().execute(imagenes_slider.get(position)).get();
                 if (img != null) {
                     BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
                     imagenes_slider_drawable.add(bmDraw);
                     imageSwitcher.setImageDrawable(bmDraw);
-
-                }
-                else
+                } else
                     imageSwitcher.setImageResource(R.drawable.noimage);
+                Log.e("Position", "" + position);
+                Log.e("Imagenes Del Agregada", img.toString());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -319,6 +361,9 @@ public class activity_detalle_lanzamientos extends AppCompatActivity
             }
 
         }
+
+
+
     }
 
     // Stops the slider when the Activity is going into the background
