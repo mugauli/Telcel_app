@@ -39,7 +39,7 @@ public class preferencias extends AppCompatActivity
 
     SessionManagement session;
     public String tokenCTE = "";
-    CheckBox rb1,rb2,rb3,rb4,rb5;
+    int rb1=0,rb2=0;
     private ListView lista;
 
     @Override
@@ -71,43 +71,177 @@ public class preferencias extends AppCompatActivity
         //ListView
         ArrayList<Lista_Entrada> datos = new ArrayList<Lista_Entrada>();
 
-        datos.add(new Lista_Entrada(1, getString(R.string.Accesorios)));
-        datos.add(new Lista_Entrada(2,getString(R.string.Autos)));
-        datos.add(new Lista_Entrada(3, getString(R.string.Vivienda)));
-        datos.add(new Lista_Entrada(4,getString(R.string.Educacion)));
-        datos.add(new Lista_Entrada(5,getString(R.string.Entretenimiento)));
-        datos.add(new Lista_Entrada(6,getString(R.string.Restaurantes)));
-        datos.add(new Lista_Entrada(7,getString(R.string.Salud)));
-        datos.add(new Lista_Entrada(8,getString(R.string.Tiendas)));
-        datos.add(new Lista_Entrada(9,getString(R.string.Viajes)));
+       TextView textView01 = (TextView) findViewById(R.id.textView01);
+       TextView textView02 = (TextView) findViewById(R.id.textView02);
+       TextView textView03 = (TextView) findViewById(R.id.textView03);
+       TextView textView04 = (TextView) findViewById(R.id.textView04);
+       TextView textView05 = (TextView) findViewById(R.id.textView05);
+       TextView textView06 = (TextView) findViewById(R.id.textView06);
+       TextView textView07 = (TextView) findViewById(R.id.textView07);
+       TextView textView08 = (TextView) findViewById(R.id.textView08);
+       TextView textView09 = (TextView) findViewById(R.id.textView09);
 
-        lista = (ListView) findViewById(R.id.sitioslista);
-        lista.setAdapter(new List_adapted(this, R.layout.entrada_preferencias, datos){
+        textView01.setText(( getString(R.string.Accesorios)));
+        textView02.setText((getString(R.string.Autos)));
+        textView03.setText(( getString(R.string.Vivienda)));
+        textView04.setText((getString(R.string.Educacion)));
+        textView05.setText((getString(R.string.Entretenimiento)));
+        textView06.setText((getString(R.string.Restaurantes)));
+        textView07.setText((getString(R.string.Salud)));
+        textView08.setText((getString(R.string.Tiendas)));
+        textView09.setText((getString(R.string.Viajes)));
+
+
+        CheckBox checkBox01 = (CheckBox) findViewById(R.id.checkBox01);
+        CheckBox checkBox02 = (CheckBox) findViewById(R.id.checkBox02);
+        CheckBox checkBox03 = (CheckBox) findViewById(R.id.checkBox03);
+        CheckBox checkBox04 = (CheckBox) findViewById(R.id.checkBox04);
+        CheckBox checkBox05 = (CheckBox) findViewById(R.id.checkBox05);
+        CheckBox checkBox06 = (CheckBox) findViewById(R.id.checkBox06);
+        CheckBox checkBox07 = (CheckBox) findViewById(R.id.checkBox07);
+        CheckBox checkBox08 = (CheckBox) findViewById(R.id.checkBox08);
+        CheckBox checkBox09 = (CheckBox) findViewById(R.id.checkBox09);
+
+        checkBox01.setTag(new Lista_Entrada(1, getString(R.string.Accesorios)));
+        checkBox02.setTag(new Lista_Entrada(2,getString(R.string.Autos)));
+        checkBox03.setTag(new Lista_Entrada(3, getString(R.string.Vivienda)));
+        checkBox04.setTag(new Lista_Entrada(4,getString(R.string.Educacion)));
+        checkBox05.setTag(new Lista_Entrada(5,getString(R.string.Entretenimiento)));
+        checkBox06.setTag(new Lista_Entrada(6,getString(R.string.Restaurantes)));
+        checkBox07.setTag(new Lista_Entrada(7,getString(R.string.Salud)));
+        checkBox08.setTag(new Lista_Entrada(8,getString(R.string.Tiendas)));
+        checkBox09.setTag(new Lista_Entrada(9,getString(R.string.Viajes)));
+
+
+        checkBox01.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onEntrada(Object entrada, View view) {
-                if (entrada != null) {
-                    // Applying font
-                    int cont = 0;
-                    int s = ((Lista_Entrada) entrada).get_idradio();
-                    String ss = Integer.toString(s);
-                    TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.list_one_toggler);
-                    Typeface tfi = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
-                    texto_inferior_entrada.setTypeface(tfi);
-                    if (texto_inferior_entrada != null)
-                        texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
-                    CheckBox ch = (CheckBox) view.findViewById(R.id.checkBox1);
-                    //Toast.makeText(view.getContext(), ss + ".. "+ int1 + "..." + int2  , Toast.LENGTH_SHORT).show();
-                    if(int1.compareTo(ss) == 0 || int2.compareTo(ss) == 0){
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
 
-                        ch.setChecked(true);
-                        cont=2;
+                checkedRadios();
 
-                    }
-
-
-                }
             }
         });
+        checkBox02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
+
+                checkedRadios();
+
+            }
+        });
+        checkBox03.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
+
+                checkedRadios();
+
+            }
+        });
+        checkBox04.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
+
+                checkedRadios();
+
+            }
+        });
+        checkBox05.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
+
+                checkedRadios();
+
+            }
+        });
+        checkBox06.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
+
+                checkedRadios();
+
+            }
+        });
+        checkBox07.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
+
+                checkedRadios();
+
+            }
+        });
+        checkBox08.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
+
+                checkedRadios();
+
+            }
+        });
+        checkBox09.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lista_Entrada a = (Lista_Entrada) v.getTag();
+                rb2 = rb1;
+                rb1 = a.get_idradio();
+
+                checkedRadios();
+
+            }
+        });
+
+        //get_idradio
+
+   //  lista = (ListView) findViewById(R.id.sitioslista);
+   //  lista.setAdapter(new List_adapted(this, R.layout.entrada_preferencias, datos){
+   //      @Override
+   //      public void onEntrada(Object entrada, View view) {
+   //          if (entrada != null) {
+   //              // Applying font
+   //              int cont = 0;
+   //              int s = ((Lista_Entrada) entrada).get_idradio();
+   //              String ss = Integer.toString(s);
+   //              TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.list_one_toggler);
+   //              Typeface tfi = Typeface.createFromAsset(getAssets(), "fonts/ligera.otf");
+   //              texto_inferior_entrada.setTypeface(tfi);
+   //              if (texto_inferior_entrada != null)
+   //                  texto_inferior_entrada.setText(((Lista_Entrada) entrada).get_textoDebajo());
+   //              CheckBox ch = (CheckBox) view.findViewById(R.id.checkBox1);
+   //              //Toast.makeText(view.getContext(), ss + ".. "+ int1 + "..." + int2  , Toast.LENGTH_SHORT).show();
+   //              if(int1.compareTo(ss) == 0 || int2.compareTo(ss) == 0){
+
+   //                  ch.setChecked(true);
+   //                  cont=2;
+
+   //              }
+
+
+   //          }
+   //      }
+   //  });
 
         //
 
@@ -173,7 +307,38 @@ public class preferencias extends AppCompatActivity
         }
 
     }
+    public void checkedRadios()
+    {
+        CheckBox checkBox01 = (CheckBox) findViewById(R.id.checkBox01);
+        CheckBox checkBox02 = (CheckBox) findViewById(R.id.checkBox02);
+        CheckBox checkBox03 = (CheckBox) findViewById(R.id.checkBox03);
+        CheckBox checkBox04 = (CheckBox) findViewById(R.id.checkBox04);
+        CheckBox checkBox05 = (CheckBox) findViewById(R.id.checkBox05);
+        CheckBox checkBox06 = (CheckBox) findViewById(R.id.checkBox06);
+        CheckBox checkBox07 = (CheckBox) findViewById(R.id.checkBox07);
+        CheckBox checkBox08 = (CheckBox) findViewById(R.id.checkBox08);
+        CheckBox checkBox09 = (CheckBox) findViewById(R.id.checkBox09);
 
+        checkBox01.setChecked(Boolean.FALSE);
+        checkBox02.setChecked(Boolean.FALSE);
+        checkBox03.setChecked(Boolean.FALSE);
+        checkBox04.setChecked(Boolean.FALSE);
+        checkBox05.setChecked(Boolean.FALSE);
+        checkBox06.setChecked(Boolean.FALSE);
+        checkBox07.setChecked(Boolean.FALSE);
+        checkBox08.setChecked(Boolean.FALSE);
+        checkBox09.setChecked(Boolean.FALSE);
+
+        if(rb1 == 1 || rb2 == 1)checkBox01.setChecked(Boolean.TRUE);
+        if(rb1 == 2 || rb2 == 2)checkBox02.setChecked(Boolean.TRUE);
+        if(rb1 == 3 || rb2 == 3)checkBox03.setChecked(Boolean.TRUE);
+        if(rb1 == 4 || rb2 == 4)checkBox04.setChecked(Boolean.TRUE);
+        if(rb1 == 5 || rb2 == 5)checkBox05.setChecked(Boolean.TRUE);
+        if(rb1 == 6 || rb2 == 6)checkBox06.setChecked(Boolean.TRUE);
+        if(rb1 == 7 || rb2 == 7)checkBox07.setChecked(Boolean.TRUE);
+        if(rb1 == 8 || rb2 == 8)checkBox08.setChecked(Boolean.TRUE);
+        if(rb1 == 9 || rb2 == 9)checkBox09.setChecked(Boolean.TRUE);
+    }
 
     @Override
     public void onBackPressed() {
