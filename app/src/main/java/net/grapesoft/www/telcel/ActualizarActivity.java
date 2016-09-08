@@ -227,7 +227,13 @@ public class ActualizarActivity extends AppCompatActivity
                             return;
                         }
                         String email = txtCorreo.getText().toString();
-                        if(email.length() == 0|| !email.matches("[a-zA-Z0-9._-]+@[A-Za-z]+.+[a-z]+")) {
+
+
+                        if(email.length() == 0||
+                                (!(email.toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@mail\\.telcel\\.com"))
+                                && !(email.toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@americamovil\\.com"))
+                                && !(email.toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@telcel\\.com"))
+                        )) {
                             Toast toast = Toast.makeText(ActualizarActivity.this, "Correo invalido.", Toast.LENGTH_LONG);
                             toast.show();
                             return;
@@ -257,6 +263,9 @@ public class ActualizarActivity extends AppCompatActivity
                         {
                             String resp = response.getJSONObject(0).get("respuesta").toString();
                             Log.e("Response Actualizar: ", resp);
+
+                            session.createLoginSession(tokenCTE, user.get(SessionManagement.KEY_DATO), user.get(SessionManagement.KEY_CAMPO), user.get(SessionManagement.KEY_PASS), user.get(SessionManagement.KEY_PD_ID), user.get(SessionManagement.KEY_PD_NUM_EMPLEADO), num_Celular,
+                                    region, nombre, paterno, materno, user.get(SessionManagement.KEY_PD_INTERES_1), user.get(SessionManagement.KEY_PD_INTERES_2),email);
 
                             if(resp.equals("1")) {
                                 Intent i = new Intent(ActualizarActivity.this, ActualizadosActivity.class);

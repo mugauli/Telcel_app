@@ -225,6 +225,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                     String texto = responseArray.getJSONObject(i).get("texto").toString();
 
                     Boolean estatus = Boolean.TRUE;
+                    Boolean ganador = Boolean.TRUE;
                     String duracion = "1";
                     String preguntas = "0";
                     if(tipo.equals("T"))
@@ -232,10 +233,11 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                         preguntas = responseArray.getJSONObject(i).getJSONArray("elementos").toString();
                         duracion = responseArray.getJSONObject(i).get("duracion").toString();
                         estatus = responseArray.getJSONObject(i).get("estatus").toString().equals("1");
+                        ganador = !(responseArray.getJSONObject(i).get("ganador").toString().equals("0"));
                         Log.e("estatus",""+estatus);
                     }
 
-                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_detalle,preguntas,duracion,estatus));
+                    datos.add(new Lista_Entrada(id,titulo,tipo,texto,img_detalle,preguntas,duracion,estatus,ganador));
                 }
             }
 
@@ -318,7 +320,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                                 {
                                     Toast toast = Toast.makeText(activity, "Trivia ya contestada.", Toast.LENGTH_LONG);
                                     toast.show();
-                                }else if(entrada.get_estatus())
+                                }else if(entrada.get_estatus() || entrada.get_ganador())
                                 {
                                     Toast toast = Toast.makeText(activity, "Trivia ya contestada.", Toast.LENGTH_LONG);
                                     toast.show();

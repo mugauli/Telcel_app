@@ -155,7 +155,9 @@ public class LoginActivity extends Activity  {
                     if(item.getId() == "C") {
 
 
-                        if (!(txtDato.getText().toString().matches("[a-zA-Z0-9._-]+@[A-Za-z]+.[a-z]+"))) {
+                        if (!(txtDato.getText().toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@mail\\.telcel\\.com"))
+                                && !(txtDato.getText().toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@americamovil\\.com"))
+                                && !(txtDato.getText().toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@telcel\\.com"))) {
 
                             //mail.telcel.com
                             //Telcel.com
@@ -166,7 +168,7 @@ public class LoginActivity extends Activity  {
                             Log.e("Email", "validacion de email: " + txtDato.getText().toString());
                             //message error
 
-                        } else  if (!(txtDato.getText().toString().contains("telcel") || txtDato.getText().toString().contains("telcel") || txtDato.getText().toString().contains("telcel")))
+                        } else  if (!(txtDato.getText().toString().contains("telcel") || txtDato.getText().toString().contains("americamovil") || txtDato.getText().toString().contains("telcel")))
                         {
                             Log.e("Response", "Ingrese un correo electrónico valido.");
                             text.setText("Ingrese un correo electrónico valido.");

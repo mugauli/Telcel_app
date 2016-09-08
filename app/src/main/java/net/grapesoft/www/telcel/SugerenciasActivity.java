@@ -148,6 +148,8 @@ public class SugerenciasActivity extends AppCompatActivity
                     tvErrorSugerencia.setText("");
 
                     //-------//
+
+                    txtCorreoSugerencia.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
                     if(user == null)
                     {
                         Log.e("Response", "Sin usuario ");
@@ -159,19 +161,14 @@ public class SugerenciasActivity extends AppCompatActivity
                         tvErrorCorreoSugerencia.setText("Ingrese su correo electrónico.");
                         txtCorreoSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
-                    }else if (!(txtCorreoSugerencia.getText().toString().matches("[a-zA-Z0-9._-]+@[A-Za-z]+.[a-z]+")))
+                    }else if (!(correo.toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@mail\\.telcel\\.com"))
+                            && !(correo.toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@americamovil\\.com"))
+                            && !(correo.toString().matches("[a-zA-Z0-9._-]*[a-zA-Z0-9]+@telcel\\.com")))
                     {
                         Log.e("Response", "Ingrese un correo electrónico valido.");
                         tvErrorCorreoSugerencia.setText("Ingrese un correo electrónico valido.");
                         txtCorreoSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
-                    } else if (!(txtCorreoSugerencia.getText().toString().contains("telcel") || txtCorreoSugerencia.getText().toString().contains("telcel") || txtCorreoSugerencia.getText().toString().contains("telcel")))
-                            {
-                                Log.e("Response", "Ingrese un correo electrónico valido.");
-                                tvErrorCorreoSugerencia.setText("Ingrese un correo electrónico valido.");
-                                txtCorreoSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
-                            }
-
-                    else if (sugerencia.trim().length() == 0)
+                    } if (sugerencia.trim().length() == 0)
                     {
                         tvErrorComentarioSugerencia.setText("Ingrese una sugerencia.");
                         txtSugerencia.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
