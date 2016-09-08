@@ -247,6 +247,8 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                             titGrupo.setText(Entrada.get_titulo());
                             descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
                             principal.setTag(Entrada);
+                            Log.e("SELECCIONADO",Entrada.get_id()+"");
+                            Log.e("SIGUIENTE",Entrada.get_idSiguiente()+"");
                         }
                     });
 

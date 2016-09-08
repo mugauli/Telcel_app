@@ -48,7 +48,7 @@ public class activity_detalle_galeria extends AppCompatActivity
     private ArrayList<String> imagenes_slider = new ArrayList<String>();
     private ArrayList<Drawable> imagenes_slider_drawable = new ArrayList<Drawable>();
     private int position = 0,descargado=0;
-    private static final Integer DURATION = 5000;
+    private static final Integer DURATION = 6000;
     private Timer timer = null;
     private String idSiguiente2 = "0";
     private String idSiguienteR;
@@ -316,15 +316,19 @@ public class activity_detalle_galeria extends AppCompatActivity
                     // "Only the original thread that created a view hierarchy can touch its views"
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            if (soloUna2) {
-                                soloUna2 = true;
-                                position++;
-                                if (position == imagenes_slider.size()) {
-                                    position = 0;
-                                }
-                                Log.e("Position X1", ""+position);
-                            }
-                            if(imagenes_slider.size() >0)
+
+                         //  if (soloUna2) {
+                         //      soloUna2 = true;
+                         //      position++;
+                         //      if (position == imagenes_slider.size()) {
+                         //          position = 0;
+                         //      }
+                         //      Log.e("Position X1", ""+position);
+                         //  }
+
+
+                            if(imagenes_slider.size() > 0)
+
                             if (imagenes_slider_drawable.size() > position) {
                                 imageSwitcher.setImageDrawable(imagenes_slider_drawable.get(position));
                                 Log.e("Position 1", ""+position);
@@ -338,25 +342,31 @@ public class activity_detalle_galeria extends AppCompatActivity
                                         BitmapDrawable bmDraw = new BitmapDrawable(getResources(), img);
                                         imagenes_slider_drawable.add(bmDraw);
                                         imageSwitcher.setImageDrawable(bmDraw);
-
                                     } else
                                         imageSwitcher.setImageResource(R.drawable.noimage);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
+                                    Log.e("Error", "1");
                                 } catch (ExecutionException e) {
                                     e.printStackTrace();
+                                    Log.e("Error", "2");
                                 }
 
                             }
-                            if (soloUna3) {
-                                soloUna3 = false;
-                                soloUna2 = true;
-                                position++;
-                                if (position == imagenes_slider.size()) {
-                                    position = 0;
-                                }
-                                Log.e("Position X2", ""+position);
+                            position++;
+                            if (position == imagenes_slider.size()) {
+                                position = 0;
                             }
+                            Log.e("Position X2", ""+position);
+                         //  if (soloUna3) {
+                         //      soloUna3 = false;
+                         //      soloUna2 = true;
+                         //      position++;
+                         //      if (position == imagenes_slider.size()) {
+                         //          position = 0;
+                         //      }
+                         //      Log.e("Position X2", ""+position);
+                         //  }
 
 
 

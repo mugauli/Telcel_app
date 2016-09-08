@@ -56,7 +56,7 @@ public class FragmentGaleria  extends Fragment {
                 Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
 
                 i.putExtra("json",Entrada.get_jsonStr());
-                i.putExtra("idSiguiente",""+Entrada.get_idSiguiente());
+                i.putExtra("idSiguiente",""+Entrada.get_id());
 
 
                 startActivity(i);
