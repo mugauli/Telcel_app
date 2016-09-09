@@ -89,7 +89,8 @@
                             android:autoLink="web"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:layout_height="match_parent"
-                            android:id="@+id/descUN"/>
+                            android:id="@+id/descUN"
+                            android:autoText="false" />
                     </LinearLayout>
 
                 </LinearLayout>

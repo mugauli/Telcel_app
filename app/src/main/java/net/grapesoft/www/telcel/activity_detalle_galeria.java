@@ -132,7 +132,7 @@ public class activity_detalle_galeria extends AppCompatActivity
 
                 if (responseArray.length() > 0) {
                     Log.e("Item Galeria JSON siguiente", idSiguiente2);
-                    String idSiguiente = "0", tituloSig = "", imagenSig = "", textoSig = "";
+                    String idSiguiente = "0", tituloSig = "", imagenSig = "", textoSig = "",url = "";
                     for (int i = 0; i < responseArray.length(); i++) {
                         String id = responseArray.getJSONObject(i).get("id").toString();
                         if (id.equals(idSiguiente2)) {
@@ -141,6 +141,7 @@ public class activity_detalle_galeria extends AppCompatActivity
 
                             String titulo1 = responseArray.getJSONObject(i).get("titulo").toString();
                             String texto = responseArray.getJSONObject(i).get("texto").toString();
+                            url = responseArray.getJSONObject(i).get("url").toString();
                             JSONArray imagenes_slide = responseArray.getJSONObject(i).getJSONArray("imagenes_slide");
 
                             if (i+1 == responseArray.length()) {
@@ -149,11 +150,13 @@ public class activity_detalle_galeria extends AppCompatActivity
                                 imagenSig = responseArray.getJSONObject(0).get("img_previa").toString();
                                 textoSig = responseArray.getJSONObject(0).get("texto").toString();
 
+
                             } else {
                                 idSiguiente = responseArray.getJSONObject(i + 1).get("id").toString();
                                 tituloSig = responseArray.getJSONObject(i + 1).get("titulo").toString();
                                 imagenSig = responseArray.getJSONObject(i + 1).get("img_previa").toString();
                                 textoSig = responseArray.getJSONObject(i + 1).get("texto").toString();
+
 
                             }
 
@@ -193,7 +196,7 @@ public class activity_detalle_galeria extends AppCompatActivity
 
                             titUG.setText(Html.fromHtml(titulo1));
                             if(descUG != null)
-                                descUG.setText(Html.fromHtml(texto));
+                                descUG.setText(url);
 
                         }
                     }
