@@ -214,7 +214,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                             //String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                            String desc = ((Lista_Entrada) entrada).get_url();
                            galeriaDescripcion.setMovementMethod(LinkMovementMethod.getInstance());
-                            galeriaDescripcion.setText(Html.fromHtml(desc));
+                           galeriaDescripcion.setText(Html.fromHtml(desc));
 
                         }
 
