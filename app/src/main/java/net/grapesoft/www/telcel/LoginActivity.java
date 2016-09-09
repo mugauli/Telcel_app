@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,6 +10,9 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -367,6 +371,7 @@ public class LoginActivity extends Activity  {
                // Log.i("Response", "Login: " + response);
         }
     });
+
         Log.i("LunchList", "Array Adapter Size: " + spinner_adapter.getCount());
 
 
@@ -402,6 +407,32 @@ public class LoginActivity extends Activity  {
         });
 
 }
+    @Override
+    public void onBackPressed() {
+
+
+            //super.onBackPressed();
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Telcel #Nosune")
+                    .setMessage("¿Deseas realmente salir de la aplicación?")
+                    .setPositiveButton("Sí", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                            System.exit(0);
+
+                        }
+
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+
+
+
+
+    }
 
     public String obtenerPassMD5(String pass) {
 
