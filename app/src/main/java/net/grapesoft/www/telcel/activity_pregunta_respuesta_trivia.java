@@ -363,7 +363,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             if(height<1500) {
                 btn1.setPadding(40, 20, 40, 20);
                 btn1.setTextSize(12);
-                preg.setTextSize(13);
+                preg.setTextSize(10);
                 Button btnEnviar = (Button) findViewById(R.id.btnEnviar);
                 if (btnEnviar != null) {
                         btnEnviar.setTextSize(13);
@@ -371,7 +371,7 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             }
             else
             {
-                btn1.setPadding(70, 50, 70, 50);
+                btn1.setPadding(50, 30, 50, 30);
                 btn1.setTextSize(15);
             }
 

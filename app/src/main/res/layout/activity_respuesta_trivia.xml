@@ -42,17 +42,17 @@
                 android:minHeight="300dp"
                 android:id="@+id/RelRevista">
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="48"/>
+                <!-- <LinearLayout
+                     android:orientation="horizontal"
+                     android:layout_width="fill_parent"
+                     android:layout_height="fill_parent"
+                     android:layout_weight="48"/>-->
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="4"
+                    android:layout_weight="100"
                     android:weightSum="100">
 
                     <LinearLayout
@@ -71,9 +71,9 @@
 
                         <LinearLayout
                             android:orientation="vertical"
-                            android:layout_width="match_parent"
+                            android:layout_width="fill_parent"
                             android:weightSum="100"
-                            android:layout_height="match_parent">
+                            android:layout_height="fill_parent">
 
                             <LinearLayout
                                 android:orientation="vertical"
@@ -84,6 +84,7 @@
                                 <ImageView
                                     android:layout_width="fill_parent"
                                     android:layout_height="fill_parent"
+                                    android:scaleType="fitXY"
                                     android:id="@+id/imagenTriviaRespuesta" />
                             </LinearLayout>
 
@@ -114,7 +115,7 @@
                                     android:id="@+id/pregunta"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Los ganadores recibirán un mensaje en su teléfono. Ninguna persona ajena &lt;a Telcel bajo ninguna circunstacia podrá participar o recoger el premio de los ganadores. Un sólo pase doble por empleado. El premio únicamente se podrá recoger en el lugar, fecha y hora indicada."
+                                    android:text="Los ganadores recibirán un mensaje en su teléfono. Ninguna persona ajena a Telcel bajo ninguna circunstacia podrá participar o recoger el premio de los ganadores. Un sólo pase doble por empleado. El premio únicamente se podrá recoger en el lugar, fecha y hora indicada."
                                     android:gravity="center"
                                     android:layout_centerHorizontal="true"
                                     android:textAppearance="?android:attr/textAppearanceSmall"
@@ -157,11 +158,11 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="48"/>
+                <!-- <LinearLayout
+                     android:orientation="horizontal"
+                     android:layout_width="fill_parent"
+                     android:layout_height="fill_parent"
+                     android:layout_weight="48"/>-->
 
 
             </LinearLayout>
