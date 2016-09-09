@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -205,10 +207,19 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                             galeriaTitulo.setText(Html.fromHtml(((Lista_Entrada) entrada).get_titulo()));
 
                         TextView galeriaDescripcion = (TextView) activity.findViewById(R.id.descUN);
-                       /* if (galeriaDescripcion != null) {
-                            String desc = ((Lista_Entrada) entrada).get_textoDebajo();
+
+                        /*Toast toast5 = Toast.makeText(activity,desc, Toast.LENGTH_SHORT);
+                                    toast5.show();*/
+                       if (galeriaDescripcion != null) {
+                            //String desc = ((Lista_Entrada) entrada).get_textoDebajo();
+                           String desc = ((Lista_Entrada) entrada).get_url();
+                           galeriaDescripcion.setMovementMethod(LinkMovementMethod.getInstance());
                             galeriaDescripcion.setText(Html.fromHtml(desc));
-                        }*/
+
+                        }
+
+                        //galeriaDescripcion.setText(Html.fromHtml(desc));
+
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalNT);
                         principal.setTag(entrada);
                     }
@@ -245,7 +256,8 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                             imagenGrupo.setImageBitmap(Entrada.get_img_previa());
                             fechaGrupo.setText(Entrada.get_fecha());
                             titGrupo.setText(Entrada.get_titulo());
-                            descGrupo.setText(Html.fromHtml(Entrada.get_textoDebajo()));
+                            descGrupo.setText(Html.fromHtml(Entrada.get_url()));
+                            descGrupo.setMovementMethod(LinkMovementMethod.getInstance());
                             principal.setTag(Entrada);
                             Log.e("SELECCIONADO",Entrada.get_id()+"");
                             Log.e("SIGUIENTE",Entrada.get_idSiguiente()+"");

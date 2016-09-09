@@ -12,164 +12,199 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:background="@color/ColorFondo">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:weightSum="100"
-            >
+            android:weightSum="100">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:weightSum="100" >
+                android:weightSum="10"
+                android:layout_weight="38">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:layout_weight="3">
+
+                    <ImageSwitcher
+                        android:id="@+id/imageSwitcher"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:scaleType="fitXY">
+
+                    </ImageSwitcher>
+
+                </LinearLayout>
+
+                <!--   <LinearLayout
+                      android:id="@+id/buttons"
+                      android:layout_width="fill_parent"
+                      android:layout_height="100dp"
+                      android:layout_alignParentBottom="false"
+                      android:layout_alignParentTop="false"
+                      android:layout_weight="2"
+                      android:orientation="horizontal"
+                      android:weightSum="10">
+                      <Button
+                          android:id="@+id/btnBack"
+                          android:layout_width="fill_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="5"
+                          android:onClick="backSlider"
+                          android:text="&lt;&lt;" />
+                      <Button
+                          android:id="@+id/btnFwd"
+                          android:layout_width="fill_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="5"
+                          android:onClick="fwdSlider"
+                          android:text=">>" />
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="48" />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="4"
-                    android:weightSum="100" >
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="49" />
-
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentEnd="true"
+                    android:weightSum="100"
+                    android:layout_weight="7">
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:layout_weight="39"
+                        android:layout_weight="100"
                         android:orientation="vertical"
                         android:weightSum="100"
-                        android:padding="3dp"
-                        android:id="@+id/btnPreguntaDia"
-                        android:background="@drawable/border">
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="100"
-                            android:layout_marginTop="0dp"
-                            android:padding="10dp"
-                            android:layout_weight="70">
-
-                            <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="fill_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="80" >
-
-                                <ImageView
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent"
-                                    android:id="@+id/imageView16"
-                                    android:src="@drawable/pregunta"
-                                    android:padding="4dp"
-                                    android:layout_weight="100" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:orientation="vertical"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="20"
-                                android:weightSum="100"
-                                android:padding="10dp" >
-
-                                <TextView
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="wrap_content"
-                                    android:textAppearance="?android:attr/textAppearanceLarge"
-                                    android:text="@string/tituloPregunta"
-                                    android:id="@+id/txtTituloPregunta"
-                                    android:textColor="@color/ColorPrimary"
-                                    android:paddingLeft="14dp"
-                                    android:textStyle="bold"
-                                    android:textSize="16dp" />
-
-                                <TextView
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/txtPreguntaTrivia"
-                                    android:textSize="12dp"
-                                    android:text="@string/tituloPregunta"
-                                    android:paddingLeft="14dp"
-                                     />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="14"
+                        android:layout_marginTop="0dp"
                         android:background="@drawable/border"
-                        android:layout_marginTop="10dp"
-                        android:weightSum="10">
-
-                        <RelativeLayout
-                            android:id="@+id/loadingTrivias"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:gravity="center"
-                            android:visibility="visible" >
-
-                            <ProgressBar
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:indeterminate="true" />
-                        </RelativeLayout>
+                        android:layout_marginRight="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
 
 
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
-                            android:weightSum="10">
-
-                            <ListView
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:id="@+id/lstTrivias"
-                                android:layout_weight="3" />
+                            android:layout_weight="50"
+                            android:layout_margin="15px"
+                            android:orientation="vertical"
+                            android:weightSum="100">
 
                             <TextView
                                 android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:text="@string/textoTrivias"
-                                android:id="@+id/textView25"
-                                android:textSize="16dp"
-                                android:padding="4dp"
-                                android:textColor="@color/tituloRevista"
-                                android:layout_weight="7" />
+                                android:textColor="@color/ColorPrimaryDark"
+                                android:textStyle="bold"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/titDNT"/>
+
                         </LinearLayout>
+
+                        <ScrollView
+                            android:id="@+id/SCROLLER_ID"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:scrollbars="vertical"
+                            android:fillViewport="true"
+                            android:layout_weight="50">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_weight="1.0"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_height="match_parent"
+                                android:id="@+id/descDNT"/>
+
+                        </ScrollView>
+
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="48" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:weightSum="100"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:layout_weight="62" >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="100" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="35dp"
+                        android:text="Siguiente galería"
+                        android:background="@drawable/border_siguiente_video"
+                        android:id="@+id/textView16"
+                        android:layout_margin="5dp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="5dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="100"
+                        android:background="@drawable/border"
+                        android:id="@+id/lnySiguienteGaleria"
+                        android:layout_marginTop="10dp"
+                        android:layout_margin="5dp" >
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="55"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp" >
+
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/imagenGaleriaSiguiente"
+                                android:src="@drawable/appicon" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="45" >
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtTituloSiguiente"
+                                android:text="Siguiente Video"
+                                android:textColor="@color/ColorPrimaryDark"
+                                android:padding="10dp" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtDuracionSiguente"
+                                android:text=""
+                                android:padding="10dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

@@ -498,6 +498,17 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
                         homeTitulo.setTypeface(tfl);
 
+                        homeTitulo.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View arg0) {
+
+                                Intent i = new Intent(activity, ComunicacionInternaActivity.class);
+                                i.putExtra("direccion","4");
+                                activity.startActivity(i);
+                            }
+                        });
+
                         view.setOnClickListener(new View.OnClickListener() {
 
                             @Override

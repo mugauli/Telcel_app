@@ -156,8 +156,8 @@ public class ComunicacionInternaActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-       Toast toast5 = Toast.makeText(this,"NADA", Toast.LENGTH_SHORT);
-                                    toast5.show();
+       /*Toast toast5 = Toast.makeText(this,"NADA", Toast.LENGTH_SHORT);
+                                    toast5.show();*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);

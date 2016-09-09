@@ -108,7 +108,7 @@
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:layout_weight="75"
+                                android:layout_weight="50"
                                 android:layout_margin="15px"
                                 android:orientation="vertical"
                                 android:weightSum="100">
@@ -129,7 +129,7 @@
                                 android:layout_height="fill_parent"
                                 android:scrollbars="vertical"
                                 android:fillViewport="true"
-                                android:layout_weight="25">
+                                android:layout_weight="50">
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_weight="1.0"
