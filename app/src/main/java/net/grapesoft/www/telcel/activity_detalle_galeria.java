@@ -174,8 +174,8 @@ public class activity_detalle_galeria extends AppCompatActivity
 
                             TextView txtTituloSiguiente =  (TextView) findViewById(R.id.txtTituloSiguiente);
                             txtTituloSiguiente.setText(Html.fromHtml(tituloSig));
-                            TextView  txtDuracionSiguente  = (TextView) findViewById(R.id.txtDuracionSiguente);
-                            //txtDuracionSiguente.setText(Html.fromHtml(textoSig));
+                            TextView  txtDuracionSiguente  = (TextView) findViewById(R.id.textDNT);
+                            txtDuracionSiguente.setText(Html.fromHtml(textoSig));
                             ImageView imagenGaleriaSiguiente = (ImageView) findViewById(R.id.imagenGaleriaSiguiente);
 
                             idSiguienteR = idSiguiente;
@@ -196,7 +196,7 @@ public class activity_detalle_galeria extends AppCompatActivity
 
                             titUG.setText(Html.fromHtml(titulo1));
                             if(descUG != null)
-                                descUG.setText(url);
+                                descUG.setText("Si deseas ver más fotos de esta galería visita nuestra página:" +""+ url);
 
                         }
                     }

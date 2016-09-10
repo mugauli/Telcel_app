@@ -208,15 +208,14 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
 
                         TextView galeriaDescripcion = (TextView) activity.findViewById(R.id.descUN);
 
-                        /*Toast toast5 = Toast.makeText(activity,desc, Toast.LENGTH_SHORT);
-                                    toast5.show();*/
-                       if (galeriaDescripcion != null) {
+
+                      /* if (galeriaDescripcion != null) {
                             //String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                            String desc = ((Lista_Entrada) entrada).get_url();
                            galeriaDescripcion.setMovementMethod(LinkMovementMethod.getInstance());
                            galeriaDescripcion.setText(Html.fromHtml(desc));
 
-                        }
+                        }*/
 
                         //galeriaDescripcion.setText(Html.fromHtml(desc));
 
@@ -258,6 +257,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
                             titGrupo.setText(Entrada.get_titulo());
                             descGrupo.setText(Html.fromHtml(Entrada.get_url()));
                             descGrupo.setMovementMethod(LinkMovementMethod.getInstance());
+
                             principal.setTag(Entrada);
                             Log.e("SELECCIONADO",Entrada.get_id()+"");
                             Log.e("SIGUIENTE",Entrada.get_idSiguiente()+"");

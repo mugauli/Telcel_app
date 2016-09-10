@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import Utitilies.SessionManagement;
 
 public class acercade extends AppCompatActivity
@@ -109,33 +111,46 @@ public class acercade extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        session = new SessionManagement(getApplicationContext());
+        final HashMap<String, String> user = session.getUserDetails();
+        String idUsuario = user.get(SessionManagement.KEY_PD_ID);
+
+        if(user.get(SessionManagement.KEY_PD_ID) != null) {
+            if (id == R.id.nav_camera) {
+                Intent i = new Intent(acercade.this, ActualizarActivity.class);
+                startActivity(i);
+
+                // Handle the camera action
+            } else if (id == R.id.nav_gallery) {
+                Intent i = new Intent(acercade.this, pinActivity.class);
+                startActivity(i);
 
 
-        if (id == R.id.nav_camera) {
-            Intent i = new Intent(acercade.this, ActualizarActivity.class);
-            startActivity(i);
+            } else if (id == R.id.nav_slideshow) {
+                Intent i = new Intent(acercade.this, preferencias.class);
+                startActivity(i);
 
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            Intent i = new Intent(acercade.this, pinActivity.class);
-            startActivity(i);
+            } else if (id == R.id.nav_send) {
+                session.logoutUser();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
 
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
 
-        } else if (id == R.id.nav_slideshow) {
-            Intent i = new Intent(acercade.this, preferencias.class);
-            startActivity(i);
-
-        } else if (id == R.id.nav_send) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+        }else
+        {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+
     }
 
 

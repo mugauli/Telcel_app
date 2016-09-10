@@ -111,7 +111,7 @@ public class triviasActivity extends AppCompatActivity
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
 
-        params.add("GetTrivia_test.php");
+        params.add("GetTrivia.php");
         params.add("GetQuestion.php");
         params.add(tokenCTE);
         params.add(region);
