@@ -39,7 +39,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:weightSum="10"
-                    android:layout_weight="38">
+                    android:layout_weight="34">
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -90,7 +90,8 @@
                         android:layout_alignParentRight="false"
                         android:layout_alignParentEnd="true"
                         android:weightSum="100"
-                        android:layout_weight="7">
+                        android:layout_weight="7"
+                        android:padding="0dp">
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
@@ -108,10 +109,11 @@
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
-                                android:layout_weight="50"
-                                android:layout_margin="15px"
+                                android:layout_weight="100"
                                 android:orientation="vertical"
-                                android:weightSum="100">
+                                android:weightSum="100"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="4dp">
 
                                 <TextView
                                     android:layout_width="fill_parent"
@@ -119,7 +121,9 @@
                                     android:textStyle="bold"
                                     android:textAppearance="?android:attr/textAppearanceSmall"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/titDNT"/>
+                                    android:id="@+id/titDNTG"
+                                    android:text="MARATON CDMX TELCEL 2016"
+                                    android:padding="0dp" />
 
                                 <TextView
                                     android:layout_width="fill_parent"
@@ -127,16 +131,21 @@
                                     android:textStyle="bold"
                                     android:textAppearance="?android:attr/textAppearanceSmall"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/textDNT"/>
+                                    android:id="@+id/textDNTG"
+                                    android:text="Telcel anunci&amp;oacute; el inicio de la campa&amp;ntilde;a (Telcel) RED 2015 que tiene como objetivo reducir la transmisi&amp;oacute;n del VIH de madres a hijos."
+                                    android:textIsSelectable="true"
+                                    android:textSize="12dp"
+                                    android:padding="0dp" />
 
                                 <TextView
                                     android:layout_width="fill_parent"
-                                    android:layout_weight="1.0"
                                     android:textAppearance="?android:attr/textAppearanceSmall"
                                     android:layout_height="wrap_content"
-                                    android:paddingTop="20dp"
-                                    android:id="@+id/descDNT"
-                                    android:autoLink="web" />
+                                    android:id="@+id/descDNTG"
+                                    android:autoLink="web"
+                                    android:text="Si deseas ver más fotos de esta galería visita nuestra página: www.telcel.com"
+                                    android:padding="0dp"
+                                    android:textSize="12dp" />
 
                             </LinearLayout>
 
@@ -152,9 +161,9 @@
                     android:layout_height="fill_parent"
                     android:orientation="horizontal"
                     android:weightSum="100"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:padding="10dp"
-                    android:layout_weight="62" >
+                    android:layout_weight="66" >
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -196,7 +205,9 @@
                                     android:layout_width="fill_parent"
                                     android:layout_height="fill_parent"
                                     android:id="@+id/imagenGaleriaSiguiente"
-                                    android:src="@drawable/appicon" />
+                                    android:src="@drawable/appicon"
+                                    android:layout_gravity="left"
+                                    android:layout_margin="0dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -211,14 +222,20 @@
                                     android:id="@+id/txtTituloSiguiente"
                                     android:text="Siguiente Video"
                                     android:textColor="@color/ColorPrimaryDark"
-                                    android:padding="10dp" />
+                                    android:paddingTop="5dp"
+                                    android:paddingRight="1dp"
+                                    android:paddingBottom="5dp"
+                                    android:paddingLeft="1dp" />
 
                                 <TextView
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/txtDuracionSiguente"
                                     android:text=""
-                                    android:padding="10dp" />
+                                    android:paddingLeft="1dp"
+                                    android:paddingTop="5dp"
+                                    android:paddingRight="1dp"
+                                    android:paddingBottom="5dp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>

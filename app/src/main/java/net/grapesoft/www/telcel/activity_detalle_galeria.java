@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -142,22 +143,19 @@ public class activity_detalle_galeria extends AppCompatActivity
                             String titulo1 = responseArray.getJSONObject(i).get("titulo").toString();
                             String texto = responseArray.getJSONObject(i).get("texto").toString();
                             url = responseArray.getJSONObject(i).get("url").toString();
+
                             JSONArray imagenes_slide = responseArray.getJSONObject(i).getJSONArray("imagenes_slide");
 
-                            if (i+1 == responseArray.length()) {
+                            if (i + 1 == responseArray.length()) {
                                 idSiguiente = responseArray.getJSONObject(0).get("id").toString();
                                 tituloSig = responseArray.getJSONObject(0).get("titulo").toString();
                                 imagenSig = responseArray.getJSONObject(0).get("img_previa").toString();
                                 textoSig = responseArray.getJSONObject(0).get("texto").toString();
-
-
                             } else {
                                 idSiguiente = responseArray.getJSONObject(i + 1).get("id").toString();
                                 tituloSig = responseArray.getJSONObject(i + 1).get("titulo").toString();
                                 imagenSig = responseArray.getJSONObject(i + 1).get("img_previa").toString();
                                 textoSig = responseArray.getJSONObject(i + 1).get("texto").toString();
-
-
                             }
 
 
@@ -172,10 +170,8 @@ public class activity_detalle_galeria extends AppCompatActivity
 //                                            Log.e("Prubea", idSiguiente2 + " " + idSiguiente);
 
 
-                            TextView txtTituloSiguiente =  (TextView) findViewById(R.id.txtTituloSiguiente);
+                            TextView txtTituloSiguiente = (TextView) findViewById(R.id.txtTituloSiguiente);
                             txtTituloSiguiente.setText(Html.fromHtml(tituloSig));
-                            TextView  txtDuracionSiguente  = (TextView) findViewById(R.id.textDNT);
-                            txtDuracionSiguente.setText(Html.fromHtml(textoSig));
                             ImageView imagenGaleriaSiguiente = (ImageView) findViewById(R.id.imagenGaleriaSiguiente);
 
                             idSiguienteR = idSiguiente;
@@ -183,7 +179,7 @@ public class activity_detalle_galeria extends AppCompatActivity
 
                             try {
                                 Bitmap img = new GetNetImage().execute(imagenSig).get();
-                                if(img != null)
+                                if (img != null)
                                     imagenGaleriaSiguiente.setImageBitmap(img);
 
                             } catch (InterruptedException e) {
@@ -191,12 +187,18 @@ public class activity_detalle_galeria extends AppCompatActivity
                             } catch (ExecutionException e) {
                                 e.printStackTrace();
                             }
-                            TextView titUG = (TextView) findViewById(R.id.titDNT);
-                            TextView descUG = (TextView) findViewById(R.id.descDNT);
+
+
+                            TextView titUG = (TextView) findViewById(R.id.titDNTG);
+                            TextView descUG = (TextView) findViewById(R.id.descDNTG);
+                            TextView txtDNT = (TextView) findViewById(R.id.textDNTG);
+
 
                             titUG.setText(Html.fromHtml(titulo1));
+                            if(txtDNT != null)
+                                txtDNT.setText(Html.fromHtml(texto.replace("<p>","").replace("</p>","").trim()));
                             if(descUG != null)
-                                descUG.setText("Si deseas ver más fotos de esta galería visita nuestra página:" +""+ url);
+                                descUG.setText("Si deseas ver más fotos de esta galería visita nuestra página: "+ url);
 
                         }
                     }
