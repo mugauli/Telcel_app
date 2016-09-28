@@ -150,7 +150,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                         texto = responseArray.getJSONObject(i).get("texto").toString();
                         fecha = responseArray.getJSONObject(i).get("fecha").toString();
                         URL imageUrl = null;
-                        imageUrl = new URL(imageHttpAddress + img_previa);
+                        imageUrl = new URL(imageHttpAddress + img_mini);
                         HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
 
                         try {
@@ -177,7 +177,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                         fecha2 = responseArray.getJSONObject(i).get("fecha").toString();
 
                         URL imageUrl = null;
-                        imageUrl = new URL(imageHttpAddress + img_previa2);
+                        imageUrl = new URL(imageHttpAddress + img_mini2);
                         HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
 
                         try {
@@ -359,7 +359,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
 
                         LinearLayout linear = (LinearLayout) activity.findViewById(R.id.linearSva2);
                         if(linear != null)
-                            linear.setVisibility(View.GONE);
+                            linear.setVisibility(View.VISIBLE);
 
                         if(primer){
                             primer = false;
