@@ -116,10 +116,27 @@ public class ActualizarActivity extends AppCompatActivity
             Spinner spinner_Region1 = (Spinner) findViewById(R.id.spnRegion);
             Spinner spinner_Direccion1 = (Spinner) findViewById(R.id.spnDireccion);
 
-            spinner_Region1.setSelection(Integer.parseInt(user.get(SessionManagement.KEY_PD_REGION))-1);
+            Log.e("Spinner",user.get(SessionManagement.KEY_PD_REGION)+"");
+            String regChar = user.get(SessionManagement.KEY_PD_REGION);
+
+            int regInt = 0;
+
+            if(regChar.equals("A")) {
+                regInt = 10;
+            }
+            else if(regChar.equals("C")) {
+                regInt = 11;
+            }
+            else
+            {
+                regInt = Integer.parseInt(user.get(SessionManagement.KEY_PD_REGION));
+            }
+
+            spinner_Region1.setSelection(regInt-1);
 
             EditText txtCelular = (EditText) findViewById(R.id.txtCelular);
             txtCelular.setText(user.get(SessionManagement.KEY_PD_NUM_CELULAR));
+
             txtCelular.setKeyListener(null);
             txtCelular.setEnabled(false);
 
@@ -200,10 +217,10 @@ public class ActualizarActivity extends AppCompatActivity
 
                         region = Long.toString(spinner_Region.getSelectedItemId()+1);
 
-                        if (region == "11") {
+                        if (region == "10") {
+                            region = "X";
+                        } else if (region == "11") {
                             region = "C";
-                        } else if (region == "12") {
-                            region = "A";
                         }
 
                         Log.e("Request", "Region: " + region);
