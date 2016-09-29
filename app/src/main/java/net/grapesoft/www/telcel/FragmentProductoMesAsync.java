@@ -240,10 +240,10 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                      if (producto_titulo != null)
                          producto_titulo.setText(((Lista_Entrada) entrada).get_titulo());
 
-                     TextView producto_descripcion = (TextView) view.findViewById(R.id.txtDescripcionProductoMesL);
+                   // TextView producto_descripcion = (TextView) view.findViewById(R.id.txtDescripcionProductoMesL);
 
-                     if (producto_descripcion != null)
-                         producto_descripcion.setText(Html.fromHtml(((Lista_Entrada) entrada).get_textoDebajo()));
+                   // if (producto_descripcion != null)
+                   //     producto_descripcion.setText(Html.fromHtml(((Lista_Entrada) entrada).get_textoDebajo()));
 
                      view.setTag(entrada);
 
