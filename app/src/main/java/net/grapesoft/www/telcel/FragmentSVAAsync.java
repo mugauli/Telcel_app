@@ -244,8 +244,10 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                     int type =  ((Lista_Entrada)entrada).get_type();
 
                     if(type == 2) {
+
                         Log.e("TYPE",""+type);
-                        LinearLayout linear = (LinearLayout) activity.findViewById(R.id.linearSva2);
+
+                        LinearLayout linear = (LinearLayout) view.findViewById(R.id.linearSva2);
                         if(linear != null)
                             linear.setVisibility(View.VISIBLE);
 
@@ -318,11 +320,14 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                         if (tituloSVA2 != null) {
                             String tit = "";
                             if(sva2.get_tituloSva().length() > 20) {
-                                tit = sva2.get_tituloSva().substring(0, 20);
+                                tituloSVA2.setTextSize(10);
                             }
                             else
-                                tit = sva2.get_tituloSva();
-                            tituloSVA2.setText(tit);
+                                tituloSVA2.setTextSize(13);
+                            tituloSVA2.setText(sva2.get_tituloSva());
+
+
+
                         }
 
 
