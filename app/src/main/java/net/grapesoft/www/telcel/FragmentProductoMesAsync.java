@@ -109,7 +109,6 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                 reader.close();
                 result11 = sb.toString();
 
-
                 session.createMesProductosSession(result11);
             }
             else
@@ -180,8 +179,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                     } catch (FileNotFoundException e) {
                         loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     }
-
-
+                    Log.e("ADD MES--------------------->",mes);
                     datos.add(new Lista_Entrada(mes, id, loadedImage, titulo, img_mini, texto, imagenes_slider));
 
                     if (mes.equals("actual")) {
@@ -193,17 +191,12 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                         textoActual = texto;
                         imagenes_sliderActual = imagenes_slider;
                     }
-
-
                 }
             }
-
 
         } catch (JSONException e) {
             Log.e("Error JSONException ProductoMes", e.getMessage());
             e.printStackTrace();
-
-
         } catch (UnsupportedEncodingException e) {
             Log.e("Error UnsupportedEncodingException ProductoMes", e.getMessage());
             e.printStackTrace();
@@ -227,7 +220,8 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
                  String mes = ((Lista_Entrada) entrada).get_mes();
 
-                 //else {
+                 Log.e("MES--------------------->",mes);
+
 
                      ImageView imagen_producto_mes_l = (ImageView) view.findViewById(R.id.imagenProductoMesL);
                      if (imagen_producto_mes_l != null)
@@ -235,9 +229,9 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
                      TextView producto_mes = (TextView) view.findViewById(R.id.txtMesProductoMesL);
                      if (producto_mes != null) {
-                            String MS = ((Lista_Entrada) entrada).get_mes();
-                         if(MS.equals("actual"))
-                             producto_mes.setText("");
+                         String MS = ((Lista_Entrada) entrada).get_mes();
+                         if (MS.equals("actual"))
+                             producto_mes.setText("Mes actual");
                          else
                              producto_mes.setText(MS);
                      }
@@ -259,7 +253,6 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                          public void onClick(View arg0) {
 
                              ImageView imagenGrupo = (ImageView) activity.findViewById(R.id.imagenUNT);
-                             //      TextView fechaGrupo = (TextView) activity.findViewById(R.id.fechaUN);
                              TextView titGrupo = (TextView) activity.findViewById(R.id.titUN);
                              TextView descGrupo = (TextView) activity.findViewById(R.id.descUN);
                              TextView productoMes = (TextView) activity.findViewById(R.id.txtMesMain);
@@ -270,7 +263,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
                              imagenGrupo.setImageBitmap(Entrada.get_img_previa());
                              String MS = Entrada.get_mes();
-                             if(MS.equals("actual"))
+                             if (MS.equals("actual"))
                                  productoMes.setText("Este Mes");
                              else
                                  productoMes.setText(MS);
@@ -281,10 +274,9 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                          }
                      });
 
-               //  }
+                     //  }
+                 }
 
-
-             }
             }
         };
     }
@@ -317,12 +309,10 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
             {
                 if(imgFaltaInfo != null)
                     imgFaltaInfo.setVisibility(View.VISIBLE);
-
             }
         }
         else
         {
-
             if(imgFaltaInfo != null)
                 imgFaltaInfo.setVisibility(View.VISIBLE);
             Log.e("No llego", "algo paso");
@@ -334,8 +324,6 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
         if (!idActual.equals("0")) {
             Log.e("Entrada producto mes ACTUAL----------------------------------1", mesActual);
 
-
-
             TextView productoMes = (TextView) activity.findViewById(R.id.txtMesMain);
             if (productoMes != null)
                 productoMes.setText("Este Mes");
@@ -344,6 +332,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
             if (imagen_producto_mes != null) {
                 imagen_producto_mes.setImageBitmap(loadedImageActual);
             }
+
             TextView productoMesTitulo = (TextView) activity.findViewById(R.id.titUN);
             if (productoMesTitulo != null)
                 productoMesTitulo.setText(tituloActual);

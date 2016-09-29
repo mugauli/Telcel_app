@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="60dp"
-    android:background="@color/ColorFondo">
+    android:background="@color/ColorFondo">-->
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
 
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/imgFaltaInfo"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:src="@drawable/faltainfo" />
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_weight="100"
-            android:layout_height="fill_parent"
-            android:id="@+id/imagennada" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -41,7 +36,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="4"
             android:weightSum="100">
 
@@ -98,99 +93,23 @@
                             android:layout_weight="68"
                             android:layout_height="match_parent"
                             android:id="@+id/titUN"/>
-                        <TextView
+
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_weight="32"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_height="match_parent"
-                            android:id="@+id/descUN"/>
+                            android:layout_height="100dp"
+                            android:id="@+id/scrollView" >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_weight="32"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_height="match_parent"
+                                android:id="@+id/descUN"
+                                android:scrollIndicators="right" />
+                        </ScrollView>
+
                     </LinearLayout>
 
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="35dp"
-                    android:text="Este Mes"
-                    android:background="@drawable/border_meses_anteriores"
-                    android:id="@+id/textView17"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:layout_marginBottom="3dp" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/border"
-                    android:orientation="horizontal"
-                    android:weightSum="100"
-                    android:layout_margin="0dp" >
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="60" >
-
-                        <ImageView
-                            android:layout_width="fill_parent"
-                            android:layout_height="90dp"
-                            android:id="@+id/imageView14"
-                            android:layout_marginLeft="3dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="40"
-                        android:weightSum="10"
-                        android:padding="15dp" >
-
-                        <TextView
-                            android:id="@+id/textView18"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:gravity="left"
-                            android:layout_centerHorizontal="true"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="4"
-                            android:text="Enero" />
-
-                        <TextView
-                            android:id="@+id/textView19"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:text="Apple iPhone 6S / 6S Plus"
-                            android:textColor="@color/ColorPrimary"
-                            android:textStyle="bold"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="4"
-                            android:gravity="left" />
-
-                        <TextView
-                            android:id="@+id/textView20"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_centerHorizontal="true"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:layout_weight="2"
-                            android:gravity="left"
-                            android:text="El más buscado por su tecnología 3D touch." />
-                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -228,7 +147,7 @@
                     android:layout_marginBottom="3dp" />
                 <ListView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:id="@+id/lstProductosMes" />
             </LinearLayout>
         </LinearLayout>
@@ -242,4 +161,4 @@
 
 
 </RelativeLayout>
-    </ScrollView>
+    <!--</ScrollView>-->
