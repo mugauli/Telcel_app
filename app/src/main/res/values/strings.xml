@@ -3,7 +3,7 @@
 
     <string name="app_name">#NosUne</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="text_with_bullet">\u02C4</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -15,7 +15,7 @@
 
     <!--Configuracion WS-->
 
-    <string name="URL">http://internetencaja.com.mx/telcel/WServices/</string>
+    <string name="URL">http://webox.com.mx/telcel/WServices/</string>
     <string name="tokenXM">67d6b32e8d96b8542feda3df334c04f5</string>
 
     <!--Actualiza Trabajador-->
@@ -182,7 +182,7 @@
     <string name="naturaleza">lanaturalezanosllama.com</string>
     <string name="racing">telcelracing.com</string>
     <string name="prox">¡Próximamente!</string>
-
+    <string name="mitelcel">mitelcel.com</string>
     //Intereses
 
     <string-array name="Accesorios">

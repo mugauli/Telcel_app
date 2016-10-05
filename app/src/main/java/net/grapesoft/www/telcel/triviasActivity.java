@@ -1,7 +1,11 @@
 package net.grapesoft.www.telcel;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,31 +13,144 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.liuguangqiang.swipeback.SwipeBackLayout;
+
+//import java.sql.Date;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 import Utitilies.SessionManagement;
+import com.liuguangqiang.swipeback.SwipeBackActivity;
+import com.liuguangqiang.swipeback.SwipeBackLayout;
 
-public class triviasActivity extends AppCompatActivity
+public class triviasActivity extends SwipeBackActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     String styledText = "This is <font color='red'>simple</font>.";
     public String tokenCTE = "";
     SessionManagement session;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+    private int totalCount=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trivias);
+        setDragEdge(SwipeBackLayout.DragEdge.BOTTOM);
         session = new SessionManagement(getApplicationContext());
 
-        //boton ayuda
+
+       //Dates
+
+        String valid_until = "08:00";
+        Calendar d = Calendar.getInstance();
+        SimpleDateFormat dfd = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDated = dfd.format(d.getTime());
+        String fechaini = formattedDated + " " + valid_until;
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String formattedDate = df.format(c.getTime());
+        Date dt = new Date();
+        int hours = dt.getHours();
+        int minutes = dt.getMinutes();
+        //int seconds = dt.getSeconds();
+        String curTime = hours + ":" + minutes;
+
+        /*SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+        editor.putInt("ID",totalCount);
+        editor.putString("Fecha",fechaini);
+        editor.putString("FechaHoy",formattedDate);
+        editor.apply();*/
+
+
+
+       // SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        //Integer restoredText = prefs.getInt("Contador",0);
+       // totalCount++;
+        //prefs.edit().putInt("ID",totalCount).commit();
+       // String restoredFecha = prefs.getString("Fecha", null);
+        /*if (restoredText != null)
+        {*/
+           // Toast.makeText(this, totalCount, Toast.LENGTH_SHORT).show();
+        //}
+
+        // formattedDate have current date/time
+
+        //Toast.makeText(this, formattedDate + "..." + fechaini, Toast.LENGTH_SHORT).show();
+        //Data base
+       // SQLiteDatabase myDB= null;
+        //String TableName = "fecha";
+
+        //String Data="";
+        /* Create a Database. */
+        //try {
+        //    myDB = this.openOrCreateDatabase("trivias", MODE_PRIVATE, null);
+
+        /* Create a Table in the Database. */
+        //    myDB.execSQL("CREATE TABLE IF NOT EXISTS "
+        //            + TableName
+        //            + " (Field1 VARCHAR, Field2 VARCHAR);");
+
+        /* Insert data to a Table*/
+         /*   myDB.execSQL("INSERT INTO "
+                    + TableName
+                    + " (Field1, Field2)"
+                    + " VALUES (" + fechaini + ", '" + formattedDate + "');");*/
+
+        //    ContentValues values = new ContentValues();
+        //    values.put(formattedDate, fechaini);
+
+
+        //    myDB.insert(TableName, null, values);
+
+        /*retrieve data from database */
+        //    Cursor co = myDB.rawQuery("SELECT * FROM " + TableName , null);
+
+        //    int Column1 = co.getColumnIndex("Field1");
+        //    int Column2 = co.getColumnIndex("Field2");
+
+
+            // Check if our result was valid.
+        //    co.moveToFirst();
+        //    if (co != null) {
+                // Loop through all Results
+        //        do {
+        //            String Name = co.getString(Column1);
+        //            String Names = co.getString(Column2);
+                   // Toast.makeText(this, Column1 + Column2, Toast.LENGTH_SHORT).show();
+        //        }while(co.moveToNext());
+        //    }
+
+        //}
+        //catch(Exception e) {
+        //    Log.e("Error", "Error", e);
+        //} finally {
+        //    if (myDB != null)
+        //        myDB.close();
+        //}
+
+
+
+
+
+            //boton ayuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +206,7 @@ public class triviasActivity extends AppCompatActivity
             });
         }
 
-        if (imgButton2 != null) {
+       /* if (imgButton2 != null) {
             imgButton2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -97,7 +214,7 @@ public class triviasActivity extends AppCompatActivity
                     startActivity(i);
                 }
             });
-        }
+        }*/
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
