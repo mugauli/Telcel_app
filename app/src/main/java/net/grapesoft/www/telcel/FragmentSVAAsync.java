@@ -37,6 +37,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utitilies.FileCache;
 import Utitilies.List_adapted_SVA;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
@@ -151,19 +152,47 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                         texto = responseArray.getJSONObject(i).get("texto").toString();
                         fecha = responseArray.getJSONObject(i).get("fecha").toString();
                         URL imageUrl = null;
-                        imageUrl = new URL(imageHttpAddress + img_mini);
-                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                     //   imageUrl = new URL(imageHttpAddress + img_mini);
+                     //   HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+//
+                     //   try {
+                     //       conn.connect();
+                     //       loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                     //       conn.disconnect();
+                     //   }
+                     //   catch (FileNotFoundException e)
+                     //   {
+                     //       loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                     //   }
 
-                        try {
-                            conn.connect();
-                            loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                            conn.disconnect();
-                        }
-                        catch (FileNotFoundException e)
-                        {
-                            loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                        }
+                        FileCache m = new FileCache();
 
+                        byte[] c = m.getObject(activity,img_previa);
+
+                        if(c!= null && c.length > 0)
+
+                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
+                        else {
+                            Log.e("cache_","No se encontro el objeto y se guarda");
+
+                            imageUrl = new URL(imageHttpAddress + img_previa);
+                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                            try {
+                                conn.connect();
+                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                conn.disconnect();
+                            }
+                            catch (FileNotFoundException e)
+                            {
+                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                            }
+                            boolean result = m.saveObject(activity,loadedImage,img_previa);
+
+                            if(result)
+                                Log.e("cache_0","Saved object");
+                            else
+                                Log.e("cache_0","Error saving object");
+                        }
 
                     } else {
 
@@ -178,18 +207,49 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                         fecha2 = responseArray.getJSONObject(i).get("fecha").toString();
 
                         URL imageUrl = null;
-                        imageUrl = new URL(imageHttpAddress + img_mini2);
-                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
 
-                        try {
-                            conn.connect();
-                            loadedImage2 = BitmapFactory.decodeStream(conn.getInputStream());
-                            conn.disconnect();
+                    //   imageUrl = new URL(imageHttpAddress + img_mini2);
+                    //   HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+
+                    //   try {
+                    //       conn.connect();
+                    //       loadedImage2 = BitmapFactory.decodeStream(conn.getInputStream());
+                    //       conn.disconnect();
+                    //   }
+                    //   catch (FileNotFoundException e)
+                    //   {
+                    //       loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                    //   }
+
+                        FileCache m = new FileCache();
+
+                        byte[] c = m.getObject(activity,img_mini2);
+
+                        if(c!= null && c.length > 0)
+
+                            loadedImage2 = BitmapFactory.decodeByteArray(c, 0, c.length);
+                        else {
+                            Log.e("cache_","No se encontro el objeto y se guarda");
+
+                            imageUrl = new URL(imageHttpAddress + img_mini2);
+                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                            try {
+                                conn.connect();
+                                loadedImage2 = BitmapFactory.decodeStream(conn.getInputStream());
+                                conn.disconnect();
+                            }
+                            catch (FileNotFoundException e)
+                            {
+                                loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                            }
+                            boolean result = m.saveObject(activity,loadedImage2,img_mini2);
+
+                            if(result)
+                                Log.e("cache_0","Saved object");
+                            else
+                                Log.e("cache_0","Error saving object");
                         }
-                        catch (FileNotFoundException e)
-                        {
-                            loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                        }
+
 
                         SvaElement svaElement1 = new SvaElement(id, loadedImage, titulo, img_detalle, texto, fecha, img_mini);
                         SvaElement svaElement2 = new SvaElement(id2, loadedImage2, titulo2, img_detalle2, texto2, fecha2, img_mini2);
