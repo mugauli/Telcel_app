@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -303,6 +304,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
 
                     int type =  ((Lista_Entrada)entrada).get_type();
 
+                    //Toast.makeText(activity, String.valueOf(type), Toast.LENGTH_LONG).show();
                     if(type == 2) {
 
                         Log.e("TYPE",""+type);

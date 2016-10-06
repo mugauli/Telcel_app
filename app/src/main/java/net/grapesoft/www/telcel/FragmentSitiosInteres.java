@@ -53,8 +53,10 @@ public class FragmentSitiosInteres extends Fragment {
         datos.add(new Lista_Entrada(R.drawable.arrow,R.drawable.clickisalud,R.drawable.logoclickisalud,getString(R.string.salud)));
         datos.add(new Lista_Entrada(R.drawable.arrow,R.drawable.holatelcel,R.drawable.logoholatelcel,getString(R.string.holatel)));
         datos.add(new Lista_Entrada(R.drawable.arrow,R.drawable.naturaleza,R.drawable.logonaturaleza,getString(R.string.naturaleza)));
+        datos.add(new Lista_Entrada(R.drawable.arrow,R.drawable.sitiomitelcel,R.drawable.mitelcel,getString(R.string.mitelcel)));
         datos.add(new Lista_Entrada(R.drawable.arrow,R.drawable.racing,R.drawable.logoracing,getString(R.string.racing)));
         datos.add(new Lista_Entrada(R.drawable.arrow,R.drawable.telcelred,R.drawable.logotelcelred,getString(R.string.prox)));
+
 
         //COdigo
         lista = (ListView) rootview.findViewById(R.id.sitioslista);
@@ -125,7 +127,9 @@ public class FragmentSitiosInteres extends Fragment {
                 } else if (elegido.get_textoDebajo() == getString(R.string.naturaleza)) {
                     Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://lanaturalezanosllama.com/"));
                     startActivity(intent);
-
+                } else if (elegido.get_textoDebajo() == getString(R.string.mitelcel)) {
+                    Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("https://www.mitelcel.com"));
+                    startActivity(intent);
 
                 } else if (elegido.get_textoDebajo() == getString(R.string.racing)) {
                     Intent intent = new Intent("android.intent.action.VIEW", Uri.parse("http://telcelracing.com/v2/"));

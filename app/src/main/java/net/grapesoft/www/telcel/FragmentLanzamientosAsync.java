@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
@@ -276,11 +277,11 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
 
                         TextView lanzamientosDescripcion = (TextView) activity.findViewById(R.id.descLZ);
 
-                        /*if (lanzamientosDescripcion != null) {
+                        if (lanzamientosDescripcion != null) {
                             String desc = ((Lista_Entrada) entrada).get_textoDebajo();
                             // desc = desc.substring(0,200);
                             lanzamientosDescripcion.setText(Html.fromHtml(desc));
-                        }*/
+                        }
                         LinearLayout principal = (LinearLayout) activity.findViewById(R.id.linearPrincipalLZ);
                         principal.setTag(entrada);
 
@@ -293,15 +294,20 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
 
                     TextView lanzamientosTitulo = (TextView) view.findViewById(R.id.lanzamientostitulo);
 
-                    if (lanzamientosTitulo != null) {
-                        String title = ((Lista_Entrada) entrada).get_titulo();
-                        if(title.length()> 18) {
-                            lanzamientosTitulo.setTextSize(10);
-                        }
-                        if(title.length()> 33) {
-                            title = title.substring(0,33)+"...";
-                        }
-                        lanzamientosTitulo.setText(title);
+                    /*if (lanzamientosTitulo != null)
+                        lanzamientosTitulo.setText(((Lista_Entrada) entrada).get_titulo());*/
+                    Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/media.otf");
+                    Typeface tfl = Typeface.createFromAsset(activity.getAssets(), "fonts/ligera.otf");
+                    Integer conteo = 0;
+                    conteo = ((Lista_Entrada) entrada).get_titulo().length();
+                    if (lanzamientosTitulo != null && conteo <=20){
+                        lanzamientosTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+
+                        lanzamientosTitulo.setTypeface(tf);
+                    }else{
+                        lanzamientosTitulo.setText(((Lista_Entrada) entrada).get_titulo().substring(0,13)+ "...");
+
+                        lanzamientosTitulo.setTypeface(tf);
                     }
 
                     view.setTag(entrada);
