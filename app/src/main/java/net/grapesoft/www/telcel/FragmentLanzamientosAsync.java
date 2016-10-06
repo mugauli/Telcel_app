@@ -160,33 +160,37 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                  //   } catch (FileNotFoundException e) {
                  //       loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                  //   }
-                    FileCache m = new FileCache();
+                    try {
+                        FileCache m = new FileCache();
 
-                    byte[] c = m.getObject(activity,img_previa);
+                        byte[] c = m.getObject(activity, img_previa);
 
-                    if(c!= null && c.length > 0)
+                        if (c != null && c.length > 0)
 
-                        loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                    else {
-                        Log.e("cache_","No se encontro el objeto y se guarda");
+                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                        imageUrl = new URL(imageHttpAddress + img_previa);
-                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                        try {
-                            conn.connect();
-                            loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                            conn.disconnect();
+
+                        else {
+                            Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                            imageUrl = new URL(imageHttpAddress + img_previa);
+                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                            try {
+                                conn.connect();
+                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                conn.disconnect();
+                            } catch (FileNotFoundException e) {
+                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                            }
+                            boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                            if (result)
+                                Log.e("cache_0", "Saved object");
+                            else
+                                Log.e("cache_0", "Error saving object");
                         }
-                        catch (FileNotFoundException e)
-                        {
-                            loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                        }
-                        boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                        if(result)
-                            Log.e("cache_0","Saved object");
-                        else
-                            Log.e("cache_0","Error saving object");
+                    } catch (OutOfMemoryError e) {
+                        e.printStackTrace();
                     }
 
                     URL imageUrlM = null;
@@ -201,33 +205,38 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                //       loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
 //}
 
-                    byte[] c1 = m.getObject(activity,img_mini);
+                    try {
+                        FileCache m = new FileCache();
 
-                    if(c1!= null && c1.length > 0)
+                        byte[] c = m.getObject(activity, img_mini);
 
-                        loadedImage2 = BitmapFactory.decodeByteArray(c1, 0, c1.length);
-                    else {
-                        Log.e("cache_","No se encontro el objeto y se guarda");
+                        if (c != null && c.length > 0)
 
-                        imageUrl = new URL(imageHttpAddress + img_mini);
-                        HttpURLConnection connM = (HttpURLConnection) imageUrl.openConnection();
-                        try {
-                            connM.connect();
-                            loadedImage2 = BitmapFactory.decodeStream(connM.getInputStream());
-                            connM.disconnect();
+                            loadedImage2 = BitmapFactory.decodeByteArray(c, 0, c.length);
+
+
+                        else {
+                            Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                            imageUrl = new URL(imageHttpAddress + img_mini);
+                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                            try {
+                                conn.connect();
+                                loadedImage2 = BitmapFactory.decodeStream(conn.getInputStream());
+                                conn.disconnect();
+                            } catch (FileNotFoundException e) {
+                                loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                            }
+                            boolean result = m.saveObject(activity, loadedImage2, img_mini);
+
+                            if (result)
+                                Log.e("cache_0", "Saved object");
+                            else
+                                Log.e("cache_0", "Error saving object");
                         }
-                        catch (FileNotFoundException e)
-                        {
-                            loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                        }
-                        boolean result = m.saveObject(activity,loadedImage2,img_mini);
-
-                        if(result)
-                            Log.e("cache_0","Saved object");
-                        else
-                            Log.e("cache_0","Error saving object");
+                    } catch (OutOfMemoryError e) {
+                        e.printStackTrace();
                     }
-
                     datos.add(new Lista_Entrada(id, loadedImage,loadedImage2, titulo, texto, imagenes_slider,"",0,"","",""));
                     //Lista_Entrada( id,  img_previa,  titulo,  url,  textoDebajo,  ArrayList<String> imagenesSlide,String jsonStr, int idSiguiente,String tituloSig,String imagenSig, String textoSig ) {
                 }

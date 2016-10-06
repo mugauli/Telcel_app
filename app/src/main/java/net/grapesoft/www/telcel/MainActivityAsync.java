@@ -160,52 +160,54 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                         idP = elementos.getJSONObject(0).get("id").toString();
                         tituloP = elementos.getJSONObject(0).get("titulo").toString();
-                        if(tituloP.length() >= 20){
-                            tituloP = tituloP.substring(0,15) + "...";
+                        if (tituloP.length() >= 20) {
+                            tituloP = tituloP.substring(0, 15) + "...";
                         }
                         img_previaP = elementos.getJSONObject(0).get("img_previa").toString();
                         url_podcastP = elementos.getJSONObject(0).get("url_podcast").toString();
                         duracionP = elementos.getJSONObject(0).get("duracion").toString();
 
                         URL imageUrl = null;
-                      //  imageUrl = new URL(imageHttpAddress + img_previaP);
-                      //  HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                      //  try {
-                      //      conn.connect();
-                      //      loadedImageP = BitmapFactory.decodeStream(conn.getInputStream());
-                      //      conn.disconnect();
-                      //  } catch (FileNotFoundException e) {
-                      //      loadedImageP = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                      //  }
-                        FileCache m = new FileCache();
+                        //  imageUrl = new URL(imageHttpAddress + img_previaP);
+                        //  HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                        //  try {
+                        //      conn.connect();
+                        //      loadedImageP = BitmapFactory.decodeStream(conn.getInputStream());
+                        //      conn.disconnect();
+                        //  } catch (FileNotFoundException e) {
+                        //      loadedImageP = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                        //  }
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previaP);
+                            byte[] c = m.getObject(activity, img_previaP);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImageP = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImageP = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previaP);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImageP = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previaP);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImageP = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImageP = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImageP, img_previaP);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImageP = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImageP,img_previaP);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
-
                        // datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, url_podcast, duracion, R.drawable.play));
 
                     } else if (seccion.equals("promociones")) {
@@ -226,33 +228,37 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                     //  } catch (FileNotFoundException e) {
                     //      loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                     //  }
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
 
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, img_detalle, texto));
@@ -272,37 +278,38 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                   //  } catch (FileNotFoundException e) {
                   //      loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
                   //  }
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
-
-
-
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, url_pdf, "", R.drawable.descarga));
                     } else if (seccion.equals("SVA")) {
 
@@ -315,35 +322,38 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         String fecha = elementos.getJSONObject(0).get("fecha").toString();
 
                         URL imageUrl = null;
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
-
 
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, img_mini, img_detalle, texto, fecha));
                     } else if (seccion.equals("carso")) {
@@ -356,33 +366,37 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
 
                         URL imageUrl = null;
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
 
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha));
@@ -398,33 +412,37 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         String fecha = elementos.getJSONObject(0).get("fecha").toString();
 
                         URL imageUrl = null;
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
 
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha,tipo));
@@ -439,35 +457,38 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         String duracion = elementos.getJSONObject(0).get("duracion").toString();
 
                         URL imageUrl = null;
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
-
                         datos.add(new Lista_Entrada(seccion,id, loadedImage, titulo, url_video, duracion, responseArray));
                     } else if (seccion.equals("noticias")) {
                         String id = elementos.getJSONObject(0).get("id").toString();
@@ -482,33 +503,37 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         }
 
                         URL imageUrl = null;
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
 
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha));
@@ -523,35 +548,38 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         String fecha = elementos.getJSONObject(0).get("fecha").toString();
                         String tipo = elementos.getJSONObject(0).get("tipo").toString();
                         URL imageUrl = null;
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
-
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, imagen_detalle, texto, fecha, tipo));
                     } else if (seccion.equals("video")) {
 
@@ -565,33 +593,37 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
                         Log.e("Img_previa Home",img_previa);
 
                         URL imageUrl = null;
-                        FileCache m = new FileCache();
+                        try {
+                            FileCache m = new FileCache();
 
-                        byte[] c = m.getObject(activity,img_previa);
+                            byte[] c = m.getObject(activity, img_previa);
 
-                        if(c!= null && c.length > 0)
+                            if (c != null && c.length > 0)
 
-                            loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
-                        else {
-                            Log.e("cache_","No se encontro el objeto y se guarda");
+                                loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
 
-                            imageUrl = new URL(imageHttpAddress + img_previa);
-                            HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                            try {
-                                conn.connect();
-                                loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                                conn.disconnect();
+
+                            else {
+                                Log.e("cache_", "No se encontro el objeto y se guarda");
+
+                                imageUrl = new URL(imageHttpAddress + img_previa);
+                                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                                try {
+                                    conn.connect();
+                                    loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                                    conn.disconnect();
+                                } catch (FileNotFoundException e) {
+                                    loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                                }
+                                boolean result = m.saveObject(activity, loadedImage, img_previa);
+
+                                if (result)
+                                    Log.e("cache_0", "Saved object");
+                                else
+                                    Log.e("cache_0", "Error saving object");
                             }
-                            catch (FileNotFoundException e)
-                            {
-                                loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
-                            }
-                            boolean result = m.saveObject(activity,loadedImage,img_previa);
-
-                            if(result)
-                                Log.e("cache_0","Saved object");
-                            else
-                                Log.e("cache_0","Error saving object");
+                        } catch (OutOfMemoryError e) {
+                            e.printStackTrace();
                         }
 
                         datos.add(new Lista_Entrada(seccion, id, loadedImage, titulo, url_video, duracion, responseArray));

@@ -58,9 +58,12 @@ public class FragmentVideo extends Fragment {
         params.add("GetVideo.php");
         params.add(tokenCTE);
         params.add(region);
-
-        new FragmentVideoAsync(getActivity()).execute(params);
-
+        try {
+            new FragmentVideoAsync(getActivity()).execute(params);
+        } catch (Exception e) {
+            Log.e("abc","");
+            e.printStackTrace();
+        }
 
        LinearLayout videotodo = (LinearLayout)rootview.findViewById(R.id.videotodo);
 

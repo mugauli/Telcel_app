@@ -2,6 +2,7 @@ package net.grapesoft.www.telcel;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +33,12 @@ public class FragmentPodCast extends Fragment {
         params.add("GetPodcast.php");
         params.add(tokenCTE);
         params.add(region);
-
+        try{
         new FragmentPodCastAsync(getActivity()).execute(params);
-
+        } catch (Exception e) {
+            Log.e("abc","");
+            e.printStackTrace();
+        }
 
         return rootview;
     }

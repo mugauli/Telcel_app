@@ -3,6 +3,7 @@ package net.grapesoft.www.telcel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -43,9 +44,13 @@ public class FragmentCampana extends Fragment {
         params.add("GetCInternas.php");
         params.add(tokenCTE);
         params.add(region);
-
-        new FragmentCampanaAsync(getActivity()).execute(params);
-
+        try {
+            new FragmentCampanaAsync(getActivity()).execute(params);
+        }
+        catch (Exception e) {
+            Log.e("abc","");
+            e.printStackTrace();
+        }
         LinearLayout principal = (LinearLayout)rootview.findViewById(R.id.linearPrincipalCM);
 
         principal.setOnClickListener(new View.OnClickListener() {

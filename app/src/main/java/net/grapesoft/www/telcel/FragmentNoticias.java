@@ -8,6 +8,7 @@ package net.grapesoft.www.telcel;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,9 +43,14 @@ public class FragmentNoticias extends Fragment {
         params.add(tokenCTE);
         params.add(region);
 
-        new FragmentNoticiasAsync(getActivity()).execute(params);
+        try {
+            new FragmentNoticiasAsync(getActivity()).execute(params);
+        } catch (Exception e) {
+            Log.e("abc","");
+            e.printStackTrace();
+        }
 
-        LinearLayout principal = (LinearLayout)rootview.findViewById(R.id.linearPrincipalNT);
+        LinearLayout principal = (LinearLayout) rootview.findViewById(R.id.linearPrincipalNT);
 
         principal.setOnClickListener(new View.OnClickListener() {
 
@@ -53,15 +59,15 @@ public class FragmentNoticias extends Fragment {
 
                 Intent i = new Intent(getActivity(), activity_detalle_noticia.class);
 
-                Lista_Entrada Entrada = (Lista_Entrada)arg0.getTag();
-            if(Entrada != null) {
-                i.putExtra("imagen", Entrada.get_img_detalle());
-                i.putExtra("titulo", Entrada.get_titulo());
-                i.putExtra("fecha", Entrada.get_fecha());
-                i.putExtra("descripcion", Entrada.get_textoDebajo());
+                Lista_Entrada Entrada = (Lista_Entrada) arg0.getTag();
+                if (Entrada != null) {
+                    i.putExtra("imagen", Entrada.get_img_detalle());
+                    i.putExtra("titulo", Entrada.get_titulo());
+                    i.putExtra("fecha", Entrada.get_fecha());
+                    i.putExtra("descripcion", Entrada.get_textoDebajo());
 
-                startActivity(i);
-            }
+                    startActivity(i);
+                }
 
             }
         });
