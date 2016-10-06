@@ -38,6 +38,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utitilies.FileCache;
 import Utitilies.HorizontalListView;
 import Utitilies.List_adapted_Lanzamientos;
 import Utitilies.List_adapted_Noticias;
@@ -149,25 +150,83 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
                     }
 
                     URL imageUrl = null;
-                    imageUrl = new URL(imageHttpAddress + img_previa);
-                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                    try {
-                        conn.connect();
-                        loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                        conn.disconnect();
-                    } catch (FileNotFoundException e) {
-                        loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                 //   imageUrl = new URL(imageHttpAddress + img_previa);
+                 //   HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                 //   try {
+                 //       conn.connect();
+                 //       loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                 //       conn.disconnect();
+                 //   } catch (FileNotFoundException e) {
+                 //       loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                 //   }
+                    FileCache m = new FileCache();
+
+                    byte[] c = m.getObject(activity,img_previa);
+
+                    if(c!= null && c.length > 0)
+
+                        loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
+                    else {
+                        Log.e("cache_","No se encontro el objeto y se guarda");
+
+                        imageUrl = new URL(imageHttpAddress + img_previa);
+                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                        try {
+                            conn.connect();
+                            loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                            conn.disconnect();
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                        }
+                        boolean result = m.saveObject(activity,loadedImage,img_previa);
+
+                        if(result)
+                            Log.e("cache_0","Saved object");
+                        else
+                            Log.e("cache_0","Error saving object");
                     }
+
                     URL imageUrlM = null;
-                    imageUrlM = new URL(imageHttpAddress + img_mini);
-                    HttpURLConnection connM = (HttpURLConnection) imageUrlM.openConnection();
-                    try {
-                        connM.connect();
-                        loadedImage2 = BitmapFactory.decodeStream(connM.getInputStream());
-                        connM.disconnect();
-                    } catch (FileNotFoundException e) {
-                        loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+
+               //   imageUrlM = new URL(imageHttpAddress + img_mini);
+               //   HttpURLConnection connM = (HttpURLConnection) imageUrlM.openConnection();
+               //   try {
+               //       connM.connect();
+               //       loadedImage2 = BitmapFactory.decodeStream(connM.getInputStream());
+               //       connM.disconnect();
+               //   } catch (FileNotFoundException e) {
+               //       loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+//}
+
+                    byte[] c1 = m.getObject(activity,img_mini);
+
+                    if(c1!= null && c1.length > 0)
+
+                        loadedImage2 = BitmapFactory.decodeByteArray(c1, 0, c1.length);
+                    else {
+                        Log.e("cache_","No se encontro el objeto y se guarda");
+
+                        imageUrl = new URL(imageHttpAddress + img_mini);
+                        HttpURLConnection connM = (HttpURLConnection) imageUrl.openConnection();
+                        try {
+                            connM.connect();
+                            loadedImage2 = BitmapFactory.decodeStream(connM.getInputStream());
+                            connM.disconnect();
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            loadedImage2 = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                        }
+                        boolean result = m.saveObject(activity,loadedImage2,img_mini);
+
+                        if(result)
+                            Log.e("cache_0","Saved object");
+                        else
+                            Log.e("cache_0","Error saving object");
                     }
+
                     datos.add(new Lista_Entrada(id, loadedImage,loadedImage2, titulo, texto, imagenes_slider,"",0,"","",""));
                     //Lista_Entrada( id,  img_previa,  titulo,  url,  textoDebajo,  ArrayList<String> imagenesSlide,String jsonStr, int idSiguiente,String tituloSig,String imagenSig, String textoSig ) {
                 }
@@ -234,8 +293,16 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
 
                     TextView lanzamientosTitulo = (TextView) view.findViewById(R.id.lanzamientostitulo);
 
-                    if (lanzamientosTitulo != null)
-                        lanzamientosTitulo.setText(((Lista_Entrada) entrada).get_titulo());
+                    if (lanzamientosTitulo != null) {
+                        String title = ((Lista_Entrada) entrada).get_titulo();
+                        if(title.length()> 18) {
+                            lanzamientosTitulo.setTextSize(10);
+                        }
+                        if(title.length()> 33) {
+                            title = title.substring(0,33)+"...";
+                        }
+                        lanzamientosTitulo.setText(title);
+                    }
 
                     view.setTag(entrada);
 

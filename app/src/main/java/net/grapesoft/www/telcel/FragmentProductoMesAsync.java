@@ -39,6 +39,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utitilies.FileCache;
 import Utitilies.List_adapted_Producto_Mes;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
@@ -170,15 +171,45 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                         imagenes_slider.add(imagenes_slide.getJSONObject(i).get("url_img").toString());
                     }
                     URL imageUrl = null;
-                    imageUrl = new URL(imageHttpAddress + img_previa);
-                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                    try {
-                        conn.connect();
-                        loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
-                        conn.disconnect();
-                    } catch (FileNotFoundException e) {
-                        loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+
+                //   imageUrl = new URL(imageHttpAddress + img_previa);
+                //   HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                //   try {
+                //       conn.connect();
+                //       loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                //       conn.disconnect();
+                //   } catch (FileNotFoundException e) {
+                //       loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                //   }
+                    FileCache m = new FileCache();
+
+                    byte[] c = m.getObject(activity,img_previa);
+
+                    if(c!= null && c.length > 0)
+
+                        loadedImage = BitmapFactory.decodeByteArray(c, 0, c.length);
+                    else {
+                        Log.e("cache_","No se encontro el objeto y se guarda");
+
+                        imageUrl = new URL(imageHttpAddress + img_previa);
+                        HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                        try {
+                            conn.connect();
+                            loadedImage = BitmapFactory.decodeStream(conn.getInputStream());
+                            conn.disconnect();
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            loadedImage = BitmapFactory.decodeResource(activity.getResources(), R.drawable.noimage);
+                        }
+                        boolean result = m.saveObject(activity,loadedImage,img_previa);
+
+                        if(result)
+                            Log.e("cache_0","Saved object");
+                        else
+                            Log.e("cache_0","Error saving object");
                     }
+
                     Log.e("ADD MES--------------------->",mes);
                     datos.add(new Lista_Entrada(mes, id, loadedImage, titulo, img_mini, texto, imagenes_slider));
 
