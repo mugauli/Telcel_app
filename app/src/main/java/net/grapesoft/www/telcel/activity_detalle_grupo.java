@@ -71,8 +71,8 @@ public class activity_detalle_grupo extends AppCompatActivity
         String descripcion = getIntent().getStringExtra("descripcion") + urlc.toString();
 
 
-        Toast toast5 = Toast.makeText(this,urlc, Toast.LENGTH_SHORT);
-        toast5.show();
+        /*Toast toast5 = Toast.makeText(this,urlc, Toast.LENGTH_SHORT);
+        toast5.show();*/
 
         ImageView imagenUG = (ImageView) findViewById(R.id.imagenUG);
         TextView titUG = (TextView) findViewById(R.id.titUG);

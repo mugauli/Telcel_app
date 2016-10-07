@@ -58,8 +58,8 @@ public class activity_detalle_promociones extends AppCompatActivity
             breadcrumComunicado.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(activity_detalle_promociones.this, ComunicacionInternaActivity.class);
-                    i.putExtra("direccion","3");
+                    Intent i = new Intent(activity_detalle_promociones.this, PromocionesActivity.class);
+                    i.putExtra("direccion","0");
                     startActivity(i);
                 }
             });
