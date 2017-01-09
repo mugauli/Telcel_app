@@ -24,6 +24,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -45,13 +50,23 @@ public class LoginActivity extends Activity  {
     final Context context = this;
     AlertDialogManager alert = new AlertDialogManager();
     SessionManagement session;
-
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Analytics
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
+        mTracker.setScreenName("Login");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Set the log level to verbose.
+        GoogleAnalytics.getInstance(this).getLogger()
+                .setLogLevel(Logger.LogLevel.VERBOSE);
+        //
 
 
 

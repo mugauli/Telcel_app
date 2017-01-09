@@ -299,7 +299,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
                              imagenGrupo.setImageBitmap(Entrada.get_img_previa());
                              String MS = Entrada.get_mes();
                              if (MS.equals("actual"))
-                                 productoMes.setText("Este Mes");
+                                 productoMes.setText("Este mes");
                              else
                                  productoMes.setText(MS);
                              titGrupo.setText(Entrada.get_titulo());
@@ -361,7 +361,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
             TextView productoMes = (TextView) activity.findViewById(R.id.txtMesMain);
             if (productoMes != null)
-                productoMes.setText("Este Mes");
+                productoMes.setText("Este mes");
 
             ImageView imagen_producto_mes = (ImageView) activity.findViewById(R.id.imagenUNT);
             if (imagen_producto_mes != null) {

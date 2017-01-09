@@ -30,6 +30,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,12 +51,22 @@ public class preferencias extends AppCompatActivity
     int rb1=0,rb2=0;
     private ListView lista;
     String usuario = "0";
-
+    private Tracker mTracker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferencias);
+        //Analytics
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
+        mTracker.setScreenName("Cambiar intereses");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Set the log level to verbose.
+        GoogleAnalytics.getInstance(this).getLogger()
+                .setLogLevel(Logger.LogLevel.VERBOSE);
+        //
         tokenCTE = getText(R.string.tokenXM).toString();
 
         TextView txtGhost4 = (TextView) findViewById(R.id.TitleSeccion);

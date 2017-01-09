@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -311,6 +312,8 @@ public class activity_pregunta_respuesta_trivia extends AppCompatActivity
             }
 
             TextView preg = (TextView) findViewById(R.id.txtPreguntaTrivia);
+            preg.setMovementMethod(new ScrollingMovementMethod());
+
             if (preg != null) {
                 preg.setText("No se encontraron preguntas para esta trivia.");
             }

@@ -76,7 +76,8 @@
                         android:layout_weight="36"
                         android:layout_height="fill_parent"
                         android:scaleType="fitXY"
-                        android:id="@+id/imagenUNT" />
+                        android:id="@+id/imagenUNT"
+                        android:src="@drawable/pantallafaltaprod" />
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"

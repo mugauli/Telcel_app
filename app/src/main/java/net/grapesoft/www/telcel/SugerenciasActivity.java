@@ -19,6 +19,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -35,12 +40,24 @@ public class SugerenciasActivity extends AppCompatActivity
 
     SessionManagement session;
     public String tokenCTE = "";
-
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sugerencias);
+
+        //Analytics
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+
+        mTracker.setScreenName("Sugerencias");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Set the log level to verbose.
+        GoogleAnalytics.getInstance(this).getLogger()
+                .setLogLevel(Logger.LogLevel.VERBOSE);
+        //
         tokenCTE = getText(R.string.tokenXM).toString();
         session = new SessionManagement(getApplicationContext());
         final HashMap<String, String> user = session.getUserDetails();
@@ -82,7 +99,40 @@ public class SugerenciasActivity extends AppCompatActivity
 
         final DrawerLayout drawer;
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(user.get(SessionManagement.KEY_PD_ID) != null) {
 
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
+                }
+            });
+            ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+            imgButton2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(SugerenciasActivity.this, triviasActivity.class);
+                    startActivity(i);
+                }
+            });
+            toolbar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(SugerenciasActivity.this, MainActivity.class);
+                    i.putExtra("direccion","0");
+                    startActivity(i);
+                }
+            });
+
+        }else
+        {
+
+        }
 
         /*if (imgButton != null) {
             imgButton.setOnClickListener(new View.OnClickListener() {

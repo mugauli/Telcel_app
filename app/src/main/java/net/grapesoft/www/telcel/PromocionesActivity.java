@@ -17,20 +17,35 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
+
 import Utitilies.SessionManagement;
 
 public class PromocionesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
-
+    private Tracker mTracker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_promociones);
         session = new SessionManagement(getApplicationContext());
+        //Analytics
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
+        mTracker.setScreenName("Promociones");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Set the log level to verbose.
+        GoogleAnalytics.getInstance(this).getLogger()
+                .setLogLevel(Logger.LogLevel.VERBOSE);
+        //
         final int direccion = Integer.parseInt(getIntent().getStringExtra("direccion"));
         Log.e("direccion","" + direccion);
 

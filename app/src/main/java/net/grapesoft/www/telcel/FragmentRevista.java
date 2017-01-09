@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,13 +35,14 @@ public class FragmentRevista extends Fragment {
     private Bitmap loadedImage;
     private String imageHttpAddress = "";
     SessionManagement session;
-
+    private Tracker mTracker;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
         final View rootview = inflater.inflate(R.layout.tab_fragment_revista, container, false);
-
+        AnalyticsApplication app = (AnalyticsApplication) getActivity().getApplication();
+        mTracker = app.getDefaultTracker();
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
 
@@ -64,7 +68,13 @@ public class FragmentRevista extends Fragment {
         return rootview;
 
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        mTracker.setScreenName("Revista");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
+    }
 
 
 

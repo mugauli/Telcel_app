@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "255901054313",
+    "project_id": "firebase-telcel"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255901054313:android:b9c0e5973af5becb",
+        "android_client_info": {
+          "package_name": "net.grapesoft.www.telcel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgHj2MMFYa4iv_h-ffCDyY6VJfjCWASio"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-85655716-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

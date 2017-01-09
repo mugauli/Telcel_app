@@ -16,6 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,7 +29,7 @@ public class FragmentComunicados extends Fragment {
     private ListView lista;
     public String tokenCTE = "";
     SessionManagement session;
-
+    private Tracker mTracker;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.tab_fragment_comunicados, container, false);
@@ -37,7 +40,8 @@ public class FragmentComunicados extends Fragment {
         String imageHttpAddress = getText(R.string.URL_media).toString();
         session = new SessionManagement(getActivity());
 
-
+        AnalyticsApplication app = (AnalyticsApplication) getActivity().getApplication();
+        mTracker = app.getDefaultTracker();
         final HashMap<String, String> user = session.getUserDetails();
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
@@ -103,5 +107,11 @@ public class FragmentComunicados extends Fragment {
 
         return rootview;
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        mTracker.setScreenName("Comunicados");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
+    }
 }

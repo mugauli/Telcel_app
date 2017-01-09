@@ -25,6 +25,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
+
 import Utitilies.List_adapted;
 import Utitilies.Lista_Entrada;
 import Utitilies.SessionManagement;
@@ -37,12 +42,26 @@ public class ayuda  extends AppCompatActivity
 
     final Context context = this;
     SessionManagement session;
+    private Tracker mTracker;
     private ListView lista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayuda);
+        ///
+        //Analytics
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
+        mTracker.setScreenName("Ayuda");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Set the log level to verbose.
+        GoogleAnalytics.getInstance(this).getLogger()
+                .setLogLevel(Logger.LogLevel.VERBOSE);
+        //
+
+        ///
         session = new SessionManagement(getApplicationContext());
         final HashMap<String, String> user = session.getUserDetails();
 
@@ -127,15 +146,7 @@ public class ayuda  extends AppCompatActivity
         getSupportActionBar().setLogo(R.drawable.telcelnosune);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(ayuda.this, LoginActivity.class);
-                i.putExtra("direccion","0");
-                startActivity(i);
-            }
-        });
+
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
 
@@ -160,6 +171,15 @@ public class ayuda  extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(ayuda.this, triviasActivity.class);
+                    startActivity(i);
+                }
+            });
+            toolbar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(ayuda.this, MainActivity.class);
+                    i.putExtra("direccion","0");
                     startActivity(i);
                 }
             });
@@ -274,6 +294,18 @@ public class ayuda  extends AppCompatActivity
 
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
     }
 
 

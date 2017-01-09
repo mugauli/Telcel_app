@@ -22,6 +22,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,11 +39,12 @@ public class FragmentSitiosInteres extends Fragment {
     SessionManagement session;
     private ListView lista;
     Activity activity;
-
+    private Tracker mTracker;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.tab_fragment_sitios, container, false);
-
+        AnalyticsApplication app = (AnalyticsApplication) getActivity().getApplication();
+        mTracker = app.getDefaultTracker();
         tokenCTE = getText(R.string.tokenXM).toString();
 
         session = new SessionManagement(getActivity());
@@ -151,5 +155,12 @@ public class FragmentSitiosInteres extends Fragment {
 
 
         return rootview;
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        mTracker.setScreenName("Sitios de interes");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
     }
 }

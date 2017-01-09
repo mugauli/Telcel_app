@@ -25,6 +25,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -47,7 +52,7 @@ public class activity_detalle_video extends AppCompatActivity
     private Bitmap loadedImage;
     Boolean siguiente = false,primero = true;
     String tokenCTE = "";
-
+    private Tracker mTracker;
     // Insert your Video URL
     String VideoURL = "";
     String s_id = "";
@@ -61,7 +66,17 @@ public class activity_detalle_video extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_video);
+        //Analytics
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
+        mTracker.setScreenName("Videos - detalle");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Set the log level to verbose.
+        GoogleAnalytics.getInstance(this).getLogger()
+                .setLogLevel(Logger.LogLevel.VERBOSE);
+        //
         TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
         if(breadcrumComunicado != null) {
             breadcrumComunicado.setText("   COMUNICACIÓN INTERNA > VIDEO");

@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,11 +27,12 @@ public class FragmentDescuentos extends Fragment {
     String styledText = "This is <font color='red'>simple</font>.";
     public String tokenCTE = "";
     SessionManagement session;
-
+    private Tracker mTracker;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.tab_fragment_descuentos, container, false);
-
+        AnalyticsApplication app = (AnalyticsApplication) getActivity().getApplication();
+        mTracker = app.getDefaultTracker();
         tokenCTE = getText(R.string.tokenXM).toString();
         ArrayList<String> params = new ArrayList<String>();
 
@@ -69,5 +73,12 @@ public class FragmentDescuentos extends Fragment {
     //       }
     //   });
         return rootview;
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        mTracker.setScreenName("Descuentos");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
     }
 }

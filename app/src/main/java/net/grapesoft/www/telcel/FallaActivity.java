@@ -27,6 +27,11 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -40,6 +45,7 @@ public class FallaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManagement session;
+    private Tracker mTracker;
     public String tokenCTE = "";
     RadioButton rb1,rb2,rb3,rb4,rb5;
 
@@ -49,8 +55,19 @@ public class FallaActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_falla);
+        //Analytics
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
+        mTracker.setScreenName("Reportar fallas");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Set the log level to verbose.
+        GoogleAnalytics.getInstance(this).getLogger()
+                .setLogLevel(Logger.LogLevel.VERBOSE);
+        //
         session = new SessionManagement(getApplicationContext());
+        final HashMap<String, String> user = session.getUserDetails();
 
         TextView txtGhost = (TextView) findViewById(R.id.textView_desc1);
         TextView txtGhost2 = (TextView) findViewById(R.id.textView_desc2);
@@ -293,6 +310,40 @@ public class FallaActivity extends AppCompatActivity
 
         ImageButton imgButton = (ImageButton) findViewById(R.id.btnMenu);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(user.get(SessionManagement.KEY_PD_ID) != null) {
+
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawer.isDrawerOpen(GravityCompat.START)) {
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else {
+                        drawer.openDrawer(GravityCompat.START);
+                    }
+                }
+            });
+            ImageButton imgButton2 = (ImageButton) findViewById(R.id.btnTrivia);
+            imgButton2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(FallaActivity.this, triviasActivity.class);
+                    startActivity(i);
+                }
+            });
+            toolbar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Toast.makeText(MainActivity.this,"Toolbar title clicked",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(FallaActivity.this, MainActivity.class);
+                    i.putExtra("direccion","0");
+                    startActivity(i);
+                }
+            });
+
+        }else
+        {
+
+        }
 
        /* if (imgButton != null) {
             imgButton.setOnClickListener(new View.OnClickListener() {

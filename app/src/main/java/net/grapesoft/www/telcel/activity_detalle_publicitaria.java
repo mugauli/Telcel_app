@@ -26,6 +26,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -57,12 +62,22 @@ public class activity_detalle_publicitaria extends AppCompatActivity
     String s_url_video = "";
     String s_duracion = "";
     String result11 = "";
-
+    private Tracker mTracker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicitaria_view);
+        //Analytics
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
+        mTracker.setScreenName("Campaña publicitaria - video");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // Set the log level to verbose.
+        GoogleAnalytics.getInstance(this).getLogger()
+                .setLogLevel(Logger.LogLevel.VERBOSE);
+        //
         session = new SessionManagement(getApplicationContext());
 
         TextView breadcrumComunicado = (TextView) findViewById(R.id.breadcrumComunicado);
@@ -78,7 +93,7 @@ public class activity_detalle_publicitaria extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(activity_detalle_publicitaria.this, ProductosActivity.class);
-                    i.putExtra("direccion","3");
+                    i.putExtra("direccion","2");
                     startActivity(i);
                 }
             });
