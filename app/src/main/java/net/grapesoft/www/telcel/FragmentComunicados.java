@@ -46,7 +46,7 @@ public class FragmentComunicados extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetRelease.php");
+        params.add("GetRelease");
         params.add(tokenCTE);
         params.add(region);
         try {

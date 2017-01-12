@@ -173,7 +173,7 @@ public class recuperar extends AppCompatActivity
                             final HashMap<String, String> user = session.getUserDetails();
                             String idUsuario = user.get(SessionManagement.KEY_PD_ID);
                             params.add("5");
-                            params.add("RecoveryPassword.php");
+                            params.add("RecoveryPassword");
                             params.add(tokenCTE);
                             params.add(idUsuario);
 

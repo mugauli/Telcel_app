@@ -46,7 +46,7 @@ public class FragmentGrupo extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetCarso.php");
+        params.add("GetCarso");
         params.add(tokenCTE);
         params.add(region);
         try {
@@ -73,13 +73,8 @@ public class FragmentGrupo extends Fragment {
                 i.putExtra("descripcion",Entrada.get_textoDebajo());
                 i.putExtra("url",Entrada.get_tipo());
                 startActivity(i);
-
-
             }
         });
-
-
-
 
         return rootview;
     }

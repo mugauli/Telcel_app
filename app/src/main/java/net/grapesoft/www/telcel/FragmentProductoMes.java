@@ -43,7 +43,7 @@ public class FragmentProductoMes extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetProduct.php");
+        params.add("GetProduct");
         params.add(tokenCTE);
         params.add(region);
 

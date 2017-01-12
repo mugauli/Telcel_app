@@ -314,7 +314,7 @@ public class LoginActivity extends Activity  {
 
                             //-- PARAMETROS PETICION LOGIN-----//
                             params.add("1");
-                            params.add("GetLogin.php");
+                            params.add("GetLogin");
                             params.add(dato);
                             params.add(password);
                             params.add(tokenCTE);
@@ -323,7 +323,13 @@ public class LoginActivity extends Activity  {
 
                             //{"id":"5","num_empleado":"ANDROID","num_celular":"ANDROID","region":"1","nombre":"ANDROID","paterno":"ANDROID","materno":"ANDROID","interes_1":null,"interes_2":null}
 
-                            if(!response.getJSONObject(0).has("error")) {
+                            if(response == null)
+                            {
+                                txtErrorPass.setText("Ha ocurrido un error en la comunicación con el servidor.");
+                                txtpass.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+                            }
+                            else if(!response.getJSONObject(0).has("error")) {
 
                                 String id = response.getJSONObject(0).get("id").toString();
                                 String num_empleado = response.getJSONObject(0).get("num_empleado").toString();

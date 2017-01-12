@@ -35,7 +35,7 @@ public class FragmentPodCast extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetPodcast.php");
+        params.add("GetPodcast");
         params.add(tokenCTE);
         params.add(region);
         try{

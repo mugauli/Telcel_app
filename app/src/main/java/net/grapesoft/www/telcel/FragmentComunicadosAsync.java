@@ -31,6 +31,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -38,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +68,7 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
     JSONArray responseArray;
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
-    public String IP = "",tokenCTE = "";
+    public String IP = "",tokenCTE = "", NAMESPACE = "",SOAP_ACTIONCTE = "";
     public boolean primer = true,primer2 = true;
     SessionManagement session;
 
@@ -71,6 +77,8 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
         tokenCTE = activity.getString(R.string.tokenXM);
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
         this.activity = activity;
+        NAMESPACE = activity.getText(R.string.NAMESPACE).toString();
+        SOAP_ACTIONCTE = activity.getText(R.string.SOAP_ACTION).toString();
     }
 
     @Override
@@ -87,27 +95,65 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
             if(comunicadosDetails == null || comunicadosDetails == "") {
 
-                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-                HttpClient httpclient = new DefaultHttpClient();
+                //------------SOAP
 
-                HttpPost httppost = new HttpPost(IP + params[0].get(1));
-                nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
-                nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+                String SOAP_ACTION = SOAP_ACTIONCTE + params[0].get(1);
 
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
-                StringBuilder sb = new StringBuilder();
-                sb.append(reader.readLine() + "\n");
-                String line = "0";
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                reader.close();
-                result11 = sb.toString();
+                // Modelo el request
 
+                SoapObject request = new SoapObject(NAMESPACE, params[0].get(1));
+
+                SoapObject datosG = new SoapObject();
+
+                datosG.addProperty("token", params[0].get(2));
+                datosG.addProperty("reg", params[0].get(3));
+
+                request.addProperty("datos_generales_entrada", datosG);
+
+                // Modelo el Sobre
+                SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                sobre.dotNet = false;
+                sobre.implicitTypes = true;
+                sobre.setAddAdornments(false);
+                sobre.encodingStyle = SoapSerializationEnvelope.XSD;
+                sobre.setOutputSoapObject(request);
+
+                // Modelo el transporte
+                HttpTransportSE transporte = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
+                transporte.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                transporte.debug = true;
+
+                // Llamada
+                transporte.call(SOAP_ACTION, sobre);
+
+                // Resultado
+                SoapObject resultado = (SoapObject) sobre.getResponse();
+                result11 = resultado.getPropertyAsString("return");
+
+                //-----SOAP
+                //-------REST
+                //List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+                //HttpClient httpclient = new DefaultHttpClient();
+//
+                //HttpPost httppost = new HttpPost(IP + params[0].get(1));
+                //nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
+                //nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
+                //httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+//
+                //// Execute HTTP Post Request
+                //HttpResponse response = httpclient.execute(httppost);
+//
+                //BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+                //StringBuilder sb = new StringBuilder();
+                //sb.append(reader.readLine() + "\n");
+                //String line = "0";
+                //while ((line = reader.readLine()) != null) {
+                //    sb.append(line + "\n");
+                //}
+                //reader.close();
+                //result11 = sb.toString();
+//
                 session.createComunicadosSession(result11);
             }
             else
@@ -220,6 +266,8 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
             e.printStackTrace();
         } catch (IOException e) {
             Log.e("Error async 3 Comunicados", e.getMessage());
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
 

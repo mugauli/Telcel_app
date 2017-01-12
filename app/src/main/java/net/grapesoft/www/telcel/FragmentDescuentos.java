@@ -44,7 +44,7 @@ public class FragmentDescuentos extends Fragment {
         String idUsuario = user.get(SessionManagement.KEY_PD_ID);
 
         params.add("8");
-        params.add("GetDiscount.php");
+        params.add("GetDiscount");
         params.add(tokenCTE);
         params.add(idUsuario);
         params.add(region);

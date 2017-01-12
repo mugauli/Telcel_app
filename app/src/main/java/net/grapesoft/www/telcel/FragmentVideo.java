@@ -59,7 +59,7 @@ public class FragmentVideo extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetVideo.php");
+        params.add("GetVideo");
         params.add(tokenCTE);
         params.add(region);
         try {

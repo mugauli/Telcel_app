@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetHome.php");
+        params.add("GetHome");
         params.add(tokenCTE);
         params.add(region);
 

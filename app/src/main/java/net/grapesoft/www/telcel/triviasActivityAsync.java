@@ -27,6 +27,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -34,6 +39,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +59,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
     JSONArray responseArray,responseArray2;
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
-    public String IP = "",tokenCTE = "",preguntaPreg="",jsonPreguntas="";
+    public String IP = "",tokenCTE = "",preguntaPreg="",jsonPreguntas="", NAMESPACE = "",SOAP_ACTIONCTE = "";
     public boolean primer3 = true,PregBool = true;
     SessionManagement session;
 
@@ -61,6 +67,8 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
         IP = activity.getString(R.string.URL);
         tokenCTE = activity.getString(R.string.tokenXM);
         this.activity = activity;
+        NAMESPACE = activity.getText(R.string.NAMESPACE).toString();
+        SOAP_ACTIONCTE = activity.getText(R.string.SOAP_ACTION).toString();
     }
 
     @Override
@@ -80,27 +88,66 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                 Log.e("Se obtiene Pregunta","Procesando...");
 
-                List<NameValuePair> nameValuePair2 = new ArrayList<NameValuePair>(2);
-                HttpClient httpclient2 = new DefaultHttpClient();
+                //----SOAP
 
-                HttpPost httppost2 = new HttpPost(IP + params[0].get(1));
-                nameValuePair2.add(new BasicNameValuePair("token", params[0].get(2)));
-                nameValuePair2.add(new BasicNameValuePair("reg", params[0].get(3)));
+                String SOAP_ACTION = SOAP_ACTIONCTE + params[0].get(1);
 
-                httppost2.setEntity(new UrlEncodedFormEntity(nameValuePair2));
-                Log.e("IP", IP + params[0].get(1));
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient2.execute(httppost2);
+                // Modelo el request
 
-                BufferedReader reader2 = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
-                StringBuilder sb2 = new StringBuilder();
-                sb2.append(reader2.readLine() + "\n");
-                String line = "0";
-                while ((line = reader2.readLine()) != null) {
-                    sb2.append(line + "\n");
-                }
-                reader2.close();
-                result2 = sb2.toString();
+                SoapObject request = new SoapObject(NAMESPACE, params[0].get(1));
+
+                SoapObject datosG = new SoapObject();
+
+                datosG.addProperty("token", params[0].get(2));
+                datosG.addProperty("reg", params[0].get(3));
+
+
+                request.addProperty("datos_generales_entrada", datosG);
+
+                // Modelo el Sobre
+                SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                sobre.dotNet = false;
+                sobre.implicitTypes = true;
+                sobre.setAddAdornments(false);
+                sobre.encodingStyle = SoapSerializationEnvelope.XSD;
+                sobre.setOutputSoapObject(request);
+
+                // Modelo el transporte
+                HttpTransportSE transporte = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
+                transporte.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                transporte.debug = true;
+
+                // Llamada
+                transporte.call(SOAP_ACTION, sobre);
+
+                // Resultado
+                SoapObject resultado = (SoapObject) sobre.getResponse();
+                result11 = resultado.getPropertyAsString("return");
+
+                //--SOAP
+
+
+                //List<NameValuePair> nameValuePair2 = new ArrayList<NameValuePair>(2);
+                //HttpClient httpclient2 = new DefaultHttpClient();
+
+                //HttpPost httppost2 = new HttpPost(IP + params[0].get(1));
+                //nameValuePair2.add(new BasicNameValuePair("token", params[0].get(2)));
+                //nameValuePair2.add(new BasicNameValuePair("reg", params[0].get(3)));
+
+                //httppost2.setEntity(new UrlEncodedFormEntity(nameValuePair2));
+                //Log.e("IP", IP + params[0].get(1));
+                //// Execute HTTP Post Request
+                //HttpResponse response = httpclient2.execute(httppost2);
+
+                //BufferedReader reader2 = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+                //StringBuilder sb2 = new StringBuilder();
+                //sb2.append(reader2.readLine() + "\n");
+                //String line = "0";
+                //while ((line = reader2.readLine()) != null) {
+                //    sb2.append(line + "\n");
+                //}
+                //reader2.close();
+                //result2 = sb2.toString();
 
 
                 session.createPreguntaSession(result2);
@@ -153,31 +200,69 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                 Log.e("Se obtiene Trivias","Procesando...");
 
-                List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-                HttpClient httpclient = new DefaultHttpClient();
+                //----SOAP
 
-                HttpPost httppost = new HttpPost(IP + params[0].get(0));
+                String SOAP_ACTION = SOAP_ACTIONCTE + params[0].get(1);
 
-                nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
-                nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
-                nameValuePair.add(new BasicNameValuePair("idUsuario", params[0].get(4)));
+                // Modelo el request
 
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+                SoapObject request = new SoapObject(NAMESPACE, params[0].get(0));
 
-                Log.e("IP", IP + params[0].get(0));
+                SoapObject datosG = new SoapObject();
 
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
-                StringBuilder sb = new StringBuilder();
-                sb.append(reader.readLine() + "\n");
-                String line = "0";
+                datosG.addProperty("token", params[0].get(2));
+                datosG.addProperty("reg", params[0].get(3));
 
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                reader.close();
-                result11 = sb.toString();
+
+                request.addProperty("datos_generales_entrada", datosG);
+
+                // Modelo el Sobre
+                SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                sobre.dotNet = false;
+                sobre.implicitTypes = true;
+                sobre.setAddAdornments(false);
+                sobre.encodingStyle = SoapSerializationEnvelope.XSD;
+                sobre.setOutputSoapObject(request);
+
+                // Modelo el transporte
+                HttpTransportSE transporte = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
+                transporte.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                transporte.debug = true;
+
+                // Llamada
+                transporte.call(SOAP_ACTION, sobre);
+
+                // Resultado
+                SoapObject resultado = (SoapObject) sobre.getResponse();
+                result11 = resultado.getPropertyAsString("return");
+
+                //--SOAP
+
+                //List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+                //HttpClient httpclient = new DefaultHttpClient();
+
+                //HttpPost httppost = new HttpPost(IP + params[0].get(0));
+
+                //nameValuePair.add(new BasicNameValuePair("token", params[0].get(2)));
+                //nameValuePair.add(new BasicNameValuePair("reg", params[0].get(3)));
+                //nameValuePair.add(new BasicNameValuePair("idUsuario", params[0].get(4)));
+
+                //httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
+
+                //Log.e("IP", IP + params[0].get(0));
+
+                //// Execute HTTP Post Request
+                //HttpResponse response = httpclient.execute(httppost);
+                //BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
+                //StringBuilder sb = new StringBuilder();
+                //sb.append(reader.readLine() + "\n");
+                //String line = "0";
+
+                //while ((line = reader.readLine()) != null) {
+                //    sb.append(line + "\n");
+                //}
+                //reader.close();
+                //result11 = sb.toString();
 
                // result11= "[{\"id\":\"1\",\"texto\":\"\",\"tipo\":\"C\",\"titulo\":\"Cruz Azul vs. Pumas\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\"},{\"id\":\"2\",\"texto\":\"\",\"tipo\":\"T\",\"titulo\":\"Trivia de prueba\",\"duracion\":\"1\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/videos\\/video-Retroalimentacion.png\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 1\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 1\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 1\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 2\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 2\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 2\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 3\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 3\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 3\",\"valRespuesta\":\"0\"}]}]}]\n";
 //result11 = "[{\"id\":\"2\",\"tipo\":\"T\",\"texto\":\"<p>Telcel te invita al partido<\\/p>\",\"titulo\":\"Pumas vs. Leon\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/pumas-leon-preview.png\",\"duracion\":\"1\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"?En QUE periodo Francisco Palencia jugo con los Pumas? \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"2004 al 2010\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"2005 al 2009\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"2007 al 2011 \",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"?En que anio fue fundado el Club Leon?\",\"respuestas\":[{\"idResp\":\"4\",\"txtRespuesta\":\"1942 \",\"valRespuesta\":\"1\"},{\"idResp\":\"5\",\"txtRespuesta\":\"1944\",\"valRespuesta\":\"0\"},{\"idResp\":\"6\",\"txtRespuesta\":\"1952\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"?Que marca de celulares patrocina al Club Universidad Nacional? \",\"respuestas\":[{\"idResp\":\"7\",\"txtRespuesta\":\"Huawei\",\"valRespuesta\":\"1\"},{\"idResp\":\"8\",\"txtRespuesta\":\"Samsung\",\"valRespuesta\":\"0\"},{\"idResp\":\"9\",\"txtRespuesta\":\"ZTE\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"4\",\"txtPregunta\":\"?Como se llama la ultima plataforma digital de aprendizaje que lanzo la Fundacion Carlos Slim?\",\"respuestas\":[{\"idResp\":\"10\",\"txtRespuesta\":\"Capacitate para el empleo\",\"valRespuesta\":\"0\"},{\"idResp\":\"11\",\"txtRespuesta\":\"Aprende.org\",\"valRespuesta\":\"1\"},{\"idResp\":\"12\",\"txtRespuesta\":\"ClikiSalud\",\"valRespuesta\":\"0\"}]}]}]";
@@ -254,6 +339,8 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
             e.printStackTrace();
         } catch (IOException e) {
             Log.e("Error IOException Noticia", e.getMessage());
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
 

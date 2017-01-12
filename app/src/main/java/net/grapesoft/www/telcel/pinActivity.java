@@ -196,7 +196,7 @@ public class pinActivity extends AppCompatActivity
 
 
                             params.add("7");
-                            params.add("ChangePassword.php");
+                            params.add("ChangePassword");
                             params.add(tokenCTE);
                             params.add(reg);
                             params.add(idUsuario);

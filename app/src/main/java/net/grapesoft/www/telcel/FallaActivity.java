@@ -233,7 +233,7 @@ public class FallaActivity extends AppCompatActivity
 
                               //-- PARAMETROS PETICION -----//
                               params.add("3");
-                              params.add("GetComment.php");
+                              params.add("GetComment");
                               params.add(tokenCTE);
                               params.add(idUsuario);
                               params.add("R");

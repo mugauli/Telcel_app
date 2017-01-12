@@ -53,7 +53,7 @@ public class FragmentRevista extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetMagazine.php");
+        params.add("GetMagazine");
         params.add(tokenCTE);
         params.add(region);
 

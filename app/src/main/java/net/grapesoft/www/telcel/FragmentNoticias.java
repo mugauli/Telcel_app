@@ -43,7 +43,7 @@ public class FragmentNoticias extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetNews.php");
+        params.add("GetNews");
         params.add(tokenCTE);
         params.add(region);
 

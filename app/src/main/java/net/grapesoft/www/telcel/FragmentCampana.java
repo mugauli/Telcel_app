@@ -48,7 +48,7 @@ public class FragmentCampana extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetCInternas.php");
+        params.add("GetCInternas");
         params.add(tokenCTE);
         params.add(region);
         try {

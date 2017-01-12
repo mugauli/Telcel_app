@@ -40,7 +40,7 @@ public class FragmentPromociones extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetPromo.php");
+        params.add("GetPromo");
         params.add(tokenCTE);
         params.add(region);
 

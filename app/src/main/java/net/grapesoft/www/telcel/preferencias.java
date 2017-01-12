@@ -345,7 +345,7 @@ public class preferencias extends AppCompatActivity
 
                             //-- PARAMETROS PETICION LOGIN-----//
                             params.add("10");
-                            params.add("ChangeInterests.php");
+                            params.add("ChangeInterests");
                             params.add(tokenCTE);
                             params.add(usuario);
                             params.add(rb1 + "");

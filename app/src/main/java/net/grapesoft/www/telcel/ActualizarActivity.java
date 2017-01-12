@@ -257,7 +257,7 @@ public class ActualizarActivity extends AppCompatActivity
                         }
 
                         params.add("2");
-                        params.add("ChangeData.php");
+                        params.add("ChangeData");
                         params.add(tokenCTE);
                         params.add(idUsuario);
                         params.add(num_Celular);

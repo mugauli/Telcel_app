@@ -15,8 +15,12 @@
 
     <!--Configuracion WS-->
 
-    <string name="URL">http://webox.com.mx/telcel/WServices/</string>
+    <string name="URL">http://servicios-ie.telcel.com/TelcelNosUne/WServices/mi_ws1.php</string>
     <string name="tokenXM">67d6b32e8d96b8542feda3df334c04f5</string>
+    <string name="NAMESPACE">urn:mi_ws1</string>
+    <string name="SOAP_ACTION">urn:mi_ws1#</string>
+
+
 
     <!--Actualiza Trabajador-->
     <string name="asignado">Female</string>

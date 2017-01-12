@@ -242,8 +242,8 @@ public class triviasActivity extends SwipeBackActivity
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
 
-        params.add("GetTrivia.php");
-        params.add("GetQuestion.php");
+        params.add("GetTrivia");
+        params.add("GetQuestion");
         params.add(tokenCTE);
         params.add(region);
         params.add(user.get(SessionManagement.KEY_PD_ID));

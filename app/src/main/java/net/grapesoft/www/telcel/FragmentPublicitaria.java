@@ -57,7 +57,7 @@ public class FragmentPublicitaria extends Fragment {
         String region = user.get(SessionManagement.KEY_PD_REGION);
 
         params.add("6");
-        params.add("GetCPublicitarias.php");
+        params.add("GetCPublicitarias");
         params.add(tokenCTE);
         params.add(region);
 
