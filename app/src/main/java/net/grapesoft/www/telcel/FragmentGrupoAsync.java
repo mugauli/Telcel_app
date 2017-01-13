@@ -88,7 +88,7 @@ public class FragmentGrupoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
             String grupo_carso= session.getGrupoCarsoDetails();
 
-            if(grupo_carso == null || grupo_carso == "") {
+            if(grupo_carso == null || grupo_carso == "" || grupo_carso.contains("error")) {
 
                 Log.e("Se obtiene GRUPO","Procesando...");
 

@@ -84,7 +84,7 @@ public class FragmentPodCastAsync extends AsyncTask<ArrayList<String>, Integer, 
 
             String podcast = session.getPodcastDetails();
 
-            if(podcast == null || podcast == "") {
+            if(podcast == null || podcast == "" || podcast.contains("error")) {
 
                 //----SOAP
 

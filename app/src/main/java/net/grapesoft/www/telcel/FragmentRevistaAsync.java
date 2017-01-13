@@ -96,7 +96,7 @@ public class FragmentRevistaAsync extends AsyncTask<ArrayList<String>, Integer, 
 
             String revista = session.getRevistaDetails();
 
-            if(revista == null || revista == "") {
+            if(revista == null || revista == "" || revista.contains("error")) {
 
                 //----SOAP
 

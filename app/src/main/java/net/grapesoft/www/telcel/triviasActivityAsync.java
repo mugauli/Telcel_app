@@ -84,7 +84,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
             //Pregunta del dia
             String preguntaDiaDetails = session.getPreguntaDetails();
 
-            if(preguntaDiaDetails == null || preguntaDiaDetails == "") {
+            if(preguntaDiaDetails == null || preguntaDiaDetails == "" || preguntaDiaDetails.contains("error")) {
 
                 Log.e("Se obtiene Pregunta","Procesando...");
 
@@ -196,7 +196,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
             String triviasDetails = session.getTriviasDetails();
 
-            if(triviasDetails == null || triviasDetails == "") {
+            if(triviasDetails == null || triviasDetails == "" || triviasDetails.contains("error")) {
 
                 Log.e("Se obtiene Trivias","Procesando...");
 

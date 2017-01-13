@@ -88,7 +88,7 @@ public class FragmentVideoAsync extends AsyncTask<ArrayList<String>, Integer, Li
 
             String video = session.getVideoDetails();
 
-            if(video == null || video == "") {
+            if(video == null || video == "" || video.contains("error")) {
 
                 Log.e("Se obtiene VIDEO","Procesando...");
 

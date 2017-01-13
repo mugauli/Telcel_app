@@ -84,7 +84,7 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
 
             String noticias = session.getNoticiasDetails();
 
-            if(noticias == null || noticias == "") {
+            if(noticias == null || noticias == "" || noticias.contains("error")) {
 
                 Log.e("Se obtiene NOTICIAS","Procesando...");
 

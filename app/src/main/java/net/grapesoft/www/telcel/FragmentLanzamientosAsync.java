@@ -87,7 +87,7 @@ public class FragmentLanzamientosAsync extends AsyncTask<ArrayList<String>, Inte
 
             String lanzamientosProductosDetails = session.getLanzamientosProductosDetails();
 
-            if (lanzamientosProductosDetails == null || lanzamientosProductosDetails == "") {
+            if (lanzamientosProductosDetails == null || lanzamientosProductosDetails == "" || lanzamientosProductosDetails.contains("error")) {
 
                 Log.e("Se obtiene LANZAMIENTOS", "Procesando...");
 

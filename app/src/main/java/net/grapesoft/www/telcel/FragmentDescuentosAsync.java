@@ -100,7 +100,7 @@
 
                 String descuentosDetails = session.getDescuentosDetails();
 
-                if(descuentosDetails == null || descuentosDetails == "") {
+                if(descuentosDetails == null || descuentosDetails == "" || descuentosDetails.contains("error")) {
 
                     Log.e("Se obtiene DESCUENTOS","Procesando...");
 
@@ -136,12 +136,12 @@
 
                     // Llamada
                     transporte.call(SOAP_ACTION, sobre);
-                    Log.i("Respuesta", sobre.bodyIn.toString());
+                    Log.e("Respuesta", sobre.bodyIn.toString());
                     if(sobre.bodyIn.toString().contains("fault"))
                     {
                         // Llamada
                         transporte.call(SOAP_ACTION, sobre);
-                        Log.i("Intento", "segundo");
+                        Log.e("Intento", "segundo");
                     }
                     // Resultado
                     SoapObject resultado = (SoapObject) sobre.getResponse();

@@ -334,8 +334,8 @@ public class LoginActivity extends Activity  {
                                 String id = response.getJSONObject(0).get("id").toString();
                                 String num_empleado = response.getJSONObject(0).get("num_empleado").toString();
                                 String num_celular = response.getJSONObject(0).get("num_celular").toString();
-                                String region = "9";
-                                //String region = response.getJSONObject(0).get("region").toString();
+
+                                String region = response.getJSONObject(0).get("region").toString();
                                 String nombre = response.getJSONObject(0).get("nombre").toString();
                                 String paterno = response.getJSONObject(0).get("paterno").toString();
                                 String materno = response.getJSONObject(0).get("materno").toString();

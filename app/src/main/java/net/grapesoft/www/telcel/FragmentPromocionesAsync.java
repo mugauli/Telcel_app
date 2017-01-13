@@ -84,7 +84,7 @@ public class FragmentPromocionesAsync extends AsyncTask<ArrayList<String>, Integ
 
             String promos = session.getPromosDetails();
 
-            if(promos == null || promos == "") {
+            if(promos == null || promos == "" || promos.contains("error")) {
 
                 Log.e("Se obtiene PROMOS","Procesando...");
 

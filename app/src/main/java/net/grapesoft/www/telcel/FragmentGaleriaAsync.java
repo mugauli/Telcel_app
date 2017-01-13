@@ -91,7 +91,7 @@ public class FragmentGaleriaAsync   extends AsyncTask<ArrayList<String>, Integer
 
             String galeriaDetails = session.getGaleriaDetails();
 
-            if(galeriaDetails == null || galeriaDetails == "") {
+            if(galeriaDetails == null || galeriaDetails == "" || galeriaDetails.contains("error")) {
 
                 //------SOAP
 

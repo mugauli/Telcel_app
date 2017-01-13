@@ -90,7 +90,7 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
 
             String video = session.getSVAProductosDetails();
 
-            if(video == null || video == "") {
+            if(video == null || video == "" || video.contains("error")) {
 
                 Log.e("Se obtiene SVA","Procesando...");
 

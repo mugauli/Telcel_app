@@ -86,7 +86,7 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
             String campanaProductosDetails = session.getCampanaProductosDetails();
 
-            if(campanaProductosDetails == null || campanaProductosDetails == "") {
+            if(campanaProductosDetails == null || campanaProductosDetails == "" || campanaProductosDetails.contains("error")) {
 
                 Log.e("Se obtiene VIDEO Campana publicitaria","Procesando...");
 

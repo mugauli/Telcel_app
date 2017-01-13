@@ -93,7 +93,7 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
             String noticias = session.getMesProductosDetails();
 
-            if(noticias == null || noticias == "") {
+            if(noticias == null || noticias == "" || noticias.contains("error")) {
 
                 Log.e("Se obtiene Producto del mes","Procesando...");
 
