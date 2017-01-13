@@ -78,7 +78,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
         imageHttpAddress = activity.getText(R.string.URL_media).toString();
 
         session = new SessionManagement(activity.getApplicationContext());
-        String result11 = "", result2 = "";
+        String result2 = "", result11T= "";
         try {
 
             //Pregunta del dia
@@ -122,7 +122,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                 // Resultado
                 SoapObject resultado = (SoapObject) sobre.getResponse();
-                result11 = resultado.getPropertyAsString("return");
+                result2 = resultado.getPropertyAsString("return");
 
                 //--SOAP
 
@@ -198,49 +198,50 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
             if(triviasDetails == null || triviasDetails == "" || triviasDetails.contains("error")) {
 
-                Log.e("Se obtiene Trivias","Procesando...");
+                Log.e("Se obtiene Trivias","Procesando..." + params[0].get(0));
 
                 //----SOAP
 
-                String SOAP_ACTION = SOAP_ACTIONCTE + params[0].get(1);
+                String SOAP_ACTIONT = SOAP_ACTIONCTE + params[0].get(0);
 
                 // Modelo el request
 
-                SoapObject request = new SoapObject(NAMESPACE, params[0].get(0));
+                SoapObject requestT = new SoapObject(NAMESPACE, params[0].get(0));
 
-                SoapObject datosG = new SoapObject();
+                SoapObject datosGT = new SoapObject();
 
-                datosG.addProperty("token", params[0].get(2));
-                datosG.addProperty("reg", params[0].get(3));
+                datosGT.addProperty("token", params[0].get(2));
+                datosGT.addProperty("reg", params[0].get(3));
+                datosGT.addProperty("idUsuario", params[0].get(4));
 
 
-                request.addProperty("datos_generales_entrada", datosG);
+                requestT.addProperty("promociones_entrada.", datosGT);
 
                 // Modelo el Sobre
-                SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-                sobre.dotNet = false;
-                sobre.implicitTypes = true;
-                sobre.setAddAdornments(false);
-                sobre.encodingStyle = SoapSerializationEnvelope.XSD;
-                sobre.setOutputSoapObject(request);
+                SoapSerializationEnvelope sobreT = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                sobreT.dotNet = false;
+                sobreT.implicitTypes = true;
+                sobreT.setAddAdornments(false);
+                sobreT.encodingStyle = SoapSerializationEnvelope.XSD;
+                sobreT.setOutputSoapObject(requestT);
 
                 // Modelo el transporte
-                HttpTransportSE transporte = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
-                transporte.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-                transporte.debug = true;
+                HttpTransportSE transporteT = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
+                transporteT.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                transporteT.debug = true;
 
                 // Llamada
-                transporte.call(SOAP_ACTION, sobre);
-                Log.i("Respuesta", sobre.bodyIn.toString());
-                if(sobre.bodyIn.toString().contains("fault"))
+                transporteT.call(SOAP_ACTIONT, sobreT);
+                Log.e("Respuesta Trivia", sobreT.bodyIn.toString());
+                if(sobreT.bodyIn.toString().contains("fault"))
                 {
                     // Llamada
-                    transporte.call(SOAP_ACTION, sobre);
-                    Log.i("Intento", "segundo");
+                    transporteT.call(SOAP_ACTIONT, sobreT);
+                    Log.e("Intento trivia", "segundo");
                 }
                 // Resultado
-                SoapObject resultado = (SoapObject) sobre.getResponse();
-                result11 = resultado.getPropertyAsString("return");
+                SoapObject resultadoT = (SoapObject) sobreT.getResponse();
+                result11T = resultadoT.getPropertyAsString("return");
 
                 //--SOAP
 
@@ -273,30 +274,30 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                // result11= "[{\"id\":\"1\",\"texto\":\"\",\"tipo\":\"C\",\"titulo\":\"Cruz Azul vs. Pumas\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/cruz-azul-pumas-detalle.png\"},{\"id\":\"2\",\"texto\":\"\",\"tipo\":\"T\",\"titulo\":\"Trivia de prueba\",\"duracion\":\"1\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/videos\\/video-Retroalimentacion.png\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 Pregunta 1 \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 1\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 1\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 1\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2 Pregunta 2\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 2\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 2\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 2\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3 Pregunta 3\",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"Respuesta 1 de 3\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"Respuesta 2 de 3\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"Respuesta 3 de 3\",\"valRespuesta\":\"0\"}]}]}]\n";
 //result11 = "[{\"id\":\"2\",\"tipo\":\"T\",\"texto\":\"<p>Telcel te invita al partido<\\/p>\",\"titulo\":\"Pumas vs. Leon\",\"img_previa\":\"http:\\/\\/internetencaja.com.mx\\/telcel\\/promociones\\/pumas-leon-preview.png\",\"duracion\":\"1\",\"elementos\":[{\"idPreg\":\"1\",\"txtPregunta\":\"?En QUE periodo Francisco Palencia jugo con los Pumas? \",\"respuestas\":[{\"idResp\":\"1\",\"txtRespuesta\":\"2004 al 2010\",\"valRespuesta\":\"1\"},{\"idResp\":\"2\",\"txtRespuesta\":\"2005 al 2009\",\"valRespuesta\":\"0\"},{\"idResp\":\"3\",\"txtRespuesta\":\"2007 al 2011 \",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"2\",\"txtPregunta\":\"?En que anio fue fundado el Club Leon?\",\"respuestas\":[{\"idResp\":\"4\",\"txtRespuesta\":\"1942 \",\"valRespuesta\":\"1\"},{\"idResp\":\"5\",\"txtRespuesta\":\"1944\",\"valRespuesta\":\"0\"},{\"idResp\":\"6\",\"txtRespuesta\":\"1952\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"3\",\"txtPregunta\":\"?Que marca de celulares patrocina al Club Universidad Nacional? \",\"respuestas\":[{\"idResp\":\"7\",\"txtRespuesta\":\"Huawei\",\"valRespuesta\":\"1\"},{\"idResp\":\"8\",\"txtRespuesta\":\"Samsung\",\"valRespuesta\":\"0\"},{\"idResp\":\"9\",\"txtRespuesta\":\"ZTE\",\"valRespuesta\":\"0\"}]},{\"idPreg\":\"4\",\"txtPregunta\":\"?Como se llama la ultima plataforma digital de aprendizaje que lanzo la Fundacion Carlos Slim?\",\"respuestas\":[{\"idResp\":\"10\",\"txtRespuesta\":\"Capacitate para el empleo\",\"valRespuesta\":\"0\"},{\"idResp\":\"11\",\"txtRespuesta\":\"Aprende.org\",\"valRespuesta\":\"1\"},{\"idResp\":\"12\",\"txtRespuesta\":\"ClikiSalud\",\"valRespuesta\":\"0\"}]}]}]";
 
-                session.createTriviasSession(result11);
-                Log.e("Con create Trivias",result11);
+                session.createTriviasSession(result11T);
+                Log.e("Con create Trivias",result11T);
             }
             else
             {
                 Log.e("Con session Trivias",triviasDetails);
-                result11 = triviasDetails;
+                result11T = triviasDetails;
             }
 
             //Log.e("Response: ", result11);
 
-            if(result11.equals("true"+"\n")) {
+            if(result11T.equals("true"+"\n")) {
                 // Log.e("Response: ", "true Int");
                 responseArray = new JSONArray("[{'resp':'true'}]");
-            }else if(result11.equals("false"+"\n")) {
+            }else if(result11T.equals("false"+"\n")) {
                 //Log.e("Response: ", "false int");
                 responseArray = new JSONArray("[{'resp':'false'}]");
             } else
             {
                 //Log.e("Response: ", "JSON");
-                if(result11.contains("["))
-                    responseArray = new JSONArray(result11);
+                if(result11T.contains("["))
+                    responseArray = new JSONArray(result11T);
                 else
-                    responseArray = new JSONArray("[" + result11 + "]");
+                    responseArray = new JSONArray("[" + result11T + "]");
             }
 
             if(responseArray.getJSONObject(0).has("resp")) {
