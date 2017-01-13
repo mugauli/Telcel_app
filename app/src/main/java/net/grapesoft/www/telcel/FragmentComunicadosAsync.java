@@ -93,8 +93,9 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
             String comunicadosDetails = session.getComunicadosDetails();
 
-            if(comunicadosDetails == null || comunicadosDetails == "") {
+            if(comunicadosDetails == null || comunicadosDetails == "" || comunicadosDetails.contains("error")) {
 
+                Log.e("Se obtiene Comunicados","Procesando...");
                 //------------SOAP
 
                 String SOAP_ACTION = SOAP_ACTIONCTE + params[0].get(1);
@@ -126,7 +127,13 @@ public class FragmentComunicadosAsync extends AsyncTask<ArrayList<String>, Integ
 
                 // Llamada
                 transporte.call(SOAP_ACTION, sobre);
-
+                Log.e("Respuesta", sobre.bodyIn.toString());
+                if(sobre.bodyIn.toString().contains("fault"))
+                {
+                    // Llamada
+                    transporte.call(SOAP_ACTION, sobre);
+                    Log.e("Intento comunicados", "segundo");
+                }
                 // Resultado
                 SoapObject resultado = (SoapObject) sobre.getResponse();
                 result11 = resultado.getPropertyAsString("return");

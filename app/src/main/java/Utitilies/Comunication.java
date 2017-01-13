@@ -75,67 +75,68 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
         try {
 
 
-
-
+            SoapObject resultado;
             String SOAP_ACTION = SOAP_ACTIONCTE + params[0].get(1);
 
-            try {
 
-                // Modelo el request
-                SoapObject request = createSoapPost(params[0]);
+            // Modelo el request
+            SoapObject request = createSoapPost(params[0]);
 
-                // Modelo el Sobre
-                SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-                sobre.dotNet = false;
-                sobre.implicitTypes = true;
-                sobre.setAddAdornments(false);
-                sobre.encodingStyle = SoapSerializationEnvelope.XSD;
-                sobre.setOutputSoapObject(request);
+            // Modelo el Sobre
+            SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            sobre.dotNet = false;
+            sobre.implicitTypes = true;
+            sobre.setAddAdornments(false);
+            sobre.encodingStyle = SoapSerializationEnvelope.XSD;
+            sobre.setOutputSoapObject(request);
 
-                // Modelo el transporte
-                HttpTransportSE transporte = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
-                transporte.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-                transporte.debug = true;
+            // Modelo el transporte
+            HttpTransportSE transporte = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
+            transporte.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            transporte.debug = true;
 
+            // Llamada
+            transporte.call(SOAP_ACTION, sobre);
+
+            if(sobre.bodyIn.toString().contains("fault"))
+            {
                 // Llamada
                 transporte.call(SOAP_ACTION, sobre);
-
-                // Resultado
-                SoapObject resultado = (SoapObject)sobre.getResponse();
-                String result = resultado.getPropertyAsString("return");
-                Log.i("Resultado", result);
-
-                if(result.equals("true"+"\n")) {
-                   // Log.e("Response: ", "true Int");
-                    arreglo = new JSONArray("[{'resp':'true'}]");
-                }else if(result.equals("false"+"\n")) {
-                    //Log.e("Response: ", "false int");
-                    arreglo = new JSONArray("[{'resp':'false'}]");
-                } else
-                {
-                    //Log.e("Response: ", "JSON");
-                    if(result.contains("["))
-                        arreglo = new JSONArray(result);
-                    else
-                        arreglo = new JSONArray("[" + result + "]");
-                }
-                return arreglo;
-
-            } catch (Exception e) {
-                Log.e("ERROR", e.getMessage());
-                return null;
+                Log.e("Intento", "segundo");
             }
+                // Resultado
+                resultado = (SoapObject) sobre.getResponse();
+
+
+            String result = resultado.getPropertyAsString("return");
+            Log.i("Resultado", result);
+
+            if (result.equals("true" + "\n")) {
+                // Log.e("Response: ", "true Int");
+                arreglo = new JSONArray("[{'resp':'true'}]");
+            } else if (result.equals("false" + "\n")) {
+                //Log.e("Response: ", "false int");
+                arreglo = new JSONArray("[{'resp':'false'}]");
+            } else {
+                //Log.e("Response: ", "JSON");
+                if (result.contains("["))
+                    arreglo = new JSONArray(result);
+                else
+                    arreglo = new JSONArray("[" + result + "]");
+            }
+            return arreglo;
+
 
             //-----------------------------------------------------------RES
             //HttpClient httpclient = new DefaultHttpClient();
 
-         //   Log.e("IP",IP + params[0].get(1));
+            //   Log.e("IP",IP + params[0].get(1));
             //HttpPost httppost = new HttpPost(IP + params[0].get(1));
 
-           //httppost.setEntity(new UrlEncodedFormEntity(createPost(params[0])));
+            //httppost.setEntity(new UrlEncodedFormEntity(createPost(params[0])));
 
-           //// Execute HTTP Post Request
-           //HttpResponse response = httpclient.execute(httppost);
+            //// Execute HTTP Post Request
+            //HttpResponse response = httpclient.execute(httppost);
 
             //BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"), 8);
             //StringBuilder sb = new StringBuilder();
@@ -152,34 +153,34 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             //Log.e("Response: ", result11);
             //-----------------------------------------------------------RES FIN
 
-         //Checar Parametros
-       //BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
-       //StringBuilder sb1 = new StringBuilder();
-       //sb1.append(reader1.readLine() + "\n");
-       //String line1 = "0";
-       //while ((line1 = reader1.readLine()) != null) {
-       //    sb1.append(line1 + "\n");
-       //}
-       //reader1.close();
-       //String result111 = sb1.toString();
-       //Log.e("Parametros: ", result111);
-         //Fin Checar Parametros
+            //Checar Parametros
+            //BufferedReader reader1 = new BufferedReader(new InputStreamReader(httppost.getEntity().getContent(), "utf-8"), 8);
+            //StringBuilder sb1 = new StringBuilder();
+            //sb1.append(reader1.readLine() + "\n");
+            //String line1 = "0";
+            //while ((line1 = reader1.readLine()) != null) {
+            //    sb1.append(line1 + "\n");
+            //}
+            //reader1.close();
+            //String result111 = sb1.toString();
+            //Log.e("Parametros: ", result111);
+            //Fin Checar Parametros
 
 
-         //  if(result11.equals("true"+"\n")) {
-         //     // Log.e("Response: ", "true Int");
-         //      arreglo = new JSONArray("[{'resp':'true'}]");
-         //  }else if(result11.equals("false"+"\n")) {
-         //      //Log.e("Response: ", "false int");
-         //      arreglo = new JSONArray("[{'resp':'false'}]");
-         //  } else
-         //  {
-         //      //Log.e("Response: ", "JSON");
-         //      if(result11.contains("["))
-         //          arreglo = new JSONArray(result11);
-         //      else
-         //          arreglo = new JSONArray("[" + result11 + "]");
-         //  }
+            //  if(result11.equals("true"+"\n")) {
+            //     // Log.e("Response: ", "true Int");
+            //      arreglo = new JSONArray("[{'resp':'true'}]");
+            //  }else if(result11.equals("false"+"\n")) {
+            //      //Log.e("Response: ", "false int");
+            //      arreglo = new JSONArray("[{'resp':'false'}]");
+            //  } else
+            //  {
+            //      //Log.e("Response: ", "JSON");
+            //      if(result11.contains("["))
+            //          arreglo = new JSONArray(result11);
+            //      else
+            //          arreglo = new JSONArray("[" + result11 + "]");
+            //  }
 
 
             // parsing data

@@ -121,7 +121,13 @@ public class FragmentPublicitariaAsync extends AsyncTask<ArrayList<String>, Inte
 
                 // Llamada
                 transporte.call(SOAP_ACTION, sobre);
-
+                Log.i("Respuesta", sobre.bodyIn.toString());
+                if(sobre.bodyIn.toString().contains("fault"))
+                {
+                    // Llamada
+                    transporte.call(SOAP_ACTION, sobre);
+                    Log.i("Intento", "segundo");
+                }
                 // Resultado
                 SoapObject resultado = (SoapObject) sobre.getResponse();
                 result11 = resultado.getPropertyAsString("return");

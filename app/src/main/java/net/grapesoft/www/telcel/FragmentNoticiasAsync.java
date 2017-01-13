@@ -119,7 +119,13 @@ public class FragmentNoticiasAsync extends AsyncTask<ArrayList<String>, Integer,
 
                 // Llamada
                 transporte.call(SOAP_ACTION, sobre);
-
+                Log.i("Respuesta", sobre.bodyIn.toString());
+                if(sobre.bodyIn.toString().contains("fault"))
+                {
+                    // Llamada
+                    transporte.call(SOAP_ACTION, sobre);
+                    Log.i("Intento", "segundo");
+                }
                 // Resultado
                 SoapObject resultado = (SoapObject) sobre.getResponse();
                 result11 = resultado.getPropertyAsString("return");

@@ -128,6 +128,13 @@ public class FragmentProductoMesAsync extends AsyncTask<ArrayList<String>, Integ
 
                 // Llamada
                 transporte.call(SOAP_ACTION, sobre);
+                Log.i("Respuesta", sobre.bodyIn.toString());
+                if(sobre.bodyIn.toString().contains("fault"))
+                {
+                    // Llamada
+                    transporte.call(SOAP_ACTION, sobre);
+                    Log.i("Intento", "segundo");
+                }
 
                 // Resultado
                 SoapObject resultado = (SoapObject) sobre.getResponse();

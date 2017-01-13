@@ -93,7 +93,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
             String home = session.getHomeDetails();
 
-            if(home == null || home == "") {
+            if(home == null || home == ""|| home.contains("error")) {
 
                 Log.e("Se obtiene Home","Procesando...");
                 //----SOAP
@@ -127,7 +127,13 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
 
                 // Llamada
                 transporte.call(SOAP_ACTION, sobre);
-
+                Log.e("Respuesta", sobre.bodyIn.toString());
+                if(sobre.bodyIn.toString().contains("fault"))
+                {
+                    // Llamada
+                    transporte.call(SOAP_ACTION, sobre);
+                    Log.e("Intento", "segundo");
+                }
                 // Resultado
                 SoapObject resultado = (SoapObject) sobre.getResponse();
                 result11 = resultado.getPropertyAsString("return");
@@ -161,7 +167,7 @@ public class MainActivityAsync extends AsyncTask<ArrayList<String>, Integer, Lis
             }
             else
             {
-           //     Log.e("Con session Home",home);
+               Log.e("Con session Home",home);
                 result11 = home;
             }
 

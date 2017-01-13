@@ -123,8 +123,17 @@ public class FragmentSVAAsync extends AsyncTask<ArrayList<String>, Integer, List
                 transporte.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                 transporte.debug = true;
 
+
                 // Llamada
                 transporte.call(SOAP_ACTION, sobre);
+
+                Log.i("Respuesta", sobre.bodyIn.toString());
+                if(sobre.bodyIn.toString().contains("fault"))
+                {
+                    // Llamada
+                    transporte.call(SOAP_ACTION, sobre);
+                    Log.i("Intento", "segundo");
+                }
 
                 // Resultado
                 SoapObject resultado = (SoapObject) sobre.getResponse();
