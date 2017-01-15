@@ -104,6 +104,14 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
                 transporte.call(SOAP_ACTION, sobre);
                 Log.e("Intento", "segundo");
             }
+
+            if(sobre.bodyIn.toString().contains("fault"))
+            {
+                // Llamada
+                transporte.call(SOAP_ACTION, sobre);
+                Log.e("Intento", "segundo");
+            }
+
                 // Resultado
                 resultado = (SoapObject) sobre.getResponse();
 
