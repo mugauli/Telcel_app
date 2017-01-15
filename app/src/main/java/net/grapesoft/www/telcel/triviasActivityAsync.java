@@ -27,10 +27,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.kxml2.kdom.Element;
+import org.kxml2.kdom.Node;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
@@ -59,7 +62,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
     JSONArray responseArray,responseArray2;
     private String imageHttpAddress = "";
     private Bitmap loadedImage;
-    public String IP = "",tokenCTE = "",preguntaPreg="",jsonPreguntas="", NAMESPACE = "",SOAP_ACTIONCTE = "";
+    public String IP = "",tokenCTE = "",preguntaPreg="",jsonPreguntas="", NAMESPACE = "",SOAP_ACTIONCTE = "" , USERNAME_HEADER = "", PASS_HEADER = "";
     public boolean primer3 = true,PregBool = true;
     SessionManagement session;
 
@@ -69,6 +72,8 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
         this.activity = activity;
         NAMESPACE = activity.getText(R.string.NAMESPACE).toString();
         SOAP_ACTIONCTE = activity.getText(R.string.SOAP_ACTION).toString();
+        USERNAME_HEADER = activity.getText(R.string.USERNAME_HEADER).toString();
+        PASS_HEADER = activity.getText(R.string.PASS_HEADER).toString();
     }
 
     @Override
@@ -106,11 +111,18 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
 
                 // Modelo el Sobre
                 SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+                //header
+
+                List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+                headerList.add(new HeaderProperty("Authorization", "Basic " + org.kobjects.base64.Base64.encode((USERNAME_HEADER+":"+PASS_HEADER).getBytes())));
+
                 sobre.dotNet = false;
                 sobre.implicitTypes = true;
                 sobre.setAddAdornments(false);
                 sobre.encodingStyle = SoapSerializationEnvelope.XSD;
                 sobre.setOutputSoapObject(request);
+
 
                 // Modelo el transporte
                 HttpTransportSE transporte = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
@@ -118,7 +130,7 @@ public class triviasActivityAsync extends AsyncTask<ArrayList<String>, Integer, 
                 transporte.debug = true;
 
                 // Llamada
-                transporte.call(SOAP_ACTION, sobre);
+                transporte.call(SOAP_ACTION, sobre, headerList);
 
                 // Resultado
                 SoapObject resultado = (SoapObject) sobre.getResponse();

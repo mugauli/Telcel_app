@@ -19,7 +19,8 @@
     <string name="tokenXM">67d6b32e8d96b8542feda3df334c04f5</string>
     <string name="NAMESPACE">urn:mi_ws1</string>
     <string name="SOAP_ACTION">urn:mi_ws1#</string>
-
+    <string name="USERNAME_HEADER">appnune</string>
+    <string name="PASS_HEADER">#n05un3</string>
 
 
     <!--Actualiza Trabajador-->

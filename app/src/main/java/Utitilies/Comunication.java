@@ -21,12 +21,15 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.kxml2.kdom.Element;
+import org.kxml2.kdom.Node;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedReader;
@@ -47,7 +50,7 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
 
     ProgressDialog progressDialog;
-    public String IP = "",tokenCTE = "", NAMESPACE = "",SOAP_ACTIONCTE = "";
+    public String IP = "",tokenCTE = "", NAMESPACE = "",SOAP_ACTIONCTE = "", USERNAME_HEADER = "", PASS_HEADER = "";
     public static JSONArray arreglo;
 
 
@@ -58,6 +61,8 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
         tokenCTE = cxt.getString(R.string.tokenXM);
         NAMESPACE = cxt.getString(R.string.NAMESPACE);
         SOAP_ACTIONCTE = cxt.getString(R.string.SOAP_ACTION);
+        USERNAME_HEADER = cxt.getString(R.string.USERNAME_HEADER);
+        PASS_HEADER = cxt.getString(R.string.PASS_HEADER);
     }
 
     @Override
@@ -84,6 +89,25 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
             // Modelo el Sobre
             SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+            //header
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("Authorization", "Basic " + org.kobjects.base64.Base64.encode((USERNAME_HEADER+":"+PASS_HEADER).getBytes())));
+//
+           // Element h = new Element().createElement(NAMESPACE, "AuthHeader");
+//
+           // Element username = new Element().createElement(NAMESPACE, "user");
+           // username.addChild(Node.TEXT,USERNAME_HEADER);
+           // h.addChild(Node.ELEMENT, username);
+           // Element pass = new Element().createElement(NAMESPACE, "pass");
+           // pass.addChild(Node.TEXT, PASS_HEADER);
+           // h.addChild(Node.ELEMENT, pass);
+//
+           // sobre.headerOut = new Element[1];
+           // sobre.headerOut[0] = h;
+
+
             sobre.dotNet = false;
             sobre.implicitTypes = true;
             sobre.setAddAdornments(false);
@@ -93,22 +117,22 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
             // Modelo el transporte
             HttpTransportSE transporte = new HttpTransportSE(Proxy.NO_PROXY, IP, 35000);
             transporte.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            transporte.debug = true;
+           // transporte.debug = true;
 
             // Llamada
-            transporte.call(SOAP_ACTION, sobre);
+            transporte.call(SOAP_ACTION, sobre, headerList);
 
             if(sobre.bodyIn.toString().contains("fault"))
             {
                 // Llamada
-                transporte.call(SOAP_ACTION, sobre);
+                transporte.call(SOAP_ACTION, sobre, headerList);
                 Log.e("Intento", "segundo");
             }
 
             if(sobre.bodyIn.toString().contains("fault"))
             {
                 // Llamada
-                transporte.call(SOAP_ACTION, sobre);
+                transporte.call(SOAP_ACTION, sobre, headerList);
                 Log.e("Intento", "segundo");
             }
 
@@ -201,7 +225,7 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
                 e1.printStackTrace();
             }
             e.printStackTrace();
-            return null;
+            return arreglo;
         }
 
     }
@@ -570,6 +594,20 @@ public class Comunication extends AsyncTask<ArrayList<String>, Void, JSONArray> 
 
         return nameValuePair;
 
+    }
+
+    private Element buildAuthHeader() {
+
+        Element h = new Element().createElement(NAMESPACE, "AuthHeader");
+
+        Element username = new Element().createElement(NAMESPACE, "user");
+        username.addChild(Node.TEXT, "appnune");
+        h.addChild(Node.ELEMENT, username);
+        Element pass = new Element().createElement(NAMESPACE, "pass");
+        pass.addChild(Node.TEXT, "#n05un3");
+        h.addChild(Node.ELEMENT, pass);
+
+        return h;
     }
 
 }
